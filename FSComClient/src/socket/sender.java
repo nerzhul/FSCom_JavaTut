@@ -1,8 +1,13 @@
 package socket;
 
-public class sender {
+public class sender extends Thread{
 	
 	public sender()
+	{
+		
+	}
+	
+	public void run()
 	{
 		
 	}

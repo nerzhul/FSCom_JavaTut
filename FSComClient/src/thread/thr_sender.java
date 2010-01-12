@@ -9,6 +9,6 @@ public class thr_sender extends Thread{
 	
 	public void run()
 	{
-		
+		System.out.print("test");
 	}
 }

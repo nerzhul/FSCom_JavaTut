@@ -1,10 +1,9 @@
 import java.io.IOException;
 
-import thread.thr_listen;
+import thread.*;
 
-
-public class main {
-
+public class master 
+{
 	final static String version = "Alpha 0.0.7";
 	
 	public static void main(String args[]) throws IOException
@@ -16,3 +15,4 @@ public class main {
 	}
 
 }
+
