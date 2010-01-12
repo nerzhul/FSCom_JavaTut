@@ -6,7 +6,7 @@ public class main {
 	public static void main(String args[])
 	{
 		misc.Log.outString("FSS Com Server version " + version);
-		
+		misc.Log.outError("Test d'erreur...");
 		
 	}
 

@@ -15,4 +15,9 @@ public class Log {
 	{
 		System.out.println(str);
 	}
+	
+	public static void outError(String str)
+	{
+		System.err.println(str);
+	}
 }
