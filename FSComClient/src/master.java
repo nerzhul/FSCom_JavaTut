@@ -5,7 +5,7 @@ import thread.*;
 public class master
 {
 
-	final static String version = "Alpha 0.0.4";
+	final static String version = "Alpha 0.0.5";
 	
 	public master()
 	{

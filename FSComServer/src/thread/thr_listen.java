@@ -6,7 +6,7 @@ import misc.Log;
 
 public class thr_listen extends Thread
 {
-	final static int port = 22;
+	final static int port = 5677;
 	
 	public void run()
 	{

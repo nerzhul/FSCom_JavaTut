@@ -24,15 +24,16 @@ public class listener extends Thread{
 	{
 		try
 		{
-		String message = "";
+			String message = "";
 	
-	      System.out.println("Client "  + sockt.getInetAddress() + " request connect to server");
+			System.out.println("Client "  + sockt.getInetAddress() + " request connect to server");
 
-	      BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
-	      message = in.readLine();
-	      TreatPacket(message);
+			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
+			message = in.readLine();
 
-	      sockt.close();
+			//TreatPacket(message);
+
+			sockt.close();
 	    } 
 		catch (Exception e) 
 		{
