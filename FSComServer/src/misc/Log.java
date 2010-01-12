@@ -18,6 +18,7 @@ public class Log {
 	public static void outString(String str) throws IOException
 	{
 		System.out.println(str);
+		str += "\r\n";
 		FileWriter writer = null;
 		try
 		{
@@ -39,7 +40,10 @@ public class Log {
 	
 	public static void outError(String str) throws IOException
 	{
+		Date dt = new Date();
+		str = dt + ": " + str;
 		System.err.println(str);
+		str += "\r\n";
 		FileWriter writer = null;
 		try
 		{
