@@ -14,7 +14,7 @@ public class Log {
 		System.out.println(dt + ": " + str);
 	}
 	
-	public static void outString(String str)
+	public static void outString(String str) throws IOException
 	{
 		System.out.println("DEBUG:" + str);
 	}

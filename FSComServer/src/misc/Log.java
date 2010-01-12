@@ -34,8 +34,6 @@ public class Log {
 		  if(writer != null)
 			  writer.close();
 		}
-
-		
 	}
 	
 	public static void outError(String str) throws IOException
