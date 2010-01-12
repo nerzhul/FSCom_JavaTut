@@ -6,4 +6,9 @@ public class thr_listen extends Thread{
 	{
 		
 	}
+	
+	public void run()
+	{
+		
+	}
 }
