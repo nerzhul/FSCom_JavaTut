@@ -1,5 +1,5 @@
 package thread;
 
-public class listener {
+public class listener extends Thread{
 
 }
