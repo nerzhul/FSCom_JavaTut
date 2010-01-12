@@ -1,7 +1,14 @@
 package socket;
 
-public class sender extends Thread{
-	
+import java.net.*;
+import java.io.*;
+public class sender extends Thread
+{
+	final static int port = 21;
+
+	Socket socket;
+    DataInputStream userInput;
+
 	public sender()
 	{
 		
@@ -9,7 +16,15 @@ public class sender extends Thread{
 	
 	public void run()
 	{
-		
+		try
+		{
+		    socket = new Socket("192.168.1.12",port);
+
+		} catch (Exception e) 
+		{
+	      e.printStackTrace();
+	    }
+
 	}
 
 }

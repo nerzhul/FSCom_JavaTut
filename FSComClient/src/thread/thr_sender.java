@@ -1,5 +1,5 @@
 package thread;
-
+import socket.sender;
 public class thr_sender extends Thread{
 
 	public thr_sender()
@@ -9,6 +9,7 @@ public class thr_sender extends Thread{
 	
 	public void run()
 	{
-		System.out.print("test");
+		sender thsend = new sender();
+		thsend.start();
 	}
 }
