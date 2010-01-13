@@ -31,7 +31,7 @@ public class listener extends Thread{
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
 			message = in.readLine();
 
-			//TreatPacket(message);
+			TreatPacket(message);
 
 			sockt.close();
 	    } 

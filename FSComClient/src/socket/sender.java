@@ -8,7 +8,6 @@ public class sender extends Thread
 	final static String IP = "192.168.1.12";
 
 	Socket socket;
-    DataInputStream userInput;
 
 	public sender()
 	{
@@ -22,6 +21,15 @@ public class sender extends Thread
 			// create a socket on mine IP.
 		    socket = new Socket(IP,port);
 		    
+		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		    String line = reader.readLine();
+		    while (line != "null") 
+		    {
+		    	
+		    	SendPacket(line);
+		    	System.out.println("echo: " + reader.readLine());
+
+		    }
 		    // don't forget to close the socket or client get an internal error !
 		    socket.close();
 
@@ -29,7 +37,15 @@ public class sender extends Thread
 		{
 	      e.printStackTrace();
 	    }
-
+	}
+	
+	private void SendPacket(String packt) throws IOException
+	{
+		// creating buffers for packets to send
+	    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+	    
+	    // send packet
+    	out.println(packt);
 	}
 
 }
