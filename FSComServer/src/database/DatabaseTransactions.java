@@ -62,4 +62,15 @@ public class DatabaseTransactions {
 		return results;
 	}
 	
+	public void ExecuteQuery(String query) throws IOException
+	{
+		try 
+		{
+			Statement stmt = connect.createStatement();
+		} 
+		catch (SQLException e) 
+		{
+		      Log.outError("Query : " + query + " failed. Maybe one resource doesn't exist");
+		}
+	}
 }

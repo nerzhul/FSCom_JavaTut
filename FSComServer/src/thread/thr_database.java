@@ -45,4 +45,9 @@ public class thr_database extends Thread{
 	{
 		return DB.DatabaseQuery(query);
 	}
+	
+	public void ExecQuery(String query) throws IOException
+	{
+		DB.ExecuteQuery(query);
+	}
 }
