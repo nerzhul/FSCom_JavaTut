@@ -43,7 +43,7 @@ public class sender extends Thread
 	    }
 	}
 	
-	private void SendPacket(String packt) throws IOException
+	private void SendPacket(Object packt) throws IOException
 	{
 		// creating buffers for packets to send
 		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

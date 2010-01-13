@@ -64,12 +64,10 @@ public class listener extends Thread{
 		}
 	}
 	
-	public void TreatPacket(String packt) throws IOException
+	public void TreatPacket(Object packt) throws IOException
 	{
 		// affichage du packet
-		packet_handler packopt = new packet_handler(packt);
-		packopt.ShowPacket();
-		//Log.outString(packt);
+		packet_handler packopt = new packet_handler(packt,sockt);
 		PrintStream out = new PrintStream(sockt.getOutputStream());
 		out.println(packt);
 
