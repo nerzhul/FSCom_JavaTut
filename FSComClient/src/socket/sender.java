@@ -49,9 +49,9 @@ public class sender extends Thread
 	{
 		// creating buffers for packets to send
 		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-	    
+
 		// send packet
-    	out.println(opcode.toString() + packt);
+    	out.println("0x" + Integer.toHexString(opcode) + packt);
 	}
 
 }

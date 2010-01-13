@@ -17,10 +17,10 @@ public class packet_handler
 		mysock = sock;
 		try
 		{
-			opcode_id = Integer.decode((stream.toString()).substring(0,3));
+			opcode_id = Integer.decode((stream.toString()).substring(0,4));
 			String tmp = (stream.toString());
 			int lng = tmp.length();
-			packet = (stream.toString()).substring(3,lng);
+			packet = (stream.toString()).substring(4,lng);
 			ActionOnPacket();
 		}
 		catch(Exception e)
