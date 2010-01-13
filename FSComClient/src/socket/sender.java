@@ -2,6 +2,8 @@ package socket;
 
 import java.net.*;
 import java.io.*;
+
+import misc.Log;
 public class sender extends Thread
 {
 	final static int port = 5677;
@@ -23,15 +25,16 @@ public class sender extends Thread
 		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line = reader.readLine();
-		    while (line != null) 
+		    while (true) 
 		    {
-		    	
 		    	SendPacket(line);
-		    	System.out.println("echo: " + reader.readLine());
+		    	if(line.equals("close"))
+		    		break;
 		    	line = reader.readLine();
-
 		    }
 		    // don't forget to close the socket or client get an internal error !
+		    
+		    Log.outString("Close connection with server !");
 		    socket.close();
 
 		} catch (Exception e) 
