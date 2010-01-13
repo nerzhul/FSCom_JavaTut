@@ -24,17 +24,29 @@ public class listener extends Thread{
 	{
 		try
 		{
-			String message = "";
-	
-			System.out.println("Client "  + sockt.getInetAddress() + " request connect to server");
-
+			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
+			
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
-			message = in.readLine();
-
-			TreatPacket(message);
-
+			
+			while(true)
+			{
+				String message = "";
+				
+				message = in.readLine();
+				
+				if(message.equals("close"))
+					break;
+				//sockt.setSoTimeout(20000);
+				TreatPacket(message);
+			}
+			
+			Log.outTimed("Close connection with " + sockt.getInetAddress());
 			sockt.close();
 	    } 
+		catch (SocketTimeoutException ste) 
+		{
+			Log.outTimed("Client " + sockt.getInetAddress() + " timeout");
+		}
 		catch (Exception e) 
 		{
 	      e.printStackTrace();
@@ -45,6 +57,9 @@ public class listener extends Thread{
 	{
 		// affichage du packet
 		Log.outString(packt);
+		PrintStream out = new PrintStream(sockt.getOutputStream());
+		out.println(packt);
+
 	}
 	
 	
