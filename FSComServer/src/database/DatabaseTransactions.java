@@ -42,7 +42,7 @@ public class DatabaseTransactions {
 		}
 		catch (SQLException e)
 		{
-			Log.outError("Cannon close Database connection.");
+			Log.outError("Cannot close Database connection.");
 		}
 	}
 	
