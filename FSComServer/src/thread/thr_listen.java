@@ -18,7 +18,7 @@ public class thr_listen extends Thread
 		try
 		{
 			ServerSocket MasterListener = new ServerSocket(port);
-			Log.outTimed("Starting master listener thread...");
+			Log.outString("Starting master listener thread...");
 			while (true) 
 			{
 		        Socket socketClient = MasterListener.accept();
