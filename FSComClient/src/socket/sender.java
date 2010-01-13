@@ -4,6 +4,8 @@ import java.net.*;
 import java.io.*;
 
 import misc.Log;
+import socket.packet.*;
+
 public class sender extends Thread
 {
 	final static int port = 5677;
@@ -27,7 +29,7 @@ public class sender extends Thread
 		    String line = reader.readLine();
 		    while (true) 
 		    {
-		    	SendPacket(line);
+		    	SendPacket(0xFF,line);
 		    	if(line.equals("close"))
 		    		break;
 		    	line = reader.readLine();
@@ -43,13 +45,13 @@ public class sender extends Thread
 	    }
 	}
 	
-	private void SendPacket(Object packt) throws IOException
+	private void SendPacket(Integer opcode,Object packt) throws IOException
 	{
 		// creating buffers for packets to send
 		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 	    
 		// send packet
-    	out.println(packt);
+    	out.println(opcode.toString() + packt);
 	}
 
 }

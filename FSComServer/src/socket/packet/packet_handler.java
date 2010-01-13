@@ -7,7 +7,7 @@ import misc.Log;
 
 public class packet_handler 
 {
-	final static int MAX_OPCODE = 250;
+	final static int MAX_OPCODE = 0xFF;
 	Integer opcode_id;
 	Object packet;
 	Socket mysock;
@@ -17,10 +17,10 @@ public class packet_handler
 		mysock = sock;
 		try
 		{
-			opcode_id = Integer.decode((stream.toString()).substring(0,4));
+			opcode_id = Integer.decode((stream.toString()).substring(0,3));
 			String tmp = (stream.toString());
 			int lng = tmp.length();
-			packet = (stream.toString()).substring(4,lng);
+			packet = (stream.toString()).substring(3,lng);
 			ActionOnPacket();
 		}
 		catch(Exception e)
