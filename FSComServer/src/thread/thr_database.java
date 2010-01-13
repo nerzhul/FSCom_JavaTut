@@ -40,4 +40,9 @@ public class thr_database extends Thread{
 	{
 		DB = new DatabaseTransactions();
 	}
+	
+	public Object DBQuery(String query) throws IOException
+	{
+		return DB.DatabaseQuery(query);
+	}
 }
