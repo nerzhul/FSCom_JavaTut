@@ -58,4 +58,9 @@ public class Log {
 			  writer.close();
 		}
 	}
+	
+	public static int getErrorCode(error_codes i)
+	{
+		return i.getValue();
+	}
 }
