@@ -5,7 +5,7 @@ import misc.Log;
 
 public class master 
 {
-	final static String version = "Alpha 0.0.8";
+	final static String version = "Alpha 0.1.0";
 	
 	public master()
 	{

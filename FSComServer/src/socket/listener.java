@@ -3,6 +3,8 @@ package socket;
 import java.io.*;
 import java.net.*;
 
+import socket.packet.packet_handler;
+
 import misc.Log;
 
 public class listener extends Thread{
@@ -12,7 +14,14 @@ public class listener extends Thread{
 	
 	public void run()
 	{
-		ListenAndDo();
+		try 
+		{
+			ListenAndDo();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public listener(Socket sock)
@@ -20,7 +29,7 @@ public class listener extends Thread{
 		this.sockt = sock;
 	}
 	
-	public void ListenAndDo()
+	public void ListenAndDo() throws IOException
 	{
 		try
 		{
@@ -49,14 +58,18 @@ public class listener extends Thread{
 		}
 		catch (Exception e) 
 		{
-	      e.printStackTrace();
+	      
+			Log.outError("Listening Master Socket Error !");
+			e.printStackTrace();
 		}
 	}
 	
 	public void TreatPacket(String packt) throws IOException
 	{
 		// affichage du packet
-		Log.outString(packt);
+		packet_handler packopt = new packet_handler(packt);
+		packopt.ShowPacket();
+		//Log.outString(packt);
 		PrintStream out = new PrintStream(sockt.getOutputStream());
 		out.println(packt);
 

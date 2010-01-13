@@ -7,7 +7,7 @@ import misc.Log;
 public class sender extends Thread
 {
 	final static int port = 5677;
-	final static String IP = "192.168.1.12";
+	final static String IP = "127.0.0.1";
 
 	Socket socket;
 
