@@ -44,8 +44,15 @@ public class packet_handler
 		}
 		else
 		{
-			Log.outString("Packet received from " + mysock.getInetAddress());
-			ShowPacket();
+			Log.outString("Packet received from " + mysock.getInetAddress() + " (opcode :" + this.opcode_id + ")");
+			switch(opcode_id)
+			{
+				case 0:
+					break;
+				default:
+					ShowPacket();
+					break;
+			}
 		}
 	}
 }

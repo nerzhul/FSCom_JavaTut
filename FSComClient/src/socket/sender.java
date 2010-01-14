@@ -10,14 +10,11 @@ import socket.packet.*;
 public class sender extends Thread
 {
 	final static int port = 5677;
-	final static String IP = "127.0.0.1";
+	final static String IP = "172.20.9.36";
 
 	static Socket socket;
 
-	public sender()
-	{
-		
-	}
+	public sender(){}
 	
 	public void run()
 	{
@@ -26,16 +23,19 @@ public class sender extends Thread
 			// create a socket on mine IP.
 		    socket = new Socket(IP,port);
 		    
+		    Log.outString("Initialising Master Command Line...");
+		    MasterCommandLine cmdline = new MasterCommandLine();
+		    Log.outString("Master Command Line Initialized");
+		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		    Log.outPrompt();
-		    String line = reader.readLine();
-		    SendPacket(0xFF,line);
+		    String line;
+		    MasterCommandLine.DoCommand("ping");
 		    while (true) 
 		    {
-		    	if(line.equals("close"))
-		    		break;
 		    	Log.outPrompt();
 		    	line = reader.readLine();
+		    	if(line.equals("close"))
+		    		break;
 		    	// todo : stuff on cmd
 		    	MasterCommandLine.DoCommand(line);
 		    }

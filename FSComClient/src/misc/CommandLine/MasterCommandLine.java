@@ -3,6 +3,7 @@ package misc.CommandLine;
 import java.io.IOException;
 
 import misc.Log;
+import misc.CommandLine.Commands.*;
 
 import socket.sender;
 
@@ -12,13 +13,14 @@ public class MasterCommandLine{
 	private static String command[];
 	public MasterCommandLine()
 	{
-		command[0] = "";
-		command[1] = "";
+		command = new String[2];
+		command[0] = new String();
+		command[1] = new String();
 	}
 	
 	public static void DoCommand(String cmd) throws IOException
 	{
-		if(cmd == "")
+		if(cmd == null)
 		{
 			Log.outError("No command specified");
 			return;
@@ -28,12 +30,17 @@ public class MasterCommandLine{
 		command[0] = tmpcmd[0];
 		for(int i=1;i<tmpcmd.length;i++)
 		{
-			command[1] += tmpcmd[i];
+			command[1] = tmpcmd[i];
 		}
+
 		
-		if(command[0] == "testpacket")
+		if(command[0].equals("testpacket"))
 		{
-			
+			cmd_testpacket pck = new cmd_testpacket(command[1]);
+		}
+		else if(command[0].equals("ping"))
+		{
+			cmd_ping pck = new cmd_ping();
 		}
 	}
 }
