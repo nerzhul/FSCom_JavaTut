@@ -20,7 +20,7 @@ public class MasterCommandLine{
 	
 	public static void DoCommand(String cmd) throws IOException
 	{
-		if(cmd == null)
+		if(cmd == null || cmd == "")
 		{
 			Log.outError("No command specified");
 			return;
@@ -32,7 +32,6 @@ public class MasterCommandLine{
 		{
 			command[1] = tmpcmd[i];
 		}
-
 		
 		if(command[0].equals("testpacket"))
 		{

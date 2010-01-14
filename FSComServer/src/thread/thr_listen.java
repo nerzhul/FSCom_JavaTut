@@ -24,6 +24,7 @@ public class thr_listen extends Thread
 		        Socket socketClient = MasterListener.accept();
 		        listener listen_t = new listener(socketClient);
 		        listen_t.start();
+		        Log.outString("Master listener thread started succesfuly");
 		     }
 		}
 		catch (Exception e) 

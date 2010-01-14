@@ -10,7 +10,7 @@ import socket.packet.*;
 public class sender extends Thread
 {
 	final static int port = 5677;
-	final static String IP = "172.20.9.36";
+	final static String IP = "127.0.0.1";
 
 	static Socket socket;
 
