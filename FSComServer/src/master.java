@@ -7,7 +7,7 @@ import thread.*;
 
 public class master 
 {
-	final static String version = "Alpha 0.1.4";
+	final static String version = "Alpha 0.1.5";
 	
 	public static void main(String args[]) throws IOException, SQLException
 	{

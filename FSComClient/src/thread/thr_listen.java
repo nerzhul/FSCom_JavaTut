@@ -20,13 +20,13 @@ public class thr_listen extends Thread{
 		try
 		{
 			ServerSocket MasterListener = new ServerSocket(port);
-			Log.outString("Starting master listener thread...");
+			Log.outString("Starting server listener thread...");
 			while (true) 
 			{
 		        Socket socketClient = MasterListener.accept();
 		        listener listen_t = new listener(socketClient);
 		        listen_t.start();
-		        Log.outString("Master listener thread started succesfuly");
+		        Log.outString("Server listener thread started succesfully");
 		     }
 		}
 		catch (Exception e) 

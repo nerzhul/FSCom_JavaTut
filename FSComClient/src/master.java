@@ -9,7 +9,7 @@ import thread.*;
 public class master
 {
 
-	final static String version = "Alpha 0.0.9";
+	final static String version = "Alpha 0.1.0";
 	
 	public master()
 	{

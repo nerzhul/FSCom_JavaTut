@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 
 import socket.packet.packet_handler;
+import thread.thr_sender;
 
 import misc.Log;
 
@@ -34,9 +35,12 @@ public class listener extends Thread{
 		try
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
-			
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
 			
+			Log.outString("Starting Response Thread with client");
+			thr_sender response = new thr_sender(sockt.getInetAddress().toString());
+			response.start();
+			Log.outString("Reponse thread started succesfully.");
 			while(true)
 			{
 				String message = "";
@@ -45,11 +49,11 @@ public class listener extends Thread{
 				
 				if(message.equals("close"))
 					break;
-				//sockt.setSoTimeout(20000);
 				TreatPacket(message);
 			}
 			
 			Log.outTimed("Close connection with " + sockt.getInetAddress());
+			response.CloseConnection();
 			sockt.close();
 	    } 
 		catch (SocketTimeoutException ste) 

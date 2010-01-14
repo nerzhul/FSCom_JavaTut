@@ -36,7 +36,7 @@ public class listener extends Thread{
 	{
 		try
 		{
-			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
+			Log.outTimed("Server request connect to client");
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
 			
@@ -48,21 +48,20 @@ public class listener extends Thread{
 				
 				if(message.equals("close"))
 					break;
-				//sockt.setSoTimeout(20000);
 				TreatPacket(message);
 			}
 			
-			Log.outTimed("Close connection with " + sockt.getInetAddress());
+			Log.outTimed("Close connection with server");
 			sockt.close();
 	    } 
 		catch (SocketTimeoutException ste) 
 		{
-			Log.outTimed("Client " + sockt.getInetAddress() + " timeout");
+			Log.outTimed("Server connection timeout");
 		}
 		catch (Exception e) 
 		{
 	      
-			Log.outError("Listening Master Socket Error !");
+			Log.outError("Listening Server Socket Error !");
 			e.printStackTrace();
 		}
 	}
@@ -73,6 +72,5 @@ public class listener extends Thread{
 		packet_handler packopt = new packet_handler(packt,sockt);
 		PrintStream out = new PrintStream(sockt.getOutputStream());
 		out.println(packt);
-
 	}
 }
