@@ -4,6 +4,7 @@ import java.net.*;
 import java.io.*;
 
 import misc.Log;
+import misc.CommandLine.MasterCommandLine;
 import socket.packet.*;
 
 public class sender extends Thread
@@ -11,7 +12,7 @@ public class sender extends Thread
 	final static int port = 5677;
 	final static String IP = "127.0.0.1";
 
-	Socket socket;
+	static Socket socket;
 
 	public sender()
 	{
@@ -26,13 +27,17 @@ public class sender extends Thread
 		    socket = new Socket(IP,port);
 		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		    Log.outPrompt();
 		    String line = reader.readLine();
+		    SendPacket(0xFF,line);
 		    while (true) 
 		    {
-		    	SendPacket(0xFF,line);
 		    	if(line.equals("close"))
 		    		break;
+		    	Log.outPrompt();
 		    	line = reader.readLine();
+		    	// todo : stuff on cmd
+		    	MasterCommandLine.DoCommand(line);
 		    }
 		    // don't forget to close the socket or client get an internal error !
 		    
@@ -45,7 +50,7 @@ public class sender extends Thread
 	    }
 	}
 	
-	private void SendPacket(Integer opcode,Object packt) throws IOException
+	public static void SendPacket(Integer opcode,Object packt) throws IOException
 	{
 		// creating buffers for packets to send
 		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

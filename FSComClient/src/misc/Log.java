@@ -41,4 +41,9 @@ public class Log {
 			  writer.close();
 		}
 	}
+	
+	public static void outPrompt()
+	{
+		System.out.print("Command> ");
+	}
 }
