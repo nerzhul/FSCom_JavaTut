@@ -5,7 +5,7 @@ import java.io.*;
 
 import socket.packet.opcodes;
 
-public class sender extends Thread
+public class sender
 {
 
 	private Socket socket;
