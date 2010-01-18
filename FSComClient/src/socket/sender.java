@@ -58,5 +58,19 @@ public class sender extends Thread
 		// send packet
     	out.println("0x" + Integer.toHexString(opcode) + packt);
 	}
+	
+	public void StopSocket() throws IOException
+	{
+	     try
+	     {
+	    	 Log.outString("Close connection with server");
+	    	 socket.close();
+	     } 
+	     catch (IOException e) 
+	     {
+			 Log.outError("Could not close socket");
+			 System.exit(-1);
+	     }
+	}
 
 }

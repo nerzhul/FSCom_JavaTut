@@ -36,7 +36,7 @@ public class listener extends Thread{
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
-			
+
 			Log.outString("Starting Response Thread with client");
 			thr_sender response = new thr_sender(sockt.getInetAddress().toString());
 			response.start();
@@ -47,7 +47,7 @@ public class listener extends Thread{
 				
 				message = in.readLine();
 				
-				if(message.equals("close"))
+				if(message.equals("0x060"))
 					break;
 				TreatPacket(message);
 			}

@@ -9,7 +9,8 @@ import thread.*;
 public class master
 {
 
-	final static String version = "Alpha 0.1.0";
+	private static thr_sender t_send;
+	final static String version = "Alpha 0.1.1";
 	
 	public master()
 	{
@@ -19,7 +20,14 @@ public class master
 	{
 		Log.outString("FSS Com Client version " + version);
 		Log.outError("Test des logs erreur...");
-		thr_sender t_send = new thr_sender();
+		t_send = new thr_sender();
 		t_send.start();
 	}
+	
+	protected void finalize()
+	{
+		t_send.stopSock();
+		t_send.interrupt();
+	}
+
 }

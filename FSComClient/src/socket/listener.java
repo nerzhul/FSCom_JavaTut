@@ -46,11 +46,11 @@ public class listener extends Thread{
 				
 				message = in.readLine();
 				
-				if(message.equals("close"))
+				if(message.equals("0x070"))
 					break;
+				
 				TreatPacket(message);
 			}
-			
 			Log.outTimed("Close connection with server");
 			sockt.close();
 	    } 
