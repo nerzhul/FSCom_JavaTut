@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import misc.Log;
 
 import thread.*;
-
+import socket.packet.opcodes;
 public class master 
 {
-	final static String version = "Alpha 0.1.5";
+	final static String version = "Alpha 0.1.6";
 	
 	public static void main(String args[]) throws IOException, SQLException
 	{

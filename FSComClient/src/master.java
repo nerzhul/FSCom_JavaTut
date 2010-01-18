@@ -26,7 +26,15 @@ public class master
 	
 	protected void finalize()
 	{
-		t_send.stopSock();
+		try 
+		{
+			t_send.stopSock();
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		t_send.interrupt();
 	}
 
