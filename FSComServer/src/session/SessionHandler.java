@@ -6,6 +6,11 @@ public class SessionHandler {
 
 	private static Vector<session> v_sess;
 	
+	public SessionHandler()
+	{
+		v_sess = new Vector<session>();
+	}
+	
 	public static void AddSession(session sess)
 	{
 		if(sess != null)

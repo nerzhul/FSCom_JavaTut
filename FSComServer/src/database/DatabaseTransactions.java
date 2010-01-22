@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.*;
+import java.util.Vector;
 
 import misc.Log;
 
@@ -73,9 +74,9 @@ public class DatabaseTransactions {
 		}
 	}
 	
-	public static long LongQuery(String table,String col, String cond)
+	public static Integer IntegerQuery(String table,String col, String cond)
 	{
-		long res = 0;
+		Integer res = 0;
 		if(cond != null && !cond.equals(""))
 			cond = " WHERE " + cond;
 		else 
@@ -87,7 +88,7 @@ public class DatabaseTransactions {
 			try 
 			{
 				if(qr.next())
-					res = qr.getLong(col);
+					res = (Integer) qr.getObject(col);
 			} 
 			catch (SQLException e) 
 			{
@@ -97,6 +98,42 @@ public class DatabaseTransactions {
 		return res;
 	}
 	
+	public static Vector<Object> getObjectList(String table, String col, String cond)
+	{
+		Vector<Object> objs = new Vector<Object>();
+		if(cond != null && !cond.equals(""))
+			cond = " WHERE " + cond;
+		else 
+			cond = "";
+		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		
+		if(qr != null)
+		{
+			try 
+			{
+				while(qr.next())
+					objs.addElement(qr.getObject(col));
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return objs;
+	}
+	
+	public static Vector<Integer> getIntegerList(String table, String col, String cond)
+	{
+		Vector<Integer> ints = new Vector<Integer>();
+		Vector<Object> tmpvect = getObjectList(table,col,cond);
+		for(int i=0;i<tmpvect.size();i++)
+		{
+			ints.add(Integer.decode(tmpvect.get(i).toString()));
+		}
+		
+		return ints;
+	}
 	public static boolean DataExist(String table, String col, String cond)
 	{
 		boolean exist = false;

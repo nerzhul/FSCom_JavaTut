@@ -10,7 +10,7 @@ public class session {
 	private boolean connected;
 	private Integer status;
 	private String name;
-	private long uid;
+	private Integer uid;
 	private Thread thr_associated;
 	private Vector<session> sess_linked;
 	
@@ -28,7 +28,7 @@ public class session {
 	{
 		connected = true;
 		SessionHandler.AddSession(this);
-		uid = DatabaseTransactions.LongQuery("account", "uid", "user = '" + name + "'");
+		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
 	}
 	
 	public void disconnect_client()
