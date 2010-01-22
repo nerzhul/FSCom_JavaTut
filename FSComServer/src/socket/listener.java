@@ -32,7 +32,7 @@ public class listener extends Thread{
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
-			sess = new session(this);
+			sess = new session((Thread)this,sockt);
 			
 			while(true)
 			{

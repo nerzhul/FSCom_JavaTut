@@ -1,7 +1,10 @@
 package session;
 
+import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Vector;
+
+import socket.packet.handlers.cont_connected_handler;
 
 import database.DatabaseTransactions;
 
@@ -10,25 +13,30 @@ public class session {
 	private boolean connected;
 	private Integer status;
 	private String name;
+	private String personnal_msg;
 	private Integer uid;
 	private Thread thr_associated;
 	private Vector<session> sess_linked;
+	private Socket sock;
 	
-	public session(Thread thr)
+	public session(Thread thr, Socket sockt)
 	{
 		uid = 0;
 		connected = false;
 		status = 0;
 		name = "";
+		personnal_msg = "";
 		thr_associated = thr;
 		sess_linked = null;
+		sock = sockt;
 	}
-	
+
 	public void connect_client() throws SQLException
 	{
 		connected = true;
 		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
+		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
 	}
 	
 	public void disconnect_client()
@@ -39,11 +47,10 @@ public class session {
 	public void contact_connected(session sess)
 	{
 		sess_linked.add(sess);
-		/* 
-		 * TODO: all necessary actions to declare the client
-		 *  connected
-		 *  status for example.
-		 */
+		cont_connected_handler pck = new cont_connected_handler(sess.getName(),
+				sess.getStatus().toString(),sess.getPersonnalMsg());
+		if(pck != null)
+			pck.Send(sock);
 	}
 	
 	public boolean know_contact(Integer _uid)
@@ -81,6 +88,8 @@ public class session {
 	public void SetConnected(boolean cn) { connected = cn; } 
 	public void SetName(String nm) { name = nm; }
 	public String getName() { return name; }
+	public String getPersonnalMsg() { return personnal_msg; }
+	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
 
 	
 }
