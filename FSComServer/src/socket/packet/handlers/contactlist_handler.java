@@ -31,7 +31,7 @@ public class contactlist_handler extends send_handler {
 			pck += DatabaseTransactions.StringQuery("acc_contact", "comment", acc_contact_get);
 			pck += "%";
 			pck += DatabaseTransactions.IntegerQuery("acc_contact", "group", acc_contact_get);
-			pck += "ù%ù";
+			pck += "-%-";
 		}		
 			
 		if(pck.equals(""))

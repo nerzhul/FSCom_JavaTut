@@ -27,7 +27,7 @@ public class grouplist_handler extends send_handler {
 			pck += v_grp.get(i);
 			pck += "%";
 			pck += DatabaseTransactions.StringQuery("acc_group", "name", acc_group_get);
-			pck += "ù%ù";
+			pck += "-%-";
 		}		
 			
 		if(pck.equals(""))
