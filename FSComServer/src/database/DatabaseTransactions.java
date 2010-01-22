@@ -96,5 +96,30 @@ public class DatabaseTransactions {
 		}
 		return res;
 	}
+	
+	public static boolean DataExist(String table, String col, String cond)
+	{
+		boolean exist = false;
+		if(cond != null && !cond.equals(""))
+			cond = " WHERE " + cond;
+		else 
+			cond = "";
+		
+		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		
+		if(qr != null)
+		{
+			try 
+			{
+				if(qr.next())
+					exist = true;
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		return exist;
+	}
 
 }

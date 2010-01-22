@@ -45,11 +45,10 @@ public class session {
 	
 	public boolean know_contact(long uid)
 	{
-		/*
-		 * TODO: request the db to know if the contact know him
-		 */
-		
-		return false;
+		if(DatabaseTransactions.DataExist("acc_contact", "uid", "contact = '" + uid + "'"))
+			return true;
+		else
+			return false;
 	}
 	public void contact_disconnected(session sess)
 	{
