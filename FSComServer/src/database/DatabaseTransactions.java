@@ -73,17 +73,21 @@ public class DatabaseTransactions {
 		}
 	}
 	
-	public static Object SingleObjectQuery(String query,String col)
+	public static long LongQuery(String table,String col, String cond)
 	{
-		Object res = null;
-		ResultSet qr = DatabaseQuery(query);
+		long res = 0;
+		if(cond != null && !cond.equals(""))
+			cond = " WHERE " + cond;
+		else 
+			cond = "";
+		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
 		
 		if(qr != null)
 		{
 			try 
 			{
 				if(qr.next())
-					res = qr.getObject(col);
+					res = qr.getLong(col);
 			} 
 			catch (SQLException e) 
 			{
@@ -92,4 +96,5 @@ public class DatabaseTransactions {
 		}
 		return res;
 	}
+
 }

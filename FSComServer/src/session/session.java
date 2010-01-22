@@ -1,6 +1,5 @@
 package session;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -29,16 +28,7 @@ public class session {
 	{
 		connected = true;
 		SessionHandler.AddSession(this);
-		ResultSet query = DatabaseTransactions.DatabaseQuery(
-				"select uid from account where user = '" + name + "'");
-		
-		if(query != null)
-		{
-			while(query.next())
-			{
-				uid = query.getLong("uid");
-			}
-		}
+		uid = DatabaseTransactions.LongQuery("account", "uid", "user = '" + name + "'");
 	}
 	
 	public void disconnect_client()
