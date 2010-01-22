@@ -80,11 +80,16 @@ public class packet_handler
 					pkthandle = new status_handler(m_sess);
 					((send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x0B:
+					// send contact list to client
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
 				case 0x08:
 				case 0x0A:
+				case 0x0C:
+				case 0x0D:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:
