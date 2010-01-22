@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import socket.packet.handlers.cont_connected_handler;
+import socket.packet.handlers.cont_disconct_handler;
 
 import database.DatabaseTransactions;
 
@@ -48,7 +49,7 @@ public class session {
 	{
 		sess_linked.add(sess);
 		cont_connected_handler pck = new cont_connected_handler(sess.getName(),
-				sess.getStatus().toString(),sess.getPersonnalMsg());
+				sess.getStatus().toString(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
 			pck.Send(sock);
 	}
@@ -63,9 +64,11 @@ public class session {
 	}
 	public void contact_disconnected(session sess)
 	{
-		/*
-		 * TODO: contact client to say his contact was disconnected
-		 */
+
+		cont_disconct_handler pck = new cont_disconct_handler(sess.getUid());
+		if(sock != null)
+			pck.Send(sock);
+		
 		for(int i=0;i<sess_linked.size();i++)
 			if(sess_linked.get(i).equals(sess))
 				sess_linked.remove(i);
