@@ -39,13 +39,17 @@ public class session {
 	public void contact_connected(session sess)
 	{
 		sess_linked.add(sess);
-		/* TODO: all necessary actions to declare the client
-		 connected*/
+		/* 
+		 * TODO: all necessary actions to declare the client
+		 *  connected
+		 *  status for example.
+		 */
 	}
 	
-	public boolean know_contact(long uid)
+	public boolean know_contact(Integer _uid)
 	{
-		if(DatabaseTransactions.DataExist("acc_contact", "uid", "contact = '" + uid + "'"))
+		if(DatabaseTransactions.DataExist("acc_contact", "uid", "contact = '" + _uid + "'" +
+				" AND uid = '" + uid + "'"))
 			return true;
 		else
 			return false;
@@ -60,6 +64,15 @@ public class session {
 				sess_linked.remove(i);
 	}
 	
+	public boolean has_blocked(Integer _uid) 
+	{
+		if(DatabaseTransactions.IntegerQuery("acc_contact", "blocked"
+				, "contact = '" + _uid + "' AND uid = '" + uid + "'") == 1)
+			return true;
+		else
+			return false;
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -68,4 +81,6 @@ public class session {
 	public void SetConnected(boolean cn) { connected = cn; } 
 	public void SetName(String nm) { name = nm; }
 	public String getName() { return name; }
+
+	
 }
