@@ -3,7 +3,7 @@ import misc.Log;
 import thread.*;
 public class master 
 {
-	final static String version = "Alpha 0.3.2";
+	final static String version = "Alpha 0.3.3";
 	
 	public static void main(String args[])
 	{

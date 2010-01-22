@@ -61,7 +61,7 @@ public class session {
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
-	public long getUid() { return uid; }
+	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
 	public void SetStatus(Integer st){ status = st; }
 	public Integer getStatus(){	return status; }
