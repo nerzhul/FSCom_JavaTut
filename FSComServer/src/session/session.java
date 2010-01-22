@@ -45,7 +45,9 @@ public class session {
 	
 	public boolean know_contact(long uid)
 	{
-		
+		/*
+		 * TODO: request the db to know if the contact know him
+		 */
 		
 		return false;
 	}

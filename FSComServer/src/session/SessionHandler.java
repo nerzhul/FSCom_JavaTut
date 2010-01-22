@@ -10,6 +10,15 @@ public class SessionHandler {
 	{
 		if(sess != null)
 			v_sess.add(sess);
+		
+		for(int i=0;i<v_sess.size();i++)
+		{
+			if(!v_sess.get(i).equals(sess))
+			{
+				if(v_sess.get(i).know_contact(sess.getUid()))
+					v_sess.get(i).contact_connected(sess);
+			}
+		}
 	}
 	public static void Update(int diff)
 	{
