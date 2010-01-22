@@ -9,7 +9,6 @@ import session.session;
 
 public class connect_handler extends send_handler {
 
-	private session m_sess;
 	public connect_handler(Object args, session sess) throws SQLException
 	{
 		opcode = 0x08;

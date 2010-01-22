@@ -98,6 +98,30 @@ public class DatabaseTransactions {
 		return res;
 	}
 	
+	public static String StringQuery(String table,String col, String cond)
+	{
+		String res = new String();
+		if(cond != null && !cond.equals(""))
+			cond = " WHERE " + cond;
+		else 
+			cond = "";
+		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		
+		if(qr != null)
+		{
+			try 
+			{
+				if(qr.next())
+					res = qr.getObject(col).toString();
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
+	
 	public static Vector<Object> getObjectList(String table, String col, String cond)
 	{
 		Vector<Object> objs = new Vector<Object>();

@@ -84,6 +84,10 @@ public class packet_handler
 					pkthandle = new contactlist_handler(m_sess);
 					((send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x0E:
+					pkthandle = new grouplist_handler(m_sess);
+					((send_handler) pkthandle).Send(mysock);
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:

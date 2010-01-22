@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Ven 22 Janvier 2010 à 14:06
+-- Généré le : Ven 22 Janvier 2010 à 15:04
 -- Version du serveur: 5.1.36
 -- Version de PHP: 5.3.0
 
@@ -47,10 +47,30 @@ CREATE TABLE IF NOT EXISTS `acc_contact` (
   `contact` int(5) NOT NULL,
   `blocked` int(1) NOT NULL,
   `comment` varchar(50) NOT NULL,
+  `group` int(2) NOT NULL,
   PRIMARY KEY (`uid`,`contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `acc_contact`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `acc_group`
+--
+
+DROP TABLE IF EXISTS `acc_group`;
+CREATE TABLE IF NOT EXISTS `acc_group` (
+  `uid` int(5) NOT NULL,
+  `gid` int(2) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`uid`,`gid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `acc_group`
 --
 
