@@ -3,7 +3,7 @@ import misc.Log;
 import thread.*;
 public class master 
 {
-	final static String version = "Alpha 0.3.3f";
+	final static String version = "Alpha 0.3.3g";
 	
 	public static void main(String args[])
 	{
@@ -16,6 +16,5 @@ public class master
 		thr_sesshandler tsh = new thr_sesshandler();
 		tsh.start();
 	}
-
 }
 
