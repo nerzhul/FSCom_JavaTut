@@ -62,10 +62,10 @@ public class packet_handler
 					// server kill client socket
 					break;
 				case 0x08:
-					// todo send correct status
+					// TODO: send correct status
 					if((new srvconnect_handler(packet.toString())).HasValidData())
 					{
-						pcktrecv = new statussender_handler(1);
+						pcktrecv = new statussender_handler(1,true);
 						((send_handler) pcktrecv).Send();
 					}
 					else
