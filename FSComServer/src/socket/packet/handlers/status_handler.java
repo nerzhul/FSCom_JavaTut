@@ -13,6 +13,8 @@ public class status_handler extends send_handler {
 		sess.SetStatus(Integer.decode(data.substring(0,1)));
 		if(Integer.decode(data.substring(2)) == 1)
 			sess.connect_client();
+		else
+			sess.broadcast_StatusChanged();
 
 	}
 }

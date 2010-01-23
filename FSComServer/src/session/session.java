@@ -83,6 +83,10 @@ public class session {
 			return false;
 	}
 	
+	public void broadcast_StatusChanged() {
+		// TODO Auto-generated method stub
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -93,6 +97,8 @@ public class session {
 	public String getName() { return name; }
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
+
+	
 
 	
 }
