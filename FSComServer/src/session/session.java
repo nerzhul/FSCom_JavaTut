@@ -92,6 +92,7 @@ public class session {
 	{
 		// TODO envoyer un packet de déconnexion au client déconnecté
 		
+		
 	}
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }

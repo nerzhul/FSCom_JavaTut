@@ -20,8 +20,11 @@ public class sender
 	public void CloseConnection()
 	{
 		try {
+			
 			socket.close();
-		} catch (IOException e) {
+		} 
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
