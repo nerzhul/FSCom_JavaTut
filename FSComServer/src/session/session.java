@@ -62,16 +62,17 @@ public class session {
 		else
 			return false;
 	}
-	public void contact_disconnected(session sess)
+	public void contact_disconnected(session sess, boolean blocked)
 	{
 
 		cont_disconct_handler pck = new cont_disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
 		
-		for(int i=0;i<sess_linked.size();i++)
-			if(sess_linked.get(i).equals(sess))
-				sess_linked.remove(i);
+		if(!blocked)
+			for(int i=0;i<sess_linked.size();i++)
+				if(sess_linked.get(i).equals(sess))
+					sess_linked.remove(i);
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -90,10 +91,20 @@ public class session {
 	
 	public void block_contact(String c_uid, String method) 
 	{
-		// TODO envoyer un packet de déconnexion au client déconnecté
-		
-		
+		contact_disconnected(getContactByUID(Integer.decode(c_uid)),true);
 	}
+	
+	private session getContactByUID(Integer _uid)
+	{
+		session tmp_sess = null;
+		for(int i=0;i<sess_linked.size();i++)
+		{
+			if(sess_linked.get(i).getUid() == _uid)
+				tmp_sess = sess_linked.get(i);
+		}
+		return tmp_sess;
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }

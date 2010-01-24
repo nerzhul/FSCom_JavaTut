@@ -40,7 +40,7 @@ public class SessionHandler {
 			else
 			{
 				if(v_sess.get(i).know_contact(sess.getUid()))
-					v_sess.get(i).contact_disconnected(sess);
+					v_sess.get(i).contact_disconnected(sess,false);
 			}
 		}
 		
