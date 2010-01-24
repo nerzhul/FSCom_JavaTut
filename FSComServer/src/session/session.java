@@ -83,10 +83,16 @@ public class session {
 			return false;
 	}
 	
-	public void broadcast_StatusChanged() {
+	public void broadcast_StatusChanged() 
+	{
 		// TODO Auto-generated method stub
 	}
 	
+	public void block_contact(String c_uid, String method) 
+	{
+		// TODO envoyer un packet de déconnexion au client déconnecté
+		
+	}
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }

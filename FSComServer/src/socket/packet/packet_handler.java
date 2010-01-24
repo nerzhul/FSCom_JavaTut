@@ -77,7 +77,7 @@ public class packet_handler
 					// request disconnect socket
 					break;
 				case 0x09:
-					pkthandle = new status_handler(m_sess);
+					pkthandle = new status_handler(m_sess,packet);
 					((send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x0B:
@@ -88,6 +88,10 @@ public class packet_handler
 					pkthandle = new grouplist_handler(m_sess);
 					((send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x11:
+					pkthandle = new blockcontact_handler(m_sess,packet);
+					((send_handler) pkthandle).Send(mysock);
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
@@ -95,6 +99,9 @@ public class packet_handler
 				case 0x0A:
 				case 0x0C:
 				case 0x0D:
+				case 0x0F:
+				case 0x10:
+				case 0x12:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:

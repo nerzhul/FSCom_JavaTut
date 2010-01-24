@@ -6,12 +6,12 @@ import session.session;
 
 public class status_handler extends send_handler {
 
-	public status_handler(session sess) throws SQLException
+	public status_handler(session sess, Object packet) throws SQLException
 	{
 		opcode = 0x0A;
 		data = "01000";
-		sess.SetStatus(Integer.decode(data.substring(0,1)));
-		if(Integer.decode(data.substring(2)) == 1)
+		sess.SetStatus(Integer.decode(packet.toString().substring(0,1)));
+		if(Integer.decode(packet.toString().substring(2)) == 1)
 			sess.connect_client();
 		else
 			sess.broadcast_StatusChanged();
