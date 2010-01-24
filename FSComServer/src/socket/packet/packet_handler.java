@@ -92,6 +92,9 @@ public class packet_handler
 					pkthandle = new blockcontact_handler(m_sess,packet);
 					((send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x13:
+					pkthandle = new MsgToPlatform_handler(m_sess,packet);
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
@@ -102,6 +105,7 @@ public class packet_handler
 				case 0x0F:
 				case 0x10:
 				case 0x12:
+				case 0x14:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:

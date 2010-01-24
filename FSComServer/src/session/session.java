@@ -4,6 +4,9 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import misc.Log;
+
+import socket.packet.handlers.MsgToClient_Handler;
 import socket.packet.handlers.cont_connected_handler;
 import socket.packet.handlers.cont_disconct_handler;
 
@@ -105,6 +108,24 @@ public class session {
 		return tmp_sess;
 	}
 	
+	public void TransmitMsgTo(Object packet) {
+		String cut_pck[] = packet.toString().split("#-%-#");
+		if(cut_pck.length != 2)
+		{
+			Log.outError("Malformed Msg to Transmit");
+			return;
+		}
+		
+		Integer _uid = Integer.decode(cut_pck[0]);
+		getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
+	}
+	
+	private void SendMessageToMe(Integer _uid, String msg)
+	{
+		MsgToClient_Handler pck = new MsgToClient_Handler(_uid,msg);
+		pck.Send(sock);		
+	}
+
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -115,6 +136,8 @@ public class session {
 	public String getName() { return name; }
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
+
+	
 
 	
 
