@@ -114,7 +114,7 @@ public class packet_handler
 					pkthandle = new AddContact_handler(m_sess,packet);
 					((send_handler) pkthandle).Send(mysock);
 				case 0x1C:
-					// TODO : handle del contact
+					pkthandle = new req_DelContact_handler(m_sess,packet);
 					break;
 				case 0x1F:
 					pkthandle = new invitation_answer_handler(m_sess,packet);
