@@ -6,7 +6,7 @@ import java.util.Vector;
 import misc.Log;
 
 import socket.packet.handlers.MsgToClient_Handler;
-import socket.packet.handlers.PseudoToClient;
+import socket.packet.handlers.PseudoToClient_handler;
 import socket.packet.handlers.StatusToClient_Handler;
 import socket.packet.handlers.cont_connected_handler;
 import socket.packet.handlers.cont_disconct_handler;
@@ -116,10 +116,10 @@ public class session {
 		
 	}
 	
-	private void SendPseudoToMe(Integer _uid, String _name) {
-		PseudoToClient pck = new PseudoToClient(_uid,_name);
+	private void SendPseudoToMe(Integer _uid, String _name) 
+	{
+		PseudoToClient_handler pck = new PseudoToClient_handler(_uid,_name);
 		pck.Send(sock);
-		
 	}
 
 	public void block_contact(String c_uid, String method) 
