@@ -21,7 +21,7 @@ public class SessionHandler {
 			if(!v_sess.get(i).equals(sess))
 			{
 				if(v_sess.get(i).know_contact(sess.getUid()) && !sess.has_blocked(v_sess.get(i).getUid()))
-					v_sess.get(i).contact_connected(sess);
+					v_sess.get(i).contact_connected(sess, false);
 			}
 		}
 	}

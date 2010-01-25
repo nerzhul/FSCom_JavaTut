@@ -49,9 +49,10 @@ public class session {
 		SessionHandler.DestroySession(this,thr_associated);
 	}
 
-	public void contact_connected(session sess)
+	public void contact_connected(session sess, boolean block)
 	{
-		sess_linked.add(sess);
+		if(!block)
+			sess_linked.add(sess);
 		cont_connected_handler pck = new cont_connected_handler(sess.getName(),
 				sess.getStatus().toString(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
@@ -105,8 +106,12 @@ public class session {
 	
 	public void block_contact(String c_uid, String method) 
 	{
-		contact_disconnected(getContactByUID(Integer.decode(c_uid)),true);
-		// TODO : maj DB
+		if(method.equals("1"))
+			contact_disconnected(getContactByUID(Integer.decode(c_uid)),true);
+		else
+			contact_connected(getContactByUID(Integer.decode(c_uid)), true);
+		DatabaseTransactions.ExecuteQuery("UPDATE acc_contact SET blocked = '" + method + 
+				"' where uid = '" + uid + "' AND contact = '" + c_uid + "'");
 	}
 	
 	private session getContactByUID(Integer _uid)
@@ -129,7 +134,9 @@ public class session {
 		}
 		
 		Integer _uid = Integer.decode(cut_pck[0]);
-		getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
+		if(getContactByUID(_uid) != null)
+			if(!getContactByUID(_uid).has_blocked(uid))
+				getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
 	}
 	
 	private void SendMessageToMe(Integer _uid, String msg)
