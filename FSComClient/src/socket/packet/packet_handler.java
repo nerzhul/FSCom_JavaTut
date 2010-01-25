@@ -91,12 +91,39 @@ public class packet_handler
 					events.StoreContacts(packet);
 					break;
 				case 0x0D:
-					// TODO : a contact was disconnected
+					events.ContactDisconnected(packet);
 					break;
 				case 0x0F:
 					events.StoreGroups(packet);
 					pcktrecv = new AskContacts_handler();
 					((send_handler) pcktrecv).Send();
+					break;
+				case 0x10:
+					events.ContactConnected(packet);
+					break;
+				case 0x12:
+					events.BlockContact(packet);
+					break;
+				case 0x14:
+					events.RecvMsg(packet);
+					break;
+				case 0x15:
+					events.ContactModifyStatus(packet);
+					break;
+				case 0x17:
+					events.ContactModifyPseudo(packet);
+					break;
+				case 0x19:
+					events.ContactModifyPmsg(packet);
+					break;
+				case 0x1B:
+					events.ContactAdded(packet);
+					break;
+				case 0x1D:
+					events.ContactDeleted(packet);
+					break;
+				case 0x1E:
+					events.RecvInvitation(packet);
 					break;
 				case 0x00:
 				case 0x03:
