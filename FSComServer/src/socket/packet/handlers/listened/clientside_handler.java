@@ -14,7 +14,7 @@ public class clientside_handler extends listen_handler{
 		PrintError();
 	}
 	
-	void PrintError()
+	protected void PrintError()
 	{
 		Log.outError("Received Packet opcode : 0x" + Integer.toHexString(opcode)
 				+ " and station is not a client !");
