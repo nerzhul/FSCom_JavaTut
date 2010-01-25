@@ -182,5 +182,4 @@ public class DatabaseTransactions {
 		}
 		return exist;
 	}
-
 }

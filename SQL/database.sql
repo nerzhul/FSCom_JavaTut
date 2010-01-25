@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `acc_contact` (
   `blocked` int(1) NOT NULL,
   `comment` varchar(50) NOT NULL,
   `group` int(2) NOT NULL,
+  `accepted` int(1) NOT NULL,
   PRIMARY KEY (`uid`,`contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

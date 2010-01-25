@@ -12,6 +12,7 @@ import socket.packet.handlers.StatusToClient_Handler;
 import socket.packet.handlers.cont_connected_handler;
 import socket.packet.handlers.cont_disconct_handler;
 
+import database.DatabaseFunctions;
 import database.DatabaseTransactions;
 
 public class session {
@@ -195,6 +196,38 @@ public class session {
 		broadcast_SomethingChanged(3);
 	}
 	
+	public Integer AddContact(Object packet) 
+	{
+		String pck[] = packet.toString().split("||[]||");
+		if(pck.length != 2)
+			return 5;
+		
+		String username = pck[0].toString();
+		Integer group = Integer.decode(pck[1]);
+		Integer result = 1;
+		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'"))
+		{
+			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
+			{
+				if(DatabaseTransactions.DataExist("acc_group", "gid", "uid = '" + uid + "' AND" +
+						" gid = '" + group + "'"))
+				{
+					DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
+							DatabaseFunctions.getAccountUIDByName(username) + "','0','','" + group + "'");
+					
+					// TODO : gestion sur les sessions
+					result = 0;
+				}
+				else
+					result = 4;
+
+			}
+			else
+				result = 2;
+		}
+		
+		return result;
+	}
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -205,6 +238,8 @@ public class session {
 	public String getName() { return name; }
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
+
+	
 
 
 

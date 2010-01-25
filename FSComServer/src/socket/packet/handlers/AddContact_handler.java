@@ -4,8 +4,10 @@ import session.session;
 
 public class AddContact_handler extends send_handler {
 
-	public AddContact_handler(session sess, Object packet) {
-		// TODO Auto-generated constructor stub
+	public AddContact_handler(session sess, Object packet) 
+	{
+		opcode = 0x1B;
+		data = sess.AddContact(packet).toString();
 	}
 
 }
