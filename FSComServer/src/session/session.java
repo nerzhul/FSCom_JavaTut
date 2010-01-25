@@ -46,9 +46,15 @@ public class session {
 		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
+		LoadBlockedContacts();
 		// TODO : send all invitations
 	}
 	
+	private void LoadBlockedContacts() 
+	{
+		uid_blocked = DatabaseTransactions.getIntegerList("acc_blocked", "contact", "uid = '" + uid + "'");
+	}
+
 	public void disconnect_client()
 	{
 		SessionHandler.DestroySession(this,thr_associated);
