@@ -265,7 +265,8 @@ public class session {
 	
 	private void AddContactToClientList(Integer _uid) 
 	{
-		new AddContactWithoutInvite_handler(this,(0 + "[)[)" + _uid));
+		AddContactWithoutInvite_handler ACWI = new AddContactWithoutInvite_handler(this,(0 + "[)[)" + _uid));
+		ACWI.Send(sock);
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
