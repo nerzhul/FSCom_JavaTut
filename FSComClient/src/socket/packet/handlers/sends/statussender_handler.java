@@ -1,6 +1,6 @@
 package socket.packet.handlers.sends;
 
-import session.clientstatus;
+import session.defines.clientstatus;
 import socket.packet.handlers.send_handler;
 
 public class statussender_handler extends send_handler {

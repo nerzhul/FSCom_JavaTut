@@ -10,7 +10,7 @@ public class master
 {
 
 	private static thr_sender t_send;
-	final static String version = "Alpha 0.3.2";
+	final static String version = "Alpha 0.3.2b";
 	
 	public master()	{}
 	
