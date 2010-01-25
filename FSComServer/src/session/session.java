@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import misc.Log;
 
-import socket.packet.handlers.MsgPersoToClient_handler;
+import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
