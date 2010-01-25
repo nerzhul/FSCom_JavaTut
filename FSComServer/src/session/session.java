@@ -6,6 +6,7 @@ import java.util.Vector;
 import misc.Log;
 
 import socket.packet.handlers.MsgToClient_Handler;
+import socket.packet.handlers.PseudoToClient;
 import socket.packet.handlers.StatusToClient_Handler;
 import socket.packet.handlers.cont_connected_handler;
 import socket.packet.handlers.cont_disconct_handler;
@@ -89,7 +90,7 @@ public class session {
 			return false;
 	}
 	
-	public void broadcast_StatusChanged() 
+	public void broadcast_SomethingChanged(int sth) 
 	{
 		for(int i=0;i<sess_linked.size();i++)
 		{
@@ -99,11 +100,28 @@ public class session {
 					blocked = true;
 			
 			if(!blocked)
-				sess_linked.get(i).SendStatusToMe(uid, status);
+			{
+				switch(sth)
+				{
+					case 1:
+						sess_linked.get(i).SendStatusToMe(uid, status);
+						break;
+					case 2:
+						sess_linked.get(i).SendPseudoToMe(uid, name);
+						break;
+				}
+			}
+				
 		}
 		
 	}
 	
+	private void SendPseudoToMe(Integer _uid, String _name) {
+		PseudoToClient pck = new PseudoToClient(_uid,_name);
+		pck.Send(sock);
+		
+	}
+
 	public void block_contact(String c_uid, String method) 
 	{
 		if(method.equals("1"))
@@ -151,6 +169,13 @@ public class session {
 		pck.Send(sock);
 	}
 	
+	public void ChangePseudo(Object packet) 
+	{
+		String pck = packet.toString();
+		SetName(pck);	
+		
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -161,6 +186,10 @@ public class session {
 	public String getName() { return name; }
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
+
+
+
+	
 
 	
 

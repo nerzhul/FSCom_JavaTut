@@ -14,7 +14,7 @@ public class status_handler extends send_handler {
 		if(Integer.decode(packet.toString().substring(2)) == 1)
 			sess.connect_client();
 		else
-			sess.broadcast_StatusChanged();
+			sess.broadcast_SomethingChanged(1);
 
 	}
 }
