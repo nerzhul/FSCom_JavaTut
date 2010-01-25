@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import misc.Log;
 
+import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
@@ -193,23 +194,25 @@ public class session {
 		broadcast_SomethingChanged(3);
 	}
 	
-	public Integer AddContact(Object packet) 
+	public String AddContact(Object packet) 
 	{
 		String pck[] = packet.toString().split("||[]||");
 		if(pck.length != 2)
-			return 5;
+			return "5";
 		
 		String username = pck[0].toString();
 		Integer group = Integer.decode(pck[1]);
-		Integer result = 1;
-		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'"))
+		String result = "1";
+		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'") &&
+				!username.equals(DatabaseFunctions.getAccountNameByUID(uid)))
 		{
+			Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
 			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
 			{
 				if(DatabaseTransactions.DataExist("acc_group", "gid", "uid = '" + uid + "' AND" +
 						" gid = '" + group + "'"))
 				{
-					Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
+					
 					DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
 							_uid + "','0','','" + group + "'");
 					
@@ -221,20 +224,50 @@ public class session {
 					else
 						new Invitation(uid,_uid,false);
 					
-					result = 0;
+					result = (0 + "[)[)" + _uid);
 				}
 				else
-					result = 4;
+					result = (4 + "[)[)" + _uid);
 
 			}
 			else
-				result = 2;
+				result = (2 + "[)[)" + _uid);
 		}
 		
 		return result;
 	}
 	
+	
 
+	public void ManageInvitation(Integer _uid, Integer method) 
+	{
+		switch(method)
+		{
+			case 0:
+				// nothing, not accept the client
+				break;
+			case 1:
+				DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE uid = '" + uid + "' AND" +
+						" contact = '" + _uid + "'");
+				break;
+			case 2:
+				DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE uid = '" + uid + "' AND" +
+						" contact = '" + _uid + "'");
+				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + _uid + "','" + 
+						uid + "','0','','0'");
+				AddContactToClientList(_uid);
+				break;
+			default:
+				Log.outError("Invalid response from ManageInvitation");
+				break;
+		}
+	}
+	
+	private void AddContactToClientList(Integer _uid) 
+	{
+		new AddContactWithoutInvite_handler(this,(0 + "[)[)" + _uid));
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -246,6 +279,8 @@ public class session {
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
 	private Socket getSocket() { return sock; }
+
+	
 	
 
 

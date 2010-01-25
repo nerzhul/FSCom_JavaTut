@@ -116,7 +116,10 @@ public class packet_handler
 					// TODO : handle del contact
 					break;
 				case 0x1F:
-					// TODO : handle answer to an invite
+					pkthandle = new invitation_answer_handler(m_sess,packet);
+					break;
+				case 0x20:
+					// send the 0x17
 					break;
 				case 0x01:
 				case 0x02:

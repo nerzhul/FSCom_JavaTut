@@ -1,4 +1,4 @@
-package session;
+package session.defines;
 
 public enum AddContactState {
 	EXIST(0),
