@@ -13,6 +13,7 @@ import socket.packet.handlers.senders.blockcontact_handler;
 import socket.packet.handlers.senders.connect_handler;
 import socket.packet.handlers.senders.contactlist_handler;
 import socket.packet.handlers.senders.grouplist_handler;
+import socket.packet.handlers.senders.invitation_answer_handler;
 import socket.packet.handlers.senders.pong_handler;
 import socket.packet.handlers.senders.status_handler;
 
@@ -119,7 +120,7 @@ public class packet_handler
 					pkthandle = new invitation_answer_handler(m_sess,packet);
 					break;
 				case 0x20:
-					// send the 0x17
+					pkthandle = new req_pseudo_handler(m_sess,packet);
 					break;
 				case 0x01:
 				case 0x02:

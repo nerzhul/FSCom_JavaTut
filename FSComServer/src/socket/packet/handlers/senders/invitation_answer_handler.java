@@ -1,7 +1,8 @@
-package socket.packet.handlers;
+package socket.packet.handlers.senders;
 
 import misc.Log;
 import session.session;
+import socket.packet.handlers.listen_handler;
 
 public class invitation_answer_handler extends listen_handler {
 

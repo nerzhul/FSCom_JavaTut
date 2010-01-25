@@ -12,4 +12,9 @@ public class DatabaseFunctions {
 	{
 		return DatabaseTransactions.StringQuery("account", "user", "uid = '" + uid + "'");
 	}
+	
+	public static String getPseudoByUID(Integer uid)
+	{
+		return DatabaseTransactions.StringQuery("pseudo", "user", "uid = '" + uid + "'");
+	}
 }

@@ -279,7 +279,7 @@ public class session {
 	public String getName() { return name; }
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
-	private Socket getSocket() { return sock; }
+	public Socket getSocket() { return sock; }
 
 	
 	
