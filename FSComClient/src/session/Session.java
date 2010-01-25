@@ -2,11 +2,13 @@ package session;
 
 import java.util.Vector;
 
+import session.objects.contact;
+import session.objects.group;
+
 public class Session extends Thread{
 
 	private static Integer status;
-	private static Vector<Object> contacts; // TODO: typer
-	private static Vector<Object> groups; 	// TODO: typer
+	private static Vector<group> groups;
 	private static String pseudo;
 	private static String perso_msg;
 	
@@ -14,8 +16,7 @@ public class Session extends Thread{
 	{
 		setStatus(0);
 		setPseudo("");
-		contacts = new Vector<Object>();
-		groups = new Vector<Object>();
+		groups = new Vector<group>();
 		setPerso_msg("");
 	}
 	
@@ -32,12 +33,17 @@ public class Session extends Thread{
 		}
 	}
 	
-	public static void CreateNewContact(Object cont)
+	public static void CreateNewContact(contact cont)
 	{
-		contacts.add(cont);
+		for(int i=0;i<groups.size();i++)
+			if(groups.get(i).getGid() == cont.getGroup())
+			{
+				groups.get(i).AddContact(cont);
+				return;
+			}
 	}
 	
-	public static void CreateNewGroup(Object grp)
+	public static void CreateNewGroup(group grp)
 	{
 		groups.add(grp);
 	}

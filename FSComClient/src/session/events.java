@@ -1,5 +1,7 @@
 package session;
 
+import session.objects.contact;
+import session.objects.group;
 import misc.Log;
 
 public class events {
@@ -20,12 +22,16 @@ public class events {
 			for(int i=0;i<tmp_contactlist.length;i++)
 			{
 				String tmp_contact[] = tmp_contactlist[i].split("-[%]-");
-				if(tmp_contact.length != 4)
+				if(tmp_contact.length != 7)
 					Log.outError("Bad contact list packet !");
 				else
 				{
 					// TODO : create an object
-					Session.CreateNewContact(new Object());
+					contact tmp_con = new contact(Integer.decode(tmp_contact[0]),
+							Integer.decode(tmp_contact[1]), tmp_contact[2],
+							tmp_contact[5], tmp_contact[3], Integer.decode(tmp_contact[6]),
+							Integer.decode(tmp_contact[7]));
+					Session.CreateNewContact(tmp_con);
 				}
 			}
 		}
@@ -36,6 +42,7 @@ public class events {
 		// TODO store groups into interface
 		String tmp_grouplist[] = packet.toString().split("-|%|-");
 		
+		Session.CreateNewGroup(new group(0,"Autres contacts"));
 		if(tmp_grouplist.length > 0 && !tmp_grouplist[0].equals("00"))
 		{
 			for(int i=0;i<tmp_grouplist.length;i++)
@@ -46,11 +53,10 @@ public class events {
 				else
 				{
 					// TODO : create an object
-					Session.CreateNewGroup(new Object());
+					Session.CreateNewGroup(new group(Integer.decode(tmp_group[0]),tmp_group[1]));
 				}
 			}
 		}
-		
 	}
 
 	public static void ContactDisconnected(Object packet) {
