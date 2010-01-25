@@ -8,7 +8,8 @@ import socket.packet.handlers.listens.null_handler;
 import socket.packet.handlers.listens.pong_handler;
 import socket.packet.handlers.listens.serverside_handler;
 import socket.packet.handlers.listens.srvconnect_handler;
-import socket.packet.handlers.sends.AskStatus_handler;
+import socket.packet.handlers.sends.AskContacts_handler;
+import socket.packet.handlers.sends.AskGroups_handler;
 import socket.packet.handlers.sends.srvpong_handler;
 import socket.packet.handlers.sends.statussender_handler;
 
@@ -82,8 +83,19 @@ public class packet_handler
 					}
 					break;
 				case 0x0A:
-					events.DoEvent(0);
-					pcktrecv = new AskStatus_handler();
+					events.StoreStatus(packet);
+					pcktrecv = new AskGroups_handler();
+					((send_handler) pcktrecv).Send();
+					break;
+				case 0x0C:
+					events.StoreContacts(packet);
+					break;
+				case 0x0D:
+					// TODO : a contact was disconnected
+					break;
+				case 0x0F:
+					events.StoreGroups(packet);
+					pcktrecv = new AskContacts_handler();
 					((send_handler) pcktrecv).Send();
 					break;
 				case 0x00:
