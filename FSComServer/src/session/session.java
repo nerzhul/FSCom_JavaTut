@@ -214,7 +214,6 @@ public class session {
 					
 					if(SessionHandler.isConnected(_uid))
 					{
-						// TODO : send an request to accept client or not, dont add it in vector, temp hack
 						Invitation invit = new Invitation(uid, _uid, true);
 						invit.Send(SessionHandler.getContactByUID(_uid).getSocket());
 					}
