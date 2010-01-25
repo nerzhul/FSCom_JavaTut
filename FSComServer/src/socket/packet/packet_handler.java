@@ -101,6 +101,9 @@ public class packet_handler
 				case 0x18:
 					pkthandle = new MsgPersoToPlatform_handler(m_sess,packet);
 					break;
+				case 0x1A:
+					pkthandle = new AddContact_handler(m_sess,packet);
+					((send_handler) pkthandle).Send(mysock);
 				case 0x01:
 				case 0x02:
 				case 0x07:
