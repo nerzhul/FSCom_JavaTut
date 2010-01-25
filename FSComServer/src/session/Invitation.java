@@ -2,12 +2,15 @@ package session;
 
 public class Invitation {
 
-	public Invitation(Integer uid, Integer uid2) {
-		// TODO Auto-generated constructor stub
+	private Integer uid, uid_invited;
+	public Invitation(Integer _uid, Integer uid_i) {
+		uid = _uid;
+		uid_invited = uid_i;
 	}
 
-	public void Send() {
-		// TODO Auto-generated method stub
+	public void Send() 
+	{
+		// TODO Send an invitation to client
 		
 	}
 
