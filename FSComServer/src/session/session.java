@@ -292,7 +292,13 @@ public class session {
 	public void DelContact(Integer _uid, Integer blocked) 
 	{
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_contact WHERE uid = '" + uid + "' AND " 
-				+ "contact = '" + _uid + "'");	
+				+ "contact = '" + _uid + "'");
+		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
+				+ "uid = '" + _uid + "'");
+		if(SessionHandler.isConnected(_uid));
+			for(int i=0;i<sess_linked.size();i++)
+				if(sess_linked.get(i).getUid().equals(_uid))
+					sess_linked.remove(i);
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
