@@ -25,6 +25,29 @@ public class SessionHandler {
 			}
 		}
 	}
+	
+	public static session getContactByUID(Integer _uid)
+	{
+		session tmp_sess = null;
+		for(int i=0;i<v_sess.size();i++)
+		{
+			if(v_sess.get(i).getUid() == _uid)
+				tmp_sess = v_sess.get(i);
+		}
+		return tmp_sess;
+	}
+	
+	public static boolean isConnected(Integer uid)
+	{
+		if(uid == 0)
+			return false;
+		
+		if(getContactByUID(uid) == null)		
+			return false;
+		else
+			return true;
+	}
+	
 	public static void Update(int diff)
 	{
 		/* TODO: ping connected client and wait a response

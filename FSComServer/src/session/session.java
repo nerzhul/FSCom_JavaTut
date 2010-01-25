@@ -54,6 +54,9 @@ public class session {
 
 	public void contact_connected(session sess, boolean block)
 	{
+		if(sess == null)
+			return;
+		
 		if(!block)
 			sess_linked.add(sess);
 		cont_connected_handler pck = new cont_connected_handler(sess.getName(),
@@ -72,7 +75,9 @@ public class session {
 	}
 	public void contact_disconnected(session sess, boolean blocked)
 	{
-
+		if(sess == null)
+			return;
+		
 		cont_disconct_handler pck = new cont_disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
@@ -134,23 +139,14 @@ public class session {
 	public void block_contact(String c_uid, String method) 
 	{
 		if(method.equals("1"))
-			contact_disconnected(getContactByUID(Integer.decode(c_uid)),true);
+			contact_disconnected(SessionHandler.getContactByUID(Integer.decode(c_uid)),true);
 		else
-			contact_connected(getContactByUID(Integer.decode(c_uid)), true);
+			contact_connected(SessionHandler.getContactByUID(Integer.decode(c_uid)), true);
 		DatabaseTransactions.ExecuteQuery("UPDATE acc_contact SET blocked = '" + method + 
 				"' where uid = '" + uid + "' AND contact = '" + c_uid + "'");
 	}
 	
-	private session getContactByUID(Integer _uid)
-	{
-		session tmp_sess = null;
-		for(int i=0;i<sess_linked.size();i++)
-		{
-			if(sess_linked.get(i).getUid() == _uid)
-				tmp_sess = sess_linked.get(i);
-		}
-		return tmp_sess;
-	}
+	
 	
 	public void TransmitMsgTo(Object packet) {
 		String cut_pck[] = packet.toString().split("#-%-#");
@@ -161,9 +157,9 @@ public class session {
 		}
 		
 		Integer _uid = Integer.decode(cut_pck[0]);
-		if(getContactByUID(_uid) != null)
-			if(!getContactByUID(_uid).has_blocked(uid))
-				getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
+		if(SessionHandler.getContactByUID(_uid) != null)
+			if(!SessionHandler.getContactByUID(_uid).has_blocked(uid))
+				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
 	}
 	
 	private void SendMessageToMe(Integer _uid, String msg)
@@ -215,7 +211,12 @@ public class session {
 					DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
 							DatabaseFunctions.getAccountUIDByName(username) + "','0','','" + group + "'");
 					
-					// TODO : gestion sur les sessions
+					if(SessionHandler.isConnected(DatabaseFunctions.getAccountUIDByName(username)))
+					{
+						// TODO : send an request to accept client or not, dont add it in vector, temp hack
+						sess_linked.add(SessionHandler.getContactByUID(DatabaseFunctions.getAccountUIDByName(username)));
+						
+					}
 					result = 0;
 				}
 				else
