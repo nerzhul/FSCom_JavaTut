@@ -12,7 +12,7 @@ public class sender extends Thread
 	final static int port = 5677;
 	final static String IP = "127.0.0.1";
 
-	static Socket socket;
+	private static Socket socket;
 
 	public sender(){}
 	
@@ -88,5 +88,9 @@ public class sender extends Thread
 			 System.exit(-1);
 	     }
 	}
-
+	
+	public static Socket getSocket()
+	{
+		return socket;
+	}
 }

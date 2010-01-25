@@ -10,7 +10,7 @@ public class SessionHandler {
 	{
 		v_sess = new Vector<session>();
 	}
-	
+
 	public static void AddSession(session sess)
 	{
 		if(sess != null)
@@ -25,7 +25,7 @@ public class SessionHandler {
 			}
 		}
 	}
-	
+
 	public static session getContactByUID(Integer _uid)
 	{
 		session tmp_sess = null;
@@ -47,13 +47,14 @@ public class SessionHandler {
 		else
 			return true;
 	}
-	
+
 	public static void Update(int diff)
 	{
 		/* TODO: ping connected client and wait a response
 			if no response, destroy the session and the listener thread
 		 */
 	}
+
 	public static void DestroySession(session sess, Thread thr) 
 	{
 		for(int i=0;i<v_sess.size();i++)
@@ -66,7 +67,6 @@ public class SessionHandler {
 					v_sess.get(i).contact_disconnected(sess,false);
 			}
 		}
-		
 		// delete the listener on the session
 		thr.interrupt();
 	}
