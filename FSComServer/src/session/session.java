@@ -215,11 +215,12 @@ public class session {
 					if(SessionHandler.isConnected(_uid))
 					{
 						// TODO : send an request to accept client or not, dont add it in vector, temp hack
-						Invitation invit = new Invitation(uid, _uid);
-						invit.Send();
-						sess_linked.add(SessionHandler.getContactByUID(DatabaseFunctions.getAccountUIDByName(username)));
-						
+						Invitation invit = new Invitation(uid, _uid, true);
+						invit.Send(SessionHandler.getContactByUID(_uid).getSocket());
 					}
+					else
+						new Invitation(uid,_uid,false);
+					
 					result = 0;
 				}
 				else
@@ -232,6 +233,8 @@ public class session {
 		
 		return result;
 	}
+	
+
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -242,7 +245,7 @@ public class session {
 	public String getName() { return name; }
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
-
+	private Socket getSocket() { return sock; }
 	
 
 

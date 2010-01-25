@@ -7,4 +7,9 @@ public class DatabaseFunctions {
 	{
 		return DatabaseTransactions.IntegerQuery("account", "uid", "name = '" + name + "'");
 	}
+	
+	public static String getAccountNameByUID(Integer uid)
+	{
+		return DatabaseTransactions.StringQuery("account", "user", "uid = '" + uid + "'");
+	}
 }
