@@ -45,6 +45,7 @@ public class session {
 		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
+		// TODO : send all invitations
 	}
 	
 	public void disconnect_client()

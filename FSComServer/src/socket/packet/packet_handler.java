@@ -112,6 +112,12 @@ public class packet_handler
 				case 0x1A:
 					pkthandle = new AddContact_handler(m_sess,packet);
 					((send_handler) pkthandle).Send(mysock);
+				case 0x1C:
+					// TODO : handle del contact
+					break;
+				case 0x1F:
+					// TODO : handle answer to an invite
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
@@ -126,6 +132,9 @@ public class packet_handler
 				case 0x15:
 				case 0x17:
 				case 0x19:
+				case 0x1B:
+				case 0x1D:
+				case 0x1E:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:
