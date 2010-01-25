@@ -7,7 +7,4 @@ public abstract class abstract_handler {
 	protected Integer opcode;
 	protected String data;
 	abstract void PrintError() throws IOException;
-	
-	
-	
 }

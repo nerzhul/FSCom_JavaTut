@@ -1,4 +1,4 @@
-package socket.packet.handlers;
+package socket.packet.handlers.senders;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import database.DatabaseTransactions;
 import session.onconnect_answer;
 import session.session;
+import socket.packet.handlers.send_handler;
 
 public class connect_handler extends send_handler {
 

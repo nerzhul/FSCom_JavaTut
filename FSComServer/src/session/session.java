@@ -6,11 +6,11 @@ import java.util.Vector;
 import misc.Log;
 
 import socket.packet.handlers.MsgPersoToClient_handler;
-import socket.packet.handlers.MsgToClient_Handler;
-import socket.packet.handlers.PseudoToClient_handler;
-import socket.packet.handlers.StatusToClient_Handler;
-import socket.packet.handlers.cont_connected_handler;
-import socket.packet.handlers.cont_disconct_handler;
+import socket.packet.handlers.senders.MsgToClient_Handler;
+import socket.packet.handlers.senders.PseudoToClient_handler;
+import socket.packet.handlers.senders.StatusToClient_Handler;
+import socket.packet.handlers.senders.cont_connected_handler;
+import socket.packet.handlers.senders.cont_disconct_handler;
 
 import database.DatabaseFunctions;
 import database.DatabaseTransactions;
@@ -208,12 +208,15 @@ public class session {
 				if(DatabaseTransactions.DataExist("acc_group", "gid", "uid = '" + uid + "' AND" +
 						" gid = '" + group + "'"))
 				{
+					Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
 					DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
-							DatabaseFunctions.getAccountUIDByName(username) + "','0','','" + group + "'");
+							_uid + "','0','','" + group + "'");
 					
-					if(SessionHandler.isConnected(DatabaseFunctions.getAccountUIDByName(username)))
+					if(SessionHandler.isConnected(_uid))
 					{
 						// TODO : send an request to accept client or not, dont add it in vector, temp hack
+						Invitation invit = new Invitation(uid, _uid);
+						invit.Send();
 						sess_linked.add(SessionHandler.getContactByUID(DatabaseFunctions.getAccountUIDByName(username)));
 						
 					}

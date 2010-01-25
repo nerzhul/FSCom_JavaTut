@@ -1,4 +1,4 @@
-package socket.packet.handlers;
+package socket.packet.handlers.senders;
 
 import java.util.Vector;
 

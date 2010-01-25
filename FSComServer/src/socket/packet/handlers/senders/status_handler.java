@@ -1,8 +1,9 @@
-package socket.packet.handlers;
+package socket.packet.handlers.senders;
 
 import java.sql.SQLException;
 
 import session.session;
+import socket.packet.handlers.send_handler;
 
 public class status_handler extends send_handler {
 

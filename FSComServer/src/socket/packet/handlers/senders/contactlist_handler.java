@@ -1,9 +1,10 @@
-package socket.packet.handlers;
+package socket.packet.handlers.senders;
 
 import java.util.Vector;
 
 import database.DatabaseTransactions;
 import session.session;
+import socket.packet.handlers.send_handler;
 
 public class contactlist_handler extends send_handler {
 

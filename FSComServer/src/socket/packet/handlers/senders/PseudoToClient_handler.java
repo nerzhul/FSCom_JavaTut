@@ -1,4 +1,6 @@
-package socket.packet.handlers;
+package socket.packet.handlers.senders;
+
+import socket.packet.handlers.send_handler;
 
 public class PseudoToClient_handler extends send_handler {
 
