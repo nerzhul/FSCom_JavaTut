@@ -1,5 +1,6 @@
-package socket.packet.handlers;
+package socket.packet.handlers.listens;
 
+import socket.packet.handlers.listen_handler;
 import misc.Log;
 
 public class null_handler extends listen_handler{
@@ -10,7 +11,7 @@ public class null_handler extends listen_handler{
 		PrintError();
 	}
 	
-	void PrintError()
+	protected void PrintError()
 	{
 		Log.outError("Unhandled Packet opcode : 0x" + Integer.toHexString(opcode));
 	}

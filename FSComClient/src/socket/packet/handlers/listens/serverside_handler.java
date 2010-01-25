@@ -1,5 +1,6 @@
-package socket.packet.handlers;
+package socket.packet.handlers.listens;
 
+import socket.packet.handlers.listen_handler;
 import misc.Log;
 
 public class serverside_handler extends listen_handler {
@@ -10,7 +11,7 @@ public class serverside_handler extends listen_handler {
 		PrintError();
 	}
 	
-	void PrintError()
+	protected void PrintError()
 	{
 		Log.outError("Received Packet opcode : 0x" + Integer.toHexString(opcode)
 				+ " and station is not a server !");

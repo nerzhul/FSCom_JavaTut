@@ -2,7 +2,7 @@ package socket.packet.handlers;
 
 public class listen_handler extends abstract_handler 
 {
-	void PrintError(){}
+	protected void PrintError(){}
 
 	public boolean HasValidData() 
 	{

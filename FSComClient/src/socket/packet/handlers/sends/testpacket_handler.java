@@ -1,4 +1,6 @@
-package socket.packet.handlers;
+package socket.packet.handlers.sends;
+
+import socket.packet.handlers.send_handler;
 
 public class testpacket_handler extends send_handler{
 

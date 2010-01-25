@@ -1,6 +1,6 @@
 package misc.CommandLine.Commands;
 
-import socket.packet.handlers.connect_handler;
+import socket.packet.handlers.sends.connect_handler;
 
 public class cmd_connect extends cmd_abstract {
 

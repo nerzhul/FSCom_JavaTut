@@ -3,6 +3,12 @@ package socket.packet;
 import java.net.Socket;
 
 import socket.packet.handlers.*;
+import socket.packet.handlers.listens.null_handler;
+import socket.packet.handlers.listens.pong_handler;
+import socket.packet.handlers.listens.serverside_handler;
+import socket.packet.handlers.listens.srvconnect_handler;
+import socket.packet.handlers.sends.srvpong_handler;
+import socket.packet.handlers.sends.statussender_handler;
 
 import misc.Log;
 
@@ -82,6 +88,15 @@ public class packet_handler
 				case 0x05:
 				case 0x06:
 				case 0x09:
+				case 0x0B:
+				case 0x0E:
+				case 0x11:
+				case 0x13:
+				case 0x16:
+				case 0x18:
+				case 0x1A:
+				case 0x1C:
+				case 0x1F:
 					pcktrecv = new serverside_handler(this.opcode_id);
 					break;
 				default:

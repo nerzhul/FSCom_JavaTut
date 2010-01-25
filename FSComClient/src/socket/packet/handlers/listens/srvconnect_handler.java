@@ -1,4 +1,6 @@
-package socket.packet.handlers;
+package socket.packet.handlers.listens;
+
+import socket.packet.handlers.listen_handler;
 
 public class srvconnect_handler extends listen_handler {
 

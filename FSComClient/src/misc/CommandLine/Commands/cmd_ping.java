@@ -1,6 +1,6 @@
 package misc.CommandLine.Commands;
 
-import socket.packet.handlers.ping_handler;
+import socket.packet.handlers.sends.ping_handler;
 
 public class cmd_ping extends cmd_abstract{
 
