@@ -92,7 +92,7 @@ public class session {
 	
 	public boolean has_blocked(Integer _uid) 
 	{
-		if(DatabaseTransactions.IntegerQuery("acc_contact", "blocked"
+		if(DatabaseTransactions.IntegerQuery("acc_blocked", "blocked"
 				, "contact = '" + _uid + "' AND uid = '" + uid + "'") == 1)
 			return true;
 		else
@@ -141,11 +141,25 @@ public class session {
 	public void block_contact(String c_uid, String method) 
 	{
 		if(method.equals("1"))
+		{
 			contact_disconnected(SessionHandler.getContactByUID(Integer.decode(c_uid)),true);
+			uid_blocked.add(Integer.decode(c_uid));
+		}
 		else
+		{
 			contact_connected(SessionHandler.getContactByUID(Integer.decode(c_uid)), true);
-		DatabaseTransactions.ExecuteQuery("UPDATE acc_contact SET blocked = '" + method + 
-				"' where uid = '" + uid + "' AND contact = '" + c_uid + "'");
+			for(int i=0;i<uid_blocked.size();i++)
+				if(uid_blocked.get(i).equals(Integer.decode(c_uid)))
+					uid_blocked.remove(i);
+		}
+		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
+				uid + "' AND contact = '" + c_uid + "'"))
+			DatabaseTransactions.ExecuteQuery("UPDATE acc_blocked SET blocked = '" + method + 
+					"' where uid = '" + uid + "' AND contact = '" + c_uid + "'");
+		else
+			DatabaseTransactions.ExecuteQuery("INSERT INTO acc_blocked VALUES ('" + uid + "','" 
+					+ c_uid + "','" + method + "");
+				
 	}
 	
 	
@@ -269,6 +283,12 @@ public class session {
 		ACWI.Send(sock);
 	}
 	
+	public void DelContact(Integer _uid, Integer blocked) 
+	{
+		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_contact WHERE uid = '" + uid + "' AND " 
+				+ "contact = '" + _uid + "'");	
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
@@ -280,6 +300,8 @@ public class session {
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
 	public Socket getSocket() { return sock; }
+
+	
 
 	
 	
