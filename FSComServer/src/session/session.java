@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import misc.Log;
 
+import socket.packet.handlers.MsgPersoToClient_handler;
 import socket.packet.handlers.MsgToClient_Handler;
 import socket.packet.handlers.PseudoToClient_handler;
 import socket.packet.handlers.StatusToClient_Handler;
@@ -109,13 +110,20 @@ public class session {
 					case 2:
 						sess_linked.get(i).SendPseudoToMe(uid, name);
 						break;
+					case 3:
+						sess_linked.get(i).SendMsgPersoToMe(uid, personnal_msg);
+						break;
 				}
 			}
-				
 		}
-		
 	}
 	
+	private void SendMsgPersoToMe(Integer _uid, String pmsg) 
+	{
+		MsgPersoToClient_handler pck = new MsgPersoToClient_handler(_uid,pmsg);
+		pck.Send(sock);
+	}
+
 	private void SendPseudoToMe(Integer _uid, String _name) 
 	{
 		PseudoToClient_handler pck = new PseudoToClient_handler(_uid,_name);
@@ -173,7 +181,14 @@ public class session {
 	{
 		String pck = packet.toString();
 		SetName(pck);	
-		
+		broadcast_SomethingChanged(2);
+	}
+	
+	public void ChangeMsgPerso(Object packet)
+	{
+		String pck = packet.toString();
+		SetPersonnalMsg(pck);
+		broadcast_SomethingChanged(3);
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }

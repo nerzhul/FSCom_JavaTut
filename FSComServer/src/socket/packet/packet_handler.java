@@ -98,6 +98,9 @@ public class packet_handler
 				case 0x16:
 					pkthandle = new PseudoToPlatform_handler(m_sess,packet);
 					break;
+				case 0x18:
+					pkthandle = new MsgPersoToPlatform_handler(m_sess,packet);
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
@@ -111,6 +114,7 @@ public class packet_handler
 				case 0x14:
 				case 0x15:
 				case 0x17:
+				case 0x19:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:
