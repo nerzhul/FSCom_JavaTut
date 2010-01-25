@@ -181,6 +181,8 @@ public class session {
 	{
 		String pck = packet.toString();
 		SetName(pck);	
+		DatabaseTransactions.ExecuteQuery("UPDATE account SET pseudo = '" + pck + 
+				"'	WHERE uid = '" + uid + "'");
 		broadcast_SomethingChanged(2);
 	}
 	
@@ -188,6 +190,8 @@ public class session {
 	{
 		String pck = packet.toString();
 		SetPersonnalMsg(pck);
+		DatabaseTransactions.ExecuteQuery("UPDATE account SET phr_perso = '" + pck +
+				"' WHERE uid = '" + uid + "'");
 		broadcast_SomethingChanged(3);
 	}
 	
