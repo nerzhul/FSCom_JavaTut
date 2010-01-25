@@ -2,11 +2,13 @@ package socket.packet;
 
 import java.net.Socket;
 
+import session.events;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listens.null_handler;
 import socket.packet.handlers.listens.pong_handler;
 import socket.packet.handlers.listens.serverside_handler;
 import socket.packet.handlers.listens.srvconnect_handler;
+import socket.packet.handlers.sends.AskStatus_handler;
 import socket.packet.handlers.sends.srvpong_handler;
 import socket.packet.handlers.sends.statussender_handler;
 
@@ -80,7 +82,9 @@ public class packet_handler
 					}
 					break;
 				case 0x0A:
-					// final response
+					events.DoEvent(0);
+					pcktrecv = new AskStatus_handler();
+					((send_handler) pcktrecv).Send();
 					break;
 				case 0x00:
 				case 0x03:
