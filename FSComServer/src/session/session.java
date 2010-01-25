@@ -89,12 +89,15 @@ public class session {
 	
 	public void broadcast_StatusChanged() 
 	{
-		// TODO Auto-generated method stub
+		/* TODO send status to all contact not blocked
+		 * 
+		 */
 	}
 	
 	public void block_contact(String c_uid, String method) 
 	{
 		contact_disconnected(getContactByUID(Integer.decode(c_uid)),true);
+		// TODO : maj DB
 	}
 	
 	private session getContactByUID(Integer _uid)
