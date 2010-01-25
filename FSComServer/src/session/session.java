@@ -1,12 +1,12 @@
 package session;
 
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.Vector;
 
 import misc.Log;
 
 import socket.packet.handlers.MsgToClient_Handler;
+import socket.packet.handlers.StatusToClient_Handler;
 import socket.packet.handlers.cont_connected_handler;
 import socket.packet.handlers.cont_disconct_handler;
 
@@ -22,6 +22,7 @@ public class session {
 	private Thread thr_associated;
 	private Vector<session> sess_linked;
 	private Socket sock;
+	private Vector<Integer> uid_blocked;
 	
 	public session(Thread thr, Socket sockt)
 	{
@@ -35,7 +36,7 @@ public class session {
 		sock = sockt;
 	}
 
-	public void connect_client() throws SQLException
+	public void connect_client()
 	{
 		connected = true;
 		SessionHandler.AddSession(this);
@@ -89,9 +90,17 @@ public class session {
 	
 	public void broadcast_StatusChanged() 
 	{
-		/* TODO send status to all contact not blocked
-		 * 
-		 */
+		for(int i=0;i<sess_linked.size();i++)
+		{
+			boolean blocked = false;
+			for(int j=0;j<uid_blocked.size();j++)
+				if(uid_blocked.get(i) == sess_linked.get(i).getUid())
+					blocked = true;
+			
+			if(!blocked)
+				sess_linked.get(i).SendStatusToMe(uid, status);
+		}
+		
 	}
 	
 	public void block_contact(String c_uid, String method) 
@@ -129,6 +138,12 @@ public class session {
 		pck.Send(sock);		
 	}
 
+	private void SendStatusToMe(Integer _uid, Integer status)
+	{
+		StatusToClient_Handler pck = new StatusToClient_Handler(_uid,status);
+		pck.Send(sock);
+	}
+	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
 	public Integer getUid() { return uid; }
 	public boolean IsConnected(){ return connected; }
