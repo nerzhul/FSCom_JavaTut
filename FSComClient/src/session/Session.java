@@ -39,7 +39,7 @@ public class Session extends Thread{
 	
 	public static void CreateNewGroup(Object grp)
 	{
-		contacts.add(grp);
+		groups.add(grp);
 	}
 	
 	public static void setStatus(Integer st) { Session.status = st;	}
