@@ -12,11 +12,11 @@ public class Session extends Thread{
 	
 	public Session()
 	{
-		status = 0;
-		pseudo = "";
+		setStatus(0);
+		setPseudo("");
 		contacts = new Vector<Object>();
 		groups = new Vector<Object>();
-		perso_msg = "";
+		setPerso_msg("");
 	}
 	
 	public void run()
@@ -31,4 +31,21 @@ public class Session extends Thread{
 			
 		}
 	}
+	
+	public static void CreateNewContact(Object cont)
+	{
+		contacts.add(cont);
+	}
+	
+	public static void CreateNewGroup(Object grp)
+	{
+		contacts.add(grp);
+	}
+	
+	public static void setStatus(Integer st) { Session.status = st;	}
+	public static Integer getStatus() {	return status; }
+	public static void setPseudo(String pseudo) { Session.pseudo = pseudo; }
+	public static String getPseudo() { return pseudo; }
+	public static void setPerso_msg(String perso_msg) {	Session.perso_msg = perso_msg; }
+	public static String getPerso_msg() { return perso_msg; }
 }

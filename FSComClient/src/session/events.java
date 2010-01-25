@@ -1,16 +1,34 @@
 package session;
 
+import misc.Log;
+
 public class events {
 
 	
-	public static void StoreStatus(Object packet)
+	public static void StoreStatus(Integer st)
 	{
-		// TODO : store status
+		Session.setStatus(st);
 	}
 	
 	public static void StoreContacts(Object packet)
 	{
 		// TODO : store contacts into interface
+		String tmp_contactlist[] = packet.toString().split("-|%|-");
+		
+		if(tmp_contactlist.length > 0)
+		{
+			for(int i=0;i<tmp_contactlist.length;i++)
+			{
+				String tmp_contact[] = tmp_contactlist[i].split("-[%]-");
+				if(tmp_contact.length != 4)
+					Log.outError("Bad contact list packet !");
+				else
+				{
+					// TODO : create an object
+					Session.CreateNewContact(new Object());
+				}
+			}
+		}
 	}
 
 	public static void StoreGroups(Object packet) {

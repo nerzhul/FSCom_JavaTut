@@ -2,6 +2,7 @@ package socket.packet;
 
 import java.net.Socket;
 
+import session.Session;
 import session.events;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listens.null_handler;
@@ -74,7 +75,7 @@ public class packet_handler
 					// TODO: send correct status
 					if((new srvconnect_handler(packet.toString())).HasValidData())
 					{
-						pcktrecv = new statussender_handler(1,true);
+						pcktrecv = new statussender_handler(Session.getStatus(),true);
 						((send_handler) pcktrecv).Send();
 					}
 					else
@@ -83,7 +84,6 @@ public class packet_handler
 					}
 					break;
 				case 0x0A:
-					events.StoreStatus(packet);
 					pcktrecv = new AskGroups_handler();
 					((send_handler) pcktrecv).Send();
 					break;
