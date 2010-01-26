@@ -90,11 +90,10 @@ public class form_contact extends form_abstract{
 	
 	private void setlistcontact()
 	{
-		Vector<group> contacts= Session.getGroups();
-		//remplacer par listecontacts bien sur...
-		list = new JList(contacts);
+		Vector<group> groups = Session.getGroups();
+		list = new JList(groups);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		//list.addMouseListener(new Clicks_Contact(list));
+		//list.addMouseListener(new Clicks_Contact(list)); TODO: rehandle this
 		pan.add(list);
 		JScrollPane listeAvecAscenseur = new JScrollPane(list);
 		listeAvecAscenseur.setPreferredSize(new Dimension(150, 100));

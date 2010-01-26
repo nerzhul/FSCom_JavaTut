@@ -51,9 +51,9 @@ public class form_connect extends form_abstract {
 		str="";
 		try
 		{
-			InputStream ips=new FileInputStream(file); 
+			InputStream ips = new FileInputStream(file); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
+			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
 			while ((ligne=br.readLine())!=null)
 				str+=ligne+"\n";

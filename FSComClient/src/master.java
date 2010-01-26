@@ -7,7 +7,7 @@ public class master
 {
 
 	private static threading thr_lib;
-	final static String version = "Alpha 0.4.3";
+	final static String version = "Alpha 0.4.3b";
 	
 	public master()	{}
 	
