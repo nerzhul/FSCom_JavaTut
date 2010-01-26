@@ -3,6 +3,7 @@ package windows.actions.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -20,12 +21,12 @@ public class connect_button implements ActionListener {
 	private JTextField username;
 	private JPasswordField passwd;
 	private boolean need_save; 
-	public connect_button(JComboBox statusco, JTextField mail, JPasswordField password, boolean save) 
+	public connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) 
 	{
 		this.status=statusco;
 		this.username=mail;
 		this.passwd=password;
-		need_save = save;
+		need_save = save.isSelected();
 	}
 	
 	public void actionPerformed(ActionEvent e) 
@@ -48,14 +49,14 @@ public class connect_button implements ActionListener {
 	}
 	
 	public void SaveFile(){
-		String fichier ="fichier.txt";
+		String file = "savedvariables";
 		try {
-			FileWriter fw = new FileWriter (fichier);
+			FileWriter fw = new FileWriter (file);
 			BufferedWriter bw = new BufferedWriter (fw);
-			PrintWriter fichierSortie = new PrintWriter (bw); 
-				fichierSortie.println (username); 
-				fichierSortie.println (passwd); 
-			fichierSortie.close();
+			PrintWriter wfile = new PrintWriter (bw); 
+			wfile.println (username); 
+			wfile.println (passwd); 
+			wfile.close();
 		}
 		catch (Exception e){
 			System.out.println(e.toString());

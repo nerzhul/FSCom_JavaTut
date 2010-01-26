@@ -45,14 +45,14 @@ public class form_connect extends form_abstract {
 	}
 
 	private void ReadConfigFile(){
-		r_user="";
-		r_pass="";
-		file ="savedvariables";
-		str="";
+		r_user = "";
+		r_pass = "";
+		file = "savedvariables";
+		str = "";
 		try
 		{
 			InputStream ips = new FileInputStream(file); 
-			InputStreamReader ipsr=new InputStreamReader(ips);
+			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
 			String ligne;
 			while ((ligne=br.readLine())!=null)
@@ -94,7 +94,7 @@ public class form_connect extends form_abstract {
 		if(r_user != "" && r_user != "")
 			save.setSelected(true);
 		connect=new JButton("Connexion");
-		connect.addActionListener(new connect_button(status,mail,password,save.isSelected()));
+		connect.addActionListener(new connect_button(status,mail,password,save));
 
 		pan.add(Titre);
 		pan.add(labeluser);
@@ -102,6 +102,7 @@ public class form_connect extends form_abstract {
 		pan.add(labelpass);
 		pan.add(password);
 		pan.add(status);
+		pan.add(save);	
 		pan.add(connect);
 		
 		fram.setContentPane(pan);        
@@ -110,7 +111,7 @@ public class form_connect extends form_abstract {
 	
 	protected void BuildFrame()
 	{
-		fram=new JFrame();
+		fram = new JFrame();
 		fram.setTitle("Cookie Messenger - Connexion"); 
 		fram.setSize(300,600); 
 		fram.setLocationRelativeTo(null);

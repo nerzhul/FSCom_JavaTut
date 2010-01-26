@@ -9,21 +9,26 @@ import java.net.SocketTimeoutException;
 import misc.Log;
 import socket.packet.packet_handler;
 
-public class listener extends Thread{
+public class listener extends Thread
+{
 	
 	Socket sockt;
-	
 	
 	public listener(Socket sock) throws IOException
 	{
 		this.sockt = sock;
+	}
+	
+	public void run()
+	{
 		ListenAndDo();
 	}
 	
-	public void ListenAndDo() throws IOException
+	public void ListenAndDo()
 	{
 		try
 		{
+			this.wait();
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
 			
 			while(true)
@@ -46,9 +51,7 @@ public class listener extends Thread{
 		}
 		catch (Exception e) 
 		{
-	      
-			Log.outError("Listening Server Socket Error !");
-			e.printStackTrace();
+			this.interrupt();
 		}
 	}
 	

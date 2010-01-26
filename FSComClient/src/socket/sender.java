@@ -5,7 +5,6 @@ import java.io.*;
 
 import misc.Log;
 import misc.MasterCommandLine;
-import thread.thr_listen;
 
 public class sender extends Thread
 {
@@ -13,7 +12,8 @@ public class sender extends Thread
 	final static String IP = "127.0.0.1";
 
 	private static Socket socket;
-
+	private static listener listn;
+	
 	public sender()
 	{
 		try 
@@ -42,7 +42,7 @@ public class sender extends Thread
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line;
 		    
-		    thr_listen listn = new thr_listen(socket);
+		    listn = new listener(socket);
 		    listn.start();
 		    
 		    MasterCommandLine.DoCommand("ping");
@@ -60,9 +60,13 @@ public class sender extends Thread
 		    socket.close();
 		    cmdline.Destroy();
 
-		} catch (Exception e) 
+		} 
+		catch (Exception e) 
 		{
-	      e.printStackTrace();
+	      Log.ShowPopup("Connexion au serveur impossible !", true);
+	      if(listn != null)
+	    	  listn.interrupt();
+	      this.interrupt();
 	    }
 	}
 	
