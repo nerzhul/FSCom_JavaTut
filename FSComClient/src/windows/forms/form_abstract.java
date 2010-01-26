@@ -11,4 +11,5 @@ public abstract class form_abstract extends JFrame{
 
 	protected abstract void BuildWindow();
 	protected abstract void BuildMenuBar();
+	protected abstract void BuildFrame();
 }

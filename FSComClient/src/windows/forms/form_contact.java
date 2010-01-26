@@ -19,7 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import session.Session;
-import session.objects.contact;
 import session.objects.group;
 
 /*import windows.actions.Menu_Ajout_Contact;
@@ -58,23 +57,15 @@ public class form_contact extends form_abstract{
 	protected void BuildWindow()
 	{
 		
-		fram=new JFrame();
-		fram.setTitle("Cookie Messenger - Contacts"); 
-		fram.setSize(400,600); 
-		fram.setLocationRelativeTo(null);
-		fram.setResizable(true);
-		fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		BuildFrame();
+		BuildMenuBar();
 		
 		pan=new JPanel();
 		pan.setLayout(new FlowLayout());
 		pan.setBackground(new Color(128,128,255));
 		pan.setLayout(new FlowLayout(FlowLayout.CENTER,600,15));
-		
-		
 
 		Titre=new JLabel("Vous etes connecté en tant que " + Session.getPseudo(),JLabel.CENTER);
-		
-		BuildMenuBar();
 		
 		changstatus= new JComboBox();
 		changstatus.addItem("Online");
@@ -97,8 +88,8 @@ public class form_contact extends form_abstract{
 	    
 	}
 	
-	private void setlistcontact(){
-		//nom du groupe
+	private void setlistcontact()
+	{
 		Vector<group> contacts= Session.getGroups();
 		//remplacer par listecontacts bien sur...
 		list = new JList(contacts);
@@ -127,6 +118,17 @@ public class form_contact extends form_abstract{
 		fram.setJMenuBar(menuBar);
 	}
 	
+
+	protected void BuildFrame() 
+	{
+		fram=new JFrame();
+		fram.setTitle("Cookie Messenger - Contacts"); 
+		fram.setSize(400,600); 
+		fram.setLocationRelativeTo(null);
+		fram.setResizable(true);
+		fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);		
+	}
+	
 	private void AddItem(JMenu menu, String label, ActionListener obj)
 	{
 		JMenuItem temp = new JMenuItem(label);
@@ -137,4 +139,6 @@ public class form_contact extends form_abstract{
 	public JPanel getPan(){
 		return this.pan;
 	}
+
+	
 }
