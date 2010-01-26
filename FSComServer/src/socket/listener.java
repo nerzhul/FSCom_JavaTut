@@ -55,8 +55,17 @@ public class listener extends Thread{
 		catch (Exception e) 
 		{
 	      
-			Log.outError("Listening Master Socket Error !");
-			e.printStackTrace();
+			try 
+			{
+				
+				Log.outTimed("Client " + sockt.getInetAddress() + " was disconnected...");
+				sockt.close();
+				this.interrupt();
+			}
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
+			}
 		}
 	}
 	
