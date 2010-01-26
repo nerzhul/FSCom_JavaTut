@@ -2,6 +2,7 @@ package session;
 
 import session.objects.contact;
 import session.objects.group;
+import windows.forms.form_contact;
 import misc.Log;
 
 public class events {
@@ -115,14 +116,15 @@ public class events {
 		
 	}
 
-	public static void BadLoginInformations() {
-		// TODO Auto-generated method stub
-		
+	public static void BadLoginInformations() 
+	{
+		Log.ShowPopup("Login incorrect", true);
 	}
 
 	public static void ShowConnectedFrame() {
-		// TODO Auto-generated method stub
-		
+		Log.ShowPopup("Connecté !", false);
+		if(Session.getFmc() == null)
+			Session.setFmc(new form_contact());
 	}
 	
 	

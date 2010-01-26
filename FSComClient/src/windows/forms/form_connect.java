@@ -63,10 +63,10 @@ public class form_connect extends form_abstract {
 		labelpass = new JLabel("Mot de passe");
 		password = new JPasswordField(15);
 		status= new JComboBox();
-		status.addItem("Offline");
 		status.addItem("Online");
 		status.addItem("Busy");
 		status.addItem("AFK");
+		status.addItem("Offline");
 		connect=new JButton("Connexion");
 		connect.addActionListener(new connect_button(status,mail,password));
 

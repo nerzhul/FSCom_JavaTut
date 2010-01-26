@@ -27,13 +27,13 @@ public class connect_handler extends send_handler {
 		login = tmpstr[0].substring(1);
 		pass = tmpstr[1].substring(0,tmpstr[1].length() - 1);
 		ResultSet query = DatabaseTransactions.DatabaseQuery(
-				"select user,pass_hash from account where user = '" + login + "'");
+				"select user,sha_pass from account where user = '" + login + "'");
 		
 		if(query != null && query.next())
 		{
 			do
 			{
-				if(query.getString("pass_hash").equals(pass))
+				if(query.getString("sha_pass").equals(pass))
 				{
 					m_sess.SetName(login);
 					return ("" + onconnect_answer.CONN_SUCCESS.getValue());

@@ -24,7 +24,7 @@ public class connect_button implements ActionListener {
 		this.passwd=password;
 	}
 	
-	public void actionPerformed(ActionEvent e) 
+	public synchronized void actionPerformed(ActionEvent e) 
 	{
 			// Store status in session
 			Session.setStatus(status.getSelectedIndex() + 1);
