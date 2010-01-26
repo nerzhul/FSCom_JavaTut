@@ -60,19 +60,39 @@ public class events {
 		}
 	}
 
-	public static void ContactDisconnected(Object packet) {
-		// TODO Auto-generated method stub
+	public static void ContactDisconnected(Object packet) 
+	{
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: declare contact disconnected to client
+					return;
+				}
 		
 	}
 
-	public static void ContactConnected(Object packet) {
-		// TODO Auto-generated method stub
-		
+	public static void ContactConnected(Object packet) 
+	{
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: declare contact connected to client
+					return;
+				}
 	}
 
-	public static void BlockContact(Object packet) {
-		// TODO Auto-generated method stub
-		
+	public static void BlockContact(Object packet) 
+	{
+		// TODO: split the packet
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: declare contact blocked to client
+					return;
+				}
 	}
 
 	public static void RecvMsg(Object packet) {
@@ -80,19 +100,41 @@ public class events {
 		
 	}
 
-	public static void ContactModifyStatus(Object packet) {
-		// TODO Auto-generated method stub
+	public static void ContactModifyStatus(Object packet) 
+	{
+		// TODO : split the packet
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: modify contact status
+					return;
+				}
 		
 	}
 
-	public static void ContactModifyPseudo(Object packet) {
-		// TODO Auto-generated method stub
-		
+	public static void ContactModifyPseudo(Object packet) 
+	{
+		// TODO: split the packet
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: modify contact pseudo
+					return;
+				}
 	}
 
-	public static void ContactModifyPmsg(Object packet) {
-		// TODO Auto-generated method stub
-		
+	public static void ContactModifyPmsg(Object packet) 
+	{
+		// TODO: split the packet
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: modify contact Pmsg
+					return;
+				}
 	}
 
 	public static void ContactAdded(Object packet) {
@@ -100,14 +142,21 @@ public class events {
 		
 	}
 
-	public static void ContactDeleted(Object packet) {
-		// TODO Auto-generated method stub
-		
+	public static void ContactDeleted(Object packet) 
+	{
+		// TODO: split the packet
+		for(int i=0;i<Session.getGroups().size();i++)
+			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				{
+					// TODO: delete the contact from vector and refresh list.
+					return;
+				}
 	}
 
-	public static void RecvInvitation(Object packet) {
-		// TODO Auto-generated method stub
-		
+	public static void RecvInvitation(Object packet) 
+	{
+		//TODO: show a msgbox to choice how to handle the invitation
 	}
 
 	public static void ConnectionError() 
