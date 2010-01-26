@@ -12,7 +12,6 @@ public class threading extends Thread{
 	
 	public threading()
 	{
-		thsend = new sender();
 	}
 	
 	public void run()

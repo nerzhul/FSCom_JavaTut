@@ -14,15 +14,27 @@ public class sender extends Thread
 
 	private static Socket socket;
 
-	public sender(){}
+	public sender()
+	{
+		try 
+		{
+			socket = new Socket(IP,port);
+		}
+		catch (UnknownHostException e) 
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	public void run()
 	{
 		try
 		{
 			// create a socket on mine IP.
-		    socket = new Socket(IP,port);
-		    
 		    Log.outString("Initialising Master Command Line...");
 		    MasterCommandLine cmdline = new MasterCommandLine();
 		    Log.outString("Master Command Line Initialized");
