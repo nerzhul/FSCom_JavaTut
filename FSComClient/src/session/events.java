@@ -30,7 +30,7 @@ public class events {
 					contact tmp_con = new contact(Integer.decode(tmp_contact[0]),
 							Integer.decode(tmp_contact[1]), tmp_contact[2],
 							tmp_contact[5], tmp_contact[3], Integer.decode(tmp_contact[6]),
-							Integer.decode(tmp_contact[7]));
+							Integer.decode(tmp_contact[4]));
 					Session.CreateNewContact(tmp_con);
 				}
 			}
