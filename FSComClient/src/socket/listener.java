@@ -28,7 +28,6 @@ public class listener extends Thread
 	{
 		try
 		{
-			this.wait();
 			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
 			
 			while(true)

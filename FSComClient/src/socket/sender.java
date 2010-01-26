@@ -12,7 +12,6 @@ public class sender extends Thread
 	final static String IP = "127.0.0.1";
 
 	private static Socket socket;
-	private static listener listn;
 	
 	public sender()
 	{
@@ -42,7 +41,7 @@ public class sender extends Thread
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line;
 		    
-		    listn = new listener(socket);
+		    listener listn = new listener(socket);
 		    listn.start();
 		    
 		    MasterCommandLine.DoCommand("ping");
@@ -63,9 +62,7 @@ public class sender extends Thread
 		} 
 		catch (Exception e) 
 		{
-	      Log.ShowPopup("Connexion au serveur impossible !", true);
-	      if(listn != null)
-	    	  listn.interrupt();
+	      Log.ShowPopup("Echec de connexion au serveur !", true);
 	      this.interrupt();
 	    }
 	}
