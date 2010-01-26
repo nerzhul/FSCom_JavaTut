@@ -29,7 +29,7 @@ public class connect_button implements ActionListener {
 		boolean connectok=true;
 		if(connectok == true)
 		{
-			Object stat = status.getSelectedItem();
+			String stat = status.getSelectedItem().toString();
 			String user = username.getText();
 			String pass = new String(passwd.getPassword());
 			
@@ -41,8 +41,7 @@ public class connect_button implements ActionListener {
 		else{
 			JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
 		}
-			
-
 	}
-
+	
 }
+		
