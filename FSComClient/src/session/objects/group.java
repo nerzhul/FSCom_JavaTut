@@ -26,4 +26,5 @@ public class group {
 	public Integer getGid() { return gid; }
 	public void setGname(String gname) { this.gname = gname; }
 	public String getGname() { return gname; }
+	public String toString() { return getGname(); }
 }

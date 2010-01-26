@@ -35,4 +35,5 @@ public class contact {
 	public String getComment() { return comment; }
 	public void setGroup(Integer group) { this.group = group; }
 	public Integer getGroup() { return group; }
+	public String toString() { return getPseudo(); }
 }
