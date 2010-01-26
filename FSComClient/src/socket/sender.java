@@ -54,8 +54,7 @@ public class sender extends Thread
 		    		break;
 		    	MasterCommandLine.DoCommand(line);
 		    }
-		    // don't forget to close the socket or client get an internal error !
-		    
+	    
 		    Log.outString("Close connection with server !");
 		    socket.close();
 		    cmdline.Destroy();
@@ -83,7 +82,6 @@ public class sender extends Thread
 	    	out.println(str);
 	    	Log.outTimed("Send packet : " + str + " to server ");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

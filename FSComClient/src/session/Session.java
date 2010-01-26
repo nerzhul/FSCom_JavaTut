@@ -62,12 +62,6 @@ public class Session extends Thread{
 	public static void setFmc(form_contact fmc) { Session.fmc = fmc; }
 	public static form_contact getFmc() { return fmc; }
 	public static Vector<group> getGroups() { return groups; }
-
-	public static void setFmconn(form_connect fmconn) {
-		Session.fmconn = fmconn;
-	}
-
-	public static form_connect getFmconn() {
-		return fmconn;
-	}
+	public static void setFmconn(form_connect fmconn) { Session.fmconn = fmconn; }
+	public static form_connect getFmconn() { return fmconn; }
 }

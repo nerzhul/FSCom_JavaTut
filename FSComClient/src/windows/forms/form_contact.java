@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,13 +42,6 @@ public class form_contact extends form_abstract{
 	private JLabel Soustitre;
 	private JList  list;
 	private JComboBox changstatus;
-	private JButton addcontact;
-	private JButton changepseudo;
-	private JMenuItem quitter;
-	private JMenuItem ajoutcontact;
-	private JMenuItem changerpseudo;
-	private JMenuItem deconnexion;
-	private JMenuItem aPropos;
 
 	public form_contact()
 	{
@@ -60,15 +52,14 @@ public class form_contact extends form_abstract{
 	{
 		
 		BuildFrame();
+		Titre=new JLabel("Vous etes connecté en tant que " + Session.getPseudo(),JLabel.CENTER);
 		BuildMenuBar();
 		
 		pan=new JPanel();
 		pan.setLayout(new FlowLayout());
 		pan.setBackground(new Color(128,128,255));
 		pan.setLayout(new FlowLayout(FlowLayout.CENTER,600,15));
-
-		Titre=new JLabel("Vous etes connecté en tant que " + Session.getPseudo(),JLabel.CENTER);
-		
+	
 		changstatus= new JComboBox();
 		changstatus.addItem("Online");
 		changstatus.addItem("Busy");

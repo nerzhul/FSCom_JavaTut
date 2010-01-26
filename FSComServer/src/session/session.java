@@ -36,7 +36,7 @@ public class session {
 		name = "";
 		personnal_msg = "";
 		thr_associated = thr;
-		sess_linked = null;
+		sess_linked = new Vector<session>();
 		sock = sockt;
 	}
 
@@ -199,7 +199,7 @@ public class session {
 	public void ChangePseudo(Object packet) 
 	{
 		String pck = packet.toString();
-		SetName(pck);	
+		SetName(pck);
 		DatabaseTransactions.ExecuteQuery("UPDATE account SET pseudo = '" + pck + 
 				"'	WHERE uid = '" + uid + "'");
 		broadcast_SomethingChanged(2);
