@@ -18,13 +18,13 @@ public class events {
 	public static void StoreContacts(Object packet)
 	{
 		// TODO : store contacts into interface
-		String tmp_contactlist[] = packet.toString().split("-|%|-");
+		String tmp_contactlist[] = packet.toString().split("///.///");
 		
 		if(tmp_contactlist.length > 0 && !tmp_contactlist[0].equals("00"))
 		{
-			for(int i=0;i<tmp_contactlist.length;i++)
+			for(int i=0;i<tmp_contactlist.length-1;i++)
 			{
-				String tmp_contact[] = tmp_contactlist[i].split("-[%]-");
+				String tmp_contact[] = tmp_contactlist[i].split("//.//");
 				if(tmp_contact.length != 7)
 					Log.outError("Bad contact list packet !");
 				else
