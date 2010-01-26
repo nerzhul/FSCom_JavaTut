@@ -12,6 +12,7 @@ public class sender extends Thread
 	final static String IP = "127.0.0.1";
 
 	private static Socket socket;
+	private static listener listn;
 	
 	public sender()
 	{
@@ -41,7 +42,7 @@ public class sender extends Thread
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line;
 		    
-		    listener listn = new listener(socket);
+		    listn = new listener(socket);
 		    listn.start();
 		    
 		    MasterCommandLine.DoCommand("ping");
@@ -88,7 +89,7 @@ public class sender extends Thread
 		
 	}
 	
-	public void StopSocket()
+	public static void StopSocket()
 	{
 	     try
 	     {
@@ -105,5 +106,11 @@ public class sender extends Thread
 	public static Socket getSocket()
 	{
 		return socket;
+	}
+
+	public void StopListener() 
+	{
+		if(listn != null)
+			listn.interrupt();		
 	}
 }

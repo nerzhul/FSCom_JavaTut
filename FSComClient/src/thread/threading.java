@@ -30,7 +30,10 @@ public class threading extends Thread{
 	public static void StopSender()
 	{
 		if(thsend != null)
+		{
+			thsend.StopListener();
 			thsend.interrupt();
+		}
 	}
 	
 	public void LaunchSession(boolean new_thr)

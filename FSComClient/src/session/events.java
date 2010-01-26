@@ -2,6 +2,8 @@ package session;
 
 import session.objects.contact;
 import session.objects.group;
+import socket.sender;
+import thread.threading;
 import windows.forms.form_contact;
 import misc.Log;
 
@@ -125,6 +127,12 @@ public class events {
 		Log.ShowPopup("Connecté !", false);
 		if(Session.getFmc() == null)
 			Session.setFmc(new form_contact());
+	}
+
+	public static void DisconnectCurrentClient() 
+	{
+		sender.StopSocket();
+		threading.StopSender();
 	}
 	
 	
