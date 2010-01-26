@@ -55,10 +55,7 @@ public class events {
 				if(tmp_group.length != 2)
 					Log.outError("Bad group list packet !");
 				else
-				{
-					// TODO : create an object
 					Session.CreateNewGroup(new group(Integer.decode(tmp_group[0]),tmp_group[1]));
-				}
 			}
 		}
 	}
@@ -116,7 +113,6 @@ public class events {
 	public static void ConnectionError() 
 	{
 		Log.ShowPopup("Erreur de connexion avec le serveur", true);
-		
 	}
 
 	public static void BadLoginInformations() 

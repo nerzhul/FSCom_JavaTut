@@ -3,6 +3,8 @@ package socket;
 import java.net.*;
 import java.io.*;
 
+import session.events;
+
 import misc.Log;
 import misc.MasterCommandLine;
 
@@ -62,7 +64,7 @@ public class sender extends Thread
 		} 
 		catch (Exception e) 
 		{
-	      Log.ShowPopup("Echec de connexion au serveur !", true);
+	      events.ConnectionError();
 	      this.interrupt();
 	    }
 	}
