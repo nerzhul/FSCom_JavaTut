@@ -4,43 +4,52 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import session.Session;
+import socket.packet.handlers.send_handler;
+import socket.packet.handlers.sends.connect_handler;
+import thread.threading;
 
 //import windows.forms.form_contact;
 
 public class connect_button implements ActionListener {
-	//contenuUser() et contenuPass();
-	private JFrame fenetre;
 	private JComboBox status;
 	private JTextField username;
 	private JPasswordField passwd;
-	public connect_button(JFrame fram, JComboBox statusco, JTextField mail, JPasswordField password) {
-		fenetre=fram;
+	public connect_button(JComboBox statusco, JTextField mail, JPasswordField password) {
 		this.status=statusco;
 		this.username=mail;
 		this.passwd=password;
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-
-		boolean connectok=true;
-		if(connectok == true)
-		{
+	public void actionPerformed(ActionEvent e) 
+	{
+			// Store status in session
 			String stat = status.getSelectedItem().toString();
+			Integer st = 0;
+			if(stat.equals("AFK"))
+				st = 3;
+			else if(stat.equals("Busy"))
+				st = 2;
+			else if(stat.equals("Online"))
+				st = 1;
+			else
+				st = 4;
+			Session.setStatus(st);
+			
+			// get User and Pass
 			String user = username.getText();
 			String pass = new String(passwd.getPassword());
 			
-			//verif login-->server avec user qui est le nom d'utilisateur et pass qui est le password et on récupère le pseudo dans pseudo
-			String pseudo="kikoo";		
-			fenetre.dispose();
-			//new form_contact(stat,pseudo);
-		}
-		else{
-			JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
-		}
+			// Launcher socket with server
+			threading.LaunchSender(true);
+			
+			send_handler pck = new connect_handler(user + " " + pass);
+			if(pck != null)
+				pck.Send();
+			
 	}
 	
 }

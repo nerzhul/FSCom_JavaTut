@@ -6,7 +6,7 @@ import windows.windowthread;
 
 public class threading extends Thread{
 
-	private sender thsend;
+	private static sender thsend;
 	private Session m_sess;
 	private windowthread m_window;
 	
@@ -17,19 +17,18 @@ public class threading extends Thread{
 	
 	public void run()
 	{
-		LaunchSender(true);
 		LaunchSession(true);
 		LaunchSwingInterface();
 	}
 
-	public void LaunchSender(boolean new_thr)
+	public static void LaunchSender(boolean new_thr)
 	{
 		if(new_thr)
 			thsend = new sender();
 		thsend.start();
 	}
 	
-	public void StopSender()
+	public static void StopSender()
 	{
 		if(thsend != null)
 			thsend.interrupt();

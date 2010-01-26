@@ -2,6 +2,7 @@ package socket.packet.handlers.listens;
 
 import session.events;
 import socket.packet.handlers.listen_handler;
+import thread.threading;
 
 public class srvconnect_handler extends listen_handler {
 
@@ -16,6 +17,7 @@ public class srvconnect_handler extends listen_handler {
 			return true;
 		else
 		{
+			threading.StopSender();
 			if(data.equals("1"))
 				events.ConnectionError();
 			else if(data.equals("3"))

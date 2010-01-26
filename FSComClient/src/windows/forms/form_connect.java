@@ -68,7 +68,7 @@ public class form_connect extends form_abstract {
 		status.addItem("Busy");
 		status.addItem("AFK");
 		connect=new JButton("Connexion");
-		connect.addActionListener(new connect_button(fram,status,mail,password));
+		connect.addActionListener(new connect_button(status,mail,password));
 
 
 		pan.add(Titre);
