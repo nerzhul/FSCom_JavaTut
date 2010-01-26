@@ -109,12 +109,18 @@ public class events {
 		
 	}
 
-	public static void ConnectionError() {
-		// TODO Auto-generated method stub
+	public static void ConnectionError() 
+	{
+		Log.ShowPopup("Erreur de connexion avec le serveur", true);
 		
 	}
 
 	public static void BadLoginInformations() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void ShowConnectedFrame() {
 		// TODO Auto-generated method stub
 		
 	}

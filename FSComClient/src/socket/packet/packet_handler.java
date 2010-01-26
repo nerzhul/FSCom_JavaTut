@@ -89,6 +89,7 @@ public class packet_handler
 					break;
 				case 0x0C:
 					events.StoreContacts(packet);
+					events.ShowConnectedFrame();
 					break;
 				case 0x0D:
 					events.ContactDisconnected(packet);

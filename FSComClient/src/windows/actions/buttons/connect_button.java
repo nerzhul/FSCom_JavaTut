@@ -27,17 +27,7 @@ public class connect_button implements ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 			// Store status in session
-			String stat = status.getSelectedItem().toString();
-			Integer st = 0;
-			if(stat.equals("AFK"))
-				st = 3;
-			else if(stat.equals("Busy"))
-				st = 2;
-			else if(stat.equals("Online"))
-				st = 1;
-			else
-				st = 4;
-			Session.setStatus(st);
+			Session.setStatus(status.getSelectedIndex() + 1);
 			
 			// get User and Pass
 			String user = username.getText();
@@ -48,8 +38,7 @@ public class connect_button implements ActionListener {
 			
 			send_handler pck = new connect_handler(user + " " + pass);
 			if(pck != null)
-				pck.Send();
-			
+				pck.Send();	
 	}
 	
 }
