@@ -26,6 +26,7 @@ import windows.actions.Clicks_Contact;
 import windows.actions.Menu_Deconnexion;
 import windows.actions.Menu_principal_apropos;*/
 import windows.actions.buttons.changestatus_button;
+import windows.actions.menus.menubar_a_propos;
 import windows.actions.menus.menubar_changepseudo;
 import windows.actions.menus.menubar_disconnect;
 import windows.actions.menus.menubar_quit;
@@ -111,7 +112,7 @@ public class form_contact extends form_abstract{
 		//AddItem(menu1,"Ajouter un contact",new Menu_Ajout_Contact());
 		AddItem(menu1,"Changer de pseudo",new menubar_changepseudo(Titre));
 		AddItem(menu1,"Se déconnecter",new menubar_disconnect(fram));
-		//AddItem(menu2,"A propos...",new Menu_principal_apropos());
+		AddItem(menu2,"A propos...",new menubar_a_propos());
 	
 		menuBar.add(menu1);
 		menuBar.add(menu2);

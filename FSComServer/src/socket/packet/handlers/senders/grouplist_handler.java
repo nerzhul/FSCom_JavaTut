@@ -25,13 +25,11 @@ public class grouplist_handler extends send_handler {
 			String acc_group_get = "uid = '" + m_sess.getUid() + "' AND gid = '" + v_grp.get(i) + "'";
 			
 			pck += v_grp.get(i);
-			pck += "{(-%-)}";
+			pck += "/.";
 			pck += DatabaseTransactions.StringQuery("acc_group", "name", acc_group_get);
-			pck += "-|%|-";
+			pck += "/./.";
 		}		
-			
-		if(pck.equals(""))
-			pck = "00";
+		pck += "00";
 		
 		return pck;
 	}

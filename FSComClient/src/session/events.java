@@ -43,14 +43,15 @@ public class events {
 	public static void StoreGroups(Object packet) 
 	{
 		// TODO store groups into interface
-		String tmp_grouplist[] = packet.toString().split("-|%|-");
+		
+		String tmp_grouplist[] = packet.toString().split("/./.");
 		
 		Session.CreateNewGroup(new group(0,"Autres contacts"));
 		if(tmp_grouplist.length > 0 && !tmp_grouplist[0].equals("00"))
 		{
-			for(int i=0;i<tmp_grouplist.length;i++)
+			for(int i=0;i<tmp_grouplist.length-1;i++)
 			{
-				String tmp_group[] = tmp_grouplist[i].split("-|%|-");
+				String tmp_group[] = tmp_grouplist[i].split("/.");
 				if(tmp_group.length != 2)
 					Log.outError("Bad group list packet !");
 				else
