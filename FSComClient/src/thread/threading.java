@@ -2,11 +2,13 @@ package thread;
 
 import session.Session;
 import socket.sender;
+import windows.windowthread;
 
 public class threading extends Thread{
 
 	private sender thsend;
 	private Session m_sess;
+	private windowthread m_window;
 	
 	public threading()
 	{
@@ -48,9 +50,13 @@ public class threading extends Thread{
 	
 	public void LaunchSwingInterface()
 	{
+		m_window = new windowthread();
+		m_window.start();
 	}
 	
 	public void StopSwingInterface()
 	{
+		if(m_window != null)
+			m_window.interrupt();
 	}
 }
