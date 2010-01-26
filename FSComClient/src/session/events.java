@@ -108,6 +108,16 @@ public class events {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public static void ConnectionError() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void BadLoginInformations() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
