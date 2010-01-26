@@ -2,6 +2,8 @@ package windows;
 
 import javax.swing.SwingUtilities;
 
+import windows.forms.form_connect;
+
 public class windowthread extends Thread{
 
 	public windowthread()
@@ -13,7 +15,7 @@ public class windowthread extends Thread{
 	{
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				//new form_connect();
+				new form_connect();
 			}
 		});
 	}
