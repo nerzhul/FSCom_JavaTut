@@ -3,18 +3,18 @@ package socket;
 import java.net.*;
 import java.io.*;
 
+import socket.packet.packet;
+
 import misc.Log;
 
 public class sender
 {
 	private Socket socket;
-	private Integer opcode;
-	private Object packt;
+	private packet pck;
 	public sender(Socket sock,Integer op,Object packet)
 	{
 		socket = sock;
-		opcode = op;
-		packt = packet;
+		pck = new packet(op,packet);
 	}
 	
 	public void CloseConnection()
@@ -31,19 +31,13 @@ public class sender
 	
 	public void SendPacket()
 	{
-		try
-		{
-			// creating buffers for packets to send
-			PrintWriter out;
-			out = new PrintWriter(socket.getOutputStream(), true);
+		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(socket.getOutputStream());
 			// send packet
-			String str = "0x";
-			if(opcode < 16)
-				str += "0";
-			str += Integer.toHexString(opcode);		
-			str += packt;
-	    	out.println(str);
-	    	Log.outTimed("Send packet : " + str + " to client : " + socket.getInetAddress());
+			out.writeObject(pck);
+			out.flush();
+	    	Log.outTimed("Send packet : " + pck.getData() + " to client : " + socket.getInetAddress());
 		
 		} 
 		catch (IOException e) 

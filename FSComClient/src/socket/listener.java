@@ -1,12 +1,12 @@
 package socket;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 import misc.Log;
+import socket.packet.packet;
 import socket.packet.packet_handler;
 
 public class listener extends Thread
@@ -28,13 +28,11 @@ public class listener extends Thread
 	{
 		try
 		{
-			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
+			ObjectInputStream in = new ObjectInputStream(sockt.getInputStream());
 			
 			while(true)
 			{
-				String message = "";
-				
-				message = in.readLine();
+				packet message = (packet) in.readObject();
 				
 				if(message.equals("0x070"))
 					break;
@@ -54,7 +52,7 @@ public class listener extends Thread
 		}
 	}
 	
-	public void TreatPacket(Object packt) throws IOException
+	public void TreatPacket(packet packt) throws IOException
 	{
 		// show the packet
 		packet_handler packopt = new packet_handler(packt,sockt);

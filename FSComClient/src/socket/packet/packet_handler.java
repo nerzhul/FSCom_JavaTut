@@ -20,19 +20,16 @@ public class packet_handler
 {
 	final static int MAX_OPCODE = 0xFF;
 	Integer opcode_id;
-	Object packet;
+	Object data;
 	Socket mysock;
 	
-	public packet_handler(Object stream,Socket sock)
+	public packet_handler(packet stream,Socket sock)
 	{
 		mysock = sock;
 		try
 		{
-			String tmp = (stream.toString());
-			opcode_id = Integer.decode(tmp.substring(0,4));
-			
-			int lng = tmp.length();
-			packet = tmp.substring(4,lng);
+			opcode_id = stream.getOpcode();
+			data = stream.getData();
 			ActionOnPacket();
 		}
 		catch(Exception e)
@@ -45,7 +42,7 @@ public class packet_handler
 	
 	public void ShowPacket()
 	{
-		Log.outString(opcode_id + " / " + packet);
+		Log.outString(opcode_id + " / " + data);
 	}
 	
 	public void ActionOnPacket()
@@ -73,7 +70,7 @@ public class packet_handler
 					break;
 				case 0x08:
 					// TODO: send correct status
-					if((new srvconnect_handler(packet.toString())).HasValidData())
+					if((new srvconnect_handler(data.toString())).HasValidData())
 					{
 						pcktrecv = new statussender_handler(Session.getStatus(),true);
 						((send_handler) pcktrecv).Send();
@@ -88,43 +85,43 @@ public class packet_handler
 					((send_handler) pcktrecv).Send();
 					break;
 				case 0x0C:
-					events.StoreContacts(packet);
+					events.StoreContacts(data);
 					events.ShowConnectedFrame();
 					break;
 				case 0x0D:
-					events.ContactDisconnected(packet);
+					events.ContactDisconnected(data);
 					break;
 				case 0x0F:
-					events.StoreGroups(packet);
+					events.StoreGroups(data);
 					pcktrecv = new AskContacts_handler();
 					((send_handler) pcktrecv).Send();
 					break;
 				case 0x10:
-					events.ContactConnected(packet);
+					events.ContactConnected(data);
 					break;
 				case 0x12:
-					events.BlockContact(packet);
+					events.BlockContact(data);
 					break;
 				case 0x14:
-					events.RecvMsg(packet);
+					events.RecvMsg(data);
 					break;
 				case 0x15:
-					events.ContactModifyStatus(packet);
+					events.ContactModifyStatus(data);
 					break;
 				case 0x17:
-					events.ContactModifyPseudo(packet);
+					events.ContactModifyPseudo(data);
 					break;
 				case 0x19:
-					events.ContactModifyPmsg(packet);
+					events.ContactModifyPmsg(data);
 					break;
 				case 0x1B:
-					events.ContactAdded(packet);
+					events.ContactAdded(data);
 					break;
 				case 0x1D:
-					events.ContactDeleted(packet);
+					events.ContactDeleted(data);
 					break;
 				case 0x1E:
-					events.RecvInvitation(packet);
+					events.RecvInvitation(data);
 					break;
 				case 0x00:
 				case 0x03:

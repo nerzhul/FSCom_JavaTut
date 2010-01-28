@@ -4,13 +4,13 @@ import java.io.*;
 import java.net.*;
 
 import session.session;
+import socket.packet.packet;
 import socket.packet.packet_handler;
 
 import misc.Log;
 
-public class listener extends Thread{
-
-	
+public class listener extends Thread
+{
 	private Socket sockt;
 	private session sess;
 	packet_handler packopt;
@@ -31,16 +31,14 @@ public class listener extends Thread{
 		try
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
-			BufferedReader in = new BufferedReader(new InputStreamReader(sockt.getInputStream()));
+			ObjectInputStream in = new ObjectInputStream(sockt.getInputStream());
 			sess = new session((Thread)this,sockt);
-			
+
 			while(true)
 			{
-				String message = "";
+				packet message = (packet) in.readObject();
 				
-				message = in.readLine();
-				
-				if(message.equals("0x060"))
+				if(message.getOpcode().equals(4))
 					break;
 				TreatPacket(message);
 			}
@@ -54,22 +52,16 @@ public class listener extends Thread{
 		}
 		catch (Exception e) 
 		{
-	      
+			e.printStackTrace();
+			Log.outTimed("Client " + sockt.getInetAddress() + " was disconnected...");
 			try 
-			{
-				
-				Log.outTimed("Client " + sockt.getInetAddress() + " was disconnected...");
-				sockt.close();
-				this.interrupt();
-			}
-			catch (IOException e1) 
-			{
-				e1.printStackTrace();
-			}
+			{	sockt.close();	} 
+			catch (IOException e1) {}
+			this.interrupt();
 		}
 	}
 	
-	public void TreatPacket(Object packt)
+	public void TreatPacket(packet packt)
 	{
 		packet_handler packopt = new packet_handler(packt,sockt, sess);
 		packopt.Destroy();

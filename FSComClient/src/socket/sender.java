@@ -4,6 +4,7 @@ import java.net.*;
 import java.io.*;
 
 import session.events;
+import socket.packet.packet;
 
 import misc.Log;
 import misc.MasterCommandLine;
@@ -72,17 +73,13 @@ public class sender extends Thread
 	public static void SendPacket(Integer opcode,Object packt)
 	{
 		// creating buffers for packets to send
-		PrintWriter out;
+		
 		try {
-			out = new PrintWriter(socket.getOutputStream(), true);
+			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 			// send packet
-			String str = "0x";
-			if(opcode < 16)
-				str += "0";
-			str += Integer.toHexString(opcode);		
-			str += packt;
-	    	out.println(str);
-	    	Log.outTimed("Send packet : " + str + " to server ");
+			packet pck = new packet(opcode,packt);
+			out.writeObject(pck);
+	    	Log.outTimed("Send packet : " + pck.getData() + " to server ");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -24,22 +24,19 @@ public class packet_handler
 {
 	final static int MAX_OPCODE = 0xFF;
 	Integer opcode_id;
-	Object packet;
+	Object data;
 	Socket mysock;
 	sender send;
 	private session m_sess;
 	
-	public packet_handler(Object stream,Socket sock,session sess)
+	public packet_handler(packet stream,Socket sock,session sess)
 	{
 		mysock = sock;
 		m_sess = sess;
 		try
 		{
-			String tmp = (stream.toString());
-			opcode_id = Integer.decode(tmp.substring(0,4));
-			
-			int lng = tmp.length();
-			packet = tmp.substring(4,lng);
+			opcode_id = stream.getOpcode();
+			data = stream.getData();
 			ActionOnPacket();
 		}
 		catch(Exception e)
@@ -52,7 +49,7 @@ public class packet_handler
 	
 	public void ShowPacket() throws IOException
 	{
-		Log.outString(opcode_id + " / " + packet);
+		Log.outString(opcode_id + " / " + data);
 	}
 	
 	public void ActionOnPacket() throws IOException, SQLException
@@ -76,7 +73,7 @@ public class packet_handler
 					pkthandle = new clipong_handler(mysock);
 					break;
 				case 0x04:
-					pkthandle = new connect_handler(packet,m_sess);
+					pkthandle = new connect_handler(data,m_sess);
 					((send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x05:
@@ -86,7 +83,7 @@ public class packet_handler
 					// request disconnect socket
 					break;
 				case 0x09:
-					pkthandle = new status_handler(m_sess,packet);
+					pkthandle = new status_handler(m_sess,data);
 					((send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x0B:
@@ -98,29 +95,29 @@ public class packet_handler
 					((send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x11:
-					pkthandle = new blockcontact_handler(m_sess,packet);
+					pkthandle = new blockcontact_handler(m_sess,data);
 					((send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x13:
-					pkthandle = new MsgToPlatform_handler(m_sess,packet);
+					pkthandle = new MsgToPlatform_handler(m_sess,data);
 					break;
 				case 0x16:
-					pkthandle = new PseudoToPlatform_handler(m_sess,packet);
+					pkthandle = new PseudoToPlatform_handler(m_sess,data);
 					break;
 				case 0x18:
-					pkthandle = new MsgPersoToPlatform_handler(m_sess,packet);
+					pkthandle = new MsgPersoToPlatform_handler(m_sess,data);
 					break;
 				case 0x1A:
-					pkthandle = new AddContact_handler(m_sess,packet);
+					pkthandle = new AddContact_handler(m_sess,data);
 					((send_handler) pkthandle).Send(mysock);
 				case 0x1C:
-					pkthandle = new req_DelContact_handler(m_sess,packet);
+					pkthandle = new req_DelContact_handler(m_sess,data);
 					break;
 				case 0x1F:
-					pkthandle = new invitation_answer_handler(m_sess,packet);
+					pkthandle = new invitation_answer_handler(m_sess,data);
 					break;
 				case 0x20:
-					pkthandle = new req_pseudo_handler(m_sess,packet);
+					pkthandle = new req_pseudo_handler(m_sess,data);
 					break;
 				case 0x01:
 				case 0x02:
