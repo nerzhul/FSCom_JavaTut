@@ -4,8 +4,6 @@ import java.util.Vector;
 
 import session.objects.contact;
 import session.objects.group;
-import windows.forms.form_connect;
-import windows.forms.form_contact;
 
 public class Session extends Thread{
 
@@ -13,8 +11,6 @@ public class Session extends Thread{
 	private static Vector<group> groups;
 	private static String pseudo;
 	private static String perso_msg;
-	private static form_contact fmc;
-	private static form_connect fmconn;
 	
 	public Session()
 	{
@@ -22,7 +18,6 @@ public class Session extends Thread{
 		setPseudo("");
 		groups = new Vector<group>();
 		setPerso_msg("");
-		setFmc(null);
 	}
 	
 	public void run()
@@ -59,9 +54,5 @@ public class Session extends Thread{
 	public static String getPseudo() { return pseudo; }
 	public static void setPerso_msg(String perso_msg) {	Session.perso_msg = perso_msg; }
 	public static String getPerso_msg() { return perso_msg; }
-	public static void setFmc(form_contact fmc) { Session.fmc = fmc; }
-	public static form_contact getFmc() { return fmc; }
 	public static Vector<group> getGroups() { return groups; }
-	public static void setFmconn(form_connect fmconn) { Session.fmconn = fmconn; }
-	public static form_connect getFmconn() { return fmconn; }
 }

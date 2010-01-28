@@ -20,10 +20,6 @@ import javax.swing.ListSelectionModel;
 import session.Session;
 import session.objects.group;
 
-/*import windows.actions.Menu_Ajout_Contact;
-import windows.actions.Clicks_Contact;
-import windows.actions.Menu_Deconnexion;
-import windows.actions.Menu_principal_apropos;*/
 import windows.actions.buttons.changestatus_button;
 import windows.actions.menus.menubar_a_propos;
 import windows.actions.menus.menubar_changepseudo;

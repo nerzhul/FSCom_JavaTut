@@ -4,6 +4,7 @@ import session.objects.contact;
 import session.objects.group;
 import socket.sender;
 import thread.threading;
+import windows.windowthread;
 import windows.forms.form_contact;
 import misc.Log;
 
@@ -169,10 +170,10 @@ public class events {
 		Log.ShowPopup("Login incorrect", true);
 	}
 
-	public static void ShowConnectedFrame() {
-		Log.ShowPopup("Connecté !", false);
-		if(Session.getFmc() == null)
-			Session.setFmc(new form_contact());
+	public static void ShowConnectedFrame() 
+	{
+		windowthread.getFmConn().dispose();
+		windowthread.setFmContact(new form_contact());
 	}
 
 	public static void DisconnectCurrentClient() 
