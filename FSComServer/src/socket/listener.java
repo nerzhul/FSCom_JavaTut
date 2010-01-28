@@ -14,7 +14,7 @@ public class listener extends Thread
 	private Socket sockt;
 	private session sess;
 	packet_handler packopt;
-	
+	ObjectInputStream in;
 	
 	public void run()
 	{
@@ -31,7 +31,7 @@ public class listener extends Thread
 		try
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
-			ObjectInputStream in = new ObjectInputStream(sockt.getInputStream());
+			in = new ObjectInputStream(sockt.getInputStream());
 			sess = new session((Thread)this,sockt);
 
 			while(true)
@@ -52,7 +52,6 @@ public class listener extends Thread
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
 			Log.outTimed("Client " + sockt.getInetAddress() + " was disconnected...");
 			try 
 			{	sockt.close();	} 

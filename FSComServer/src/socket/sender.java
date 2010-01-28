@@ -36,8 +36,7 @@ public class sender
 			out = new ObjectOutputStream(socket.getOutputStream());
 			// send packet
 			out.writeObject(pck);
-			out.flush();
-	    	Log.outTimed("Send packet : " + pck.getData() + " to client : " + socket.getInetAddress());
+	    	Log.outTimed("Send packet " + pck.getOpcode() + ": " + pck.getData() + " to client : " + socket.getInetAddress());
 		
 		} 
 		catch (IOException e) 

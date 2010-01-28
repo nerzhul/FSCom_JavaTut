@@ -1,6 +1,5 @@
 package socket.packet.handlers.listens;
 
-import misc.Log;
 import session.events;
 import socket.packet.handlers.listen_handler;
 import thread.threading;
@@ -14,7 +13,6 @@ public class srvconnect_handler extends listen_handler {
 
 	public boolean HasValidData() 
 	{
-		Log.outError(data);
 		if(data.equals("2"))
 			return true;
 		else

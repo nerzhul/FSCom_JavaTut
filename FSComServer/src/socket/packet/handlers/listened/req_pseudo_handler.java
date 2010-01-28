@@ -10,8 +10,8 @@ public class req_pseudo_handler extends listen_handler {
 	public req_pseudo_handler(session sess, Object packet) 
 	{
 		data = packet.toString();
-		PseudoToClient_handler pck = new PseudoToClient_handler(Integer.decode(data),
-				DatabaseFunctions.getPseudoByUID(Integer.decode(data)));
+		PseudoToClient_handler pck = new PseudoToClient_handler(Integer.decode((String) data),
+				DatabaseFunctions.getPseudoByUID(Integer.decode((String) data)));
 		pck.Send(sess.getSocket());
 	}
 

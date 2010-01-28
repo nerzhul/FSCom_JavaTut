@@ -33,8 +33,9 @@ public class listener extends Thread
 			while(true)
 			{
 				packet message = (packet) in.readObject();
+				Log.outString("Packet received from server (opcode :" + message.getOpcode() + ")");
 				
-				if(message.getOpcode().equals(7))
+				if(message.getOpcode().equals(0x07))
 					break;
 				
 				TreatPacket(message);

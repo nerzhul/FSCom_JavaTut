@@ -5,6 +5,6 @@ import java.io.IOException;
 public abstract class abstract_handler {
 
 	protected Integer opcode;
-	protected String data;
+	protected Object data;
 	abstract void PrintError() throws IOException;
 }

@@ -36,8 +36,7 @@ public class packet_handler
 		{
 			Log.outError("Packet Handler: server send invalid packet !");
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	public void ShowPacket()
@@ -54,7 +53,7 @@ public class packet_handler
 		}
 		else
 		{
-			Log.outString("Packet received from server (opcode :" + this.opcode_id + ")");
+			
 			abstract_handler pcktrecv = null;
 			switch(opcode_id)
 			{
@@ -69,14 +68,11 @@ public class packet_handler
 					// server kill client socket
 					break;
 				case 0x08:
-					// TODO: send correct status
 					if((new srvconnect_handler(data.toString())).HasValidData())
 					{
 						pcktrecv = new statussender_handler(Session.getStatus(),true);
 						((send_handler) pcktrecv).Send();
 					}
-					else
-						events.ConnectionError();
 					break;
 				case 0x0A:
 					pcktrecv = new AskGroups_handler();

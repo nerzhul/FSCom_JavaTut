@@ -36,6 +36,8 @@ public class packet_handler
 		try
 		{
 			opcode_id = stream.getOpcode();
+			Log.outString("Packet received from " + mysock.getInetAddress() + " (opcode :" + this.opcode_id + ")");
+			
 			data = stream.getData();
 			ActionOnPacket();
 		}
@@ -61,7 +63,6 @@ public class packet_handler
 		}
 		else
 		{
-			Log.outString("Packet received from " + mysock.getInetAddress() + " (opcode :" + this.opcode_id + ")");
 			abstract_handler pkthandle = null;
 			switch(opcode_id)
 			{
