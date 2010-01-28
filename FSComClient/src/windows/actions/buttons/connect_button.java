@@ -20,18 +20,18 @@ public class connect_button implements ActionListener {
 	private JComboBox status;
 	private JTextField username;
 	private JPasswordField passwd;
-	private boolean need_save; 
+	private JCheckBox need_save; 
 	public connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) 
 	{
 		this.status=statusco;
 		this.username=mail;
 		this.passwd=password;
-		need_save = save.isSelected();
+		need_save = save;
 	}
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(need_save)
+		if(need_save.isSelected())
 			SaveFile();
 		// Store status in session
 		Session.setStatus(status.getSelectedIndex() + 1);

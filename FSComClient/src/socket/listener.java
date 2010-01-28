@@ -34,7 +34,7 @@ public class listener extends Thread
 			{
 				packet message = (packet) in.readObject();
 				
-				if(message.equals("0x070"))
+				if(message.getOpcode().equals(7))
 					break;
 				
 				TreatPacket(message);

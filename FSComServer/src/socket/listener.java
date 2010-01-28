@@ -38,7 +38,7 @@ public class listener extends Thread
 			{
 				packet message = (packet) in.readObject();
 				
-				if(message.getOpcode().equals(4))
+				if(message.getOpcode().equals(6))
 					break;
 				TreatPacket(message);
 			}
@@ -63,7 +63,7 @@ public class listener extends Thread
 	
 	public void TreatPacket(packet packt)
 	{
-		packet_handler packopt = new packet_handler(packt,sockt, sess);
+		packopt = new packet_handler(packt,sockt, sess);
 		packopt.Destroy();
 	}
 	

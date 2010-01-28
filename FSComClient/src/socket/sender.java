@@ -16,12 +16,14 @@ public class sender extends Thread
 
 	private static Socket socket;
 	private static listener listn;
+	private static ObjectOutputStream out;
 	
 	public sender()
 	{
 		try 
 		{
 			socket = new Socket(IP,port);
+			out = new ObjectOutputStream(socket.getOutputStream());
 		}
 		catch (UnknownHostException e) 
 		{
@@ -74,8 +76,8 @@ public class sender extends Thread
 	{
 		// creating buffers for packets to send
 		
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+		try 
+		{
 			// send packet
 			packet pck = new packet(opcode,packt);
 			out.writeObject(pck);

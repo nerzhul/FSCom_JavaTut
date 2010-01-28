@@ -3,6 +3,7 @@ package windows.forms;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.*;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -65,7 +66,15 @@ public class form_connect extends form_abstract {
 		}		
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			try 
+			{
+				FileWriter fw = new FileWriter(file);
+				fw.close();
+			} 
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
+			}
 		}
 	}
 	

@@ -76,9 +76,7 @@ public class packet_handler
 						((send_handler) pcktrecv).Send();
 					}
 					else
-					{
-						// TODO: event fenêtre connexion failed
-					}
+						events.ConnectionError();
 					break;
 				case 0x0A:
 					pcktrecv = new AskGroups_handler();
