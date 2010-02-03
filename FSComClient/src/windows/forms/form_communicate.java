@@ -11,11 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.tree.DefaultMutableTreeNode;
-
 import session.objects.contact;
 
 import windows.actions.buttons.sendmsg_button;
+import windows.actions.keylisteners.follow_keyboard;
 
 public class form_communicate extends JFrame{
 
@@ -57,7 +56,7 @@ public class form_communicate extends JFrame{
 	    textprincipal.setEditable(false);
 	    textprincipal.setLineWrap(true); 
 	    JTextArea txt = new JTextArea(3,50);
-	    //textaenvoyer.addKeyListener(new Surveillance_clavier(contact,textaenvoyer,textprincipal));
+	    txt.addKeyListener(new follow_keyboard(noeud,txt,textprincipal));
 	    txt.setLineWrap(true); 
 	    JButton envoi = new JButton("Envoyer !");
 	    envoi.addActionListener(new sendmsg_button(noeud,txt,textprincipal));

@@ -13,17 +13,23 @@ public class sendmsg_button implements ActionListener {
 	private JTextArea textarea;
 	private JTextArea box;
 	private String text;
-	public sendmsg_button(contact interlocuteur, JTextArea textaenvoyer, JTextArea boxprincipal) {
-		this.contact=interlocuteur;
+	public sendmsg_button(contact ct, JTextArea textaenvoyer, JTextArea boxprincipal) {
+		this.contact=ct;
 		this.textarea=textaenvoyer;
 		this.box=boxprincipal;
 	}
 
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
+		SendMsg();
+	}
+	
+	public void SendMsg()
+	{
 		this.text = textarea.getText();
 		textarea.setText("");
-		box.setText(box.getText()+"J'ai écrit : "+text);
+		box.setText(box.getText()+"J'ai écrit : "+text+"\n");
 	}
 }
 
