@@ -28,13 +28,12 @@ public class SessionHandler {
 
 	public static session getContactByUID(Integer _uid)
 	{
-		session tmp_sess = null;
 		for(int i=0;i<v_sess.size();i++)
 		{
-			if(v_sess.get(i).getUid() == _uid)
-				tmp_sess = v_sess.get(i);
+			if(v_sess.get(i).getUid().equals(_uid))
+				return v_sess.get(i);
 		}
-		return tmp_sess;
+		return null;
 	}
 	
 	public static boolean isConnected(Integer uid)

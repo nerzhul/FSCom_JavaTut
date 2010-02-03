@@ -48,6 +48,7 @@ public class session {
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
 		LoadBlockedContacts();
+		Log.outError(uid+"");
 		// TODO : send all invitations
 	}
 	
@@ -183,6 +184,7 @@ public class session {
 		if(SessionHandler.getContactByUID(_uid) != null)
 			if(!SessionHandler.getContactByUID(_uid).has_blocked(uid))
 				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,msg.getMsg());
+	
 	}
 	
 	private void SendMessageToMe(Integer _uid, String msg)
