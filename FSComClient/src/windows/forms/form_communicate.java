@@ -13,6 +13,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import session.objects.contact;
+
+import windows.actions.buttons.sendmsg_button;
+
 public class form_communicate extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -34,14 +38,15 @@ public class form_communicate extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 		}
 	
-	public void AddTab(DefaultMutableTreeNode noeud){
-		panel = onglet();
+	public void AddTab(contact noeud)
+	{
+		panel = onglet(noeud);
 		TabPan.add(noeud.toString(),panel);
 	 	frame.add(TabPan);
 	 	frame.setVisible(true);
 	}
 	
-	public JPanel onglet(){
+	public JPanel onglet(contact noeud){
 		pane = new JPanel();
 		pane.setLayout(new FlowLayout());
 		pane.setBackground(new Color(128,128,255));
@@ -55,7 +60,7 @@ public class form_communicate extends JFrame{
 	    //textaenvoyer.addKeyListener(new Surveillance_clavier(contact,textaenvoyer,textprincipal));
 	    txt.setLineWrap(true); 
 	    JButton envoi = new JButton("Envoyer !");
-		//envoi.addActionListener(new Bouton_envoi(contact,textaenvoyer,textprincipal));
+	    envoi.addActionListener(new sendmsg_button(noeud,txt,textprincipal));
 
 	    pane.add(textprincipal);
 	    JScrollPane scrollprincipal = new JScrollPane(textprincipal);

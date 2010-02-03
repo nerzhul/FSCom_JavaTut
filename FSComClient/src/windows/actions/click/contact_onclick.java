@@ -26,11 +26,11 @@ public class contact_onclick implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		DefaultMutableTreeNode noeud = (DefaultMutableTreeNode) arbre.getLastSelectedPathComponent();
 	
-		if(e.getClickCount() == 2 && noeud.isLeaf()){
+		if(e.getClickCount() == 2 && noeud.getLevel() == 2){
 			if(pn.getComm() == null)
 				pn.setComm(new form_communicate());
 			
-			pn.getComm().AddTab(noeud);
+			pn.getComm().AddTab((contact) noeud.getUserObject());
 		}		   
 	}
 
@@ -39,16 +39,16 @@ public class contact_onclick implements MouseListener {
 		
 		TreePath index = arbre.getPathForLocation(e.getX(), e.getY());
         arbre.setSelectionPath(index);
-        Object noeud = arbre.getLastSelectedPathComponent();
+        DefaultMutableTreeNode noeud = (DefaultMutableTreeNode) arbre.getLastSelectedPathComponent();
         
-		if (e.getButton() == 3 && ((DefaultMutableTreeNode)noeud).isLeaf())
+		if (e.getButton() == 3 && noeud.getLevel() == 2)
 		{
 			JPopupMenu menu = new JPopupMenu();
 		      
 			JMenuItem envoi = new JMenuItem("Envoyer un message");
-			envoi.addActionListener(new contact_onclick_sendmsg((DefaultMutableTreeNode) noeud,pn));
+			envoi.addActionListener(new contact_onclick_sendmsg((contact) noeud.getUserObject(),pn));
 			JMenuItem supprimer = new JMenuItem("Supprimer");
-			supprimer.addActionListener(new contact_delete((contact) (noeud)));
+			supprimer.addActionListener(new contact_delete((contact) noeud.getUserObject()));
 			JMenuItem bloquer = new JMenuItem("Bloquer");
 			bloquer.addActionListener(new contact_onclick_block(noeud));
 			JMenuItem details = new JMenuItem("Voir les détails");

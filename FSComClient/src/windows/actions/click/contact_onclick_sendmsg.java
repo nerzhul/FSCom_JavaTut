@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import session.objects.contact;
+
 import windows.forms.form_communicate;
 import windows.forms.panel_contact;
 
@@ -12,12 +14,13 @@ import windows.forms.panel_contact;
 
 public class contact_onclick_sendmsg implements ActionListener {
 
-	private DefaultMutableTreeNode contact;
+	private contact contact;
 	private panel_contact mypn;
-	public contact_onclick_sendmsg(DefaultMutableTreeNode contactenvoi, panel_contact pn) {
-		this.contact = contactenvoi;
+	public contact_onclick_sendmsg(contact ct, panel_contact pn) {
+		this.contact = ct;
 		this.mypn = pn;
 	}
+
 
 	public void actionPerformed(ActionEvent e) {
 		if(mypn.getComm() == null)

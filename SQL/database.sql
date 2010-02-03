@@ -10,10 +10,25 @@ Target Server Type    : MYSQL
 Target Server Version : 50136
 File Encoding         : 65001
 
-Date: 2010-02-03 14:14:10
+Date: 2010-02-03 15:09:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `acc_blocked`
+-- ----------------------------
+DROP TABLE IF EXISTS `acc_blocked`;
+CREATE TABLE `acc_blocked` (
+  `uid` int(5) NOT NULL,
+  `contact` int(5) NOT NULL,
+  `blocked` int(1) NOT NULL,
+  PRIMARY KEY (`uid`,`contact`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of acc_blocked
+-- ----------------------------
+
 -- ----------------------------
 -- Table structure for `acc_contact`
 -- ----------------------------
@@ -21,7 +36,6 @@ DROP TABLE IF EXISTS `acc_contact`;
 CREATE TABLE `acc_contact` (
   `uid` int(5) NOT NULL,
   `contact` int(5) NOT NULL,
-  `blocked` int(1) NOT NULL,
   `comment` varchar(50) NOT NULL,
   `group` int(2) NOT NULL,
   `accepted` int(1) NOT NULL,
@@ -31,6 +45,8 @@ CREATE TABLE `acc_contact` (
 -- ----------------------------
 -- Records of acc_contact
 -- ----------------------------
+INSERT INTO `acc_contact` VALUES ('1', '2', 'sdffg', '0', '1');
+INSERT INTO `acc_contact` VALUES ('1', '3', 'dsvfgfg', '1', '1');
 
 -- ----------------------------
 -- Table structure for `acc_group`
@@ -46,6 +62,7 @@ CREATE TABLE `acc_group` (
 -- ----------------------------
 -- Records of acc_group
 -- ----------------------------
+INSERT INTO `acc_group` VALUES ('1', '1', 'FLigsfnk');
 
 -- ----------------------------
 -- Table structure for `acc_invitation`
@@ -88,8 +105,11 @@ CREATE TABLE `account` (
   `phr_perso` varchar(50) NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `user` (`user`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
+INSERT INTO `account` VALUES ('1', 'toto', 'toto', 'qefsdf', 'sdgfddgfh');
+INSERT INTO `account` VALUES ('2', 'msdi', 'sefdghjkhk', 'sdgdfgjtg', 'dfhfghfgj');
+INSERT INTO `account` VALUES ('3', 'dsfghjk', 'sggjhfjgj', 'ghjhfjdfsdf', 'sdfsf');

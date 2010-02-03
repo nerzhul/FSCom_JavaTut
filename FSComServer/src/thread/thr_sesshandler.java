@@ -15,7 +15,7 @@ public class thr_sesshandler extends Thread{
 			
 			try 
 			{
-				sleep(1000);
+				sleep(500);
 				uDiff = 1000;
 				SessionHandler.Update(uDiff);
 			} catch (InterruptedException e) 
