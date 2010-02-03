@@ -14,13 +14,11 @@ import socket.packet.handlers.sends.connect_handler;
 import java.io.*;
 import thread.threading;
 
-//import windows.forms.form_contact;
-
 public class connect_button implements ActionListener {
 	private JComboBox status;
 	private JTextField username;
 	private JPasswordField passwd;
-	private JCheckBox need_save; 
+	private JCheckBox need_save;
 	public connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) 
 	{
 		this.status=statusco;
@@ -35,15 +33,12 @@ public class connect_button implements ActionListener {
 			SaveFile();
 		// Store status in session
 		Session.setStatus(status.getSelectedIndex() + 1);
-		
-		// get User and Pass
-		String user = username.getText();
-		String pass = new String(passwd.getPassword());
-		
+
+	
 		// Launcher socket with server
 		threading.LaunchSender(true);
 		
-		send_handler pck = new connect_handler(user + " " + pass);
+		send_handler pck = new connect_handler(username.getText() + " " + new String(passwd.getPassword()));
 		if(pck != null)
 			pck.Send();	
 	}
@@ -54,8 +49,8 @@ public class connect_button implements ActionListener {
 			FileWriter fw = new FileWriter (file);
 			BufferedWriter bw = new BufferedWriter (fw);
 			PrintWriter wfile = new PrintWriter (bw); 
-			wfile.println (username); 
-			wfile.println (passwd); 
+			wfile.println (username.getText()); 
+			wfile.println (passwd.getPassword()); 
 			wfile.close();
 		}
 		catch (Exception e){

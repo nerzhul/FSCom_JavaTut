@@ -16,9 +16,8 @@ public class menubar_changepseudo extends menubar_main implements ActionListener
 	private String newpseud;
 	private JLabel newtitle;
 	
-	public menubar_changepseudo(JLabel lab)
+	public menubar_changepseudo()
 	{
-		newtitle=lab;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -29,7 +28,6 @@ public class menubar_changepseudo extends menubar_main implements ActionListener
 			if(newpseud.length()<20)
 			{
 				//envoi au serveur du nouveau pseudo
-				newtitle.setText("Vous etes connecté en tant que "+ newpseud + " !");
 				JOptionPane.showMessageDialog(fenetre,"Vous etes maintenant connu sous le nom de "+ newpseud +" !" );
 				send_handler pck = new changepseudo_handler(newpseud);
 				if(pck != null)

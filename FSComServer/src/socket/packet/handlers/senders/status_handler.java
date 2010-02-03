@@ -9,6 +9,7 @@ public class status_handler extends send_handler {
 	{
 		opcode = 0x0A;
 		data = new String("01000");
+		m_sess = sess;
 		sess.SetStatus(Integer.decode(packet.toString().substring(0,1)));
 		if(Integer.decode(packet.toString().substring(2)) == 1)
 			sess.connect_client();

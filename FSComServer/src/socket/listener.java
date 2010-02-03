@@ -31,8 +31,8 @@ public class listener extends Thread
 		try
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
-			in = new ObjectInputStream(sockt.getInputStream());
 			sess = new session((Thread)this,sockt);
+			in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 
 			while(true)
 			{
@@ -41,6 +41,7 @@ public class listener extends Thread
 				if(message.getOpcode().equals(6))
 					break;
 				TreatPacket(message);
+				sleep(100);
 			}
 			
 			Log.outTimed("Close connection with " + sockt.getInetAddress());

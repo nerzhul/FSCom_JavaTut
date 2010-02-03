@@ -81,7 +81,7 @@ public class DatabaseTransactions {
 			cond = " WHERE " + cond;
 		else 
 			cond = "";
-		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		ResultSet qr = DatabaseQuery("SELECT `" + col + "` FROM " + table + cond);
 		
 		if(qr != null)
 		{
@@ -105,7 +105,7 @@ public class DatabaseTransactions {
 			cond = " WHERE " + cond;
 		else 
 			cond = "";
-		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		ResultSet qr = DatabaseQuery("SELECT `" + col + "` FROM " + table + cond);
 		
 		if(qr != null)
 		{
@@ -129,7 +129,7 @@ public class DatabaseTransactions {
 			cond = " WHERE " + cond;
 		else 
 			cond = "";
-		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		ResultSet qr = DatabaseQuery("SELECT `" + col + "` FROM " + table + cond);
 		
 		if(qr != null)
 		{
@@ -166,7 +166,7 @@ public class DatabaseTransactions {
 		else 
 			cond = "";
 		
-		ResultSet qr = DatabaseQuery("SELECT " + col + " FROM " + table + cond);
+		ResultSet qr = DatabaseQuery("SELECT `" + col + "` FROM " + table + cond);
 		
 		if(qr != null)
 		{

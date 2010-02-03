@@ -29,7 +29,14 @@ public class Session extends Thread{
 	{
 		while(true)
 		{
-			
+			try 
+			{
+				sleep(100);
+			}
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -55,4 +62,11 @@ public class Session extends Thread{
 	public static void setPerso_msg(String perso_msg) {	Session.perso_msg = perso_msg; }
 	public static String getPerso_msg() { return perso_msg; }
 	public static Vector<group> getGroups() { return groups; }
+
+	public static void ClearGroups() { getGroups().clear(); }
+	public static void ClearContacts() 
+	{ 
+		for(int i=0;i<getGroups().size();i++)
+			getGroups().get(i).getContacts().clear();		
+	}
 }

@@ -23,7 +23,7 @@ public class sender extends Thread
 		try 
 		{
 			socket = new Socket(IP,port);
-			out = new ObjectOutputStream(socket.getOutputStream());
+			out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 		}
 		catch (UnknownHostException e) 
 		{
@@ -81,6 +81,7 @@ public class sender extends Thread
 			// send packet
 			packet pck = new packet(opcode,packt);
 			out.writeObject(pck);
+			out.flush();
 	    	Log.outTimed("Send packet : " + pck.getData() + " to server ");
 		} catch (IOException e) {
 			e.printStackTrace();

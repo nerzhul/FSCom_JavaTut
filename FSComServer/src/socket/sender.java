@@ -33,9 +33,10 @@ public class sender
 	{
 		ObjectOutputStream out;
 		try {
-			out = new ObjectOutputStream(socket.getOutputStream());
+			out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 			// send packet
 			out.writeObject(pck);
+			out.flush();
 	    	Log.outTimed("Send packet " + pck.getOpcode() + ": " + pck.getData() + " to client : " + socket.getInetAddress());
 		
 		} 

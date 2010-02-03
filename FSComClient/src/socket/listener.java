@@ -1,5 +1,6 @@
 package socket;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -28,10 +29,12 @@ public class listener extends Thread
 	{
 		try
 		{
-			ObjectInputStream in = new ObjectInputStream(sockt.getInputStream());
+			ObjectInputStream in;
+			
 			
 			while(true)
 			{
+				in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 				packet message = (packet) in.readObject();
 				Log.outString("Packet received from server (opcode :" + message.getOpcode() + ")");
 				

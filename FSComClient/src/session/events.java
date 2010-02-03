@@ -1,11 +1,13 @@
 package session;
 
+import javax.swing.JOptionPane;
+
 import session.objects.contact;
 import session.objects.group;
 import socket.sender;
+import socket.packet.handlers.sends.Answer_Invit_handler;
 import thread.threading;
 import windows.windowthread;
-import windows.forms.form_contact;
 import misc.Log;
 
 public class events {
@@ -18,7 +20,7 @@ public class events {
 	
 	public static void StoreContacts(Object packet)
 	{
-		// TODO : store contacts into interface
+		Session.ClearContacts();
 		String tmp_contactlist[] = packet.toString().split("///.///");
 		
 		if(tmp_contactlist.length > 0 && !tmp_contactlist[0].equals("00"))
@@ -30,7 +32,6 @@ public class events {
 					Log.outError("Bad contact list packet !");
 				else
 				{
-					// TODO : create an object
 					contact tmp_con = new contact(Integer.decode(tmp_contact[0]),
 							Integer.decode(tmp_contact[1]), tmp_contact[2],
 							tmp_contact[5], tmp_contact[3], Integer.decode(tmp_contact[6]),
@@ -43,10 +44,8 @@ public class events {
 
 	public static void StoreGroups(Object packet) 
 	{
-		// TODO store groups into interface
-		
 		String tmp_grouplist[] = packet.toString().split("/./.");
-		
+		Session.ClearGroups();
 		Session.CreateNewGroup(new group(0,"Autres contacts"));
 		if(tmp_grouplist.length > 0 && !tmp_grouplist[0].equals("00"))
 		{
@@ -157,7 +156,15 @@ public class events {
 
 	public static void RecvInvitation(Object packet) 
 	{
-		//TODO: show a msgbox to choice how to handle the invitation
+		String[] dat = packet.toString().split("[][]");
+		if(dat.length != 2)
+			Log.outError("Bad invitation received !");
+		else
+		{
+			Integer answer = JOptionPane.showConfirmDialog(null, dat[1] + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+			Answer_Invit_handler arh = new Answer_Invit_handler(Integer.decode(dat[0]), answer);
+			arh.Send();
+		}
 	}
 
 	public static void ConnectionError() 
@@ -172,8 +179,7 @@ public class events {
 
 	public static void ShowConnectedFrame() 
 	{
-		windowthread.getFmConn().dispose();
-		windowthread.setFmContact(new form_contact());
+		windowthread.SwitchPanel(2);
 	}
 
 	public static void DisconnectCurrentClient() 

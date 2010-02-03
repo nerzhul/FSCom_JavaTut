@@ -42,9 +42,7 @@ public class contactlist_handler extends send_handler {
 				pck += "0";
 			pck += "///.///";
 		}		
-			
-		if(pck.equals(""))
-			pck = "00";
+		pck += "00";
 		
 		return pck;
 	}

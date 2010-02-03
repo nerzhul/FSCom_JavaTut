@@ -1,48 +1,24 @@
--- phpMyAdmin SQL Dump
--- version 3.2.0.1
--- http://www.phpmyadmin.net
---
--- Serveur: localhost
--- Généré le : Ven 22 Janvier 2010 à 15:04
--- Version du serveur: 5.1.36
--- Version de PHP: 5.3.0
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+Source Server         : localhost
+Source Server Version : 50136
+Source Host           : localhost:3306
+Source Database       : messenger
 
---
--- Base de données: `messenger`
---
+Target Server Type    : MYSQL
+Target Server Version : 50136
+File Encoding         : 65001
 
--- --------------------------------------------------------
+Date: 2010-02-03 14:14:10
+*/
 
---
--- Structure de la table `account`
---
-
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE IF NOT EXISTS `account` (
-  `uid` int(5) NOT NULL AUTO_INCREMENT,
-  `user` varchar(20) NOT NULL,
-  `sha_pass` int(40) NOT NULL,
-  `pseudo` varchar(50) NOT NULL,
-  `phr_perso` varchar(50) NOT NULL,
-  PRIMARY KEY (`uid`),
-  UNIQUE KEY `user` (`user`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `account`
---
-
-
--- --------------------------------------------------------
-
---
--- Structure de la table `acc_contact`
---
-
+SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `acc_contact`
+-- ----------------------------
 DROP TABLE IF EXISTS `acc_contact`;
-CREATE TABLE IF NOT EXISTS `acc_contact` (
+CREATE TABLE `acc_contact` (
   `uid` int(5) NOT NULL,
   `contact` int(5) NOT NULL,
   `blocked` int(1) NOT NULL,
@@ -52,32 +28,68 @@ CREATE TABLE IF NOT EXISTS `acc_contact` (
   PRIMARY KEY (`uid`,`contact`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `acc_contact`
---
+-- ----------------------------
+-- Records of acc_contact
+-- ----------------------------
 
-
--- --------------------------------------------------------
-
---
--- Structure de la table `acc_group`
---
-
+-- ----------------------------
+-- Table structure for `acc_group`
+-- ----------------------------
 DROP TABLE IF EXISTS `acc_group`;
-CREATE TABLE IF NOT EXISTS `acc_group` (
+CREATE TABLE `acc_group` (
   `uid` int(5) NOT NULL,
   `gid` int(2) NOT NULL,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`uid`,`gid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `acc_group`
---
+-- ----------------------------
+-- Records of acc_group
+-- ----------------------------
 
+-- ----------------------------
+-- Table structure for `acc_invitation`
+-- ----------------------------
+DROP TABLE IF EXISTS `acc_invitation`;
 CREATE TABLE `acc_invitation` (
   `uid` int(5) NOT NULL,
   `contact` int(5) NOT NULL,
   PRIMARY KEY (`uid`,`contact`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- ----------------------------
+-- Records of acc_invitation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `acc_status`
+-- ----------------------------
+DROP TABLE IF EXISTS `acc_status`;
+CREATE TABLE `acc_status` (
+  `guid` int(5) NOT NULL,
+  `status` int(1) NOT NULL,
+  `suffix` varchar(10) NOT NULL,
+  PRIMARY KEY (`guid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of acc_status
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `account`
+-- ----------------------------
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+  `uid` int(5) NOT NULL AUTO_INCREMENT,
+  `user` varchar(20) NOT NULL,
+  `sha_pass` varchar(40) NOT NULL,
+  `pseudo` varchar(50) NOT NULL,
+  `phr_perso` varchar(50) NOT NULL,
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `user` (`user`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of account
+-- ----------------------------
