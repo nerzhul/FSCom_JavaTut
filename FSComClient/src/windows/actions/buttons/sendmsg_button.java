@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextArea;
 
 import session.objects.contact;
+import socket.packet.handlers.send_handler;
+import socket.packet.handlers.sends.SendMsgTo_handler;
 
 public class sendmsg_button implements ActionListener {
 
@@ -29,7 +31,9 @@ public class sendmsg_button implements ActionListener {
 	{
 		this.text = textarea.getText();
 		textarea.setText("");
-		box.setText(box.getText()+"J'ai écrit : "+text+"\n");
+		box.setText(box.getText()+"J'ai écrit : " + text + "\n");
+		send_handler pck = new SendMsgTo_handler(text,contact);
+		pck.Send();
 	}
 }
 

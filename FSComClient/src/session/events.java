@@ -6,6 +6,7 @@ import session.objects.contact;
 import session.objects.group;
 import socket.sender;
 import socket.packet.handlers.sends.Answer_Invit_handler;
+import socket.packet.objects.message;
 import thread.threading;
 import windows.windowthread;
 import misc.Log;
@@ -96,7 +97,14 @@ public class events {
 	}
 
 	public static void RecvMsg(Object packet) {
-		// TODO Auto-generated method stub
+		if(!packet.getClass().equals((new message(null,null)).getClass()))
+		{
+			Log.outError("Malformed Msg to Transmit");
+			return;
+		}
+		message msg = (message) packet;
+		Integer _uid = msg.getDest();
+		Log.outError(_uid + msg.getMsg());
 		
 	}
 

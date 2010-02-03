@@ -12,6 +12,7 @@ import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
 import socket.packet.handlers.senders.cont_connected_handler;
 import socket.packet.handlers.senders.cont_disconct_handler;
+import socket.packet.objects.message;
 
 import database.DatabaseFunctions;
 import database.DatabaseTransactions;
@@ -171,17 +172,17 @@ public class session {
 	
 	
 	public void TransmitMsgTo(Object packet) {
-		String cut_pck[] = packet.toString().split("#-%-#");
-		if(cut_pck.length != 2)
+		if(!packet.getClass().equals((new message(null,null)).getClass()))
 		{
 			Log.outError("Malformed Msg to Transmit");
 			return;
 		}
 		
-		Integer _uid = Integer.decode(cut_pck[0]);
+		message msg = (message) packet;
+		Integer _uid = msg.getDest();
 		if(SessionHandler.getContactByUID(_uid) != null)
 			if(!SessionHandler.getContactByUID(_uid).has_blocked(uid))
-				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
+				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,msg.getMsg());
 	}
 	
 	private void SendMessageToMe(Integer _uid, String msg)
