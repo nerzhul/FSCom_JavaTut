@@ -5,6 +5,8 @@ import java.io.*;
 
 import session.events;
 import socket.packet.packet;
+import thread.threading;
+import windows.windowthread;
 
 import misc.Log;
 import misc.MasterCommandLine;
@@ -80,6 +82,7 @@ public class sender extends Thread
 		    }
 	    
 		    Log.outString("Close connection with server !");
+		    StopListener();
 		    socket.close();
 		    cmdline.Destroy();
 
@@ -87,6 +90,7 @@ public class sender extends Thread
 		catch (Exception e) 
 		{
 	      this.interrupt();
+	      e.printStackTrace();
 	    }
 	}
 	
@@ -102,9 +106,18 @@ public class sender extends Thread
 			out.writeObject(pck);
 			out.flush();
 	    	Log.outTimed("Send packet (opcode :" + pck.getOpcode() + ") to server ");
-		} catch (IOException e) {
+		}
+		catch(SocketException e)
+		{
+			windowthread.SwitchPanel(1);
+			threading.StopSender();
+			// TODO: handle correctly new connection (mirror dev)
+		}
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
+		
 		
 	}
 	
@@ -127,7 +140,7 @@ public class sender extends Thread
 		return socket;
 	}
 
-	public void StopListener() 
+	public static void StopListener() 
 	{
 		if(listn != null)
 			listn.interrupt();		

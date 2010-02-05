@@ -31,7 +31,7 @@ public class threading extends Thread{
 	{
 		if(thsend != null)
 		{
-			thsend.StopListener();
+			sender.StopListener();
 			thsend.interrupt();
 		}
 	}
@@ -60,4 +60,5 @@ public class threading extends Thread{
 		if(m_window != null)
 			m_window.interrupt();
 	}
+
 }
