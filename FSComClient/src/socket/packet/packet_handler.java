@@ -106,6 +106,9 @@ public class packet_handler
 					events.StoreAllDatas(data);
 					events.ShowConnectedFrame();
 					break;
+				case 0x23:
+					// TODO: force disconnect client
+					break;
 				case 0x0C:
 				case 0x0F:
 				case 0x0A:

@@ -12,8 +12,6 @@ import socket.packet.handlers.senders.AddContact_handler;
 import socket.packet.handlers.senders.blockcontact_handler;
 import socket.packet.handlers.senders.connect2_handler;
 import socket.packet.handlers.senders.connect_handler;
-import socket.packet.handlers.senders.contactlist_handler;
-import socket.packet.handlers.senders.grouplist_handler;
 import socket.packet.handlers.senders.invitation_answer_handler;
 import socket.packet.handlers.senders.pong_handler;
 import socket.packet.handlers.senders.status_handler;
@@ -87,14 +85,6 @@ public class packet_handler
 				case 0x09:
 					pkthandle = new status_handler(m_sess,data);
 					break;
-				case 0x0B:
-					pkthandle = new contactlist_handler(m_sess);
-					((send_handler) pkthandle).Send(mysock);
-					break;
-				case 0x0E:
-					pkthandle = new grouplist_handler(m_sess);
-					((send_handler) pkthandle).Send(mysock);
-					break;
 				case 0x11:
 					pkthandle = new blockcontact_handler(m_sess,data);
 					((send_handler) pkthandle).Send(mysock);
@@ -124,6 +114,10 @@ public class packet_handler
 					pkthandle = new connect2_handler(m_sess,data);
 					((send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x0B:
+				case 0x0E:
+					new depreciated_handler(opcode_id);
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
@@ -142,6 +136,7 @@ public class packet_handler
 				case 0x1D:
 				case 0x1E:
 				case 0x22:
+				case 0x23:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:
