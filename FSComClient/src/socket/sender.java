@@ -12,31 +12,50 @@ import misc.MasterCommandLine;
 public class sender extends Thread
 {
 	private final static int port = 5677;
-	private static String IP = serverlist.GetMirror(0);
-
+	private boolean connected = false;
 	private static Socket socket;
 	private static listener listn;
 	private static ObjectOutputStream out;
 	
 	public sender()
 	{
-		try 
+		Integer i = 0;
+		
+		while(i < 4 && !connected)
 		{
-			socket = new Socket(IP,port);
-			out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+			try 
+			{
+				Log.outError("Tentative de connexion au miroir " + i);
+				socket = new Socket(serverlist.GetMirror(i),port);
+				out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+				connected = true;
+			}
+			catch (UnknownHostException e) 
+			{
+				e.printStackTrace();
+			}
+			catch(ConnectException e)
+			{
+				i++;
+				
+			}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
 		}
-		catch (UnknownHostException e) 
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+		if(!connected)
+			events.ConnectionError();
 	}
 	
 	public void run()
 	{
+		if(!connected)
+		{
+			this.interrupt();
+			return;
+		}
+		
 		try
 		{
 			// create a socket on mine IP.
@@ -67,14 +86,14 @@ public class sender extends Thread
 		} 
 		catch (Exception e) 
 		{
-	      events.ConnectionError();
 	      this.interrupt();
 	    }
 	}
 	
 	public static void SendPacket(Integer opcode,Object packt)
 	{
-		// creating buffers for packets to send
+		if(out == null)
+			return;
 		
 		try 
 		{
