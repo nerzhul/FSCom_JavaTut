@@ -5,13 +5,12 @@ import java.net.Socket;
 import session.Session;
 import session.events;
 import socket.packet.handlers.*;
+import socket.packet.handlers.listens.depreciated_handler;
 import socket.packet.handlers.listens.null_handler;
 import socket.packet.handlers.listens.pong_handler;
 import socket.packet.handlers.listens.serverside_handler;
 import socket.packet.handlers.listens.srvconnect_handler;
 import socket.packet.handlers.sends.AskAllDatas_handler;
-import socket.packet.handlers.sends.AskContacts_handler;
-import socket.packet.handlers.sends.AskGroups_handler;
 import socket.packet.handlers.sends.srvpong_handler;
 import misc.Log;
 
@@ -73,21 +72,8 @@ public class packet_handler
 						((send_handler) pcktrecv).Send();
 					}
 					break;
-				case 0x0A:
-					pcktrecv = new AskGroups_handler();
-					((send_handler) pcktrecv).Send();
-					break;
-				case 0x0C:
-					//events.StoreContacts(data);
-					events.ShowConnectedFrame();
-					break;
 				case 0x0D:
 					events.ContactDisconnected(data);
-					break;
-				case 0x0F:
-					///events.StoreGroups(data);
-					pcktrecv = new AskContacts_handler();
-					((send_handler) pcktrecv).Send();
 					break;
 				case 0x10:
 					events.ContactConnected(data);
@@ -119,9 +105,11 @@ public class packet_handler
 				case 0x22:
 					events.StoreAllDatas(data);
 					events.ShowConnectedFrame();
-					// TODO : handle correctly
-					/*pcktrecv = new AskGroups_handler();
-					((send_handler) pcktrecv).Send();*/
+					break;
+				case 0x0C:
+				case 0x0F:
+				case 0x0A:
+					new depreciated_handler(opcode_id);
 					break;
 				case 0x00:
 				case 0x03:
