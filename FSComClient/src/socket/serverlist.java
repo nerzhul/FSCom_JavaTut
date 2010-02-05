@@ -20,4 +20,9 @@ public final class serverlist {
 		else 
 			return iplist[0];
 	}
+	
+	public static Integer getMaxMirrorList()
+	{
+		return MAX_MIRROR;
+	}
 }

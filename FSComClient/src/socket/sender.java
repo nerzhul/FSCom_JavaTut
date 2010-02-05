@@ -23,7 +23,7 @@ public class sender extends Thread
 	{
 		Integer i = 0;
 		
-		while(i < 4 && !connected)
+		while(i < serverlist.getMaxMirrorList() && !connected)
 		{
 			try 
 			{
@@ -38,8 +38,7 @@ public class sender extends Thread
 			}
 			catch(ConnectException e)
 			{
-				i++;
-				
+				i++;	
 			}
 			catch (IOException e) 
 			{
