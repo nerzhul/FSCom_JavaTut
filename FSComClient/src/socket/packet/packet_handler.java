@@ -9,11 +9,10 @@ import socket.packet.handlers.listens.null_handler;
 import socket.packet.handlers.listens.pong_handler;
 import socket.packet.handlers.listens.serverside_handler;
 import socket.packet.handlers.listens.srvconnect_handler;
+import socket.packet.handlers.sends.AskAllDatas_handler;
 import socket.packet.handlers.sends.AskContacts_handler;
 import socket.packet.handlers.sends.AskGroups_handler;
 import socket.packet.handlers.sends.srvpong_handler;
-import socket.packet.handlers.sends.statussender_handler;
-
 import misc.Log;
 
 public class packet_handler 
@@ -70,7 +69,7 @@ public class packet_handler
 				case 0x08:
 					if((new srvconnect_handler(data.toString())).HasValidData())
 					{
-						pcktrecv = new statussender_handler(Session.getStatus(),true);
+						pcktrecv = new AskAllDatas_handler(Session.getStatus());
 						((send_handler) pcktrecv).Send();
 					}
 					break;
@@ -117,6 +116,12 @@ public class packet_handler
 				case 0x1E:
 					events.RecvInvitation(data);
 					break;
+				case 0x22:
+					events.StoreAllDatas(data);
+					// TODO : handle correctly
+					pcktrecv = new AskGroups_handler();
+					((send_handler) pcktrecv).Send();
+					break;
 				case 0x00:
 				case 0x03:
 				case 0x04:
@@ -132,6 +137,7 @@ public class packet_handler
 				case 0x1A:
 				case 0x1C:
 				case 0x1F:
+				case 0x21:
 					pcktrecv = new serverside_handler(this.opcode_id);
 					break;
 				default:

@@ -26,7 +26,6 @@ public class panel_contact extends JPanel{
 	private JLabel Titre;
 	private JLabel Soustitre;
 	private JTree  tree;
-	private String pseudo;
 	private JComboBox changstatus;
 	private form_communicate comm;
 
@@ -43,9 +42,9 @@ public class panel_contact extends JPanel{
 		
 		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
-		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
+		setLayout(new FlowLayout(FlowLayout.CENTER,400,10));
 		
-		Titre=new JLabel("Vous etes connecté en tant que " + pseudo,JLabel.CENTER);
+		Titre = new JLabel(Session.getPseudo());
 		
 		changstatus= new JComboBox();
 		
@@ -56,6 +55,7 @@ public class panel_contact extends JPanel{
 		changstatus.setSelectedIndex(status2);
 		changstatus.addActionListener(new changestatus_button(changstatus));
 		msgperso = new JTextField(20);
+		msgperso.setText(Session.getPerso_msg());
 		
 		Soustitre = new JLabel("Liste de vos contacts : ");
 		
@@ -63,6 +63,7 @@ public class panel_contact extends JPanel{
 		add(changstatus);
 		add(msgperso);
 		add(Soustitre);
+		
 		
 		setlistcontact();	
 		
@@ -117,12 +118,11 @@ public class panel_contact extends JPanel{
 		this.add(Scrollbar);
 	}
 
-	public void setComm(form_communicate comm) {
-		this.comm = comm;
+	public void setComm(form_communicate comm) { this.comm = comm; }
+	public form_communicate getComm() { return comm; }
+	
+	public void ChPseudo(String n_pseudo)
+	{
+		Titre.setText("Pseudo : " + n_pseudo);
 	}
-
-	public form_communicate getComm() {
-		return comm;
-	}
-
 }

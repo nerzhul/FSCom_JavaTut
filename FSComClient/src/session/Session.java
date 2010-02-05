@@ -43,7 +43,7 @@ public class Session extends Thread{
 	public static void CreateNewContact(contact cont)
 	{
 		for(int i=0;i<groups.size();i++)
-			if(groups.get(i).getGid() == cont.getGroup())
+			if(groups.get(i).getGid().equals(cont.getGroup()))
 			{
 				groups.get(i).AddContact(cont);
 				return;

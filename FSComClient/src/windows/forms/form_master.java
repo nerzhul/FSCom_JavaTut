@@ -114,4 +114,6 @@ public class form_master extends JFrame
 		temp.addActionListener(obj);
 		menu.add(temp);
 	}
+	
+	public panel_contact getPanContact() { return (panel_contact) pan_contact; } 
 }

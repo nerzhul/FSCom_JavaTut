@@ -14,6 +14,7 @@ public class listener extends Thread
 {
 	
 	Socket sockt;
+	ObjectInputStream in;
 	
 	public listener(Socket sock) throws IOException
 	{
@@ -29,8 +30,6 @@ public class listener extends Thread
 	{
 		try
 		{
-			ObjectInputStream in;
-			
 			
 			while(true)
 			{
@@ -42,6 +41,7 @@ public class listener extends Thread
 					break;
 				
 				TreatPacket(message);
+				sleep(100);
 			}
 			Log.outTimed("Close connection with server");
 			sockt.close();

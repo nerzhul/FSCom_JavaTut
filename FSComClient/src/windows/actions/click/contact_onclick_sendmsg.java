@@ -3,8 +3,6 @@ package windows.actions.click;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-
 import session.objects.contact;
 
 import windows.forms.form_communicate;

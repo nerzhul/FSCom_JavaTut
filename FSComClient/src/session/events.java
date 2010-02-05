@@ -6,6 +6,8 @@ import session.objects.contact;
 import session.objects.group;
 import socket.sender;
 import socket.packet.handlers.sends.Answer_Invit_handler;
+import socket.packet.objects.ClientDatas;
+import socket.packet.objects.IdAndData;
 import socket.packet.objects.message;
 import thread.threading;
 import windows.windowthread;
@@ -123,26 +125,52 @@ public class events {
 
 	public static void ContactModifyPseudo(Object packet) 
 	{
-		// TODO: split the packet
+		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
+		{
+			Log.outError("Malformed Data Received");
+			return;
+		}
+		
+		IdAndData pck = (IdAndData) packet;
+		if(pck.getUid().equals(0))
+		{
+			if(windowthread.getFmConn() != null)
+				if(windowthread.getFmConn().getPanContact() != null)
+					windowthread.getFmConn().getPanContact().ChPseudo(pck.getDat());
+		}
+		else
+		{
 		for(int i=0;i<Session.getGroups().size();i++)
 			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(pck.getUid()))
 				{
 					// TODO: modify contact pseudo
 					return;
 				}
+		}
 	}
 
 	public static void ContactModifyPmsg(Object packet) 
 	{
-		// TODO: split the packet
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
-				{
-					// TODO: modify contact Pmsg
-					return;
-				}
+		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
+		{
+			Log.outError("Malformed Data Received");
+			return;
+		}
+		
+		IdAndData pck = (IdAndData) packet;
+		if(pck.getUid().equals(0))
+			; // TODO: modify my personal phrase on client
+		else
+		{
+			for(int i=0;i<Session.getGroups().size();i++)
+				for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
+					if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(pck.getUid()))
+					{
+						// TODO: modify contact Pmsg
+						return;
+					}
+		}
 	}
 
 	public static void ContactAdded(Object packet) {
@@ -194,6 +222,18 @@ public class events {
 	{
 		sender.StopSocket();
 		threading.StopSender();
+	}
+
+	public static void StoreAllDatas(Object packet) {
+		if(!packet.getClass().equals((new ClientDatas()).getClass()))
+		{
+			Log.outError("Malformed Data Received");
+			return;
+		}
+		ClientDatas pck = (ClientDatas) packet;
+		Session.setPerso_msg(pck.getPperso());
+		Session.setPseudo(pck.getPseudo());
+		
 	}
 	
 	

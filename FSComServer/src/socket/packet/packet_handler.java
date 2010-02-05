@@ -10,6 +10,7 @@ import socket.packet.handlers.*;
 import socket.packet.handlers.listened.*;
 import socket.packet.handlers.senders.AddContact_handler;
 import socket.packet.handlers.senders.blockcontact_handler;
+import socket.packet.handlers.senders.connect2_handler;
 import socket.packet.handlers.senders.connect_handler;
 import socket.packet.handlers.senders.contactlist_handler;
 import socket.packet.handlers.senders.grouplist_handler;
@@ -85,7 +86,6 @@ public class packet_handler
 					break;
 				case 0x09:
 					pkthandle = new status_handler(m_sess,data);
-					((send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x0B:
 					pkthandle = new contactlist_handler(m_sess);
@@ -120,6 +120,10 @@ public class packet_handler
 				case 0x20:
 					pkthandle = new req_pseudo_handler(m_sess,data);
 					break;
+				case 0x21:
+					pkthandle = new connect2_handler(m_sess,data);
+					((send_handler) pkthandle).Send(mysock);
+					break;
 				case 0x01:
 				case 0x02:
 				case 0x07:
@@ -137,6 +141,7 @@ public class packet_handler
 				case 0x1B:
 				case 0x1D:
 				case 0x1E:
+				case 0x22:
 					pkthandle = new clientside_handler(this.opcode_id);
 					break;
 				default:

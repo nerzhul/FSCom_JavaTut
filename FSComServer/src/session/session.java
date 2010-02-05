@@ -22,6 +22,7 @@ public class session {
 	private boolean connected;
 	private Integer status;
 	private String name;
+	private String pseudo;
 	private String personnal_msg;
 	private Integer uid;
 	private Thread thr_associated;
@@ -36,6 +37,7 @@ public class session {
 		status = 0;
 		name = "";
 		personnal_msg = "";
+		setPseudo("");
 		thr_associated = thr;
 		sess_linked = new Vector<session>();
 		sock = sockt;
@@ -46,9 +48,9 @@ public class session {
 		connected = true;
 		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
+		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
 		LoadBlockedContacts();
-		Log.outError(uid+"");
 		// TODO : send all invitations
 	}
 	
@@ -109,11 +111,21 @@ public class session {
 	
 	public void broadcast_SomethingChanged(int sth) 
 	{
+		switch(sth)
+		{
+			case 2:
+				this.SendPseudoToMe(0, name);
+				break;
+			case 3:
+				this.SendMsgPersoToMe(0, personnal_msg);
+				break;
+		}
+		
 		for(int i=0;i<sess_linked.size();i++)
 		{
 			boolean blocked = false;
 			for(int j=0;j<uid_blocked.size();j++)
-				if(uid_blocked.get(i) == sess_linked.get(i).getUid())
+				if(uid_blocked.get(i).equals(sess_linked.get(i).getUid()))
 					blocked = true;
 			
 			if(!blocked)
@@ -132,6 +144,7 @@ public class session {
 				}
 			}
 		}
+		
 	}
 	
 	private void SendMsgPersoToMe(Integer _uid, String pmsg) 
@@ -315,6 +328,8 @@ public class session {
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
 	public Socket getSocket() { return sock; }
+	public void setPseudo(String pseudo) { this.pseudo = pseudo; }
+	public String getPseudo() { return pseudo; }
 
 	
 

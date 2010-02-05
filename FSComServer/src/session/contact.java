@@ -1,4 +1,4 @@
-package session.objects;
+package session;
 
 import java.io.Serializable;
 
@@ -8,11 +8,17 @@ public class contact implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private Integer cid;
+	@SuppressWarnings("unused")
 	private boolean blocked;
+	@SuppressWarnings("unused")
 	private String pseudo;
+	@SuppressWarnings("unused")
 	private String msg_perso;
+	@SuppressWarnings("unused")
 	private Integer status;
+	@SuppressWarnings("unused")
 	private String comment;
 	private Integer group;
 	
@@ -28,18 +34,10 @@ public class contact implements Serializable{
 		setGroup(_grp);
 	}
 	public void setCid(Integer cid) { this.cid = cid; }
-	public Integer getCid() { return cid; }
 	public void setBlocked(boolean blocked) { this.blocked = blocked; }
-	public boolean isBlocked() { return blocked; }
 	public void setPseudo(String pseudo) { this.pseudo = pseudo; }
-	public String getPseudo() { return pseudo; }
 	public void setMsg_perso(String msg_perso) { this.msg_perso = msg_perso; }
-	public String getMsg_perso() { return msg_perso; }
 	public void setStatus(Integer status) {	this.status = status; }
-	public Integer getStatus() { return status; }
-	public void setComment(String comment) { this.comment = comment; }
-	public String getComment() { return comment; }
 	public void setGroup(Integer group) { this.group = group; }
 	public Integer getGroup() { return group; }
-	public String toString() { return getPseudo(); }
 }

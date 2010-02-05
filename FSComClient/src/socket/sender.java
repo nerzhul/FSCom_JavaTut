@@ -82,7 +82,7 @@ public class sender extends Thread
 			packet pck = new packet(opcode,packt);
 			out.writeObject(pck);
 			out.flush();
-	    	Log.outTimed("Send packet : " + pck.getData() + " to server ");
+	    	Log.outTimed("Send packet (opcode :" + pck.getOpcode() + ") to server ");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
