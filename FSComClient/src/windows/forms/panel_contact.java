@@ -16,7 +16,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
 import session.Session;
-import session.objects.group;
+import session.group;
 import windows.actions.buttons.changestatus_button;
 import windows.actions.click.contact_onclick;
 

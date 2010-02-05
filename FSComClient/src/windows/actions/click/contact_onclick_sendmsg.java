@@ -3,7 +3,7 @@ package windows.actions.click;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import session.objects.contact;
+import session.contact;
 
 import windows.forms.form_communicate;
 import windows.forms.panel_contact;

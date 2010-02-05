@@ -32,6 +32,7 @@ public class sender
 	public void SendPacket()
 	{
 		ObjectOutputStream out;
+
 		try {
 			out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 			// send packet

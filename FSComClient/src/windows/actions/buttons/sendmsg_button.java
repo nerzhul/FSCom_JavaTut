@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextArea;
 
-import session.objects.contact;
+import session.contact;
 import socket.packet.handlers.send_handler;
 import socket.packet.handlers.sends.SendMsgTo_handler;
 

@@ -9,7 +9,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-import session.objects.contact;
+import session.contact;
 import windows.forms.form_communicate;
 import windows.forms.panel_contact;
 

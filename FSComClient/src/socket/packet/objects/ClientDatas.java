@@ -3,8 +3,8 @@ package socket.packet.objects;
 import java.io.Serializable;
 import java.util.Vector;
 
-import session.objects.contact;
-import session.objects.group;
+import session.contact;
+import session.group;
 
 public class ClientDatas implements Serializable
 {

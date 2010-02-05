@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
  
 import javax.swing.JTextArea;
 
-import session.objects.contact;
+import session.contact;
 
 import windows.actions.buttons.sendmsg_button;
  

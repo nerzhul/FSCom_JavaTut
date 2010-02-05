@@ -1,6 +1,6 @@
 package socket.packet.handlers.sends;
 
-import session.objects.contact;
+import session.contact;
 import socket.packet.handlers.send_handler;
 import socket.packet.objects.message;
 

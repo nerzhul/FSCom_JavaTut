@@ -43,7 +43,7 @@ public class ClientDatas implements Serializable
 			
 			group tmp_grp = new group(v_grp.get(i),DatabaseTransactions.StringQuery("acc_group",
 					"name", acc_group_get));
-			//grp.add(tmp_grp);
+			grp.add(tmp_grp);
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class ClientDatas implements Serializable
 					DatabaseTransactions.StringQuery("acc_contact", "comment", acc_contact_get),
 					(SessionHandler.isConnected(v_cont.get(i)) ? SessionHandler.getContactByUID(v_cont.get(i)).getStatus() : 0),
 					DatabaseTransactions.IntegerQuery("acc_contact", "group", acc_contact_get));
-			//ct.add(tmp_contact);
+			ct.add(tmp_contact);
 		}
 	}
 	public void setPseudo(String pseudo) { this.pseudo = pseudo; }

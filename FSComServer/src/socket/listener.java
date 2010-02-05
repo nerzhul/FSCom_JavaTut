@@ -3,6 +3,7 @@ package socket;
 import java.io.*;
 import java.net.*;
 
+import session.SessionHandler;
 import session.session;
 import socket.packet.packet;
 import socket.packet.packet_handler;
@@ -55,9 +56,10 @@ public class listener extends Thread
 		{
 			Log.outTimed("Client " + sockt.getInetAddress() + " was disconnected...");
 			try 
-			{	sockt.close();	} 
+			{ sockt.close(); } 
 			catch (IOException e1) {}
-			this.interrupt();
+			
+			SessionHandler.DestroySession(sess, this);
 		}
 	}
 	

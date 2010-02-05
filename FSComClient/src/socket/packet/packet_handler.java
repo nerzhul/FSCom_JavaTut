@@ -78,14 +78,14 @@ public class packet_handler
 					((send_handler) pcktrecv).Send();
 					break;
 				case 0x0C:
-					events.StoreContacts(data);
+					//events.StoreContacts(data);
 					events.ShowConnectedFrame();
 					break;
 				case 0x0D:
 					events.ContactDisconnected(data);
 					break;
 				case 0x0F:
-					events.StoreGroups(data);
+					///events.StoreGroups(data);
 					pcktrecv = new AskContacts_handler();
 					((send_handler) pcktrecv).Send();
 					break;
@@ -118,9 +118,10 @@ public class packet_handler
 					break;
 				case 0x22:
 					events.StoreAllDatas(data);
+					events.ShowConnectedFrame();
 					// TODO : handle correctly
-					pcktrecv = new AskGroups_handler();
-					((send_handler) pcktrecv).Send();
+					/*pcktrecv = new AskGroups_handler();
+					((send_handler) pcktrecv).Send();*/
 					break;
 				case 0x00:
 				case 0x03:

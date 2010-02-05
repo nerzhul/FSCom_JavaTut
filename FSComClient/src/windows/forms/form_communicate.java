@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import session.objects.contact;
+
+import session.contact;
 
 import windows.actions.buttons.sendmsg_button;
 import windows.actions.keylisteners.follow_keyboard;

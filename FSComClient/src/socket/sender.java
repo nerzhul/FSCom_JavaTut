@@ -14,38 +14,33 @@ import misc.MasterCommandLine;
 public class sender extends Thread
 {
 	private final static int port = 5677;
-	private boolean connected = false;
+	private static boolean connected = false;
 	private static Socket socket;
 	private static listener listn;
 	private static ObjectOutputStream out;
 	
 	public sender()
 	{
-		Integer i = 0;
-		
-		while(i < serverlist.getMaxMirrorList() && !connected)
+		Connect();
+	}
+	
+	public static void Connect()
+	{
+		Integer mir = serverlist.getBestMirror();
+		if(mir != -1)
 		{
 			try 
 			{
-				Log.outError("Tentative de connexion au miroir " + i);
-				socket = new Socket(serverlist.GetMirror(i),port);
+				socket = new Socket(serverlist.GetMirror(mir),port);
 				out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 				connected = true;
 			}
-			catch (UnknownHostException e) 
+			catch (Exception e) 
 			{
-				e.printStackTrace();
-			}
-			catch(ConnectException e)
-			{
-				i++;	
-			}
-			catch (IOException e) 
-			{
-				e.printStackTrace();
+				events.ConnectionError();
 			}
 		}
-		if(!connected)
+		else
 			events.ConnectionError();
 	}
 	
@@ -110,14 +105,13 @@ public class sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
-			// TODO: handle correctly new connection (mirror dev)
+			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + serverlist.getCurrentMirror()+ ")",true);
+			Connect();
 		}
 		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public static void StopSocket()

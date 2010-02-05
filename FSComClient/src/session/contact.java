@@ -1,4 +1,4 @@
-package session.objects;
+package session;
 
 import java.io.Serializable;
 

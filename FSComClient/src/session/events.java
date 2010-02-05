@@ -1,9 +1,9 @@
 package session;
 
+import java.util.Vector;
+
 import javax.swing.JOptionPane;
 
-import session.objects.contact;
-import session.objects.group;
 import socket.sender;
 import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.objects.ClientDatas;
@@ -21,12 +21,12 @@ public class events {
 		Session.setStatus(st);
 	}
 	
-	public static void StoreContacts(Object packet)
+	public static void StoreContacts(Vector<contact> packet)
 	{
 		Session.ClearContacts();
-		String tmp_contactlist[] = packet.toString().split("///.///");
+		//String tmp_contactlist[] = packet.toString().split("///.///");
 		
-		if(tmp_contactlist.length > 0 && !tmp_contactlist[0].equals("00"))
+		/*if(tmp_contactlist.length > 0 && !tmp_contactlist[0].equals("00"))
 		{
 			for(int i=0;i<tmp_contactlist.length-1;i++)
 			{
@@ -42,15 +42,18 @@ public class events {
 					Session.CreateNewContact(tmp_con);
 				}
 			}
-		}
+		}*/
+		for(contact ct: packet)
+			Session.CreateNewContact(ct);
 	}
 
-	public static void StoreGroups(Object packet) 
+	public static void StoreGroups(Vector<group> packet) 
 	{
-		String tmp_grouplist[] = packet.toString().split("/./.");
+		//String tmp_grouplist[] = packet.toString().split("/./.");
 		Session.ClearGroups();
+		
 		Session.CreateNewGroup(new group(0,"Autres contacts"));
-		if(tmp_grouplist.length > 0 && !tmp_grouplist[0].equals("00"))
+		/*if(tmp_grouplist.length > 0 && !tmp_grouplist[0].equals("00"))
 		{
 			for(int i=0;i<tmp_grouplist.length-1;i++)
 			{
@@ -60,7 +63,9 @@ public class events {
 				else
 					Session.CreateNewGroup(new group(Integer.decode(tmp_group[0]),tmp_group[1]));
 			}
-		}
+		}*/
+		for(group gr:packet)
+			Session.CreateNewGroup(gr);
 	}
 
 	public static void ContactDisconnected(Object packet) 
@@ -233,6 +238,9 @@ public class events {
 		ClientDatas pck = (ClientDatas) packet;
 		Session.setPerso_msg(pck.getPperso());
 		Session.setPseudo(pck.getPseudo());
+		events.StoreGroups(pck.GetMyGroups());
+		events.StoreContacts(pck.GetMyContacts());
+		
 		
 	}
 	

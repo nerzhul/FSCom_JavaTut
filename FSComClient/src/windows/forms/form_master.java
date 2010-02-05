@@ -36,6 +36,7 @@ public class form_master extends JFrame
 		fram.setLocationRelativeTo(null);
 		fram.setResizable(false);
 		fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		pan_connect = pan_contact = null;
 	}
 	
 	public void BuildPanel(int i) 
@@ -44,17 +45,33 @@ public class form_master extends JFrame
 		{
 			case 1:
 				Menubar_Connect();
-				if(pan_contact!=null)
-					fram.remove(pan_contact);
-				pan_connect = new panel_connect(this);
-				fram.add(pan_connect);        
+				if(pan_contact != null)
+					pan_contact.setVisible(false);
+				
+				if(pan_connect == null)
+				{
+					pan_connect = new panel_connect(this);
+					fram.add(pan_connect);
+				}
+				else
+					pan_connect.setVisible(true);
+				
+				
 				fram.setVisible(true);
 				break;
 			case 2:	
 				Menubar_contact();
-				fram.remove(pan_connect);
-				pan_contact = new panel_contact();
-				fram.add(pan_contact);
+				if(pan_connect != null)
+					pan_connect.setVisible(false);
+				
+				if(pan_contact == null)
+				{
+					pan_contact = new panel_contact();
+					fram.add(pan_contact);
+				}
+				else
+					pan_contact.setVisible(true);
+				
 				fram.setVisible(true);
 				break;
 		}

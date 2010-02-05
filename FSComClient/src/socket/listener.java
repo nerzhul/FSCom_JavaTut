@@ -30,10 +30,16 @@ public class listener extends Thread
 	{
 		try
 		{
-			
 			while(true)
 			{
-				in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
+				try
+				{
+					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
+				}
+				catch(IOException e)
+				{
+					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
+				}
 				packet message = (packet) in.readObject();
 				Log.outString("Packet received from server (opcode :" + message.getOpcode() + ")");
 				
@@ -52,6 +58,7 @@ public class listener extends Thread
 		}
 		catch (Exception e) 
 		{
+			e.printStackTrace();
 			this.interrupt();
 		}
 	}
