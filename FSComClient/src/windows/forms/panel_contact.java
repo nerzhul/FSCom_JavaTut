@@ -150,13 +150,12 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	public void setComm(form_communicate comm) { this.comm = comm; }
 	public form_communicate getComm() { return comm; }
 	
-	public void ChPseudo(String n_pseudo)
-	{
-		Titre.setText("Pseudo : " + n_pseudo);
-	}
+	public void ChPseudo(String n_pseudo) {	Titre.setText("Pseudo : " + n_pseudo); }
 
+	/*
+	 * Drag and Drop
+	 */
 	public void dragEnter(DropTargetDragEvent e) {	e.acceptDrag(DnDConstants.ACTION_MOVE);	}
-
 	public void dragGestureRecognized(DragGestureEvent e) 
 	{
 		selecContact = null;

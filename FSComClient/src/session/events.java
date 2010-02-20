@@ -24,46 +24,15 @@ public class events {
 	public static void StoreContacts(Vector<contact> packet)
 	{
 		Session.ClearContacts();
-		//String tmp_contactlist[] = packet.toString().split("///.///");
-		
-		/*if(tmp_contactlist.length > 0 && !tmp_contactlist[0].equals("00"))
-		{
-			for(int i=0;i<tmp_contactlist.length-1;i++)
-			{
-				String tmp_contact[] = tmp_contactlist[i].split("//.//");
-				if(tmp_contact.length != 7)
-					Log.outError("Bad contact list packet !");
-				else
-				{
-					contact tmp_con = new contact(Integer.decode(tmp_contact[0]),
-							Integer.decode(tmp_contact[1]), tmp_contact[2],
-							tmp_contact[5], tmp_contact[3], Integer.decode(tmp_contact[6]),
-							Integer.decode(tmp_contact[4]));
-					Session.CreateNewContact(tmp_con);
-				}
-			}
-		}*/
 		for(contact ct: packet)
 			Session.CreateNewContact(ct);
 	}
 
 	public static void StoreGroups(Vector<group> packet) 
 	{
-		//String tmp_grouplist[] = packet.toString().split("/./.");
 		Session.ClearGroups();
 		
 		Session.CreateNewGroup(new group(0,"Autres contacts"));
-		/*if(tmp_grouplist.length > 0 && !tmp_grouplist[0].equals("00"))
-		{
-			for(int i=0;i<tmp_grouplist.length-1;i++)
-			{
-				String tmp_group[] = tmp_grouplist[i].split("/.");
-				if(tmp_group.length != 2)
-					Log.outError("Bad group list packet !");
-				else
-					Session.CreateNewGroup(new group(Integer.decode(tmp_group[0]),tmp_group[1]));
-			}
-		}*/
 		for(group gr:packet)
 			Session.CreateNewGroup(gr);
 	}
@@ -112,7 +81,7 @@ public class events {
 		message msg = (message) packet;
 		Integer _uid = msg.getDest();
 		Log.outError(_uid + msg.getMsg());
-		
+		// TODO : handle with windows
 	}
 
 	public static void ContactModifyStatus(Object packet) 
@@ -149,7 +118,7 @@ public class events {
 			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
 				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(pck.getUid()))
 				{
-					// TODO: modify contact pseudo
+					Session.getGroups().get(i).getContacts().get(j).setPseudo(pck.getDat());
 					return;
 				}
 		}
