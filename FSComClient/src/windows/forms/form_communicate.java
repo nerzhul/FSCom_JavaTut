@@ -8,7 +8,7 @@ import net.infonode.tabbedpanel.Tab;
 import net.infonode.tabbedpanel.TabbedPanel;
 import net.infonode.tabbedpanel.titledtab.TitledTab;
 import session.contact;
-import windows.actions.buttons.ActionFermer;
+import windows.actions.buttons.CloseAllConversTabs;
 import windows.actions.buttons.CloseButton;
 
 public class form_communicate extends JFrame{
@@ -28,7 +28,7 @@ public class form_communicate extends JFrame{
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
-	    frame.addWindowListener(new ActionFermer(frame,TabPan));
+	    frame.addWindowListener(new CloseAllConversTabs(frame,TabPan));
 
 	}
 	

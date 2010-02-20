@@ -21,32 +21,32 @@ public class onglet_communicate extends JPanel{
 	public onglet_communicate(contact noeud){
 		super();
 		ct=noeud;
-		createonglet();
+		CreateTab();
 	}
 	
-	public void createonglet(){
+	public void CreateTab(){
 		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
 		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
 
-		JLabel Titretxt = new JLabel ("Entrez ici le texte a envoyer : ");
-	    JTextArea textprincipal = new JTextArea(15,50);
-	    textprincipal.setEditable(false);
-	    textprincipal.setLineWrap(true); 
+		JLabel TitleText = new JLabel ("Entrez ici le texte a envoyer : ");
+	    JTextArea MainText = new JTextArea(15,50);
+	    MainText.setEditable(false);
+	    MainText.setLineWrap(true); 
 	    JTextArea txt = new JTextArea(3,50);
 	    txt.setText("\n");
-	    txt.addKeyListener(new follow_keyboard(ct,txt,textprincipal));
+	    txt.addKeyListener(new follow_keyboard(ct,txt,MainText));
 	    txt.setLineWrap(true); 
 	    JButton envoi = new JButton("Envoyer !");
-	    envoi.addActionListener(new sendmsg_button(ct,txt,textprincipal));
+	    envoi.addActionListener(new sendmsg_button(ct,txt,MainText));
 
-	    add(textprincipal);
-	    JScrollPane scrollprincipal = new JScrollPane(textprincipal);
-	    add(scrollprincipal);
-	    add(Titretxt);
+	    add(MainText);
+	    JScrollPane MainScroll = new JScrollPane(MainText);
+	    add(MainScroll);
+	    add(TitleText);
 	    add(txt);
-	    JScrollPane scrollenvoi = new JScrollPane(txt);        
-	    add(scrollenvoi);
+	    JScrollPane SendScroll = new JScrollPane(txt);        
+	    add(SendScroll);
 	    add(envoi);
 	}
 
