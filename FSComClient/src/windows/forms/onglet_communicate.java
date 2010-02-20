@@ -18,7 +18,8 @@ public class onglet_communicate extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private contact ct;
-	public onglet_communicate(contact noeud){
+	public onglet_communicate(contact noeud)
+	{
 		super();
 		ct=noeud;
 		CreateTab();

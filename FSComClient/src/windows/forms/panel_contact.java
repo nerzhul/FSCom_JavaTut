@@ -33,10 +33,10 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import misc.Log;
-
 import session.Session;
+import session.contact;
 import session.group;
+import socket.packet.handlers.sends.MoveGroup_handler;
 import windows.actions.buttons.changestatus_button;
 import windows.actions.click.contact_onclick;
 
@@ -104,7 +104,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		// Adding nodes
 		for(int i=0;i<groups.size();i++)
 		{
-			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(groups.get(i).getGname());
+			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(groups.get(i));
 			root.add(tmp_grp);
 			for(int j=0;j<groups.get(i).getContacts().size();j++)
 			{
@@ -200,6 +200,10 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
 			  //changement du groupe --> envoi au serveur
 			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
+			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
+					  ((group)dropContact.getUserObject()).getGid());
+			  pck.Send();
+			  
 		    }
 		}
 	}

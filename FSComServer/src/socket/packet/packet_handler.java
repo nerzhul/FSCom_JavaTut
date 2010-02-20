@@ -114,6 +114,9 @@ public class packet_handler
 					pkthandle = new connect2_handler(m_sess,data);
 					((send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x24:
+					m_sess.EventContactGroupChange(data);
+					break;
 				case 0x0B:
 				case 0x0E:
 					new depreciated_handler(opcode_id);

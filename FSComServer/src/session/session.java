@@ -12,6 +12,7 @@ import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
 import socket.packet.handlers.senders.cont_connected_handler;
 import socket.packet.handlers.senders.cont_disconct_handler;
+import socket.packet.objects.IdAndData;
 import socket.packet.objects.message;
 
 import database.DatabaseFunctions;
@@ -272,8 +273,6 @@ public class session {
 		
 		return result;
 	}
-	
-	
 
 	public void ManageInvitation(Integer _uid, Integer method) 
 	{
@@ -315,6 +314,11 @@ public class session {
 			for(int i=0;i<sess_linked.size();i++)
 				if(sess_linked.get(i).getUid().equals(_uid))
 					sess_linked.remove(i);
+	}
+	
+	public void EventContactGroupChange(Object data) 
+	{
+		IdAndData dat = (IdAndData) data;
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
