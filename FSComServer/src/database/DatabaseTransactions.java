@@ -167,10 +167,8 @@ public class DatabaseTransactions {
 	{
 		Vector<Integer> ints = new Vector<Integer>();
 		Vector<Object> tmpvect = getObjectList(table,col,cond);
-		for(int i=0;i<tmpvect.size();i++)
-		{
-			ints.add(Integer.decode(tmpvect.get(i).toString()));
-		}
+		for(Object o : tmpvect)
+			ints.add(Integer.decode(o.toString()));
 		
 		return ints;
 	}

@@ -5,9 +5,6 @@ import java.io.Serializable;
 public class packet implements Serializable
 {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer opcode;
 	private Object data;

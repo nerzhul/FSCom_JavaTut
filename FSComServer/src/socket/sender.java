@@ -16,11 +16,11 @@ public class sender
 		socket = sock;
 		pck = new packet(op,packet);
 	}
-	
+
 	public void CloseConnection()
 	{
-		try {
-			
+		try 
+		{
 			socket.close();
 		} 
 		catch (IOException e)
@@ -33,7 +33,8 @@ public class sender
 	{
 		ObjectOutputStream out;
 
-		try {
+		try 
+		{
 			out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 			// send packet
 			out.writeObject(pck);

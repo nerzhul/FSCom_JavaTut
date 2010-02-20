@@ -20,7 +20,8 @@ public class contact_onclick_sendmsg implements ActionListener {
 	}
 
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		if(mypn.getComm() == null)
 			mypn.setComm(new form_communicate());
 		

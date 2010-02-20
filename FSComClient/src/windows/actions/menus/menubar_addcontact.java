@@ -15,7 +15,7 @@ public class menubar_addcontact implements ActionListener {
 	
 		reponse = JOptionPane.showInputDialog(fenetre,"Entrez le nom du contact à ajouter :",
 				"Nouveau contact",JOptionPane.QUESTION_MESSAGE);
-		if (reponse !=null && !reponse.equalsIgnoreCase(""))
+		if (reponse != null && !reponse.equalsIgnoreCase(""))
 		{
 			// TODO: request to server
 			JOptionPane.showMessageDialog(fenetre,"Le contact "+reponse+" a bien été ajouté !" );

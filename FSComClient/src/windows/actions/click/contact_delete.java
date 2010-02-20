@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import session.contact;
 import socket.packet.handlers.sends.DelContact_handler;
 
-public class contact_delete implements ActionListener {
-
+public class contact_delete implements ActionListener 
+{
 	private contact contact;
 	private JFrame fenetre;
 	public contact_delete(contact contactasupprimer) {
@@ -18,8 +18,8 @@ public class contact_delete implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		int reponse = JOptionPane.showConfirmDialog(fenetre, "Voulez-vous vraiment supprimer "+ contact +" ?","Important !!",JOptionPane.YES_NO_OPTION);
-		if (reponse == JOptionPane.YES_OPTION)
+		if (JOptionPane.showConfirmDialog(fenetre, "Voulez-vous vraiment supprimer "
+				+ contact +" ?","Important !!",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
 		{
 			DelContact_handler dch = new DelContact_handler(contact.getCid());
 			if(dch != null)

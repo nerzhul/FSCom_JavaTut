@@ -20,10 +20,7 @@ public class follow_keyboard implements KeyListener {
 		this.box=textprincipal;
 	}
 	 
-	public void keyReleased(KeyEvent e) {
-		
-	}
-	 
+	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
 	 
 	public void keyPressed(KeyEvent e) {

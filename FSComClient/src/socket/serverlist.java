@@ -26,17 +26,17 @@ public final class serverlist {
 		else 
 			return iplist[0];
 	}
-	
+
 	public static Integer getMaxMirrorList()
 	{
 		return MAX_MIRROR;
 	}
-	
+
 	public static Integer getCurrentMirror()
 	{
 		return curr_mirror;
 	}
-	
+
 	public static Integer getBestMirror()
 	{
 		Integer i=0;
@@ -44,17 +44,16 @@ public final class serverlist {
 		Log.ShowPopup("Recherche du meilleur miroir...", false);
 		do
 		{
-			try 
+			try
 			{
 				Socket sock = new Socket(iplist[i],5677);
 				sock.close();
 				return i;
-			} 
+			}
 			catch (Exception e) 
 			{
 				i++;
 			}
-
 		}
 		while(i<MAX_MIRROR && !found);
 		return -1;

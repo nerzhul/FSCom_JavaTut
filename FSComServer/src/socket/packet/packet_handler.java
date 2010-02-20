@@ -45,7 +45,6 @@ public class packet_handler
 			Log.outError("Packet Handler: client " + mysock.getInetAddress() + " send invalid packet !");
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void ShowPacket() throws IOException

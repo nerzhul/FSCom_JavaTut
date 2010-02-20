@@ -12,10 +12,6 @@ import windows.actions.menus.*;
 
 public class form_master extends JFrame
 {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame fram;
 	private JPanel pan_connect;
@@ -85,7 +81,6 @@ public class form_master extends JFrame
 		menuBar.add(menu2);
 		
 		fram.setJMenuBar(menuBar);
-
 	}
 	
 	private void Menubar_contact() 
@@ -108,7 +103,7 @@ public class form_master extends JFrame
 		menuBar.add(menu2);
 		fram.setJMenuBar(menuBar);
 	}
-	
+
 	private void AddItem(JMenu menu, String label, ActionListener obj)
 	{
 		JMenuItem temp = new JMenuItem(label);

@@ -17,7 +17,6 @@ public class Invitation {
 			RegisterInvitation();
 	}
 
-	
 	private void RegisterInvitation()
 	{
 		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_invitation VALUES ('" + uid_invited + "','" + uid + "'");

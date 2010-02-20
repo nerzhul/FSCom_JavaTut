@@ -17,8 +17,8 @@ public class form_communicate extends JFrame{
 	private JFrame frame;
 	public TabbedPanel TabPan;
 	
-	public form_communicate() {
-			
+	public form_communicate() 
+	{
 		TabPan = new TabbedPanel();
 
 		frame = new JFrame();
@@ -29,7 +29,6 @@ public class form_communicate extends JFrame{
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
 	    frame.addWindowListener(new CloseAllConversTabs_button(frame,TabPan));
-
 	}
 	
 	public void AddTab(contact noeud)
@@ -45,7 +44,8 @@ public class form_communicate extends JFrame{
     			UserFound = true;
     	}
     	
-		if(!UserFound){
+		if(!UserFound)
+		{
 			TitledTab tab = new TitledTab(noeud.getPseudo(), null, new onglet_communicate(noeud), null );
 			tab.setTitleComponent( new CloseButton_button(tab,frame ) );
 			

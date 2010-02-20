@@ -21,9 +21,6 @@ import windows.actions.buttons.Connect_button;
 
 public class panel_connect extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel Titre;
 	private JLabel labeluser;
@@ -97,7 +94,6 @@ public class panel_connect extends JPanel {
 			save.setSelected(true);
 		connect=new JButton("Connexion");
 		connect.addActionListener(new Connect_button(status,mail,password,save));
-
 
 		add(Titre);
 		add(labeluser);

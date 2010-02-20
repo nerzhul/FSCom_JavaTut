@@ -12,7 +12,6 @@ import net.infonode.tabbedpanel.titledtab.TitledTab;
 
 	public class CloseButton_button extends JLabel
 	{
-		
 		private static final long serialVersionUID = 184842104821L;
 		
 		public CloseButton_button(final TitledTab tab, JFrame frame)
@@ -34,7 +33,8 @@ import net.infonode.tabbedpanel.titledtab.TitledTab;
 				{
 					if(tab.getTabbedPanel().getTabCount()>1)
 						tab.getTabbedPanel().removeTab( tab );
-					else{
+					else
+					{
 						tab.getTabbedPanel().removeTab( tab );
 						convers.dispose();
 					}

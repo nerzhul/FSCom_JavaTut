@@ -89,7 +89,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		add(msgperso);
 		add(Soustitre);
 		
-		
 		setlistcontact();	
 		
 		comm = null;
@@ -102,13 +101,13 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Contactlist");
 		 
 		// Adding nodes
-		for(int i=0;i<groups.size();i++)
+		for(group g : groups)
 		{
-			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(groups.get(i));
+			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(g);
 			root.add(tmp_grp);
-			for(int j=0;j<groups.get(i).getContacts().size();j++)
+			for(contact ct : g.getContacts())
 			{
-				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(groups.get(i).getContacts().get(j));
+				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(ct);
 				tmp_grp.add(tmp_contact);	
 			}
 		}
@@ -161,7 +160,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		selecContact = null;
 	    dropContact = null;
 	    Object selected = tree.getSelectionPath();
-	 
+
 	    if (selected != null) 
 	    {
 	      TreePath treepath = (TreePath) selected;
@@ -185,9 +184,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		    	 return;
 		     e.getDropTargetContext().dropComplete(true);
 		 }
-		 else {
+		 else
 		    e.rejectDrop();
-		}
 	}
 	
 	public void dragDropEnd(DragSourceDropEvent e) {
@@ -197,7 +195,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		    else
 		    {
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
-			  //changement du groupe --> envoi au serveur
 			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
 			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
 					  ((group)dropContact.getUserObject()).getGid());

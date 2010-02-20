@@ -106,9 +106,9 @@ public class session {
 			pck.Send(sock);
 		
 		if(!blocked)
-			for(int i=0;i<sess_linked.size();i++)
-				if(sess_linked.get(i).equals(sess))
-					sess_linked.remove(i);
+			for(session s : sess_linked)
+				if(s.equals(sess))
+					sess_linked.remove(s);
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -132,11 +132,11 @@ public class session {
 				break;
 		}
 		
-		for(int i=0;i<sess_linked.size();i++)
+		for(session s : sess_linked)
 		{
 			boolean blocked = false;
-			for(int j=0;j<uid_blocked.size();j++)
-				if(uid_blocked.get(i).equals(sess_linked.get(i).getUid()))
+			for(Integer i : uid_blocked)
+				if(i.equals(s.getUid()))
 					blocked = true;
 			
 			if(!blocked)
@@ -144,13 +144,13 @@ public class session {
 				switch(sth)
 				{
 					case 1:
-						sess_linked.get(i).SendStatusToMe(uid, status);
+						s.SendStatusToMe(uid, status);
 						break;
 					case 2:
-						sess_linked.get(i).SendPseudoToMe(uid, name);
+						s.SendPseudoToMe(uid, name);
 						break;
 					case 3:
-						sess_linked.get(i).SendMsgPersoToMe(uid, personnal_msg);
+						s.SendMsgPersoToMe(uid, personnal_msg);
 						break;
 				}
 			}
@@ -180,8 +180,8 @@ public class session {
 		else
 		{
 			contact_connected(SessionHandler.getContactByUID(Integer.decode(c_uid)), true);
-			for(int i=0;i<uid_blocked.size();i++)
-				if(uid_blocked.get(i).equals(Integer.decode(c_uid)))
+			for(Integer i : uid_blocked)
+				if(i.equals(Integer.decode(c_uid)))
 					uid_blocked.remove(i);
 		}
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
@@ -191,10 +191,7 @@ public class session {
 		else
 			DatabaseTransactions.ExecuteQuery("INSERT INTO acc_blocked VALUES ('" + uid + "','" 
 					+ c_uid + "','" + method + "");
-				
 	}
-	
-	
 	
 	public void TransmitMsgTo(Object packet) {
 		if(!packet.getClass().equals((new message(null,null)).getClass()))
@@ -320,10 +317,10 @@ public class session {
 				+ "contact = '" + _uid + "'");
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
 				+ "uid = '" + _uid + "'");
-		if(SessionHandler.isConnected(_uid));
-			for(int i=0;i<sess_linked.size();i++)
-				if(sess_linked.get(i).getUid().equals(_uid))
-					sess_linked.remove(i);
+		if(SessionHandler.isConnected(_uid))
+			for(session s : sess_linked)
+				if(s.getUid().equals(_uid))
+					sess_linked.remove(s);
 	}
 	
 	public void EventContactGroupChange(Object data) 
@@ -336,7 +333,7 @@ public class session {
 				if(tmpgid >= 0)
 					if(has_group(tmpgid) || tmpgid.equals(0))
 						DatabaseTransactions.ExecuteUQuery("acc_contact", "group",
-								tmpgid.toString(), " contact = '" + dat.getUid() + "'");
+							tmpgid.toString(), " contact = '" + dat.getUid() + "'");
 					
 			}
 	}

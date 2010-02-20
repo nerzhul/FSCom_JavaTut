@@ -15,24 +15,17 @@ public class SessionHandler {
 	{
 		if(sess != null)
 			v_sess.add(sess);
-		
-		for(int i=0;i<v_sess.size();i++)
-		{
-			if(!v_sess.get(i).equals(sess))
-			{
-				if(v_sess.get(i).know_contact(sess.getUid()) && !sess.has_blocked(v_sess.get(i).getUid()))
-					v_sess.get(i).contact_connected(sess, false);
-			}
-		}
+		for(session s : v_sess)
+			if(!s.equals(sess))
+				if(s.know_contact(sess.getUid()) && !sess.has_blocked(s.getUid()))
+					s.contact_connected(sess, false);
 	}
 
 	public static session getContactByUID(Integer _uid)
 	{
-		for(int i=0;i<v_sess.size();i++)
-		{
-			if(v_sess.get(i).getUid().equals(_uid))
-				return v_sess.get(i);
-		}
+		for(session s : v_sess)
+			if(s.getUid().equals(_uid))
+				return s;
 		return null;
 	}
 	
@@ -56,17 +49,13 @@ public class SessionHandler {
 
 	public static void DestroySession(session sess, Thread thr) 
 	{
-		for(int i=0;i<v_sess.size();i++)
+		for(session s : v_sess)
 		{
-			if(v_sess.get(i).equals(sess))
-				v_sess.remove(i);
-			else
-			{
-				if(v_sess.get(i).know_contact(sess.getUid()))
-					v_sess.get(i).contact_disconnected(sess,false);
-			}
+			if(s.equals(sess))
+				v_sess.remove(s);
+			else if(s.know_contact(sess.getUid()))
+				s.contact_disconnected(sess,false);
 		}
-		// delete the listener on the session
 		thr.interrupt();
 	}
 }

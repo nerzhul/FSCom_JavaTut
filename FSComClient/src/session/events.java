@@ -39,9 +39,9 @@ public class events {
 
 	public static void ContactDisconnected(Object packet) 
 	{
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+		for(group g : Session.getGroups())
+			for(contact ct : g.getContacts())
+				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					// TODO: declare contact disconnected to client
 					return;
@@ -51,9 +51,9 @@ public class events {
 
 	public static void ContactConnected(Object packet) 
 	{
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+		for(group g : Session.getGroups())
+			for(contact ct : g.getContacts())
+				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					// TODO: declare contact connected to client
 					return;
@@ -62,10 +62,9 @@ public class events {
 
 	public static void BlockContact(Object packet) 
 	{
-		// TODO: split the packet
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+		for(group g : Session.getGroups())
+			for(contact ct : g.getContacts())
+				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					// TODO: declare contact blocked to client
 					return;
@@ -87,9 +86,9 @@ public class events {
 	public static void ContactModifyStatus(Object packet) 
 	{
 		// TODO : split the packet
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+		for(group g : Session.getGroups())
+			for(contact ct : g.getContacts())
+				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					// TODO: modify contact status
 					return;
@@ -114,13 +113,13 @@ public class events {
 		}
 		else
 		{
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(pck.getUid()))
-				{
-					Session.getGroups().get(i).getContacts().get(j).setPseudo(pck.getDat());
-					return;
-				}
+			for(group g : Session.getGroups())
+				for(contact ct : g.getContacts())
+					if(ct.getCid().equals(pck.getUid()))
+					{
+						ct.setPseudo(pck.getDat());
+						return;
+					}
 		}
 	}
 
@@ -137,9 +136,9 @@ public class events {
 			; // TODO: modify my personal phrase on client
 		else
 		{
-			for(int i=0;i<Session.getGroups().size();i++)
-				for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-					if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(pck.getUid()))
+			for(group g : Session.getGroups())
+				for(contact ct : g.getContacts())
+					if(ct.getCid().equals(pck.getUid()))
 					{
 						// TODO: modify contact Pmsg
 						return;
@@ -147,7 +146,8 @@ public class events {
 		}
 	}
 
-	public static void ContactAdded(Object packet) {
+	public static void ContactAdded(Object packet) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
@@ -155,9 +155,9 @@ public class events {
 	public static void ContactDeleted(Object packet) 
 	{
 		// TODO: split the packet
-		for(int i=0;i<Session.getGroups().size();i++)
-			for(int j=0;j<Session.getGroups().get(i).getContacts().size();j++)
-				if(Session.getGroups().get(i).getContacts().get(j).getCid().equals(Integer.decode(packet.toString())))
+		for(group g : Session.getGroups())
+			for(contact ct : g.getContacts())
+				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					// TODO: delete the contact from vector and refresh list.
 					return;
@@ -198,7 +198,8 @@ public class events {
 		threading.StopSender();
 	}
 
-	public static void StoreAllDatas(Object packet) {
+	public static void StoreAllDatas(Object packet) 
+	{
 		if(!packet.getClass().equals((new ClientDatas()).getClass()))
 		{
 			Log.outError("Malformed Data Received");
@@ -209,9 +210,5 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
-		
-		
 	}
-	
-	
 }

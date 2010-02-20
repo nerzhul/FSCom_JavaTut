@@ -22,5 +22,4 @@ public class ChangeStatus_button implements ActionListener {
 		send_handler pck = new statussender_handler(st);
 		pck.Send();				
 	}
-
 }

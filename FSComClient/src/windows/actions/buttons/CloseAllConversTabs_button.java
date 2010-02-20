@@ -22,15 +22,21 @@ public class CloseAllConversTabs_button implements WindowListener {
 
 	public void windowClosing(WindowEvent arg0) 
 	{
-        int reponse = JOptionPane.showConfirmDialog(window,"Vous allez fermer toutes vos fenêtres de conversation, êtes vous sur ?","Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        if (reponse==0)
+		if(tab.getTabCount() == 1)
+		{
+			tab.removeTab(tab.getTabAt(0));
+			window.dispose();
+			return;
+		}
+		
+        if (JOptionPane.showConfirmDialog(window,"Vous allez fermer toutes " +
+        		"vos fenêtres de conversation, êtes vous sur ?","Confirmation",
+        		JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE) == 0)
         {
-        	int nbonglet = tab.getTabCount();
-        	while(nbonglet>0){
+        	while(tab.getTabCount()>0)
         		tab.removeTab((tab.getTabAt(0)));
-        		nbonglet = tab.getTabCount();
-        	}
-                window.dispose();
+            
+        	window.dispose();
         }	
 	}
 
