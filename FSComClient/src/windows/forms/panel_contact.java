@@ -194,7 +194,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	public void dragDropEnd(DragSourceDropEvent e) {
 		if (e.getDropSuccess()) {
 			if (dropContact == null)
-		        Log.outError("Deplacement impossible car en dehors de l'arbre !");
+		        return;
 		    else
 		    {
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
