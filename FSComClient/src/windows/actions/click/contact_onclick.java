@@ -41,7 +41,11 @@ public class contact_onclick implements MouseListener {
         arbre.setSelectionPath(index);
         DefaultMutableTreeNode noeud = (DefaultMutableTreeNode) arbre.getLastSelectedPathComponent();
         
-		if (e.getButton() == 3 && noeud.getLevel() == 2)
+        if(noeud == null)
+        {
+        	// TODO : basic actions (add group, add contact...)
+        }
+        else if (e.getButton() == 3 && noeud != null && noeud.getLevel() == 2)
 		{
 			JPopupMenu menu = new JPopupMenu();
 		      
@@ -59,14 +63,13 @@ public class contact_onclick implements MouseListener {
 			menu.add(details);
 			
 	        menu.show (e.getComponent(),e.getX(),e.getY());
-
-	        //System.out.println("clique droit sur " + noeud);
 		}
 		else if(e.getButton() == 3)
 		{
 			//renommer grp
 			//supprimer grp
 			//le tout dans un beau PopUp Menu
+			// TODO: actions on group
 			System.out.println("click droit sur grp");
 		}
 	}
