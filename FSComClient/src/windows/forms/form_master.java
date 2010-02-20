@@ -35,7 +35,7 @@ public class form_master extends JFrame
 		fram.setSize(300,600); 
 		fram.setLocationRelativeTo(null);
 		fram.setResizable(false);
-		fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pan_connect = pan_contact = null;
 	}
 	
@@ -46,41 +46,25 @@ public class form_master extends JFrame
 			case 1:
 				Menubar_Connect();
 				if(pan_contact != null)
-					pan_contact.setVisible(false);
+					fram.remove(pan_contact);
 				
-				if(pan_connect == null)
-				{
-					pan_connect = new panel_connect(this);
-					fram.add(pan_connect);
-				}
-				else
-					pan_connect.setVisible(true);
-				
-				
+				pan_connect = new panel_connect(this);
+				fram.add(pan_connect);
 				fram.setVisible(true);
 				break;
 			case 2:	
 				Menubar_contact();
 				if(pan_connect != null)
-					pan_connect.setVisible(false);
-				
-				if(pan_contact == null)
-				{
-					pan_contact = new panel_contact();
-					fram.add(pan_contact);
-				}
-				else
-					pan_contact.setVisible(true);
-				
+					fram.remove(pan_connect);
+
+				pan_contact = new panel_contact();
+				fram.add(pan_contact);
 				fram.setVisible(true);
 				break;
 		}
 		
 	}
 
-	public JFrame getFrame(){
-		return this.fram;
-	}
 	
 	private void Menubar_Connect() 
 	{

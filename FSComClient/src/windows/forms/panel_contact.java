@@ -3,6 +3,23 @@ package windows.forms;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -13,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import session.Session;
@@ -20,7 +38,7 @@ import session.group;
 import windows.actions.buttons.changestatus_button;
 import windows.actions.click.contact_onclick;
 
-public class panel_contact extends JPanel{
+public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel Titre;
@@ -29,6 +47,11 @@ public class panel_contact extends JPanel{
 	private JComboBox changstatus;
 	private form_communicate comm;
 
+	private DragSource dragSource = null;
+	private DefaultMutableTreeNode selecContact = null;
+	private DefaultMutableTreeNode dropContact = null;
+
+	
 	private int status2;
 	private JTextField msgperso;
 
@@ -109,6 +132,10 @@ public class panel_contact extends JPanel{
 		myTree.setCellRenderer(myRenderer);
 		*/
 
+		new DropTarget(tree, this);
+	    dragSource = new DragSource();
+	    dragSource.createDefaultDragGestureRecognizer(tree, DnDConstants.ACTION_MOVE, this);
+	 
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
@@ -124,5 +151,82 @@ public class panel_contact extends JPanel{
 	public void ChPseudo(String n_pseudo)
 	{
 		Titre.setText("Pseudo : " + n_pseudo);
+	}
+
+	public void dragEnter(DropTargetDragEvent e) {
+		e.acceptDrag(DnDConstants.ACTION_MOVE);
+	}
+
+	public void dragGestureRecognized(DragGestureEvent e) {
+		selecContact = null;
+	    dropContact = null;
+	 
+	    Object selected = tree.getSelectionPath();
+	 
+	    if (selected != null) {
+	      TreePath treepath = (TreePath) selected;
+	      selecContact = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+	      dragSource.startDrag(e, DragSource.DefaultMoveDrop, new StringSelection(selected.toString()), this);
+	    }
+	}
+
+	public void drop(DropTargetDropEvent e) {
+		 Transferable transferable = e.getTransferable();
+		 
+		 if (transferable.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+		     e.acceptDrop(DnDConstants.ACTION_MOVE);
+		     Point dropPoint = e.getLocation();
+		     TreePath dropPath = tree.getClosestPathForLocation(dropPoint.x,dropPoint.y);
+		     dropContact = (DefaultMutableTreeNode) dropPath.getLastPathComponent();
+		     e.getDropTargetContext().dropComplete(true);
+		 }
+		 else {
+		    e.rejectDrop();
+		}
+	}
+	
+	public void dragDropEnd(DragSourceDropEvent e) {
+		if (e.getDropSuccess()) {
+			if (dropContact == null)
+		        System.out.println("Deplacement impossible car en dehors de l'arbre !");
+		    else
+		    if (selecContact.getLevel()==1)
+		       System.out.println("Deplacement impossible car le noeud source est un groupe !");
+		    else
+		    if(dropContact.getLevel()==2){
+			       System.out.println("Deplacement impossible car le groupe de destination est un contact !");   
+		    }else{
+		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
+			  //changement du groupe --> envoi au serveur
+			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
+		    }
+		}
+	}
+	
+	public void dragExit(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	public void dragOver(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+	public void dropActionChanged(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+	
+	public void dragEnter(DragSourceDragEvent dsde) {
+		// TODO Auto-generated method stub
+	}
+
+	public void dragExit(DragSourceEvent dse) {
+		// TODO Auto-generated method stub
+	}
+
+	public void dragOver(DragSourceDragEvent dsde) {
+		// TODO Auto-generated method stub
+	}
+
+	public void dropActionChanged(DragSourceDragEvent dsde) {
+		// TODO Auto-generated method stub
 	}
 }

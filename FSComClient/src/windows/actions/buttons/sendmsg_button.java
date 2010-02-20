@@ -29,8 +29,9 @@ public class sendmsg_button implements ActionListener {
 	
 	public void SendMsg()
 	{
-		this.text = textarea.getText();
-		textarea.setText("");
+		text = textarea.getText();
+		text = text.trim();
+		textarea.setText("\n");
 		box.setText(box.getText()+"J'ai écrit : " + text + "\n");
 		send_handler pck = new SendMsgTo_handler(text,contact);
 		pck.Send();
