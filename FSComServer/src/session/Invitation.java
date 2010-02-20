@@ -2,7 +2,7 @@ package session;
 
 import java.net.Socket;
 
-import socket.packet.handlers.senders.invitation_handler;
+import socket.packet.handlers.senders.Invitation_handler;
 
 import database.DatabaseTransactions;
 
@@ -24,7 +24,7 @@ public class Invitation {
 	
 	public void Send(Socket sock) 
 	{
-		invitation_handler invit = new invitation_handler(uid);
+		Invitation_handler invit = new Invitation_handler(uid);
 		invit.Send(sock);
 	}
 

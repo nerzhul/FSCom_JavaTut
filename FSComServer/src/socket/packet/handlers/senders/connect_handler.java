@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import database.DatabaseTransactions;
 import session.onconnect_answer;
 import session.session;
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class connect_handler extends send_handler {
+public class Connect_handler extends Send_handler {
 
-	public connect_handler(Object args, session sess) throws SQLException
+	public Connect_handler(Object args, session sess) throws SQLException
 	{
 		opcode = 0x08;
 		m_sess = sess;

@@ -1,10 +1,10 @@
 package socket.packet.handlers.sends;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class connect_handler extends send_handler {
+public class Connect_handler extends Send_handler {
 
-	public connect_handler(String args)
+	public Connect_handler(String args)
 	{
 		opcode = 0x04;
 		data = Reparse(args);

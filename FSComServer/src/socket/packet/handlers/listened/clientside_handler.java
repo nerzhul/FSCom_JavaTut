@@ -2,13 +2,13 @@ package socket.packet.handlers.listened;
 
 import java.io.IOException;
 
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 
 import misc.Log;
 
-public class clientside_handler extends listen_handler{
+public class ClientSide_handler extends Listen_handler{
 
-	public clientside_handler(Integer error) throws IOException
+	public ClientSide_handler(Integer error) throws IOException
 	{
 		opcode = error;
 		PrintError();

@@ -1,10 +1,10 @@
 package socket.packet.handlers.sends;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class ping_handler extends send_handler {
+public class Ping_handler extends Send_handler {
 
-	public ping_handler()
+	public Ping_handler()
 	{
 		opcode = 0x00;
 		data = "0";

@@ -4,34 +4,34 @@ import java.net.*;
 import java.io.*;
 
 import session.events;
-import socket.packet.packet;
+import socket.packet.Packet;
 import thread.threading;
 import windows.windowthread;
 
 import misc.Log;
 import misc.MasterCommandLine;
 
-public class sender extends Thread
+public class Sender extends Thread
 {
 	private final static int port = 5677;
 	private static boolean connected = false;
 	private static Socket socket;
-	private static listener listn;
+	private static Listener listn;
 	private static ObjectOutputStream out;
 	
-	public sender()
+	public Sender()
 	{
 		Connect();
 	}
 	
 	public static void Connect()
 	{
-		Integer mir = serverlist.getBestMirror();
+		Integer mir = ServerList.getBestMirror();
 		if(mir != -1)
 		{
 			try 
 			{
-				socket = new Socket(serverlist.GetMirror(mir),port);
+				socket = new Socket(ServerList.GetMirror(mir),port);
 				out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 				connected = true;
 			}
@@ -62,7 +62,7 @@ public class sender extends Thread
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line;
 		    
-		    listn = new listener(socket);
+		    listn = new Listener(socket);
 		    listn.start();
 		    
 		    MasterCommandLine.DoCommand("ping");
@@ -96,7 +96,7 @@ public class sender extends Thread
 		try 
 		{
 			// send packet
-			packet pck = new packet(opcode,packt);
+			Packet pck = new Packet(opcode,packt);
 			out.writeObject(pck);
 			out.flush();
 	    	Log.outTimed("Send packet (opcode :" + pck.getOpcode() + ") to server ");
@@ -105,7 +105,7 @@ public class sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
-			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + serverlist.getCurrentMirror()+ ")",true);
+			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
 			Connect();
 		}
 		catch (IOException e) 

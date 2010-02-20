@@ -1,12 +1,12 @@
 package thread;
 
 import session.Session;
-import socket.sender;
+import socket.Sender;
 import windows.windowthread;
 
 public class threading extends Thread
 {
-	private static sender thsend;
+	private static Sender thsend;
 	private Session m_sess;
 	private windowthread m_window;
 
@@ -21,7 +21,7 @@ public class threading extends Thread
 	public static void LaunchSender(boolean new_thr)
 	{
 		if(new_thr)
-			thsend = new sender();
+			thsend = new Sender();
 		thsend.start();
 	}
 
@@ -29,7 +29,7 @@ public class threading extends Thread
 	{
 		if(thsend != null)
 		{
-			sender.StopListener();
+			Sender.StopListener();
 			thsend.interrupt();
 		}
 	}

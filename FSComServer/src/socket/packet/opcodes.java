@@ -1,6 +1,6 @@
 package socket.packet;
 
-public enum opcodes {
+public enum Opcodes {
 
 	CMSG_REQUEST_PING(0x00),
 	SMSG_RESPONSE_PONG(0x01),
@@ -44,7 +44,7 @@ public enum opcodes {
 	
 	private final int value;
 	
-	private opcodes(int op)
+	private Opcodes(int op)
 	{
 		this.value = op;
 	}

@@ -1,13 +1,13 @@
 package socket.packet.handlers;
 
-import socket.sender;
+import socket.Sender;
 
-public abstract class send_handler extends abstract_handler {
+public abstract class Send_handler extends Abstract_handler {
 
 	void PrintError(){}
 	public void Send() 
 	{
-		sender.SendPacket(opcode,data);
+		Sender.SendPacket(opcode,data);
 	}
 	public boolean HasValidData() {
 		return true;

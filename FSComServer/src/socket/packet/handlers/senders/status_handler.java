@@ -1,11 +1,11 @@
 package socket.packet.handlers.senders;
 
 import session.session;
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class status_handler extends send_handler {
+public class Status_handler extends Send_handler {
 
-	public status_handler(session sess, Object packet)
+	public Status_handler(session sess, Object packet)
 	{
 		opcode = 0x0A;
 		data = new String("01000");

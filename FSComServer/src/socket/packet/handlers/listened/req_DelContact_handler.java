@@ -2,11 +2,11 @@ package socket.packet.handlers.listened;
 
 import misc.Log;
 import session.session;
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 
-public class req_DelContact_handler extends listen_handler {
+public class Req_DelContact_handler extends Listen_handler {
 
-	public req_DelContact_handler(session sess, Object packet) 
+	public Req_DelContact_handler(session sess, Object packet) 
 	{
 		String pck[] = packet.toString().split("@[]@");
 		if(pck.length == 2)

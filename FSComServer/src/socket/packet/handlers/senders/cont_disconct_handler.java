@@ -1,10 +1,10 @@
 package socket.packet.handlers.senders;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class cont_disconct_handler extends send_handler {
+public class Cont_Disconct_handler extends Send_handler {
 
-	public cont_disconct_handler(Integer uid)
+	public Cont_Disconct_handler(Integer uid)
 	{
 		opcode = 0x0D;
 		data = uid.toString();

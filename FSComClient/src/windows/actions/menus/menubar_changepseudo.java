@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import socket.packet.handlers.send_handler;
-import socket.packet.handlers.sends.changepseudo_handler;
+import socket.packet.handlers.Send_handler;
+import socket.packet.handlers.sends.ChangePseudo_handler;
 
 public class menubar_changepseudo extends menubar_main implements ActionListener {
 
@@ -23,7 +23,7 @@ public class menubar_changepseudo extends menubar_main implements ActionListener
 		{
 			if(newpseud.length()<20 && newpseud.length() > 1)
 			{
-				send_handler pck = new changepseudo_handler(newpseud);
+				Send_handler pck = new ChangePseudo_handler(newpseud);
 				if(pck != null)
 					pck.Send();
 			}

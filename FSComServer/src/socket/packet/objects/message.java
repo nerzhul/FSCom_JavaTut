@@ -2,7 +2,7 @@ package socket.packet.objects;
 
 import java.io.Serializable;
 
-public class message implements Serializable{
+public class Message implements Serializable{
 
 	/**
 	 * 
@@ -10,7 +10,7 @@ public class message implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String msg;
 	private Integer dest;
-	public message(String text, Integer destin)
+	public Message(String text, Integer destin)
 	{
 		this.setMsg(text);
 		this.setDest(destin);

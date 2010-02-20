@@ -1,12 +1,12 @@
 package socket.packet.handlers.sends;
 
 import session.defines.clientstatus;
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class statussender_handler extends send_handler {
+public class StatusSender_handler extends Send_handler {
 
 
-	public statussender_handler(Integer status)
+	public StatusSender_handler(Integer status)
 	{
 		opcode = 0x09;
 		data = status;

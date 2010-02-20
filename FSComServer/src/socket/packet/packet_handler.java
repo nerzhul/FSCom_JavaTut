@@ -5,30 +5,30 @@ import java.net.Socket;
 import java.sql.SQLException;
 
 import session.session;
-import socket.sender;
+import socket.Sender;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listened.*;
 import socket.packet.handlers.senders.AddContact_handler;
-import socket.packet.handlers.senders.blockcontact_handler;
-import socket.packet.handlers.senders.connect2_handler;
-import socket.packet.handlers.senders.connect_handler;
-import socket.packet.handlers.senders.invitation_answer_handler;
-import socket.packet.handlers.senders.pong_handler;
-import socket.packet.handlers.senders.status_handler;
+import socket.packet.handlers.senders.BlockContact_handler;
+import socket.packet.handlers.senders.Connect2_handler;
+import socket.packet.handlers.senders.Connect_handler;
+import socket.packet.handlers.senders.Invitation_Answer_handler;
+import socket.packet.handlers.senders.Pong_handler;
+import socket.packet.handlers.senders.Status_handler;
 
 
 import misc.Log;
 
-public class packet_handler 
+public class Packet_handler 
 {
 	final static int MAX_OPCODE = 0xFF;
 	Integer opcode_id;
 	Object data;
 	Socket mysock;
-	sender send;
+	Sender send;
 	private session m_sess;
 	
-	public packet_handler(packet stream,Socket sock,session sess)
+	public Packet_handler(Packet stream,Socket sock,session sess)
 	{
 		mysock = sock;
 		m_sess = sess;
@@ -61,19 +61,19 @@ public class packet_handler
 		}
 		else
 		{
-			abstract_handler pkthandle = null;
+			Abstract_handler pkthandle = null;
 			switch(opcode_id)
 			{
 				case 0x00:
-					pkthandle = new pong_handler();
-					((send_handler) pkthandle).Send(mysock);
+					pkthandle = new Pong_handler();
+					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x03:
-					pkthandle = new clipong_handler(mysock);
+					pkthandle = new CliPong_handler(mysock);
 					break;
 				case 0x04:
-					pkthandle = new connect_handler(data,m_sess);
-					((send_handler) pkthandle).Send(mysock);
+					pkthandle = new Connect_handler(data,m_sess);
+					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x05:
 					// disconnect
@@ -82,11 +82,11 @@ public class packet_handler
 					// request disconnect socket
 					break;
 				case 0x09:
-					pkthandle = new status_handler(m_sess,data);
+					pkthandle = new Status_handler(m_sess,data);
 					break;
 				case 0x11:
-					pkthandle = new blockcontact_handler(m_sess,data);
-					((send_handler) pkthandle).Send(mysock);
+					pkthandle = new BlockContact_handler(m_sess,data);
+					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x13:
 					pkthandle = new MsgToPlatform_handler(m_sess,data);
@@ -99,26 +99,26 @@ public class packet_handler
 					break;
 				case 0x1A:
 					pkthandle = new AddContact_handler(m_sess,data);
-					((send_handler) pkthandle).Send(mysock);
+					((Send_handler) pkthandle).Send(mysock);
 				case 0x1C:
-					pkthandle = new req_DelContact_handler(m_sess,data);
+					pkthandle = new Req_DelContact_handler(m_sess,data);
 					break;
 				case 0x1F:
-					pkthandle = new invitation_answer_handler(m_sess,data);
+					pkthandle = new Invitation_Answer_handler(m_sess,data);
 					break;
 				case 0x20:
-					pkthandle = new req_pseudo_handler(m_sess,data);
+					pkthandle = new Req_pseudo_handler(m_sess,data);
 					break;
 				case 0x21:
-					pkthandle = new connect2_handler(m_sess,data);
-					((send_handler) pkthandle).Send(mysock);
+					pkthandle = new Connect2_handler(m_sess,data);
+					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x24:
 					m_sess.EventContactGroupChange(data);
 					break;
 				case 0x0B:
 				case 0x0E:
-					new depreciated_handler(opcode_id);
+					new Depreciated_handler(opcode_id);
 					break;
 				case 0x01:
 				case 0x02:
@@ -139,10 +139,10 @@ public class packet_handler
 				case 0x1E:
 				case 0x22:
 				case 0x23:
-					pkthandle = new clientside_handler(this.opcode_id);
+					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:
-					pkthandle = new null_handler(this.opcode_id);
+					pkthandle = new Null_handler(this.opcode_id);
 					break;
 			}
 		}

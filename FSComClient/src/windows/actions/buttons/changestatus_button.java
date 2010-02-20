@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 
-import socket.packet.handlers.send_handler;
-import socket.packet.handlers.sends.statussender_handler;
+import socket.packet.handlers.Send_handler;
+import socket.packet.handlers.sends.StatusSender_handler;
 
 public class ChangeStatus_button implements ActionListener {
 
@@ -19,7 +19,7 @@ public class ChangeStatus_button implements ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		Integer st = newstatus.getSelectedIndex();
-		send_handler pck = new statussender_handler(st);
+		Send_handler pck = new StatusSender_handler(st);
 		pck.Send();				
 	}
 }

@@ -4,12 +4,12 @@ import java.net.Socket;
 
 import misc.Log;
 
-public final class serverlist {
+public final class ServerList {
 
 	private static String[] iplist;
 	private static Integer curr_mirror;
 	private static Integer MAX_MIRROR = 4;
-	public serverlist()
+	public ServerList()
 	{
 		curr_mirror = 0;
 		iplist = new String[MAX_MIRROR];

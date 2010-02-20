@@ -7,16 +7,16 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 import misc.Log;
-import socket.packet.packet;
-import socket.packet.packet_handler;
+import socket.packet.Packet;
+import socket.packet.Packet_handler;
 
-public class listener extends Thread
+public class Listener extends Thread
 {
 	
 	Socket sockt;
 	ObjectInputStream in;
 	
-	public listener(Socket sock) throws IOException
+	public Listener(Socket sock) throws IOException
 	{
 		this.sockt = sock;
 	}
@@ -40,7 +40,7 @@ public class listener extends Thread
 				{
 					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 				}
-				packet message = (packet) in.readObject();
+				Packet message = (Packet) in.readObject();
 				Log.outString("Packet received from server (opcode :" + message.getOpcode() + ")");
 				
 				if(message.getOpcode().equals(0x07))
@@ -63,10 +63,10 @@ public class listener extends Thread
 		}
 	}
 	
-	public void TreatPacket(packet packt) throws IOException
+	public void TreatPacket(Packet packt) throws IOException
 	{
 		// show the packet
-		packet_handler packopt = new packet_handler(packt,sockt);
+		Packet_handler packopt = new Packet_handler(packt,sockt);
 		packopt.Destroy();
 	}
 }

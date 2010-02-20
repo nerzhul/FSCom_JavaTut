@@ -3,10 +3,10 @@ package socket.packet.handlers;
 import java.io.IOException;
 import misc.Log;
 
-public class null_handler extends abstract_handler{
+public class Null_handler extends Abstract_handler{
 
 
-	public null_handler(Integer error) throws IOException
+	public Null_handler(Integer error) throws IOException
 	{
 		opcode = error;
 		PrintError();

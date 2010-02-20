@@ -1,11 +1,11 @@
 package socket.packet.handlers.listens;
 
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 import misc.Log;
 
-public class serverside_handler extends listen_handler {
+public class ServerSide_handler extends Listen_handler {
 
-	public serverside_handler(Integer error)
+	public ServerSide_handler(Integer error)
 	{
 		opcode = error;
 		PrintError();

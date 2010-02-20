@@ -5,23 +5,23 @@ import java.net.Socket;
 import session.Session;
 import session.events;
 import socket.packet.handlers.*;
-import socket.packet.handlers.listens.depreciated_handler;
-import socket.packet.handlers.listens.null_handler;
-import socket.packet.handlers.listens.pong_handler;
-import socket.packet.handlers.listens.serverside_handler;
-import socket.packet.handlers.listens.srvconnect_handler;
+import socket.packet.handlers.listens.Depreciated_handler;
+import socket.packet.handlers.listens.Null_handler;
+import socket.packet.handlers.listens.Pong_handler;
+import socket.packet.handlers.listens.ServerSide_handler;
+import socket.packet.handlers.listens.SrvConnect_handler;
 import socket.packet.handlers.sends.AskAllDatas_handler;
-import socket.packet.handlers.sends.srvpong_handler;
+import socket.packet.handlers.sends.SrvPong_handler;
 import misc.Log;
 
-public class packet_handler 
+public class Packet_handler 
 {
 	final static int MAX_OPCODE = 0xFF;
 	Integer opcode_id;
 	Object data;
 	Socket mysock;
 	
-	public packet_handler(packet stream,Socket sock)
+	public Packet_handler(Packet stream,Socket sock)
 	{
 		mysock = sock;
 		try
@@ -52,24 +52,24 @@ public class packet_handler
 		else
 		{
 			
-			abstract_handler pcktrecv = null;
+			Abstract_handler pcktrecv = null;
 			switch(opcode_id)
 			{
 				case 0x01:
-					pong_handler.PongReceived();
+					Pong_handler.PongReceived();
 					break;
 				case 0x02:
-					pcktrecv = new srvpong_handler();
-					((send_handler) pcktrecv).Send();
+					pcktrecv = new SrvPong_handler();
+					((Send_handler) pcktrecv).Send();
 					break;
 				case 0x07:
 					// server kill client socket
 					break;
 				case 0x08:
-					if((new srvconnect_handler(data.toString())).HasValidData())
+					if((new SrvConnect_handler(data.toString())).HasValidData())
 					{
 						pcktrecv = new AskAllDatas_handler(Session.getStatus());
-						((send_handler) pcktrecv).Send();
+						((Send_handler) pcktrecv).Send();
 					}
 					break;
 				case 0x0D:
@@ -112,7 +112,7 @@ public class packet_handler
 				case 0x0C:
 				case 0x0F:
 				case 0x0A:
-					new depreciated_handler(opcode_id);
+					new Depreciated_handler(opcode_id);
 					break;
 				case 0x00:
 				case 0x03:
@@ -130,10 +130,10 @@ public class packet_handler
 				case 0x1C:
 				case 0x1F:
 				case 0x21:
-					pcktrecv = new serverside_handler(this.opcode_id);
+					pcktrecv = new ServerSide_handler(this.opcode_id);
 					break;
 				default:
-					pcktrecv = new null_handler(this.opcode_id);
+					pcktrecv = new Null_handler(this.opcode_id);
 					break;
 			}
 			if(pcktrecv != null)

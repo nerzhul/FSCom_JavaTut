@@ -1,10 +1,10 @@
 package socket.packet.handlers.senders;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class pong_handler extends send_handler{
+public class Pong_handler extends Send_handler{
 
-	public pong_handler()
+	public Pong_handler()
 	{
 		opcode = 0x01;
 		data = "1";

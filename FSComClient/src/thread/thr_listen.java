@@ -3,12 +3,12 @@ package thread;
 import java.io.IOException;
 import java.net.Socket;
 
-import socket.listener;
+import socket.Listener;
 
 public class thr_listen extends Thread{
 
 	private static Socket socket;
-	private static listener listnr;
+	private static Listener listnr;
 	public thr_listen(Socket sock)
 	{
 		socket = sock;
@@ -18,7 +18,7 @@ public class thr_listen extends Thread{
 	{
 		try 
 		{
-			listnr = new listener(socket);
+			listnr = new Listener(socket);
 		} 
 		catch (IOException e) 
 		{
@@ -27,7 +27,7 @@ public class thr_listen extends Thread{
 		}
 	}
 	
-	public static listener GetListener()
+	public static Listener GetListener()
 	{
 		return listnr;
 	}

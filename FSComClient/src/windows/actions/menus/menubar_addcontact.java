@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import socket.packet.handlers.sends.AddContact_handler;
+
 public class menubar_addcontact implements ActionListener {
 
 	private JFrame fenetre;
@@ -17,8 +19,8 @@ public class menubar_addcontact implements ActionListener {
 				"Nouveau contact",JOptionPane.QUESTION_MESSAGE);
 		if (reponse != null && !reponse.equalsIgnoreCase(""))
 		{
-			// TODO: request to server
-			JOptionPane.showMessageDialog(fenetre,"Le contact "+reponse+" a bien été ajouté !" );
+			AddContact_handler pck = new AddContact_handler(reponse);
+			pck.Send();
 		}	
 
 	}

@@ -2,14 +2,14 @@ package socket.packet;
 
 import java.io.Serializable;
 
-public class packet implements Serializable
+public class Packet implements Serializable
 {
 
 	private static final long serialVersionUID = 1L;
 	private Integer opcode;
 	private Object data;
 	
-	public packet(Integer id, Object dat)
+	public Packet(Integer id, Object dat)
 	{
 		setOpcode(id);
 		setData(dat);

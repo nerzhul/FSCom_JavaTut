@@ -1,10 +1,10 @@
 package socket.packet.handlers.sends;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class srvpong_handler extends send_handler {
+public class SrvPong_handler extends Send_handler {
 
-	public srvpong_handler()
+	public SrvPong_handler()
 	{
 		opcode = 0x09;
 		data = "3";

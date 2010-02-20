@@ -5,16 +5,16 @@ import java.net.*;
 
 import session.SessionHandler;
 import session.session;
-import socket.packet.packet;
-import socket.packet.packet_handler;
+import socket.packet.Packet;
+import socket.packet.Packet_handler;
 
 import misc.Log;
 
-public class listener extends Thread
+public class Listener extends Thread
 {
 	private Socket sockt;
 	private session sess;
-	packet_handler packopt;
+	Packet_handler packopt;
 	ObjectInputStream in;
 	
 	public void run()
@@ -22,7 +22,7 @@ public class listener extends Thread
 		ListenAndDo();
 	}
 
-	public listener(Socket sock)
+	public Listener(Socket sock)
 	{
 		this.sockt = sock;
 	}
@@ -37,7 +37,7 @@ public class listener extends Thread
 
 			while(true)
 			{
-				packet message = (packet) in.readObject();
+				Packet message = (Packet) in.readObject();
 				
 				if(message.getOpcode().equals(6))
 					break;
@@ -63,9 +63,9 @@ public class listener extends Thread
 		}
 	}
 	
-	public void TreatPacket(packet packt)
+	public void TreatPacket(Packet packt)
 	{
-		packopt = new packet_handler(packt,sockt, sess);
+		packopt = new Packet_handler(packt,sockt, sess);
 		packopt.Destroy();
 	}
 	

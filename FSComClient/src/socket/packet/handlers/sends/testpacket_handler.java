@@ -1,10 +1,10 @@
 package socket.packet.handlers.sends;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class testpacket_handler extends send_handler{
+public class TestPacket_handler extends Send_handler{
 
-	public testpacket_handler(String args)
+	public TestPacket_handler(String args)
 	{
 		opcode = 0xFF;
 		data = args;

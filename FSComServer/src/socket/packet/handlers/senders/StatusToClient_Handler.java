@@ -1,8 +1,8 @@
 package socket.packet.handlers.senders;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class StatusToClient_Handler extends send_handler {
+public class StatusToClient_Handler extends Send_handler {
 
 	public StatusToClient_Handler(Integer uid, Integer status) {
 		opcode = 0x15;

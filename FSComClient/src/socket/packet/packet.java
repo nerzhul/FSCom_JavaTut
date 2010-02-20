@@ -2,7 +2,7 @@ package socket.packet;
 
 import java.io.Serializable;
 
-public class packet implements Serializable
+public class Packet implements Serializable
 {
 
 	/**
@@ -12,7 +12,7 @@ public class packet implements Serializable
 	private Integer opcode;
 	private Object data;
 	
-	public packet(Integer id, Object dat)
+	public Packet(Integer id, Object dat)
 	{
 		setOpcode(id);
 		setData(dat);

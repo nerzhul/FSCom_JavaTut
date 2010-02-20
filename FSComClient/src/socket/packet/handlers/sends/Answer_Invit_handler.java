@@ -1,8 +1,8 @@
 package socket.packet.handlers.sends;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class Answer_Invit_handler extends send_handler {
+public class Answer_Invit_handler extends Send_handler {
 
 	public Answer_Invit_handler(Integer uid, Integer dat)
 	{

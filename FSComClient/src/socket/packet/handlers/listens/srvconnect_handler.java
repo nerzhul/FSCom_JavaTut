@@ -1,12 +1,12 @@
 package socket.packet.handlers.listens;
 
 import session.events;
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 import thread.threading;
 
-public class srvconnect_handler extends listen_handler {
+public class SrvConnect_handler extends Listen_handler {
 
-	public srvconnect_handler(String args)
+	public SrvConnect_handler(String args)
 	{
 		data = args;
 	}

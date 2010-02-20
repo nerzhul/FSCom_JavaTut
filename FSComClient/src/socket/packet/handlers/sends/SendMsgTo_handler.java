@@ -1,14 +1,14 @@
 package socket.packet.handlers.sends;
 
 import session.contact;
-import socket.packet.handlers.send_handler;
-import socket.packet.objects.message;
+import socket.packet.handlers.Send_handler;
+import socket.packet.objects.Message;
 
-public class SendMsgTo_handler extends send_handler {
+public class SendMsgTo_handler extends Send_handler {
 
 	public SendMsgTo_handler(String text, contact contact)
 	{
 		opcode = 0x13;
-		data = new message(text,contact.getCid());
+		data = new Message(text,contact.getCid());
 	}
 }

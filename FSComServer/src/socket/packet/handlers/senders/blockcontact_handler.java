@@ -2,11 +2,11 @@ package socket.packet.handlers.senders;
 
 import misc.Log;
 import session.session;
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 
-public class blockcontact_handler extends send_handler {
+public class BlockContact_handler extends Send_handler {
 
-	public blockcontact_handler(session sess, Object packet) {
+	public BlockContact_handler(session sess, Object packet) {
 		opcode = 0x12;
 		data = packet.toString();
 		m_sess = sess;

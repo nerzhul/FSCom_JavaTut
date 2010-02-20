@@ -1,15 +1,15 @@
 package misc.CommandLine.Commands;
 
-import socket.packet.handlers.abstract_handler;
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Abstract_handler;
+import socket.packet.handlers.Send_handler;
 
 public class cmd_abstract {
 
-	abstract_handler handler;
+	Abstract_handler handler;
 	
 	public void Send()
 	{
-		((send_handler) handler).Send();
+		((Send_handler) handler).Send();
 	}
 	
 	public boolean HasValidData()

@@ -3,18 +3,18 @@ package socket;
 import java.net.*;
 import java.io.*;
 
-import socket.packet.packet;
+import socket.packet.Packet;
 
 import misc.Log;
 
-public class sender
+public class Sender
 {
 	private Socket socket;
-	private packet pck;
-	public sender(Socket sock,Integer op,Object packet)
+	private Packet pck;
+	public Sender(Socket sock,Integer op,Object packet)
 	{
 		socket = sock;
-		pck = new packet(op,packet);
+		pck = new Packet(op,packet);
 	}
 
 	public void CloseConnection()

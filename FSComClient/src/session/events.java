@@ -4,11 +4,11 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
-import socket.sender;
+import socket.Sender;
 import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
-import socket.packet.objects.message;
+import socket.packet.objects.Message;
 import thread.threading;
 import windows.windowthread;
 import misc.Log;
@@ -72,12 +72,12 @@ public class events {
 	}
 
 	public static void RecvMsg(Object packet) {
-		if(!packet.getClass().equals((new message(null,null)).getClass()))
+		if(!packet.getClass().equals((new Message(null,null)).getClass()))
 		{
 			Log.outError("Malformed Msg to Transmit");
 			return;
 		}
-		message msg = (message) packet;
+		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
 		Log.outError(_uid + msg.getMsg());
 		// TODO : handle with windows
@@ -148,8 +148,16 @@ public class events {
 
 	public static void ContactAdded(Object packet) 
 	{
-		// TODO Auto-generated method stub
+		contact ct = (contact)packet;
+		if(ct == null)
+			return;
 		
+		for(group g: Session.getGroups())
+			if(g.getGid().equals(0))
+			{
+				g.AddContact(ct);
+				return;
+			}
 	}
 
 	public static void ContactDeleted(Object packet) 
@@ -194,7 +202,7 @@ public class events {
 
 	public static void DisconnectCurrentClient() 
 	{
-		sender.StopSocket();
+		Sender.StopSocket();
 		threading.StopSender();
 	}
 

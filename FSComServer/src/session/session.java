@@ -10,10 +10,10 @@ import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
-import socket.packet.handlers.senders.cont_connected_handler;
-import socket.packet.handlers.senders.cont_disconct_handler;
+import socket.packet.handlers.senders.Cont_Connected_handler;
+import socket.packet.handlers.senders.Cont_Disconct_handler;
 import socket.packet.objects.IdAndData;
-import socket.packet.objects.message;
+import socket.packet.objects.Message;
 
 import database.DatabaseFunctions;
 import database.DatabaseTransactions;
@@ -72,7 +72,7 @@ public class session {
 		
 		if(!block)
 			sess_linked.add(sess);
-		cont_connected_handler pck = new cont_connected_handler(sess.getName(),
+		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
 				sess.getStatus().toString(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
 			pck.Send(sock);
@@ -101,7 +101,7 @@ public class session {
 		if(sess == null)
 			return;
 		
-		cont_disconct_handler pck = new cont_disconct_handler(sess.getUid());
+		Cont_Disconct_handler pck = new Cont_Disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
 		
@@ -194,13 +194,13 @@ public class session {
 	}
 	
 	public void TransmitMsgTo(Object packet) {
-		if(!packet.getClass().equals((new message(null,null)).getClass()))
+		if(!packet.getClass().equals((new Message(null,null)).getClass()))
 		{
 			Log.outError("Malformed Msg to Transmit");
 			return;
 		}
 		
-		message msg = (message) packet;
+		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
 		if(SessionHandler.getContactByUID(_uid) != null)
 			if(!SessionHandler.getContactByUID(_uid).has_blocked(uid))
@@ -238,47 +238,38 @@ public class session {
 		broadcast_SomethingChanged(3);
 	}
 	
-	public String AddContact(Object packet) 
+	public contact AddContact(Object packet) 
 	{
-		String pck[] = packet.toString().split("||[]||");
-		if(pck.length != 2)
-			return "5";
-		
-		String username = pck[0].toString();
-		Integer group = Integer.decode(pck[1]);
-		String result = "1";
+		String username = packet.toString();
 		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'") &&
 				!username.equals(DatabaseFunctions.getAccountNameByUID(uid)))
 		{
 			Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
 			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
 			{
-				if(DatabaseTransactions.DataExist("acc_group", "gid", "uid = '" + uid + "' AND" +
-						" gid = '" + group + "'"))
+				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
+						_uid + "','0','','0'");
+				
+				if(SessionHandler.isConnected(_uid))
 				{
-					
-					DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
-							_uid + "','0','','" + group + "'");
-					
-					if(SessionHandler.isConnected(_uid))
-					{
-						Invitation invit = new Invitation(uid, _uid, true);
-						invit.Send(SessionHandler.getContactByUID(_uid).getSocket());
-					}
-					else
-						new Invitation(uid,_uid,false);
-					
-					result = (0 + "[)[)" + _uid);
+					Invitation invit = new Invitation(uid, _uid, true);
+					invit.Send(SessionHandler.getContactByUID(_uid).getSocket());
 				}
 				else
-					result = (4 + "[)[)" + _uid);
-
+					new Invitation(uid,_uid,false);
+				
+				return new contact(_uid, 0, DatabaseTransactions.StringQuery(
+						"account", "pseudo", "uid = '" + _uid + "'"), 
+						DatabaseTransactions.StringQuery(
+								"account", "phr_perso", "uid = '" + _uid + "'"),
+						DatabaseTransactions.StringQuery("acc_contact", "comment",
+						"contact = '" + _uid + "'"), 0, 0);
 			}
 			else
-				result = (2 + "[)[)" + _uid);
+				return null;
 		}
-		
-		return result;
+		else
+			return null;
 	}
 
 	public void ManageInvitation(Integer _uid, Integer method) 

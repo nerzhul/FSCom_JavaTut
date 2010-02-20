@@ -2,11 +2,11 @@ package socket.packet.handlers.senders;
 
 import misc.Log;
 import session.session;
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 
-public class invitation_answer_handler extends listen_handler {
+public class Invitation_Answer_handler extends Listen_handler {
 
-	public invitation_answer_handler(session sess, Object packet) 
+	public Invitation_Answer_handler(session sess, Object packet) 
 	{
 		String pck[] = packet.toString().split("//////.//////");
 		if(pck.length != 2)

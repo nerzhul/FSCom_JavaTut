@@ -1,17 +1,17 @@
 package socket.packet.handlers.senders;
 
 import session.session;
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 import socket.packet.objects.ClientDatas;
 
-public class connect2_handler extends send_handler{
+public class Connect2_handler extends Send_handler{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public connect2_handler(session sess, Object dat)
+	public Connect2_handler(session sess, Object dat)
 	{
 		opcode = 0x22;
 		sess.connect_client();

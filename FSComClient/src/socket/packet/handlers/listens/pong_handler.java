@@ -1,9 +1,9 @@
 package socket.packet.handlers.listens;
 
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 import misc.Log;
 
-public class pong_handler extends listen_handler {
+public class Pong_handler extends Listen_handler {
 	
 	public static void PongReceived()
 	{

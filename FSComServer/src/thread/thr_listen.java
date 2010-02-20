@@ -1,6 +1,6 @@
 package thread;
 
-import socket.listener;
+import socket.Listener;
 import java.net.*;
 import misc.Log;
 
@@ -22,7 +22,7 @@ public class thr_listen extends Thread
 			while (true) 
 			{
 		        Socket socketClient = MasterListener.accept();
-		        listener listen_t = new listener(socketClient);
+		        Listener listen_t = new Listener(socketClient);
 		        listen_t.start();
 		        Log.outString("Master listener thread started succesfully");
 		     }

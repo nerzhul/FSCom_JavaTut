@@ -1,11 +1,11 @@
 package socket.packet.handlers.listened;
 
 import misc.Log;
-import socket.packet.handlers.listen_handler;
+import socket.packet.handlers.Listen_handler;
 
-public class depreciated_handler extends listen_handler {
+public class Depreciated_handler extends Listen_handler {
 
-	public depreciated_handler(Integer error)
+	public Depreciated_handler(Integer error)
 	{
 		opcode = error;
 		PrintError();

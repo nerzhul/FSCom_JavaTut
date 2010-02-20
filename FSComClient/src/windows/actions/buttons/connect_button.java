@@ -9,8 +9,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import session.Session;
-import socket.packet.handlers.send_handler;
-import socket.packet.handlers.sends.connect_handler;
+import socket.packet.handlers.Send_handler;
+import socket.packet.handlers.sends.Connect_handler;
 import java.io.*;
 import thread.threading;
 
@@ -38,7 +38,7 @@ public class Connect_button implements ActionListener {
 		// Launcher socket with server
 		threading.LaunchSender(true);
 		
-		send_handler pck = new connect_handler(username.getText() + " " + new String(passwd.getPassword()));
+		Send_handler pck = new Connect_handler(username.getText() + " " + new String(passwd.getPassword()));
 		if(pck != null)
 			pck.Send();	
 	}

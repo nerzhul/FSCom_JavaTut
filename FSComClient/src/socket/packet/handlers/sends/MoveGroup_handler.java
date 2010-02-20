@@ -1,9 +1,9 @@
 package socket.packet.handlers.sends;
 
-import socket.packet.handlers.send_handler;
+import socket.packet.handlers.Send_handler;
 import socket.packet.objects.IdAndData;
 
-public class MoveGroup_handler extends send_handler {
+public class MoveGroup_handler extends Send_handler {
 
 	public MoveGroup_handler(Integer uid, Integer gid)
 	{
