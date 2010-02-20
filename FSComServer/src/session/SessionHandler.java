@@ -49,12 +49,20 @@ public class SessionHandler {
 
 	public static void DestroySession(session sess, Thread thr) 
 	{
-		for(session s : v_sess)
+		if(!v_sess.isEmpty())
 		{
-			if(s.equals(sess))
-				v_sess.remove(s);
-			else if(s.know_contact(sess.getUid()))
-				s.contact_disconnected(sess,false);
+			for(int i=0;i<v_sess.size();i++)
+			//for(session s : v_sess)
+			{
+				session s = v_sess.get(i);
+				if(s.equals(sess))
+					v_sess.remove(sess);
+				else
+				{
+					if(s.know_contact(sess.getUid()))
+						s.contact_disconnected(sess,false);
+				}
+			}
 		}
 		thr.interrupt();
 	}
