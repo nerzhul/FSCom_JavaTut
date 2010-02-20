@@ -86,6 +86,16 @@ public class session {
 		else
 			return false;
 	}
+	
+	public boolean has_group(Integer _gid)
+	{
+		if(DatabaseTransactions.DataExist("acc_group", "uid", "gid = '" + _gid + "'" +
+				" AND uid = '" + uid + "'"))
+			return true;
+		else
+			return false;
+	}
+	
 	public void contact_disconnected(session sess, boolean blocked)
 	{
 		if(sess == null)
@@ -319,6 +329,16 @@ public class session {
 	public void EventContactGroupChange(Object data) 
 	{
 		IdAndData dat = (IdAndData) data;
+		if(dat.getUid() > 0)
+			if(know_contact(dat.getUid()))
+			{
+				Integer tmpgid = Integer.decode(dat.getDat());
+				if(tmpgid >= 0)
+					if(has_group(tmpgid) || tmpgid.equals(0))
+						DatabaseTransactions.ExecuteUQuery("acc_contact", "group",
+								tmpgid.toString(), " contact = '" + dat.getUid() + "'");
+					
+			}
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }

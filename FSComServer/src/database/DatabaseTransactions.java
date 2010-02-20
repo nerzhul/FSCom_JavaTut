@@ -74,6 +74,22 @@ public class DatabaseTransactions {
 		}
 	}
 	
+	public static void ExecuteUQuery(String tb, String chp, String val, String cond)
+	{
+		String query = "UPDATE `" + tb + "` SET `" + chp + "` = '" + val + "'";
+		if(!cond.equals(""))
+			query += " WHERE " + cond;
+		try 
+		{
+			Statement stmt = connect.createStatement();
+			stmt.executeUpdate(query);
+		} 
+		catch (SQLException e) 
+		{
+		      Log.outError("Query : " + query + " failed. Maybe one resource doesn't exist");
+		}
+	}
+	
 	public static Integer IntegerQuery(String table,String col, String cond)
 	{
 		Integer res = 0;
