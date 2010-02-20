@@ -8,11 +8,11 @@ import javax.swing.JOptionPane;
 
 import net.infonode.tabbedpanel.TabbedPanel;
 
-public class CloseAllConversTabs implements WindowListener {
+public class CloseAllConversTabs_button implements WindowListener {
 	
 	private JFrame window;
 	private TabbedPanel tab;
-	public CloseAllConversTabs(JFrame frame, TabbedPanel tabPan) {
+	public CloseAllConversTabs_button(JFrame frame, TabbedPanel tabPan) {
 		window=frame;
 		tab=tabPan;
 	}

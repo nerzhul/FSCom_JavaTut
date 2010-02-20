@@ -37,7 +37,7 @@ import session.Session;
 import session.contact;
 import session.group;
 import socket.packet.handlers.sends.MoveGroup_handler;
-import windows.actions.buttons.changestatus_button;
+import windows.actions.buttons.ChangeStatus_button;
 import windows.actions.click.contact_onclick;
 
 public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
@@ -78,7 +78,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		changstatus.addItem("AFK");
 		changstatus.addItem("Offline");
 		changstatus.setSelectedIndex(status2);
-		changstatus.addActionListener(new changestatus_button(changstatus));
+		changstatus.addActionListener(new ChangeStatus_button(changstatus));
 		msgperso = new JTextField(20);
 		msgperso.setText(Session.getPerso_msg());
 		

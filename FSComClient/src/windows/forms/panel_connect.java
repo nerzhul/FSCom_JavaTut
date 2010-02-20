@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import windows.actions.buttons.connect_button;
+import windows.actions.buttons.Connect_button;
 
 public class panel_connect extends JPanel {
 
@@ -96,7 +96,7 @@ public class panel_connect extends JPanel {
 		if(autouser!="" && autopass !="")
 			save.setSelected(true);
 		connect=new JButton("Connexion");
-		connect.addActionListener(new connect_button(status,mail,password,save));
+		connect.addActionListener(new Connect_button(status,mail,password,save));
 
 
 		add(Titre);

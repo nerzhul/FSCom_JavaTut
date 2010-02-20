@@ -7,7 +7,7 @@ import javax.swing.JTextArea;
 
 import session.contact;
 
-import windows.actions.buttons.sendmsg_button;
+import windows.actions.buttons.SendMsg_button;
  
 public class follow_keyboard implements KeyListener {
  
@@ -29,7 +29,7 @@ public class follow_keyboard implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
-			sendmsg_button smb = new sendmsg_button(contact,text,box);
+			SendMsg_button smb = new SendMsg_button(contact,text,box);
 			smb.SendMsg();
 		}
 	}

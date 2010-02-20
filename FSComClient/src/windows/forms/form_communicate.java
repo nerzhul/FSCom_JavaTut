@@ -8,8 +8,8 @@ import net.infonode.tabbedpanel.Tab;
 import net.infonode.tabbedpanel.TabbedPanel;
 import net.infonode.tabbedpanel.titledtab.TitledTab;
 import session.contact;
-import windows.actions.buttons.CloseAllConversTabs;
-import windows.actions.buttons.CloseButton;
+import windows.actions.buttons.CloseAllConversTabs_button;
+import windows.actions.buttons.CloseButton_button;
 
 public class form_communicate extends JFrame{
 
@@ -28,7 +28,7 @@ public class form_communicate extends JFrame{
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
-	    frame.addWindowListener(new CloseAllConversTabs(frame,TabPan));
+	    frame.addWindowListener(new CloseAllConversTabs_button(frame,TabPan));
 
 	}
 	
@@ -47,7 +47,7 @@ public class form_communicate extends JFrame{
     	
 		if(!UserFound){
 			TitledTab tab = new TitledTab(noeud.getPseudo(), null, new onglet_communicate(noeud), null );
-			tab.setTitleComponent( new CloseButton(tab,frame ) );
+			tab.setTitleComponent( new CloseButton_button(tab,frame ) );
 			
 			TabPan.addTab(tab) ;
 			TabPan.setSelectedTab(tab);

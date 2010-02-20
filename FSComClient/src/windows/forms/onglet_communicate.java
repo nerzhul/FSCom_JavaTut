@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
 import session.contact;
 
-import windows.actions.buttons.sendmsg_button;
+import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
 
 public class onglet_communicate extends JPanel{
@@ -39,7 +39,7 @@ public class onglet_communicate extends JPanel{
 	    txt.addKeyListener(new follow_keyboard(ct,txt,MainText));
 	    txt.setLineWrap(true); 
 	    JButton envoi = new JButton("Envoyer !");
-	    envoi.addActionListener(new sendmsg_button(ct,txt,MainText));
+	    envoi.addActionListener(new SendMsg_button(ct,txt,MainText));
 
 	    add(MainText);
 	    JScrollPane MainScroll = new JScrollPane(MainText);

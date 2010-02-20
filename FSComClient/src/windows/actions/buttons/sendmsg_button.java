@@ -9,13 +9,13 @@ import session.contact;
 import socket.packet.handlers.send_handler;
 import socket.packet.handlers.sends.SendMsgTo_handler;
 
-public class sendmsg_button implements ActionListener {
+public class SendMsg_button implements ActionListener {
 
 	private contact contact;
 	private JTextArea textarea;
 	private JTextArea box;
 	private String text;
-	public sendmsg_button(contact ct, JTextArea textaenvoyer, JTextArea boxprincipal) {
+	public SendMsg_button(contact ct, JTextArea textaenvoyer, JTextArea boxprincipal) {
 		this.contact=ct;
 		this.textarea=textaenvoyer;
 		this.box=boxprincipal;

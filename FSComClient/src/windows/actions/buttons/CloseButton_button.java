@@ -10,12 +10,12 @@ import javax.swing.JLabel;
 
 import net.infonode.tabbedpanel.titledtab.TitledTab;
 
-	public class CloseButton extends JLabel
+	public class CloseButton_button extends JLabel
 	{
 		
 		private static final long serialVersionUID = 184842104821L;
 		
-		public CloseButton(final TitledTab tab, JFrame frame)
+		public CloseButton_button(final TitledTab tab, JFrame frame)
 		{
 			super(new ImageIcon("./close.png" ));
 			final JFrame convers = frame;

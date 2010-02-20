@@ -8,10 +8,10 @@ import javax.swing.JComboBox;
 import socket.packet.handlers.send_handler;
 import socket.packet.handlers.sends.statussender_handler;
 
-public class changestatus_button implements ActionListener {
+public class ChangeStatus_button implements ActionListener {
 
 	private JComboBox newstatus;
-	public changestatus_button(JComboBox changstatus) {
+	public ChangeStatus_button(JComboBox changstatus) {
 		this.newstatus = changstatus;
 	}
 

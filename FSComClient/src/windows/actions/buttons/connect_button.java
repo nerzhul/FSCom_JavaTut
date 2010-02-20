@@ -14,12 +14,12 @@ import socket.packet.handlers.sends.connect_handler;
 import java.io.*;
 import thread.threading;
 
-public class connect_button implements ActionListener {
+public class Connect_button implements ActionListener {
 	private JComboBox status;
 	private JTextField username;
 	private JPasswordField passwd;
 	private JCheckBox need_save;
-	public connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) 
+	public Connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) 
 	{
 		this.status=statusco;
 		this.username=mail;
