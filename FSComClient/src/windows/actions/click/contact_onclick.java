@@ -26,7 +26,7 @@ public class contact_onclick implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		DefaultMutableTreeNode noeud = (DefaultMutableTreeNode) arbre.getLastSelectedPathComponent();
 	
-		if(e.getClickCount() == 2 && noeud.getLevel() == 2){
+		if(e.getClickCount() == 2 && noeud != null && noeud.getLevel() == 2){
 			if(pn.getComm() == null)
 				pn.setComm(new form_communicate());
 			
