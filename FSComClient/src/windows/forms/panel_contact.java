@@ -161,7 +161,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		selecContact = null;
 	    dropContact = null;
-	 
 	    Object selected = tree.getSelectionPath();
 	 
 	    if (selected != null) 
@@ -183,6 +182,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		     Point dropPoint = e.getLocation();
 		     TreePath dropPath = tree.getClosestPathForLocation(dropPoint.x,dropPoint.y);
 		     dropContact = (DefaultMutableTreeNode) dropPath.getLastPathComponent();
+		     if(dropContact.getLevel() == 2)
+		    	 return;
 		     e.getDropTargetContext().dropComplete(true);
 		 }
 		 else {
@@ -194,9 +195,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		if (e.getDropSuccess()) {
 			if (dropContact == null)
 		        Log.outError("Deplacement impossible car en dehors de l'arbre !");
-		    else if(dropContact.getLevel()==2){
-		    	Log.outError("Deplacement impossible car le groupe de destination est un contact !");   
-		    }else{
+		    else
+		    {
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
 			  //changement du groupe --> envoi au serveur
 			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
