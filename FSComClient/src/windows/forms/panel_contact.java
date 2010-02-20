@@ -33,6 +33,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import misc.Log;
+
 import session.Session;
 import session.group;
 import windows.actions.buttons.changestatus_button;
@@ -153,24 +155,25 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		Titre.setText("Pseudo : " + n_pseudo);
 	}
 
-	public void dragEnter(DropTargetDragEvent e) {
-		e.acceptDrag(DnDConstants.ACTION_MOVE);
-	}
+	public void dragEnter(DropTargetDragEvent e) {	e.acceptDrag(DnDConstants.ACTION_MOVE);	}
 
-	public void dragGestureRecognized(DragGestureEvent e) {
+	public void dragGestureRecognized(DragGestureEvent e) 
+	{
 		selecContact = null;
 	    dropContact = null;
 	 
 	    Object selected = tree.getSelectionPath();
 	 
-	    if (selected != null) {
+	    if (selected != null) 
+	    {
 	      TreePath treepath = (TreePath) selected;
 	      selecContact = (DefaultMutableTreeNode) treepath.getLastPathComponent();
 	      dragSource.startDrag(e, DragSource.DefaultMoveDrop, new StringSelection(selected.toString()), this);
 	    }
 	}
 
-	public void drop(DropTargetDropEvent e) {
+	public void drop(DropTargetDropEvent e) 
+	{
 		 Transferable transferable = e.getTransferable();
 		 
 		 if (transferable.isDataFlavorSupported(DataFlavor.stringFlavor)) {
@@ -188,13 +191,13 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	public void dragDropEnd(DragSourceDropEvent e) {
 		if (e.getDropSuccess()) {
 			if (dropContact == null)
-		        System.out.println("Deplacement impossible car en dehors de l'arbre !");
+		        Log.outError("Deplacement impossible car en dehors de l'arbre !");
 		    else
 		    if (selecContact.getLevel()==1)
-		       System.out.println("Deplacement impossible car le noeud source est un groupe !");
+		    	Log.outError("Deplacement impossible car le noeud source est un groupe !");
 		    else
 		    if(dropContact.getLevel()==2){
-			       System.out.println("Deplacement impossible car le groupe de destination est un contact !");   
+		    	Log.outError("Deplacement impossible car le groupe de destination est un contact !");   
 		    }else{
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
 			  //changement du groupe --> envoi au serveur
@@ -203,30 +206,11 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		}
 	}
 	
-	public void dragExit(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-
-	public void dragOver(DropTargetDragEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-	public void dropActionChanged(DropTargetDragEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void dragEnter(DragSourceDragEvent dsde) {
-		// TODO Auto-generated method stub
-	}
-
-	public void dragExit(DragSourceEvent dse) {
-		// TODO Auto-generated method stub
-	}
-
-	public void dragOver(DragSourceDragEvent dsde) {
-		// TODO Auto-generated method stub
-	}
-
-	public void dropActionChanged(DragSourceDragEvent dsde) {
-		// TODO Auto-generated method stub
-	}
+	public void dragExit(DropTargetEvent arg0) {}
+	public void dragOver(DropTargetDragEvent arg0) {}
+	public void dropActionChanged(DropTargetDragEvent arg0) {}
+	public void dragEnter(DragSourceDragEvent dsde) {}
+	public void dragExit(DragSourceEvent dse) {}
+	public void dragOver(DragSourceDragEvent dsde) {}
+	public void dropActionChanged(DragSourceDragEvent dsde) {}
 }
