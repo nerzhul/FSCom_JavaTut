@@ -7,7 +7,7 @@ import thread.*;
 public class master
 {
 	private static threading thr_lib;
-	final static String version = "Alpha 0.5.13b";
+	final static String version = "Alpha 0.5.13c";
 	
 	public master()	{}
 	
@@ -15,9 +15,7 @@ public class master
 	{
 		Log.outString("FSS Com Client version " + version);
 		
-		Log.outString("Initlialise mirror list...");
 		new serverlist();
-		Log.outString("Launch client...");
 		thr_lib = new threading();
 		thr_lib.start();
 	}

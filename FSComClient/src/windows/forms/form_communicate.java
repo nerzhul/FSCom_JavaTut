@@ -34,7 +34,7 @@ public class form_communicate extends JFrame{
 	
 	public void AddTab(contact noeud)
 	{
-		int convers = 0;
+		boolean UserFound = false;
 		Tab onglet;
 		int nbonglet = TabPan.getTabCount();
     	for(int i=0;i<nbonglet;i++)
@@ -42,12 +42,10 @@ public class form_communicate extends JFrame{
     		onglet = TabPan.getTabAt(i);
     		contact ct = ((onglet_communicate) onglet.getContentComponent()).GetContact();
     		if(ct.getCid() == noeud.getCid())
-    		{
-    				convers = 1;
-    		}
+    			UserFound = true;
     	}
     	
-		if(convers != 1){
+		if(!UserFound){
 			TitledTab tab = new TitledTab(noeud.getPseudo(), null, new onglet_communicate(noeud), null );
 			tab.setTitleComponent( new CloseButton(tab,frame ) );
 			
