@@ -109,6 +109,9 @@ public class Packet_handler
 				case 0x23:
 					// TODO: force disconnect client
 					break;
+				case 0x26:
+					// TODO: add group and update it
+					break;
 				case 0x0C:
 				case 0x0F:
 				case 0x0A:
@@ -130,6 +133,8 @@ public class Packet_handler
 				case 0x1C:
 				case 0x1F:
 				case 0x21:
+				case 0x24:
+				case 0x25:
 					pcktrecv = new ServerSide_handler(this.opcode_id);
 					break;
 				default:

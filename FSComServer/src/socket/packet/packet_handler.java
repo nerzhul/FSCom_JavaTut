@@ -116,6 +116,9 @@ public class Packet_handler
 				case 0x24:
 					m_sess.EventContactGroupChange(data);
 					break;
+				case 0x25:
+					// TODO: handle adding group
+					break;
 				case 0x0B:
 				case 0x0E:
 					new Depreciated_handler(opcode_id);
@@ -139,6 +142,7 @@ public class Packet_handler
 				case 0x1E:
 				case 0x22:
 				case 0x23:
+				case 0x26:
 					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:
