@@ -53,6 +53,15 @@ public class Session extends Thread{
 		groups.add(grp);
 	}
 	
+	public static contact getContactByUid(Integer _uid)
+	{
+		for(group g: getGroups())
+			for(contact ct: g.getContacts())
+				if(ct.getCid().equals(_uid))
+					return ct;
+		return null;
+	}
+	
 	public static void setStatus(Integer st) { Session.status = st;	}
 	public static Integer getStatus() {	return status; }
 	public static void setPseudo(String pseudo) { Session.pseudo = pseudo; }

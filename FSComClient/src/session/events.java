@@ -11,6 +11,7 @@ import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
 import thread.threading;
 import windows.windowthread;
+import windows.forms.form_communicate;
 import misc.Log;
 
 public class events {
@@ -46,7 +47,6 @@ public class events {
 					// TODO: declare contact disconnected to client
 					return;
 				}
-		
 	}
 
 	public static void ContactConnected(Object packet) 
@@ -71,7 +71,8 @@ public class events {
 				}
 	}
 
-	public static void RecvMsg(Object packet) {
+	public static void RecvMsg(Object packet) 
+	{
 		if(!packet.getClass().equals((new Message(null,null)).getClass()))
 		{
 			Log.outError("Malformed Msg to Transmit");
@@ -80,7 +81,27 @@ public class events {
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
 		Log.outError(_uid + msg.getMsg());
-		// TODO : handle with windows
+		form_communicate fmSpeak = windowthread.getFmConn().getPanContact().getComm();
+		if(fmSpeak == null)
+		{
+			windowthread.getFmConn().getPanContact().setComm(new form_communicate());
+			contact ct = Session.getContactByUid(_uid);
+			if(ct != null)
+				windowthread.getFmConn().getPanContact().getComm().AddTab(ct);
+			else
+				Log.outError("Contact" + _uid + " not exist for client");
+		}
+		else
+		{
+			if(fmSpeak.GetContactConvers(_uid) != null)
+			{
+				// TODO: écrire dans l'onglet
+			}
+			else
+			{
+				// TODO: créer onglet et convers
+			}
+		}		
 	}
 
 	public static void ContactModifyStatus(Object packet) 
@@ -168,6 +189,7 @@ public class events {
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					g.getContacts().remove(ct);
+					//TODO : dont work
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}

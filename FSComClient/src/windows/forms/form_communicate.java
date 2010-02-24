@@ -40,7 +40,7 @@ public class form_communicate extends JFrame{
     	{
     		onglet = TabPan.getTabAt(i);
     		contact ct = ((onglet_communicate) onglet.getContentComponent()).GetContact();
-    		if(ct.getCid() == noeud.getCid())
+    		if(ct.getCid().equals(noeud.getCid()))
     			UserFound = true;
     	}
     	
@@ -54,8 +54,20 @@ public class form_communicate extends JFrame{
 		 	frame.add(TabPan);
 		 	frame.setVisible(true);
 		}
-    	
 	}
+	
+	public onglet_communicate GetContactConvers(Integer _uid)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+		{
+			contact ct = ((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).GetContact();
+    		if(ct.getCid().equals(_uid))
+    			return (onglet_communicate)TabPan.getTabAt(i).getContentComponent();
+		}
+		return null;
+	}
+	
 	public JFrame getfram(){
 		return this;
 	}

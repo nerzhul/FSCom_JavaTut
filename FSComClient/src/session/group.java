@@ -35,6 +35,7 @@ public class group implements Serializable{
 			contacts = new Vector<contact>();
 		return contacts;	
 	}
+	
 	public void setGid(Integer gid) { this.gid = gid; }
 	public Integer getGid() { return gid; }
 	public void setGname(String gname) { this.gname = gname; }
