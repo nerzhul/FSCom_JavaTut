@@ -52,7 +52,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private DragSource dragSource = null;
 	private DefaultMutableTreeNode selecContact = null;
 	private DefaultMutableTreeNode dropContact = null;
-
 	
 	private int status2;
 	private JTextField msgperso;
@@ -89,34 +88,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		add(msgperso);
 		add(Soustitre);
 		
-		setlistcontact();	
+		SetListContact();	
 		
 		comm = null;
 	}
 	
-	private void setlistcontact()
+	private void SetListContact()
 	{
-		Vector<group> groups = Session.getGroups();
-		
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Contactlist");
-		 
-		// Adding nodes
-		for(group g : groups)
-		{
-			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(g);
-			root.add(tmp_grp);
-			for(contact ct : g.getContacts())
-			{
-				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(ct);
-				tmp_grp.add(tmp_contact);	
-			}
-		}
-		     
-		// Construction du modèle de l'arbre.
-		DefaultTreeModel myModel = new DefaultTreeModel(root);
-		 
-		// Construction de l'arbre.
-		tree = new JTree(myModel);
+		GenerateNodes();
 		
 		/*
 		// Construction d'un afficheur par défaut.
@@ -144,6 +123,33 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		JScrollPane Scrollbar = new JScrollPane(tree);
 		Scrollbar.setPreferredSize(new Dimension(150, 300));
 		this.add(Scrollbar);
+	}
+	
+	private void GenerateNodes()
+	{
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Contactlist");
+		
+		for(group g : Session.getGroups())
+		{
+			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(g);
+			root.add(tmp_grp);
+			for(contact ct : g.getContacts())
+			{
+				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(ct);
+				tmp_grp.add(tmp_contact);	
+			}
+		}
+		
+		// Construction du modèle de l'arbre.
+		DefaultTreeModel myModel = new DefaultTreeModel(root);
+		 
+		// Construction de l'arbre.
+		tree = new JTree(myModel);
+	}
+	
+	public void RefreshContactList()
+	{
+		GenerateNodes();
 	}
 
 	public void setComm(form_communicate comm) { this.comm = comm; }

@@ -34,7 +34,6 @@ public class Connect_button implements ActionListener {
 		// Store status in session
 		Session.setStatus(status.getSelectedIndex() + 1);
 
-	
 		// Launcher socket with server
 		threading.LaunchSender(true);
 		

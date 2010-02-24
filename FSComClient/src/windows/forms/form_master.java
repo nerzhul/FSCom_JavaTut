@@ -58,10 +58,8 @@ public class form_master extends JFrame
 				fram.setVisible(true);
 				break;
 		}
-		
 	}
 
-	
 	private void Menubar_Connect() 
 	{
 		JMenuBar menuBar = new JMenuBar();

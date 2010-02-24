@@ -167,7 +167,8 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
-					// TODO: delete the contact from vector and refresh list.
+					g.getContacts().remove(ct);
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}

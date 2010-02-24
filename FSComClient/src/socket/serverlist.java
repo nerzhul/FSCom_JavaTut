@@ -2,7 +2,7 @@ package socket;
 
 import java.net.Socket;
 
-import misc.Log;
+import thread.thr_popup;
 
 public final class ServerList {
 
@@ -41,13 +41,15 @@ public final class ServerList {
 	{
 		Integer i=0;
 		boolean found=false;
-		Log.ShowPopup("Recherche du meilleur miroir...", false);
+		thr_popup pop = new thr_popup("Recherche du meilleur miroir...", false);
+		pop.start();
 		do
 		{
 			try
 			{
 				Socket sock = new Socket(iplist[i],5677);
 				sock.close();
+				pop.interrupt();
 				return i;
 			}
 			catch (Exception e) 
@@ -56,6 +58,8 @@ public final class ServerList {
 			}
 		}
 		while(i<MAX_MIRROR && !found);
+		
+		pop.interrupt();
 		return -1;
 	}
 }
