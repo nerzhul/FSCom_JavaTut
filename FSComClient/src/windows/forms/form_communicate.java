@@ -24,7 +24,7 @@ public class form_communicate extends JFrame{
 		frame = new JFrame();
 		frame.setSize(new Dimension(200,200));
 		frame.setTitle("Cookie Messenger - Conversation"); 
-		frame.setSize(600,450);
+		frame.setSize(600,500);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 

@@ -30,7 +30,8 @@ public class onglet_communicate extends JPanel{
 		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
 		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
-
+		JTextArea image = new JTextArea(1,1);
+		image.setText("AVATAR");
 		JLabel TitleText = new JLabel ("Entrez ici le texte a envoyer : ");
 	    MainText = new JTextArea(15,50);
 	    MainText.setEditable(false);
@@ -42,6 +43,7 @@ public class onglet_communicate extends JPanel{
 	    JButton envoi = new JButton("Envoyer !");
 	    envoi.addActionListener(new SendMsg_button(ct,txt,MainText));
 
+	    add(image);
 	    add(MainText);
 	    JScrollPane MainScroll = new JScrollPane(MainText);
 	    add(MainScroll);
