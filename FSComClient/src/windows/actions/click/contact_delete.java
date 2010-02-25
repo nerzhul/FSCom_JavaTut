@@ -13,8 +13,8 @@ public class contact_delete implements ActionListener
 {
 	private contact contact;
 	private JFrame fenetre;
-	public contact_delete(contact contactasupprimer) {
-		this.contact = contactasupprimer;
+	public contact_delete(contact toDel) {
+		this.contact = toDel;
 	}
 
 	public void actionPerformed(ActionEvent e) {

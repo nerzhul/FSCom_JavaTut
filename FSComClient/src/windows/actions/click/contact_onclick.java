@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import session.contact;
+import session.group;
 import windows.SwingExtendLib.SwingEL;
 import windows.forms.form_communicate;
 import windows.forms.panel_contact;
@@ -60,11 +61,13 @@ public class contact_onclick implements MouseListener
 		}
 		else if(e.getButton() == 3 && noeud != null && noeud.getLevel() == 1)
 		{
-			//renommer grp
-			//supprimer grp
-			//le tout dans un beau PopUp Menu
-			// TODO: actions on group
-			System.out.println("click droit sur grp");
+			if(((group)noeud.getUserObject()).getGid().equals(0))
+				return;
+			
+			JPopupMenu menu = new JPopupMenu();
+			SwingEL.AddItemToMenu(menu,"Renommer le groupe", new group_onclick_rename((group) noeud.getUserObject()));
+			SwingEL.AddItemToMenu(menu,"Supprimer le groupe", new group_onclick_delete((group) noeud.getUserObject()));
+			menu.show (e.getComponent(),e.getX(),e.getY());
 		}
 	}
 

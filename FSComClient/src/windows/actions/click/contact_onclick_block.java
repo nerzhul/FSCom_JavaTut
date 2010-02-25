@@ -14,7 +14,8 @@ public class contact_onclick_block implements ActionListener {
 		this.contact=contactabloquer;
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		//envoi au serveur pour bloqué "contact"
 		//puis maj list
 		JOptionPane.showMessageDialog(fenetre,"Le contact "+ contact +" a été bloqué avec succès !");

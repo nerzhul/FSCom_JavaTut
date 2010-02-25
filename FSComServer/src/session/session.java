@@ -8,6 +8,7 @@ import misc.Log;
 import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
 import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
 import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
+import socket.packet.handlers.senders.ConfirmGroupRenamed_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
@@ -374,7 +375,21 @@ public class session {
 		
 		ConfirmGroupDeleted_handler pkt = new ConfirmGroupDeleted_handler(_gid);
 		pkt.Send(sock);
+	}
+
+	public void EventGroupRen(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,""))))
+			return;
 		
+		IdAndData pck = (IdAndData)data;
+		Integer _gid = pck.getUid();
+		String gName = pck.getDat();
+		
+		DatabaseTransactions.ExecuteUQuery("acc_group", "name", gName, "uid = '" +
+				this.getUid() + "' AND gid = '" + _gid + "'");
+		ConfirmGroupRenamed_handler pkt = new ConfirmGroupRenamed_handler(_gid,gName);
+		pkt.Send(sock);
 	}
 
 	

@@ -147,7 +147,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
-		GenerateNodes();
+		//GenerateNodes();
 	}
 
 	public void setComm(form_communicate comm) { this.comm = comm; }

@@ -278,6 +278,26 @@ public class events {
 				return;
 			}
 		}
+	}
+
+	public static void GroupRenamed(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)data;
+		Integer _gid = pck.getUid();
+		String newName = pck.getDat();
+		
+		for(group g: Session.getGroups())
+		{
+			if(g.getGid().equals(_gid))
+			{
+				g.setGname(newName);
+				windowthread.getFmConn().getPanContact().RefreshContactList();
+				return;
+			}
+		}
 		
 	}
 }
