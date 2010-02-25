@@ -189,7 +189,6 @@ public class events {
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					g.getContacts().remove(ct);
-					//TODO : dont work
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -251,7 +250,7 @@ public class events {
 		IdAndData pck = (IdAndData)data;
 		group gr = new group(pck.getUid(), pck.getDat());
 		Session.getGroups().add(gr);
-		// TODO: refresh tree		
+		windowthread.getFmConn().getPanContact().RefreshContactList();		
 	}
 
 	public static void GroupDeleted(Object data) 
@@ -264,8 +263,18 @@ public class events {
 		{
 			if(g.getGid().equals(_gid))
 			{
-				// TODO: delete group and move contacts
+				group move_gr = Session.getDefaultGroup();
+				if(move_gr == null)
+					return;
 				
+				for(contact ct: g.getContacts())
+				{
+					move_gr.AddContact(ct);
+					g.getContacts().remove(ct);
+				}
+				
+				g.getContacts().clear();
+				windowthread.getFmConn().getPanContact().RefreshContactList();
 				return;
 			}
 		}
