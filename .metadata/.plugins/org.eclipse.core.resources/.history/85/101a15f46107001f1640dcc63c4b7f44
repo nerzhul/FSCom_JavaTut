@@ -1,8 +1,0 @@
-package user;
-
-import java.util.Vector;
-
-public class group {
-	
-	Vector<contact> groupedecontact; 
-}

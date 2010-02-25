@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/FSComClient" element2="/FSComServer" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1267010502458"/>&#x0A;<refactoring comment="Delete 2 resources" deleteContents="true" description="Delete 2 resources" element1="/FSComClient" element2="/FSComServer" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1267096020829"/>
-</session>

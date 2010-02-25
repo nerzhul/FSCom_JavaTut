@@ -1,9 +1,0 @@
-package user;
-
-public class contact {
-
-	private String nom;
-	private String pseudo;
-	private String phraseperso;
-	
-}

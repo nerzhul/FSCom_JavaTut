@@ -1,9 +1,0 @@
-package user.pages;
-
-public enum clientstatus {
-
-	
-	CONNECTED(0),
-	BUSY(1);
-	private final int value;
-}
