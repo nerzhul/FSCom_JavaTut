@@ -117,7 +117,10 @@ public class Packet_handler
 					m_sess.EventContactGroupChange(data);
 					break;
 				case 0x25:
-					// TODO: handle adding group
+					m_sess.EventGroupAdd(data);
+					break;
+				case 0x27:
+					m_sess.EventGroupDel(data);
 					break;
 				case 0x0B:
 				case 0x0E:
@@ -143,6 +146,7 @@ public class Packet_handler
 				case 0x22:
 				case 0x23:
 				case 0x26:
+				case 0x28:
 					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:

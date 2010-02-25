@@ -65,17 +65,10 @@ public class form_master extends JFrame
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu1 = new JMenu("Menu");
 		JMenu menu2 = new JMenu("?");
-		JMenuItem quitter;
-		JMenuItem aPropos;
 		
-		quitter = new JMenuItem("Quitter");
-		quitter.addActionListener(new menubar_quit());
-		menu1.add(quitter);
+		AddItem(menu1,"Quitter",new menubar_quit());
+		AddItem(menu1,"A propos",new menubar_a_propos());
 		menuBar.add(menu1);
-
-		aPropos = new JMenuItem("A propos");
-		aPropos.addActionListener(new menubar_a_propos());
-		menu2.add(aPropos);
 		menuBar.add(menu2);
 		
 		fram.setJMenuBar(menuBar);

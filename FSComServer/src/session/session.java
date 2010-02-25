@@ -6,6 +6,8 @@ import java.util.Vector;
 import misc.Log;
 
 import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
+import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
+import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
@@ -342,6 +344,38 @@ public class session {
 	public Socket getSocket() { return sock; }
 	public void setPseudo(String pseudo) { this.pseudo = pseudo; }
 	public String getPseudo() { return pseudo; }
+
+	public void EventGroupAdd(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"").getClass())))
+			return;
+		
+		IdAndData pck = (IdAndData) data;
+		if(pck.getUid().equals(0))
+			return;
+		
+		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_group VALUES ('" +
+				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "'");
+		
+		ConfirmGroupAdded_handler pkt = new ConfirmGroupAdded_handler(pck.getUid());
+		pkt.Send(sock);
+	}
+
+	public void EventGroupDel(Object data) 
+	{
+		Integer _gid = Integer.decode(data.toString());
+		if(_gid.equals(0))
+			return;
+		
+		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_group where uid = '" +
+				this.getUid() + "' AND gid = '" + _gid + "'");
+		DatabaseTransactions.ExecuteUQuery("acc_contact", "group", "0", "uid = '" +
+				this.getUid() + "' AND `group` = '" + _gid + "'");
+		
+		ConfirmGroupDeleted_handler pkt = new ConfirmGroupDeleted_handler(_gid);
+		pkt.Send(sock);
+		
+	}
 
 	
 
