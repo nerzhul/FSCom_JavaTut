@@ -35,8 +35,7 @@ public class follow_keyboard implements KeyListener {
 			text = textenvoy.getText();
 			textenvoy.setText("");
 			text = text.trim();
-			System.out.println(text);
-			textrecu.setText(textrecu.getText()+"J'ai �crit : " + text + "\n");
+			textrecu.setText(textrecu.getText()+"J'ai écrit : " + text + "\n");
 			Send_handler pck = new SendMsgTo_handler(text,contact);
 			pck.Send();
 		}

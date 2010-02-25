@@ -12,6 +12,7 @@ import socket.packet.objects.Message;
 import thread.threading;
 import windows.windowthread;
 import windows.forms.form_communicate;
+import windows.forms.onglet_communicate;
 import misc.Log;
 
 public class events {
@@ -80,28 +81,32 @@ public class events {
 		}
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
-		Log.outError(_uid + msg.getMsg());
 		form_communicate fmSpeak = windowthread.getFmConn().getPanContact().getComm();
+		Log.outError(_uid + msg.getMsg());
 		if(fmSpeak == null)
 		{
 			windowthread.getFmConn().getPanContact().setComm(new form_communicate());
+			
+		}
+
+		fmSpeak = windowthread.getFmConn().getPanContact().getComm();
+		onglet_communicate ongletconvers = fmSpeak.GetContactConvers(_uid);
+		if(ongletconvers == null)
+		{
 			contact ct = Session.getContactByUid(_uid);
 			if(ct != null)
+			{
 				windowthread.getFmConn().getPanContact().getComm().AddTab(ct);
+				ongletconvers = fmSpeak.GetContactConvers(_uid);
+				ongletconvers.ajout_texte(msg.getMsg());
+			}
 			else
 				Log.outError("Contact" + _uid + " not exist for client");
 		}
 		else
 		{
-			if(fmSpeak.GetContactConvers(_uid) != null)
-			{
-				// TODO: écrire dans l'onglet
-			}
-			else
-			{
-				// TODO: créer onglet et convers
-			}
-		}		
+			ongletconvers.ajout_texte(msg.getMsg());
+		}	
 	}
 
 	public static void ContactModifyStatus(Object packet) 
@@ -202,7 +207,7 @@ public class events {
 			Log.outError("Bad invitation received !");
 		else
 		{
-			Integer answer = JOptionPane.showConfirmDialog(null, dat[1] + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+			Integer answer = JOptionPane.showConfirmDialog(null, dat[1] + " vous a ajoutï¿½, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
 			Answer_Invit_handler arh = new Answer_Invit_handler(Integer.decode(dat[0]), answer);
 			arh.Send();
 		}
