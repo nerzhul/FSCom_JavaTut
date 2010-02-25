@@ -1,0 +1,23 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+
+import windows.window.form_connect;
+import windows.window.form_contact;
+
+public class Menu_Deconnexion implements ActionListener {
+
+	private JFrame fenetre;
+	public Menu_Deconnexion(JFrame fram) {
+		this.fenetre=fram;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		fenetre.dispose();
+		new form_connect();
+	}
+
+}

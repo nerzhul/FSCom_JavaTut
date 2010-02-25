@@ -1,0 +1,17 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+
+@SuppressWarnings("serial")
+public class Menu_action_quit extends AbstractAction 
+{
+	public Menu_action_quit(String texte)
+	{
+		super(texte);
+	}
+	public void actionPerformed(ActionEvent e) { 
+		System.exit(0);
+	} 
+}

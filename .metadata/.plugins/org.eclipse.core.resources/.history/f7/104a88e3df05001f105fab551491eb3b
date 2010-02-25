@@ -1,0 +1,29 @@
+package user2.pages;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+
+import user2.menu.Connexion;
+
+
+
+
+public class Deconnexion extends AbstractAction 
+	{
+	
+		private static final long serialVersionUID = 3L;
+		
+				
+		public Deconnexion(Pageherit page, String texte)
+		{
+			super(texte);
+     	}
+
+		public void actionPerformed(ActionEvent e)
+		{ 
+			Connexion.fenetreconnectée.setVisible(false);
+			Pageacceuil fenetre = new Pageacceuil();
+			fenetre.setVisible(true);
+		}
+	}

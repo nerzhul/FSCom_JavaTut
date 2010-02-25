@@ -1,0 +1,18 @@
+package windows.window;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Bouton_Changement_Pseudo implements ActionListener {
+
+	public Bouton_Changement_Pseudo(String user) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

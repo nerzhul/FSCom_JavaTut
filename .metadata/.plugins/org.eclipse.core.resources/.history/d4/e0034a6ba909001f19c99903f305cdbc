@@ -1,0 +1,29 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import user.*;
+
+public class Clicks_Contact_Supprimer implements ActionListener {
+
+	private Object contact;
+	private JFrame fenetre;
+	public Clicks_Contact_Supprimer(Object contactasupprimer) {
+		this.contact=contactasupprimer;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//supprimercontact(contact);
+		int reponse = JOptionPane.showConfirmDialog(fenetre, "Voulez-vous vraiment supprimer "+ contact +" ?","Etiquettes Java",JOptionPane.YES_NO_OPTION);
+		if (reponse == JOptionPane.YES_OPTION)
+			JOptionPane.showMessageDialog(fenetre,"Le contact "+ contact +" a été supprimé avec succès !");
+	 /* else if (reponse == JOptionPane.NO_OPTION) label.setText("Courage!");
+       else  label.setText("ni l'un ni l'autre ?");
+		JOptionPane.showMessageDialog(fenetre,"Le contact "+ contact +" a été supprimé avec succès !");*/
+	}
+}

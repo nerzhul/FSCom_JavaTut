@@ -1,0 +1,16 @@
+package user2.master;
+import msn.pageacceuil.*;
+
+import javax.swing.SwingUtilities;
+
+
+public class Master {
+	public static void main(String[] args){
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				Pageacceuil fenetre = new Pageacceuil();
+				fenetre.setVisible(true);
+			}
+		});
+	}
+}

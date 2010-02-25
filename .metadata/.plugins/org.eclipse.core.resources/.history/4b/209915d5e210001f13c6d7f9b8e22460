@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: NNL Technology AB
+Main-Class: net.infonode.tabbedpanel.info.Info
+
+Name: net/infonode
+Implementation-Title: InfoNode Tabbed Panel GPL
+Implementation-Version: 1.6.1
+Implementation-Vendor: NNL Technology AB
+Implementation-URL: www.infonode.net
+Specification-Title: InfoNode Tabbed Panel GPL
+Specification-Version: 1.6.1
+Specification-Vendor: NNL Technology AB
+

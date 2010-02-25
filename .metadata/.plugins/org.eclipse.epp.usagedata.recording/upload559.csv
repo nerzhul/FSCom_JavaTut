@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.ecf.provider.filetransfer,3.0.1.v20090831-1906,"org.eclipse.ecf.provider.filetransfer",1264694262469
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694262719
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1264694269751
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694269772
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694276152
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694315187
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694320082
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1264694322819
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694322844
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.update",1264694325531
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694325943
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694336601
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694339210
+started,bundle,org.eclipse.equinox.p2.updatesite,1.0.100.v20090525,"org.eclipse.equinox.p2.updatesite",1264694343525
+error,log,,,"Unable to load the repository http://download.eclipse.org/releases/galileo",1264694344151
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1264694420215
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694420233
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264694421406
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694425515
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.properties",1264694458472
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264694458486
+started,bundle,org.eclipse.wst.xml.ui,1.1.1.v200908242115,"org.eclipse.wst.xml.ui",1264694463215
+started,bundle,org.eclipse.wst.sse.ui,1.1.101.v200908261807,"org.eclipse.wst.sse.ui",1264694463224
+started,bundle,org.eclipse.wst.sse.core,1.1.401.v200909172215,"org.eclipse.wst.sse.core",1264694463709
+started,bundle,org.eclipse.wst.xml.core,1.1.401.v200908242115,"org.eclipse.wst.xml.core",1264694463725

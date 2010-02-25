@@ -1,0 +1,99 @@
+package windows.forms;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import windows.actions.Bouton_envoi;
+import windows.actions.Surveillance_clavier;
+
+public class onglets extends JFrame{
+
+	private static final long serialVersionUID = 1L;
+	private JFrame fram;
+	private JPanel panel;
+	private JTabbedPane onglet;
+	private String contact;
+	
+	public onglets(Object interlocuteur) {
+		
+		contact = interlocuteur.toString();
+		
+		fram = new JFrame();
+		fram.setSize(new Dimension(200,200));
+		fram.setTitle("Cookie Messenger - Conversation"); 
+		fram.setSize(600,500); //420
+		fram.setLocationRelativeTo(null);
+		fram.setResizable(true);
+		fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 		
+			
+		buildonglet();
+
+		}
+
+	
+	
+	public void buildonglet(){
+		//if(i==1){
+			/*panel = contenuonglet();
+			onglet.add(contact,panel);
+			fram.add(onglet);		*/
+			new PanelOnglet(contact,fram);	
+		    
+		//}
+	/*	if(i==2){
+			panel=contenuonglet();
+			onglet.add("Onglet N°",panel);
+		 	fram.add(onglet);			
+	        fram.setVisible(true);
+		}*/		
+	}
+	
+	private JPanel contenuonglet() {
+		JPanel pane = new JPanel();
+		pane.setLayout(new FlowLayout());
+		pane.setBackground(new Color(128,128,255));
+		pane.setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
+
+		JLabel Titretxt = new JLabel ("Entrez ici le texte à envoyer : ");
+	    JTextArea textprincipal = new JTextArea(15,50);
+	    textprincipal.setEditable(false);
+	    textprincipal.setLineWrap(true); 
+	    JTextArea textaenvoyer = new JTextArea(3,50);
+	    textaenvoyer.addKeyListener(new Surveillance_clavier(contact,textaenvoyer,textprincipal));
+	    textaenvoyer.setLineWrap(true); 
+	    JButton envoi = new JButton("Envoyer !");
+		envoi.addActionListener(new Bouton_envoi(contact,textaenvoyer,textprincipal));
+
+	    pane.add(textprincipal);
+	    JScrollPane scrollprincipal = new JScrollPane(textprincipal);
+	    pane.add(scrollprincipal);
+	    pane.add(Titretxt);
+	    pane.add(textaenvoyer);
+	    JScrollPane scrollenvoi = new JScrollPane(textaenvoyer);        
+	    pane.add(scrollenvoi);
+	    pane.add(envoi);
+	    
+	    JButton nouveau = new JButton("Ajouter un onglet");
+		nouveau.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				panel=contenuonglet();
+				onglet.add("Onglet N°", panel);
+			}
+		});
+		pane.add(nouveau);
+		
+		return pane;    
+	}
+}

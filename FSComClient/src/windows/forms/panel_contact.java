@@ -20,6 +20,7 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -95,21 +96,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		GenerateNodes();
 		
-		/*
-		// Construction d'un afficheur par défaut.
-		DefaultTreeCellRenderer myRenderer = new DefaultTreeCellRenderer();
-		 
-		// Changement de l'icône pour les feuilles de l'arbre.
-		myRenderer.setLeafIcon(new ImageIcon("pageIcon.png"));
-		// Changement de l'icône pour les noeuds fermés.
-		myRenderer.setClosedIcon(new ImageIcon("closedBookIcon.png"));
-		// Changement de l'icône pour les noeuds ouverts.
-		myRenderer.setOpenIcon(new ImageIcon("openBookIcon.png"));
-		 
-		// Application de l'afficheur à l'arbre.
-		myTree.setCellRenderer(myRenderer);
-		*/
-
 		new DropTarget(tree, this);
 	    dragSource = new DragSource();
 	    dragSource.createDefaultDragGestureRecognizer(tree, DnDConstants.ACTION_MOVE, this);
@@ -129,20 +115,22 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		
 		for(group g : Session.getGroups())
 		{
-			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(g);
+			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(g,true);
+			//tmp_grp.setIconTextGap("close.png");
 			root.add(tmp_grp);
 			for(contact ct : g.getContacts())
 			{
-				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(ct);
+				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(ct,false);
 				tmp_grp.add(tmp_contact);	
 			}
 		}
 		
-		// Construction du modèle de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
-		 
+		myModel.setAsksAllowsChildren(true);
+
 		// Construction de l'arbre.
 		tree = new JTree(myModel);
+		tree.setCellRenderer(new MyRenderer("afk.png","busy.png","offline.png","online.png"));
 	}
 	
 	public void RefreshContactList()

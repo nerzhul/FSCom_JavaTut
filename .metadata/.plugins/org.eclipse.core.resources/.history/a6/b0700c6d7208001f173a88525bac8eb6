@@ -1,0 +1,71 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.ListModel;
+import windows.window.*;
+public class Click_Contact implements MouseListener {
+
+	private JList liste;
+	public Click_Contact(JList list) {
+		this.liste = list;
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		
+		   if(e.getClickCount() == 2){
+				int index = liste.locationToIndex(e.getPoint());
+			     ListModel dlm = liste.getModel();
+			     Object item = dlm.getElementAt(index);;
+			     liste.ensureIndexIsVisible(index);
+			     new form_conversation_avec(item);
+			     System.out.println("double cliqué sur " + item);
+			     }
+
+		// TODO Auto-generated method stub
+		/*JPopupMenu jpopupmenu = new JPopupMenu();
+
+			JMenuItem jmenuitem1 = new JMenuItem("blabla" );
+            jmenuitem1.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent actionevent)
+                {
+                      System.out.print("blabla");
+                }
+
+            });
+            jpopupmenu.add(jmenuitem1);*/
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+}

@@ -1,0 +1,105 @@
+package windows.window;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+
+import windows.actions.Bouton_Ajout_Contact;
+import windows.actions.Bouton_connect;
+import windows.actions.Changement_status;
+import windows.actions.Clicks_Contact;
+@SuppressWarnings("serial")
+public class form_contact extends JFrame{
+
+	private JPanel pan;
+	private JLabel Titre;
+	private JLabel Soustitre;
+	private JList  list;
+	private String pseudo;
+	private String user;
+	private Object status;
+	private JComboBox changstatus;
+	private JButton addcontact;
+	private JButton changepseudo;
+
+	public form_contact(Object stat, String username, String pseudo2){
+		this.user=username;
+		this.status=stat;
+		this.pseudo=pseudo2
+		BuildFenetre();
+	}
+
+	private void BuildFenetre(){
+		
+		setTitle("Cookie Messenger - Contacts"); 
+		setSize(400,600); 
+		setLocationRelativeTo(null);
+		setResizable(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		pan=new JPanel();
+		pan.setLayout(new FlowLayout());
+		pan.setBackground(new Color(128,128,255));
+		pan.setLayout(new FlowLayout(FlowLayout.CENTER,600,15));
+
+
+		Titre=new JLabel("Vous etes connecté en tant que " + pseudo,JLabel.CENTER);
+		
+		changstatus= new JComboBox();
+		changstatus.addItem("Offline");
+		changstatus.addItem("Online");
+		changstatus.addItem("Busy");
+		changstatus.addItem("AFK");
+		changstatus.setSelectedItem(status);
+		changstatus.addActionListener(new Changement_status(changstatus));
+		
+		Soustitre = new JLabel("Liste de vos contacts : ");
+		
+		addcontact=new JButton("Ajouter un contact");
+		changepseudo=new JButton("Changer de pseudo");
+		addcontact.addActionListener(new Bouton_Ajout_Contact());
+		changepseudo.addActionListener(new Bouton_Changement_Pseudo());
+
+		pan.add(addcontact);
+		pan.add(Titre);
+		pan.add(changstatus);
+		pan.add(Soustitre);
+		setlistcontact();	
+		
+		setContentPane(pan);        
+	    setVisible(true); 
+	    
+	}
+	
+	private void setlistcontact(){
+		//nom du groupe
+		Vector<String> contacts=new Vector<String>();
+		contacts.add("truc");
+		contacts.add("truc1");
+		contacts.add("truc3");
+		contacts.add("truc4");
+		contacts.add("truc5");
+		contacts.add("truc6");
+		contacts.add("truc7");
+		contacts.add("truc8");
+		contacts.add("truc9");
+		//remplacer par listecontacts bien sur...
+		list = new JList(contacts);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.addMouseListener(new Clicks_Contact(list));
+		pan.add(list);
+		/*JScrollPane listeAvecAscenseur = new JScrollPane(list);
+		listeAvecAscenseur.setPreferredSize(new Dimension(80, 60));
+		pan.add(listeAvecAscenseur);*/
+	}
+}

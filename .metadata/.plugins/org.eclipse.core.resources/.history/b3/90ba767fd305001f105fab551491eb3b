@@ -1,0 +1,26 @@
+package msn.menu;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+
+import msn.pageheritage.Page;
+
+	public class APropos extends AbstractAction
+				{
+				private static final long serialVersionUID = 5L;
+				
+					private Page fenetre;
+					
+					public APropos(Page page, String texte)
+					{
+						super(texte);
+						
+						this.fenetre = page;
+					}
+					
+					public void actionPerformed(ActionEvent e) { 
+						JOptionPane.showMessageDialog(fenetre, "Ce programme a été développé pour le projet tutoré de java par Blot Loic, Blandureau Jean-Baptiste et Chouchkaïeff Alexis");
+					} 
+				}

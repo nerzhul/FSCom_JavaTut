@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1264693893475
+java.vm.version,sysinfo,,,"16.0-b13",1264693893475
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264693895540
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1264693900061
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693909764
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693911666
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693912672
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693926700
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693930799
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693932487
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693941550
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693948158
+opened,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264693948324
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264693948376
+opened,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264693975101
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264693975138
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.window.newEditor",1264693975139
+started,bundle,org.eclipse.search,3.5.1.r351_v20090708-0800,"org.eclipse.search",1264693982866
+opened,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693983221
+activated,perspective,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.JavaPerspective",1264693983222
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.window.newWindow",1264693983225
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693983251
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693983263
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264693983264
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264693989561

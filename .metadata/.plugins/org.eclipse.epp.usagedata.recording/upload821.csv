@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.paste",1265215589349
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215592063
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215592115
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1265215595480
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215601785
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215601870
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1265215628356
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215632715
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215632828
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215632920
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215639603
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1265215641803
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215644472
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215677463
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1265215677492
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1265215683744
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215688329
+closed,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1265215692198
+closed,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1265215692212
+closed,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1265215692227
+closed,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1265215692311
+error,log,,,"Internal Error",1265215692371
+error,log,,,"Problems encountered while deleting resources.",1265215692372
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265215693822
+executed,command,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring.commands.deleteResources",1265215693832

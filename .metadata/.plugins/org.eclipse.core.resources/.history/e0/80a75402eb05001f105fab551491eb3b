@@ -1,0 +1,97 @@
+package user.pages;
+import java.awt.*;
+import java.util.Vector;
+import javax.swing.*;
+
+
+@SuppressWarnings("serial")
+public class connexion extends Frame implements ActionListener{
+	
+		private JPanel pFace; 
+		CardLayout cards=new CardLayout();
+		
+		private JLabel Titre;
+		private JComboBox list;
+		private JLabel label;
+		private JLabel label2;
+		private JTextField mail;
+		private JPasswordField password;
+		private JButton connect;
+		
+		private Vector<String> contacts;
+		
+		private JPanel contenu()
+		{
+			JPanel panel = new JPanel();
+			
+			panel.setLayout(new FlowLayout());
+			panel.setBackground(new Color(50,50,150));
+			setLayout(new FlowLayout(FlowLayout.CENTER,50,10));
+			Titre=new JLabel("Bienvenue dans Chouch Messenger",JLabel.CENTER);
+			panel.add(Titre);
+					
+			//on cree le premier champ demandant l'adresse e-mail
+			label = new JLabel("Adresse e-mail");
+			panel.add(label);
+			mail = new JTextField(15);
+			panel.add(mail);
+
+			//on cree le second champ demandant le mot de passe avec un champ password
+			label2 = new JLabel("Mot de passe");
+			panel.add(label2);
+			password = new JPasswordField(15);
+			panel.add(password);	
+	
+			connect=new JButton("Connexion");
+			panel.add(connect);
+			
+			return panel;
+		}
+		
+		private void fenetreprincipale()
+		{
+			setTitle("Page de connexion"); //On donne un titre a l'application
+			setSize(300,600); //On donne une taille a notre fenetre
+			setLocationRelativeTo(null); //On centre la fenetre sur l'ecran
+			setResizable(false); //On interdit la redimensionnement de la fenetre
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit a l'application de se fermer lors du clic sur la croix
+
+			setContentPane(contenu()); //on appelle la methode qui ajoutera du texte dans notre fenetre
+		}
+
+	public void login(String u, String p) {
+		//envoi au serveur/verif...
+	}
+	
+	public Vector<String> getContacts(){
+		return contacts;
+		//recup contacts
+	}
+
+	public void startApp(String u,String p){  
+	
+			user.setEnabled(false);
+			pwd.setEnabled(false);
+			connect.setEnabled(false);
+			
+			login(u,p);		
+			//contact
+			
+			//fenetre de tchat
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==connect){  
+			Thread application = new Thread(){  
+				public void run(){
+					String u = user.getText();
+					String p = new String(pwd.getPassword());
+					startApp(u,p);	
+				}
+			};
+			application.start();
+		}
+	}
+	
+}

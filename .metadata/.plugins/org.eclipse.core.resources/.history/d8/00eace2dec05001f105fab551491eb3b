@@ -1,0 +1,15 @@
+package windows;
+
+import javax.swing.JPanel;
+
+public class masterpage {
+
+	void Show() {}
+	void Hide() {}
+	private JPanel panel;
+	
+	public void Hide(){
+		panel.show(false);
+	}
+}
+

@@ -1,0 +1,14 @@
+what,kind,bundleId,bundleVersion,description,time
+stopped,bundle,org.eclipse.mylyn.java.tasks,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.java.tasks",1267103110396
+stopped,bundle,org.eclipse.mylyn.java.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.java.ui",1267103110396
+stopped,bundle,org.eclipse.jdt.junit,3.5.1.r351_v20090708-0800,"org.eclipse.jdt.junit",1267103110396
+stopped,bundle,org.eclipse.jdt.apt.ui,3.3.200.v20090528-1135,"org.eclipse.jdt.apt.ui",1267103110422
+stopped,bundle,org.eclipse.jdt.debug.ui,3.4.1.v20090811_r351,"org.eclipse.jdt.debug.ui",1267103110422
+stopped,bundle,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui",1267103110452
+stopped,bundle,org.eclipse.mylyn.bugzilla.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.bugzilla.ui",1267103110452
+stopped,bundle,org.eclipse.mylyn.ide.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.ide.ui",1267103110453
+stopped,bundle,org.eclipse.mylyn.team.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.team.ui",1267103110453
+stopped,bundle,org.eclipse.mylyn.resources.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.resources.ui",1267103110455
+stopped,bundle,org.eclipse.mylyn.wikitext.tasks.ui,1.1.2.v20090912-0400-e3x,"org.eclipse.mylyn.wikitext.tasks.ui",1267103110478
+stopped,bundle,org.eclipse.mylyn.context.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.context.ui",1267103110478
+stopped,bundle,org.eclipse.mylyn.help.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.help.ui",1267103110517

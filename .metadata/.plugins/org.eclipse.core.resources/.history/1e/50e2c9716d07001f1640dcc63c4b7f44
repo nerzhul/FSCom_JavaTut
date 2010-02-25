@@ -1,0 +1,20 @@
+package user;
+
+public class appliuser extends user {
+	
+	private String status;
+	private Vector<group> 
+	public appliuser(String nm, String pse, String phpers, String stt) {
+		super(nm, pse, phpers);
+		this.status=stt;
+	}
+
+	public String gettatus(){
+		return this.status;
+	}
+	
+	public void setNom(String newstatus){
+		this.nom=newstatus;
+	}
+	
+}

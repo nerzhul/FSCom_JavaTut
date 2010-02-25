@@ -1,0 +1,96 @@
+package user.pages;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+
+import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+@SuppressWarnings("serial")
+public class connexion extends Frame implements ActionListener{
+	
+		private JPanel frame; 
+		CardLayout cards=new CardLayout();
+		
+		private JLabel Titre;
+		private JComboBox list;
+		private JLabel lbluser;
+		private JLabel lblpwd;
+		private JTextField user;
+		private JPasswordField pwd;
+		private JButton connect;
+		
+		private Vector<String> contacts;
+		
+	public connexion(){
+		super();
+		setLayout(cards);
+		frame=new JPanel();
+		frame.setBackground(new Color(50,50,150));
+		frame.setLayout(new FlowLayout());
+		frame.setLayout(new FlowLayout(FlowLayout.CENTER,50,10));
+			
+		Titre=new JLabel("Bienvenue dans Chouch Messenger",JLabel.CENTER);
+		lbluser=new JLabel("Pseudo :");
+		lblpwd=new JLabel("Password :");
+		user=new JTextField(15);
+		pwd=new JPasswordField(15);
+		connect=new JButton("Connection");
+		connect.addActionListener((ActionListener) this);
+		frame.add(Titre);
+		//imagelogo
+		frame.add(lbluser);
+		frame.add(user);
+		frame.add(lblpwd);
+		frame.add(pwd);
+		frame.add(connect);
+		//status
+		//groupe
+		setSize(300,600);
+		setTitle("Page de connexion");
+		setLocationRelativeTo(null); 
+		setResizable(true); 
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+
+	}
+
+	public void login(String u, String p) {
+		//envoi au serveur/verif...
+	}
+	
+	public Vector<String> getContacts(){
+		return contacts;
+		//recup contacts
+	}
+
+	public void startApp(String u,String p,int s){  
+	
+			user.setEnabled(false);
+			pwd.setEnabled(false);
+			connect.setEnabled(false);
+			
+			login(u,p);		
+			//contact
+			
+			//fenetre de tchat
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==connect){  
+			Thread application = new Thread(){  
+				public void run(){
+					String u = user.getText();
+					String p = new String(pwd.getPassword());
+					int s = 1;//
+					startApp(u,p,s);	
+				}
+			};
+			application.start();
+		}
+	}
+	
+}

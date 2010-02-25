@@ -1,0 +1,25 @@
+package windows.actions;
+
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Bouton_envoi implements ActionListener {
+
+	private String contact;
+	private TextArea textarea;
+	private String text;
+	public Bouton_envoi(Object interlocuteur, TextArea textaenvoyer) {
+		this.contact=interlocuteur.toString();
+		this.textarea=textaenvoyer;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.text=textarea.getText();
+		//envoi du message contenu dans "text" a "contact"
+		
+
+	}
+
+}

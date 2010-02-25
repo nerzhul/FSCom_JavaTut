@@ -1,0 +1,32 @@
+package windows.window;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class Bouton_Changement_Pseudo implements ActionListener {
+
+	private JFrame fenetre;
+	private String reponse;
+	private JPanel pann;
+	
+	public Bouton_Changement_Pseudo(JPanel pan){
+		pann=pan;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		reponse = JOptionPane.showInputDialog(fenetre,"Entrez votre nouveau pseudo :",
+				"Nouveau pseudo",JOptionPane.QUESTION_MESSAGE);
+		if (reponse !=null && !reponse.equalsIgnoreCase(""))
+		{
+			//envoi au serveur du nouveau pseudo
+			JOptionPane.showMessageDialog(fenetre,"Vous etes maintenant connu sous le nom de "+reponse+" !" );
+			pann.repaint();
+		}	
+	}
+
+}

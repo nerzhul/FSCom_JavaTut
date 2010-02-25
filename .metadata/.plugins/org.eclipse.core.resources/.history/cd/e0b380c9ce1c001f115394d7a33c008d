@@ -1,0 +1,42 @@
+package windows.actions.keylisteners;
+ 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+ 
+import javax.swing.JTextArea;
+
+import session.contact;
+
+import windows.actions.buttons.sendmsg_button;
+ 
+public class follow_keyboard implements KeyListener {
+ 
+	private contact contact;
+	private JTextArea textenvoy;
+	private JTextArea textrecu;
+	private String text;
+	 
+	public follow_keyboard(contact ct, JTextArea textaenvoyer, JTextArea textprincipal) {
+		this.contact=ct;
+		this.textenvoy=textaenvoyer;
+		this.textrecu=textprincipal;
+	}
+	 
+	public void keyReleased(KeyEvent e) {
+		
+	}
+	 
+	public void keyTyped(KeyEvent e) {}
+	 
+	public void keyPressed(KeyEvent e) {
+		text = textenvoy.getText();
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			//String[] text2 = text.split("\n");
+			System.out.println(text);
+			//sendmsg_button smb = new sendmsg_button(contact,textenvoy,textrecu);
+			//smb.SendMsg();
+		}
+	}
+	 
+}

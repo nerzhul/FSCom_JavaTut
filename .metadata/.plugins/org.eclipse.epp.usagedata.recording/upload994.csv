@@ -1,0 +1,12 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265911376278
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265911383891
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265911387479
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265911388618
+closed,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265911388758
+stopped,bundle,org.eclipse.mylyn.ide.ant,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.ide.ant",1265911389008
+stopped,bundle,org.eclipse.ant.ui,3.4.1.v20090901_r351,"org.eclipse.ant.ui",1265911389008
+stopped,bundle,org.eclipse.compare.win32,1.0.0.I20090430-0408,"org.eclipse.compare.win32",1265911389024
+stopped,bundle,org.eclipse.mylyn.java.tasks,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.java.tasks",1265911389039
+stopped,bundle,org.eclipse.mylyn.java.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.java.ui",1265911389039
+stopped,bundle,org.eclipse.jdt.junit,3.5.1.r351_v20090708-0800,"org.eclipse.jdt.junit",1265911389039

@@ -1,0 +1,54 @@
+package windows;
+
+import javax.swing.JPanel;
+
+import windows.window.*;
+
+public class masterwindow {
+
+	private JPanel panel;
+	private static form_connect connect;
+	private static form_contact contact;
+	private static masterwindow current;
+	public masterwindow(JPanel pan){
+		panel = pan;
+		/*if(connect instanceof this) chercher la comparaison des types
+			connect=this;*/
+	}
+
+	public void Hide(){
+		getPanel().setVisible(false);
+	}
+	
+	public void Show(){
+		getPanel().setVisible(true);
+	}
+	
+	public JPanel getPanel(){ 
+		return this.panel; 
+	}
+	
+	public static void switch_panel(String args){
+		current.Hide();
+		masterwindow content=getWindowContent(args);
+		if(content != null){
+			current=content;
+			current.Show();
+		}else{
+			
+			//création
+		}
+			
+	}
+	
+	public static masterwindow getWindowContent(String args){
+		if(args.equals("connect"))
+			return connect;
+		else if(args.equals("contact"))
+			return contact;
+		else return null;
+	}
+
+	
+}
+

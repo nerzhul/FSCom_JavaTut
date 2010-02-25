@@ -1,0 +1,49 @@
+package windows.forms;
+public class MyRenderer extends DefaultTreeCellRenderer {
+ 
+ 
+	private static final long serialVersionUID = -3991603773928897980L;
+	private ImageIcon launcher;
+	private ImageIcon device;
+	private ImageIcon interfaceRule;
+	private ImageIcon smtpServer;
+	private ImageIcon group;
+	private ImageIcon person;
+	private ImageIcon rule;
+ 
+public MyRenderer(String l, String d, String ir, String ss, String g, String p, String r) {
+	launcher = new ImageIcon(l);
+	device = new ImageIcon(d);
+	interfaceRule = new ImageIcon(ir);
+	smtpServer = new ImageIcon(ss);
+	group = new ImageIcon(g);
+	person = new ImageIcon(p);
+	rule = new ImageIcon(r);
+}
+ 
+public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+    super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+    
+    DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+    
+    String nodeInfo = (String)(node.getUserObject());
+    
+    if (nodeInfo.equals("DEVICE")) {
+    	setIcon(device);
+    } else if (nodeInfo.equals("INTERFACERULE")) {
+    	setIcon(interfaceRule);
+    } else if (nodeInfo.equals("GROUP")) {
+    	setIcon(group);
+    } else if (nodeInfo.equals("PERSON")) {
+    	setIcon(person);
+    } else if (nodeInfo.equals("RULE")) {
+    	setIcon(rule);
+    } else if (nodeInfo.equals("SMTPSERVER")) {
+    	setIcon(smtpServer);
+    } else if (nodeInfo.equals("LAUNCHER")) {
+    	setIcon(launcher);
+    }
+    
+    return this;
+}
+}

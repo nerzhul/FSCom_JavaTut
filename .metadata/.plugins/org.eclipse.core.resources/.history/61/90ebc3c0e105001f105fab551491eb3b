@@ -1,0 +1,18 @@
+package user2.master;
+
+import javax.swing.SwingUtilities;
+
+import user2.pages.*;
+import user2.pages.connexion;
+
+
+public class Master {
+	public static void main(String[] args){
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				connexion fenetre = new connexion();
+				fenetre.setVisible(true);
+			}
+		});
+	}
+}

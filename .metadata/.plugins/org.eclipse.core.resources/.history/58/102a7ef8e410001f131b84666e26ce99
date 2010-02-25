@@ -1,0 +1,7 @@
+package windows.forms;
+
+import javax.swing.JComponent;
+
+public class CloseButton extends JComponent {
+
+}

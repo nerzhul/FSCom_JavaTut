@@ -1,0 +1,89 @@
+package windows.window;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class form_option extends JFrame{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel pan;
+	private JLabel Titre;
+	private JButton envoi;
+	private JPanel pannel2;
+	private JComboBox Selector;
+	  private String [] ColorList;
+
+	public form_option(JPanel pannel){
+		pannel2=pannel;
+		buildfenetre();	
+	}
+
+	private void buildfenetre(){
+		ColorList = new String [9];
+		ColorList [0] = "Red";
+		ColorList [1] = "Magenta";
+		ColorList [2] = "Blue";
+		ColorList [3] = "Cyan";
+		ColorList [4] = "Green";
+		ColorList [5] = "Yellow";
+		ColorList [6] = "White";
+		ColorList [7] = "Gray";
+		ColorList [8] = "Black";
+
+		Selector = new JComboBox (ColorList);
+		ItemListener aListener = null;
+		Selector.addItemListener(aListener);
+		
+		setTitle("Cookie Messenger - Préférence"); 
+		setSize(300,300); 
+		setLocationRelativeTo(null);
+		setResizable(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+		
+        pan=new JPanel();              
+        pan.setBackground(new Color(128,128,255));
+        pan.setLayout(new FlowLayout(FlowLayout.CENTER));   
+       
+        Titre = new JLabel("Préférence");
+		
+        pan.add(Titre); 
+
+        setContentPane(pan);        
+        setVisible(true);
+	}
+	
+	public void itemStateChanged(ItemEvent aListener) {
+	    int Selection;
+	    Selection = Selector.getSelectedIndex();
+	    if (Selection == 0) {
+	      pan.setBackground (Color.red);
+	    } else if (Selection == 1) {
+	      pan.setBackground (Color.magenta);
+	    } else if (Selection == 2) {
+	      pan.setBackground (Color.blue);
+	    } else if (Selection == 3) {
+	      pan.setBackground (Color.cyan);
+	    } else if (Selection == 4) {
+	      pan.setBackground (Color.green);
+	    } else if (Selection == 5) {
+	      pan.setBackground (Color.yellow);
+	    } else if (Selection == 6) {
+	      pan.setBackground (Color.white);
+	    } else if (Selection == 7) {
+	      pan.setBackground (Color.gray);
+	    } else if (Selection == 8) {
+	      pan.setBackground (Color.black);
+	    } 
+	  } 
+}

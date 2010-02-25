@@ -1,0 +1,15 @@
+
+import javax.swing.SwingUtilities;
+
+import windows.mainpage;
+import windows.window.form_connect;
+
+public class Master {
+	public static void main(String[] args){
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				new form_connect();
+			}
+		});
+	}
+}

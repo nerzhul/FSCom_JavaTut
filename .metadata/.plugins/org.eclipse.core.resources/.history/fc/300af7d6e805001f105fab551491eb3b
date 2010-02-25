@@ -1,0 +1,14 @@
+
+import javax.swing.SwingUtilities;
+import user.pages.connexion;
+
+public class Master {
+	public static void main(String[] args){
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				connexion fenetre = new connexion();
+				fenetre.setVisible(true);
+			}
+		});
+	}
+}

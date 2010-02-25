@@ -1,0 +1,28 @@
+package windows.window;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class Bouton_Changement_Pseudo implements ActionListener {
+
+	private String nomuser;
+	private JFrame fenetre;
+	public Bouton_Changement_Pseudo(String user) {
+		this.nomuser=user;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		reponse = JOptionPane.showInputDialog(fenetre,"Entrez le nom du contact à ajouter :",
+				"Nouveau contact",JOptionPane.QUESTION_MESSAGE);
+		if (reponse !=null && !reponse.equalsIgnoreCase(""))
+		{
+			//envoi au serveur du nouveau pseudo lié a l'user "nomuser"
+			JOptionPane.showMessageDialog(fenetre,"Le contact "+reponse+" a bien été ajouté !" );
+		}	
+	}
+
+}

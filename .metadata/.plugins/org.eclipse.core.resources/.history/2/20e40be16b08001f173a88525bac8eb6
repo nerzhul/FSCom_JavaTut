@@ -1,0 +1,35 @@
+package user;
+
+import java.util.Vector;
+
+public class group {
+	private Vector<String> groupedecontact; 
+	private String name;
+	
+	public group(String nom){ 
+		this.name=nom;	
+	}
+	
+	public void ajoutercontact(String nom){
+		groupedecontact.add(nom);
+	}
+	
+	public void supprimercontact(contact nom){
+		groupedecontact.remove(nom);
+	}
+	
+	public boolean hascontact(contact nom){
+		if(groupedecontact.contains(nom))
+			return true;
+		else
+			return false;
+	}
+	
+	public void setname(String nomgrp){
+		this.name=nomgrp;
+	}
+
+	public String getName(){
+		return this.name;
+	}
+}

@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+java.runtime.version,sysinfo,,,"1.6.0_17-b04",1265207630355
+java.specification.name,sysinfo,,,"Java Platform API Specification",1265207630355
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1265207630355
+java.specification.version,sysinfo,,,"1.6",1265207630355
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1265207630355
+java.version,sysinfo,,,"1.6.0_17",1265207630355
+java.vm.info,sysinfo,,,"mixed mode, sharing",1265207630355
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1265207630355
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1265207630355
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1265207630355
+java.vm.specification.version,sysinfo,,,"1.0",1265207630355
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1265207630355
+java.vm.version,sysinfo,,,"14.3-b01",1265207630355
+started,bundle,org.eclipse.mylyn.commons.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.commons.ui",1265207630403
+started,bundle,org.eclipse.jsch.core,1.1.100.I20090430-0408,"org.eclipse.jsch.core",1265207630410
+started,bundle,org.eclipse.team.cvs.core,3.3.200.I20090430-0408,"org.eclipse.team.cvs.core",1265207630411
+started,bundle,org.eclipse.mylyn.bugzilla.core,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.bugzilla.core",1265207630638
+started,bundle,org.eclipse.mylyn.bugzilla.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.bugzilla.ui",1265207630882
+started,bundle,org.eclipse.team.cvs.ui,3.3.201.R35x_v20090826-0905,"org.eclipse.team.cvs.ui",1265207631346
+started,bundle,org.eclipse.ui.forms,3.4.1.v20090714_35x,"org.eclipse.ui.forms",1265207631356
+started,bundle,org.eclipse.mylyn.context.core,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.context.core",1265207631479
+started,bundle,org.eclipse.mylyn.context.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.context.ui",1265207631491
+started,bundle,org.eclipse.mylyn.tasks.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.tasks.ui",1265207631779
+started,bundle,org.eclipse.mylyn.team.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.team.ui",1265207631900
+started,bundle,org.eclipse.update.scheduler,3.2.200.v20081127,"org.eclipse.update.scheduler",1265207631951

@@ -1,0 +1,75 @@
+package windows.actions;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+public class Clicks_Contact implements MouseListener {
+
+	private JList liste;
+	public Clicks_Contact(JList list) {
+		this.liste = list;
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		
+		//action sur double click d'un contact
+		if(e.getClickCount() == 2){
+			Object contact = liste.getSelectedValue();
+			
+			new form_conversation_avec(item);
+			
+			System.out.println("double cliqué sur " + contact);
+		}
+		   
+		//action sur click droit d'un contact
+		if (e.getButton() == 3){
+			
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if (e.getButton() == 3){
+			JPopupMenu menu = new JPopupMenu();
+			
+			int index = liste.locationToIndex(e.getPoint());
+	        liste.setSelectedIndex(index);
+			Object contact = liste.getSelectedValue();
+			
+			JMenuItem supprimer = new JMenuItem("Supprimer");
+			supprimer.addActionListener(new Clicks_Contact_Supprimer(contact));
+			JMenuItem bloquer = new JMenuItem("Bloquer");
+			bloquer.addActionListener(new Clicks_Contact_Bloquer(contact));
+			JMenuItem details = new JMenuItem("Voir les détails");
+			details.addActionListener(new Clicks_Contact_Details(contact));
+			menu.add(supprimer);
+			menu.add(bloquer);
+			menu.add(details);
+	        menu.show (e.getComponent(),e.getX(),e.getY());
+
+	        System.out.println("clique droit sur " + contact);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,72 @@
+package windows.forms;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+
+public class onglets extends JFrame{
+
+	private static final long serialVersionUID = 1L;
+	private JFrame fram;
+	private String contact;
+	public JTabbedPane onglets;
+	private JPanel panel;
+	
+	public onglets(Object interlocuteur) {
+		
+		contact = interlocuteur.toString();
+		
+		fram = new JFrame();
+		fram.setSize(new Dimension(200,200));
+		fram.setTitle("Cookie Messenger - Conversation"); 
+		fram.setSize(600,500); //420
+		fram.setLocationRelativeTo(null);
+		fram.setResizable(true);
+		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 		
+			
+		onglet();	
+		onglets = new JTabbedPane();
+	 	panel = contenuonglet();
+		onglets.add(interlocuteur,panel);
+	 	fram.add(onglets);
+	 	fram.setVisible(true);
+
+		}
+	
+	public JPanel onglet(){
+		JPanel pane = new JPanel();
+		pane.setLayout(new FlowLayout());
+		pane.setBackground(new Color(128,128,255));
+		pane.setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
+
+		JLabel Titretxt = new JLabel ("Entrez ici le texte à envoyer : ");
+	    JTextArea textprincipal = new JTextArea(15,50);
+	    textprincipal.setEditable(false);
+	    textprincipal.setLineWrap(true); 
+	    JTextArea textaenvoyer = new JTextArea(3,50);
+	    //textaenvoyer.addKeyListener(new Surveillance_clavier(contact,textaenvoyer,textprincipal));
+	    textaenvoyer.setLineWrap(true); 
+	    JButton envoi = new JButton("Envoyer !");
+		//envoi.addActionListener(new Bouton_envoi(contact,textaenvoyer,textprincipal));
+
+	    pane.add(textprincipal);
+	    JScrollPane scrollprincipal = new JScrollPane(textprincipal);
+	    pane.add(scrollprincipal);
+	    pane.add(Titretxt);
+	    pane.add(textaenvoyer);
+	    JScrollPane scrollenvoi = new JScrollPane(textaenvoyer);        
+	    pane.add(scrollenvoi);
+	    pane.add(envoi);
+		return pane;    
+	}
+}

@@ -1,0 +1,51 @@
+package user;
+
+public class contact {
+
+	private String nom;
+	private String pseudo;
+	private String phraseperso;
+	private boolean bloque;
+	
+	public contact(String nm, String pse, String phpers){
+		this.pseudo=pse;
+		this.nom=nm;
+		this.phraseperso=phpers;
+		this.bloque=false;
+	}
+	
+	public String getNom(){
+		return this.nom;
+	}
+	
+	public String getphraseperso(){
+		return this.phraseperso;
+	}
+	
+	public String getpseudo(){
+		return this.pseudo;
+	}
+	
+	public boolean getbloque(){
+		return this.bloque;
+	}
+	
+	public void setbloque(boolean status){
+		this.bloque=status;
+	}
+	
+	
+	public void setNom(String newnom){
+		this.nom=newnom;
+	}
+	
+	public void setphraseperso(String newphrase){
+		this.phraseperso=newphrase;
+	}
+	
+	public void setpseudo(String newpseudo){
+		this.pseudo=newpseudo;
+	}
+	
+	
+}

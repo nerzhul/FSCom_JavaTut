@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+java.vm.info,sysinfo,,,"mixed mode",1264622750311
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1264622750311
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1264622750311
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1264622750311
+java.vm.specification.version,sysinfo,,,"1.0",1264622750311
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1264622750311
+java.vm.version,sysinfo,,,"14.3-b01",1264622750311
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264622750584
+started,bundle,org.eclipse.ui.forms,3.4.1.v20090714_35x,"org.eclipse.ui.forms",1264622750621
+started,bundle,org.eclipse.mylyn.context.core,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.context.core",1264622750700
+started,bundle,org.eclipse.mylyn.context.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.context.ui",1264622750840
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1264622751106
+started,bundle,org.eclipse.mylyn.tasks.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.tasks.ui",1264622751127
+started,bundle,org.eclipse.mylyn.team.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.team.ui",1264622751163
+started,bundle,org.eclipse.update.scheduler,3.2.200.v20081127,"org.eclipse.update.scheduler",1264622751182
+started,bundle,org.eclipse.update.core,3.2.300.v20090525,"org.eclipse.update.core",1264622751222
+started,bundle,org.eclipse.mylyn.monitor.ui,3.2.2.v20090912-0400-e3x,"org.eclipse.mylyn.monitor.ui",1264622751397
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264622753990
+executed,command,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring.commands.deleteResources",1264622755730
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1264622755730
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264622755753
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264622759137
+executed,command,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring.commands.deleteResources",1264622760274
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1264622760274
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264622760297

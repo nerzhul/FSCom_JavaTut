@@ -1,0 +1,29 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import user.*;
+
+public class Clicks_Contact_Supprimer implements ActionListener {
+
+	private Object contact;
+	private JFrame fenetre;
+	public Clicks_Contact_Supprimer(Object contactasupprimer) {
+		this.contact=contactasupprimer;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		int reponse = JOptionPane.showConfirmDialog(fenetre, "Voulez-vous vraiment supprimer "+ contact +" ?","Important !!",JOptionPane.YES_NO_OPTION);
+		if (reponse == JOptionPane.YES_OPTION)
+		{
+			//envoi au serveur pour supprimer le "contact"
+			//puis maj list
+			JOptionPane.showMessageDialog(fenetre,"Le contact "+ contact +" a été supprimé avec succès !");
+		}
+	}
+}

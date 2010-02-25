@@ -1,0 +1,21 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import windows.window.form_conversation_avec;
+
+public class Clicks_Contact_Envoi implements ActionListener {
+
+	private Object contact;
+	public Clicks_Contact_Envoi(Object contactenvoi) {
+		this.contact=contactenvoi;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//new form_conversation_avec(contact);
+
+	}
+
+}

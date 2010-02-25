@@ -1,0 +1,73 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import windows.window.form_contact;
+
+public class Bouton_connect implements ActionListener {
+	//contenuUser() et contenuPass();
+	private JFrame fenetre;
+	private JComboBox status;
+	private JTextField username;
+	private JPasswordField passwd;
+	private boolean sauvegarde;
+	private String user;
+	private String pass;
+	public Bouton_connect(JFrame fram, JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) {
+		fenetre=fram;
+		this.status=statusco;
+		this.username=mail;
+		this.passwd=password;
+		sauvegarde=save.isSelected();
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+
+		boolean connectok=true;
+		if(connectok == true)
+		{
+			Object stat = status.getSelectedItem();
+			user = username.getText();
+			pass = new String(passwd.getPassword());
+			
+			//verif login-->server avec user qui est le nom d'utilisateur et pass qui est le password et on récupère le pseudo dans pseudo
+			String pseudo="kikoo";		
+			fenetre.dispose();
+			new form_contact(stat,pseudo);
+		}
+		else{
+			JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
+		}
+			
+		//save fichier
+	}
+	
+	public void savefichier(){
+		String chaine="";
+		String fichier ="fichier.txt";
+		chaine=user+":"+pass;
+		try {
+			FileWriter fw = new FileWriter (fichier);
+			BufferedWriter bw = new BufferedWriter (fw);
+			PrintWriter fichierSortie = new PrintWriter (bw); 
+				fichierSortie.println (chaine+"\n test de lecture et écriture !!"); 
+			fichierSortie.close();
+			System.out.println("Le fichier " + fichier + " a été créé!"); 
+		}
+		catch (Exception e){
+			System.out.println(e.toString());
+		}	
+	}
+
+}

@@ -1,0 +1,7 @@
+package windows.window;
+
+import java.awt.Component;
+
+public class PanelOnglet extends Component {
+
+}

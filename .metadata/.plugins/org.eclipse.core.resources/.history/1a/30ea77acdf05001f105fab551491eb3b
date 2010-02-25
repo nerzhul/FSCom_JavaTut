@@ -1,0 +1,27 @@
+package user2.menu;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+
+import user2.pageheritage.Page;
+
+
+	public class APropos extends AbstractAction
+				{
+				private static final long serialVersionUID = 5L;
+				
+					private Page fenetre;
+					
+					public APropos(Page page, String texte)
+					{
+						super(texte);
+						
+						this.fenetre = page;
+					}
+					
+					public void actionPerformed(ActionEvent e) { 
+						JOptionPane.showMessageDialog(fenetre, "blabla");
+					} 
+				}

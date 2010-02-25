@@ -1,0 +1,78 @@
+package windows.window;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+
+import windows.actions.Bouton_envoi;
+import windows.actions.Surveillance_clavier;
+
+public class form_conversation_avec extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
+	private Object interlocuteur;
+	private JPanel pan;
+	private JLabel Titre;
+	private JLabel Titretxt;
+	private JTextArea textprincipal;
+	private JTextArea textaenvoyer;
+	private JButton envoi;
+
+	public form_conversation_avec(Object contact){
+		this.interlocuteur=contact;
+		buildfenetre();	
+	}
+
+	private void buildfenetre(){
+		
+		setSize(new Dimension(200,200));
+		setTitle("Cookie Messenger - Conversation"); 
+		setSize(600,400); 
+		setLocationRelativeTo(null);
+		setResizable(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+		
+        pan=new JPanel();              
+        pan.setBackground(new Color(128,128,255));
+        pan.setLayout(new FlowLayout(FlowLayout.CENTER));   
+        
+        JTabbedPane panel = new JTabbedPane();
+        pan.add(panel);
+        /*Titre = new JLabel("Fenetre de conversation avec "+interlocuteur,JLabel.CENTER);
+        Titretxt = new JLabel ("Entrez ici le texte à envoyer : ");
+        textprincipal = new JTextArea(15,50);
+        textprincipal.setEditable(false);
+        textprincipal.setLineWrap(true); 
+        textaenvoyer = new JTextArea(3,50);
+        textaenvoyer.addKeyListener(new Surveillance_clavier(interlocuteur,textaenvoyer,textprincipal));
+        textaenvoyer.setLineWrap(true); 
+        envoi=new JButton("Envoyer !");
+		envoi.addActionListener(new Bouton_envoi(interlocuteur,textaenvoyer,textprincipal));
+		
+        pan.add(Titre); 
+        pan.add(textprincipal);
+        JScrollPane scrollprincipal = new JScrollPane(textprincipal);
+        pan.add(scrollprincipal);
+        pan.add(Titretxt);
+        pan.add(textaenvoyer);
+        JScrollPane scrollenvoi = new JScrollPane(textaenvoyer);        
+        pan.add(scrollenvoi);
+        pan.add(envoi);*/
+                
+        setContentPane(pan);        
+        setVisible(true);
+	}
+	
+	public JTextArea getText(){
+		return this.textaenvoyer;
+	}
+
+}

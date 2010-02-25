@@ -1,0 +1,30 @@
+package user;
+
+import java.util.Vector;
+
+public class appliuser extends user {
+	
+	private String status;
+	private Vector<group> mygroup;
+	public appliuser(String nm, String pse, String phpers, String stt) {
+		super(nm, pse, phpers);
+		this.status=stt;
+		mygroup = new Vector<group>();
+	}
+
+	public String gettatus(){
+		return this.status;
+	}
+	
+	public void setNom(String newstatus){
+		this.nom=newstatus;
+	}
+	
+	public void addGroup(String nmgrp){
+		mygroup.add(new group(nmgrp));
+	}
+	
+	public Vector<group> getGrp(){
+		
+	}
+}

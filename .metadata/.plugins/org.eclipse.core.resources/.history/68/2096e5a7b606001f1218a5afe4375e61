@@ -1,0 +1,21 @@
+package windows.bouton;
+
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.Icon;
+
+import windows.window.form_connect;
+
+public class Connexion implements Icon {
+
+	public Connexion(form_connect formConnect, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Connexion(form_connect formConnect, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+}

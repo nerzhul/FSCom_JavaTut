@@ -1,0 +1,56 @@
+package windows.window;
+
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import windows.masterwindow;
+
+public class form_connect extends masterwindow {
+	CardLayout cards=new CardLayout();
+	private JLabel Titre;
+	private JLabel labeluser;
+	private JLabel labelpass;
+	private JTextField mail;
+	private JPasswordField password;
+	private JButton connect;
+	
+	public form_connect(){
+		super(new JPanel());	
+		BuildPanel();
+		BuildContent();
+		
+	}
+
+	private void BuildPanel(){
+		getPanel().setLayout(new FlowLayout());
+		getPanel().setBackground(new Color(75,150,75));
+		getPanel().setLayout(new FlowLayout(FlowLayout.CENTER,50,10));
+		Titre=new JLabel("Bienvenue dans Chouch Messenger",JLabel.CENTER);
+		getPanel().add(Titre);
+	}
+	
+	private void BuildContent(){
+		labeluser = new JLabel("Adresse e-mail");
+		getPanel().add(labeluser);
+		mail = new JTextField(15);
+		getPanel().add(mail);
+		
+		labelpass = new JLabel("Mot de passe");
+		getPanel().add(labelpass);
+		password = new JPasswordField(15);
+		getPanel().add(password);	
+
+		connect=new JButton("Connexion");
+		getPanel().add(connect);
+	}
+	
+	
+
+}

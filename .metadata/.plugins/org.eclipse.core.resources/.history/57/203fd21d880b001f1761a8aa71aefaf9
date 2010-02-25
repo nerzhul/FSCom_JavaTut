@@ -1,0 +1,47 @@
+package windows.window;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.nio.channels.Selector;
+
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+
+public class Change_couleur implements ActionListener {
+
+	private JComboBox selct;
+	private JPanel pan;
+	public Change_couleur(JComboBox selector, JPanel pan) {
+		selct=selector;
+		pannel=pan;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		 int Selection;
+		    Selection = Selector.getSelectedIndex();
+		    if (Selection == 0) {
+		      pan.setBackground (Color.red);
+		    } else if (Selection == 1) {
+		      pan.setBackground (Color.magenta);
+		    } else if (Selection == 2) {
+		      pan.setBackground (Color.blue);
+		    } else if (Selection == 3) {
+		      pan.setBackground (Color.cyan);
+		    } else if (Selection == 4) {
+		      pan.setBackground (Color.green);
+		    } else if (Selection == 5) {
+		      pan.setBackground (Color.yellow);
+		    } else if (Selection == 6) {
+		      pan.setBackground (Color.white);
+		    } else if (Selection == 7) {
+		      pan.setBackground (Color.gray);
+		    } else if (Selection == 8) {
+		      pan.setBackground (Color.black);
+		    } 
+		  } 
+
+	}
+
+}

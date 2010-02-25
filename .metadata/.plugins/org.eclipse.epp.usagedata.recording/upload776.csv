@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1265200894998
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200895685
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200898571
+error,log,,,"The project description file (.project) for 'FSComClient' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.",1265200898586
+error,log,,,"Problems occurred opening the selected resources.",1265200898602
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200899179
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200902642
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200907198
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200909038
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200911846
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200914530
+executed,command,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring.commands.deleteResources",1265200914545
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1265200914545
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200918336
+started,bundle,org.eclipse.debug.core,3.5.0.v20090526-1600,"org.eclipse.debug.core",1265200936104
+started,bundle,org.eclipse.jdt.launching,3.5.0.v20090527,"org.eclipse.jdt.launching",1265200936229
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200938756
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.import",1265200938756
+started,bundle,org.eclipse.jdt.apt.core,3.3.201.R35x_v20090818-0235,"org.eclipse.jdt.apt.core",1265200939739
+started,bundle,org.eclipse.jdt.apt.pluggable.core,1.0.201.R35x_v20090818-0225,"org.eclipse.jdt.apt.pluggable.core",1265200939739
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200941221
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200953389
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.import",1265200953389
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200957227
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1265200982312

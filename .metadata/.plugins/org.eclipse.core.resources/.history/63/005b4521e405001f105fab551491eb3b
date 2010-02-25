@@ -1,0 +1,25 @@
+package actions;
+
+import javax.swing.JOptionPane;
+
+import user2.pages.Pageherit;
+import user2.pages.Pageprincipale;
+
+public class connexion {
+	boolean connectok=false;  
+	public static Pageherit fenetre;
+
+	public static Pageprincipale fenetreprincipale;
+
+	public connexion(){
+		fenetreprincipale= new Pageprincipale();
+	}
+	if(connectok == true)
+	{
+		fenetre.setVisible(false);
+		fenetreprincipale.setVisible(true);
+		
+	}
+	else
+		JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
+}

@@ -1,0 +1,45 @@
+package user2.menu;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+
+import user2.pages.Pageherit;
+import user2.pages.Pageconnecté;
+
+
+	
+				public class Connexion extends AbstractAction 
+				{
+				
+					private static final long serialVersionUID = 3L;
+
+
+					public static Pageconnecté fenetreconnectée = new Pageconnecté();
+
+								
+					private Pageherit fenetre;
+					
+					public Connexion(Pageherit page, String texte){
+						super(texte);
+						
+						this.fenetre = page;
+					}
+					
+					public void actionPerformed(ActionEvent e)
+					{ 
+						//TODO : test d'adresse mail et mot de passe avec Jabber
+						
+						boolean connecok=true;  
+							
+						if(connecok == true)
+						{
+							fenetre.setVisible(false);
+							fenetreconnectée.setVisible(true);
+							
+						}
+						else
+							JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
+					}
+				}

@@ -1,0 +1,21 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JComboBox;
+
+public class Changement_status implements ActionListener {
+
+	private JComboBox newstatus;
+	public Changement_status(JComboBox changstatus) {
+		this.newstatus=changstatus;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//balance au serveur de newstatus
+				
+	}
+
+}

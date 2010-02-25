@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264008333209
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264008334402
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008335175
+closed,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264008336003
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.delete",1264008336080
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008336126
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008338158
+error,log,,,"Internal Error",1264008344200
+error,log,,,"Problems encountered while moving resources.",1264008344200
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.edit.rename",1264008351542
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008351586
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264008356368
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264008358801
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008361070
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008364750
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008367896
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008369051
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264008371429
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264008374002
+deactivated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008381040
+activated,workbench,org.eclipse.ui.workbench,3.5.1.M20090826-0800a,"",1264008395927
+opened,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264008396006
+activated,editor,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1264008396128
+executed,command,org.eclipse.ui,3.5.1.M20090902-1000,"org.eclipse.ui.file.save",1264008426252
+activated,view,org.eclipse.jdt.ui,3.5.1.r351_v20090821-0800,"org.eclipse.jdt.ui.PackageExplorer",1264008437357

@@ -1,0 +1,66 @@
+package windows.window;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class form_option extends JFrame{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel pan;
+	private JLabel Titre;
+	private JButton envoi;
+	private JPanel pannel2;
+	private JComboBox Selector;
+	  private String [] ColorList;
+
+	public form_option(JPanel pannel){
+		pannel2=pannel;
+		buildfenetre();	
+	}
+
+	private void buildfenetre(){
+		ColorList = new String [9];
+		ColorList [0] = "Red";
+		ColorList [1] = "Magenta";
+		ColorList [2] = "Blue";
+		ColorList [3] = "Cyan";
+		ColorList [4] = "Green";
+		ColorList [5] = "Yellow";
+		ColorList [6] = "White";
+		ColorList [7] = "Gray";
+		ColorList [8] = "Black";
+		ColorList [8] = "Default";
+		
+		setTitle("Cookie Messenger - Préférence"); 
+		setSize(300,300); 
+		setLocationRelativeTo(null);
+		setResizable(true);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+		
+        pan=new JPanel();              
+        pan.setBackground(new Color(128,128,255));
+        pan.setLayout(new FlowLayout(FlowLayout.CENTER));   
+       
+        Titre = new JLabel("Couleur de la fenetre des contacts :");
+    	Selector = new JComboBox (ColorList);
+		Selector.addActionListener(new Change_couleur(Selector,pan));
+		
+        pan.add(Titre); 
+        pan.add(Selector);
+        setContentPane(pan);        
+        setVisible(true);
+	}
+	
+	   
+}

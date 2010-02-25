@@ -1,0 +1,13 @@
+package user;
+
+public class appliuser extends user {
+	
+	private String status;
+	
+	public appliuser(String nm, String pse, String phpers) {
+		super(nm, pse, phpers);
+		
+	}
+
+	
+}

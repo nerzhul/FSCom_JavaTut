@@ -1,0 +1,43 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import windows.window.form_contact;
+
+public class Bouton_connect implements ActionListener {
+	//contenuUser() et contenuPass();
+	private JFrame fenetre;
+	private JComboBox status;
+	private String pseudo;
+	public Bouton_connect(JFrame fram, JComboBox statusco, String pseudoco) {
+		fenetre=fram;
+		this.status=statusco;
+		this.pseudo=pseudoco;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+
+		//verif login-->server
+		boolean connectok=true;
+		if(connectok == true)
+		{
+			Object truc = status.getSelectedItem();
+			System.out.println(truc +"-"+ pseudo);
+			
+			
+			fenetre.dispose();
+			new form_contact();
+		}
+		else{
+			JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
+		}
+			
+
+	}
+
+}

@@ -1,0 +1,21 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import user.contact;
+
+public class Clicks_Contact_Supprimer implements ActionListener {
+
+	private Object contact;
+	public Clicks_Contact_Supprimer(Object contactasupprimer) {
+		this.contact=contactasupprimer;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		supprimercontact(contact);
+
+	}
+
+}

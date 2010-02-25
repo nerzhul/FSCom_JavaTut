@@ -1,0 +1,70 @@
+package windows.window;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+
+import windows.actions.Bouton_envoi;
+import windows.actions.Surveillance_clavier;
+
+public class PanelOnglet extends JPanel {
+
+	public JTabbedPane onglets;
+	private String interlocuteur;
+	private JFrame frame;
+	private JPanel pane;
+	
+	public PanelOnglet(final Object contact, final JFrame fram) {
+		interlocuteur = contact.toString();
+		frame=fram;
+	 	onglets = new JTabbedPane();
+    
+	 	contenuonglet();
+	 	onglets.add(interlocuteur,pane);
+	 	fram.add(onglets);
+	}
+	public void contenuonglet(){
+		JPanel pane = new JPanel();
+		pane.setLayout(new FlowLayout());
+		pane.setBackground(new Color(128,128,255));
+		pane.setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
+
+		JLabel Titretxt = new JLabel ("Entrez ici le texte à envoyer : ");
+	    JTextArea textprincipal = new JTextArea(15,50);
+	    textprincipal.setEditable(false);
+	    textprincipal.setLineWrap(true); 
+	    JTextArea textaenvoyer = new JTextArea(3,50);
+	    textaenvoyer.addKeyListener(new Surveillance_clavier(interlocuteur,textaenvoyer,textprincipal));
+	    textaenvoyer.setLineWrap(true); 
+	    JButton envoi = new JButton("Envoyer !");
+		envoi.addActionListener(new Bouton_envoi(interlocuteur,textaenvoyer,textprincipal));
+
+	    pane.add(textprincipal);
+	    JScrollPane scrollprincipal = new JScrollPane(textprincipal);
+	    pane.add(scrollprincipal);
+	    pane.add(Titretxt);
+	    pane.add(textaenvoyer);
+	    JScrollPane scrollenvoi = new JScrollPane(textaenvoyer);        
+	    pane.add(scrollenvoi);
+	    pane.add(envoi);
+	    
+	    JButton nouveau = new JButton("Ajouter un onglet");
+		nouveau.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				onglets.add("Onglet N°", new PanelOnglet(interlocuteur, frame));
+			}
+		});
+		pane.add(nouveau);
+	    
+	}
+}

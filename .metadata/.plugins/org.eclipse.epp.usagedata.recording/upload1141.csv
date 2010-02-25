@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+arch,sysinfo,,,"x86",1267016427943
+ws,sysinfo,,,"gtk",1267016427943
+locale,sysinfo,,,"fr_FR",1267016427943
+processors,sysinfo,,,"2",1267016427944
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1267016427944
+java.runtime.version,sysinfo,,,"1.6.0_15-b03",1267016427944
+java.specification.name,sysinfo,,,"Java Platform API Specification",1267016427944
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1267016427944
+java.specification.version,sysinfo,,,"1.6",1267016427944
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1267016427944
+java.version,sysinfo,,,"1.6.0_15",1267016427944
+java.vm.info,sysinfo,,,"mixed mode, sharing",1267016427944
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1267016427944
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1267016427944
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1267016427944
+java.vm.specification.version,sysinfo,,,"1.0",1267016427944
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1267016427944
+java.vm.version,sysinfo,,,"14.1-b02",1267016427944
+started,bundle,org.eclipse.equinox.p2.garbagecollector,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.garbagecollector",1267016428015
+started,bundle,org.eclipse.equinox.p2.exemplarysetup,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.exemplarysetup",1267016428090
+started,bundle,org.eclipse.equinox.frameworkadmin,1.0.100.v20090520-1905,"org.eclipse.equinox.frameworkadmin",1267016428093
+started,bundle,org.eclipse.equinox.frameworkadmin.equinox,1.0.100.v20090520-1905,"org.eclipse.equinox.frameworkadmin.equinox",1267016428095
+started,bundle,org.eclipse.equinox.simpleconfigurator.manipulator,1.0.100.v20090520-1905,"org.eclipse.equinox.simpleconfigurator.manipulator",1267016428111
+started,bundle,org.eclipse.equinox.p2.updatechecker,1.1.0.v20090520-1905,"org.eclipse.equinox.p2.updatechecker",1267016428161
+started,bundle,org.eclipse.equinox.p2.ui.sdk.scheduler,1.0.0.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.scheduler",1267016428207

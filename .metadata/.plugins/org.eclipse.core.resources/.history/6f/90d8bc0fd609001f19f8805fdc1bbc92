@@ -1,0 +1,32 @@
+package windows.actions;
+
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Bouton_envoi implements ActionListener {
+
+	//supprimer box;
+	private String contact;
+	private TextArea textarea;
+	private TextArea box;
+	private String text;
+	public Bouton_envoi(Object interlocuteur, TextArea textaenvoyer, TextArea boxprincipal) {
+		this.contact=interlocuteur.toString();
+		this.textarea=textaenvoyer;
+		this.box=boxprincipal;
+
+		clean_et_envoi();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		clean_et_envoi();
+	}
+
+	public void clean_et_envoi(){
+		this.text=textarea.getText();
+		//envoi du message contenu dans "text" a "contact"
+		textarea.setText("");
+		box.setText(box.getText()+"J'ai écrit : "+text);
+	}
+}

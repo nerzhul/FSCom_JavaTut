@@ -1,0 +1,30 @@
+package windows.actions;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+public class Menu_principal {
+	
+	public Menu_principal(){
+		BuildMenu();
+	}
+	JMenuBar menuBar = new JMenuBar();
+	JMenu menu1 = new JMenu("Menu");
+	JMenu menu2 = new JMenu("?");
+	JMenuItem quitter;
+	JMenuItem aPropos;
+	
+	/*contenu du menu "menu":*/
+	quitter = new JMenuItem("Quitter");
+	quitter.addActionListener(new Menu_principal_quit());
+	menu1.add(quitter);
+	menuBar.add(menu1);
+
+	/*contenu du menu "?":*/
+	aPropos = new JMenuItem("A propos");
+	aPropos.addActionListener(new Menu_principal_apropos());
+	menu2.add(aPropos);
+	menuBar.add(menu2);
+	setJMenuBar(menuBar);
+}

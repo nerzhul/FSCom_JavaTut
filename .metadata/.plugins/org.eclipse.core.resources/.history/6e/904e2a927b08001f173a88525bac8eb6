@@ -1,0 +1,23 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
+import windows.mainpage;
+
+public class Clicks_Contact_Details implements ActionListener {
+
+	private Object contact;
+	private mainpage fenetre;
+	public Clicks_Contact_Details(Object contactavoir) {
+		this.contact=contactavoir;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JOptionPane.showMessageDialog(fenetre,"Nom : " + GetNom()...........);
+	}
+
+}

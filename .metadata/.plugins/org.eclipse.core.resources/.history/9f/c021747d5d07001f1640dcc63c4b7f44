@@ -1,0 +1,62 @@
+package windows;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import windows.actions.Bouton_action_connect;
+import windows.actions.Menu_action_apropos;
+import windows.actions.Menu_action_quit;
+import windows.window.form_connect;
+
+
+@SuppressWarnings("serial")
+public class mainpage extends JFrame{
+
+	private masterwindow mainpanel;
+	
+	public mainpage(){
+		
+		BuildPage();
+		BuildMenu();
+	}
+	
+	private void BuildPage(){
+		setTitle("Cookie Messenger Powaaa"); 
+		setSize(300,600); 
+		setLocationRelativeTo(null);
+		setResizable(false); 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	private void BuildMenu(){
+
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu1 = new JMenu("Menu");
+		JMenu menu2 = new JMenu("?");
+		JMenuItem quitter;
+		JMenuItem aPropos;
+		
+		/*contenu du menu "menu":*/
+		quitter = new JMenuItem("Quitter");
+		quitter.addActionListener(new Menu_action_quit());
+		menu1.add(quitter);
+		menuBar.add(menu1);
+
+		/*contenu du menu "?":*/
+		aPropos = new JMenuItem("A propos");
+		aPropos.addActionListener(new Menu_action_apropos());
+		menu2.add(aPropos);
+		menuBar.add(menu2);
+		setJMenuBar(menuBar);
+	}
+	
+	public masterwindow GetMainPanel() { 
+        return this.mainpanel;
+	}
+
+}

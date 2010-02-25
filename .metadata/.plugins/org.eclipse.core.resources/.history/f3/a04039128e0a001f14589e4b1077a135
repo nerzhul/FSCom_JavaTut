@@ -1,0 +1,37 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+public class Menu_Changement_Pseudo implements ActionListener {
+
+	private JFrame fenetre;
+	private String reponse;
+	private JLabel newtitle;
+	
+	public Menu_Changement_Pseudo(JLabel lab){
+		newtitle=lab;
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		reponse = JOptionPane.showInputDialog(fenetre,"Entrez votre nouveau pseudo :",
+				"Nouveau pseudo",JOptionPane.QUESTION_MESSAGE);
+		System.out.println(reponse);
+		if (reponse !=null && !reponse.equals("")) 
+		{
+			if(reponse.length()<20)
+			{
+				reponse.substring(0,1).equals(" ");
+				//envoi au serveur du nouveau pseudo
+				newtitle.setText("Vous etes connecté en tant que "+reponse+" !");
+				JOptionPane.showMessageDialog(fenetre,"Vous etes maintenant connu sous le nom de "+reponse+" !" );
+			}else
+				JOptionPane.showMessageDialog(fenetre,"Nouveau pseudo trop long !" );
+		}	
+	}
+
+}

@@ -1,0 +1,43 @@
+	class CloseButton extends JLabel
+	{
+		
+		private static final long serialVersionUID = 184842104821L;
+		
+ 
+ 
+		/**
+		 * 
+		 * @param tab
+		 */
+		public CloseButton(final TitledTab tab)
+		{
+			super( Images._16x16_CLOSE, JLabel.CENTER );
+			this.setVerticalAlignment( JLabel.CENTER );
+			setPreferredSize( new Dimension( 15, 8 ) );
+			setBorder( BorderFactory.createEmptyBorder( 0, 0, 0, 0 ) );
+			setToolTipText( Messages.getMessage( "fermer" ) );
+			
+			addMouseListener( new MouseAdapter()
+			{
+				public void mouseEntered(MouseEvent e)
+				{
+					setBorder( BorderFactory.createEtchedBorder() );
+					validate();
+				}
+ 
+				public void mouseExited(MouseEvent e)
+				{
+					setBorder( BorderFactory.createEmptyBorder( 0, 0, 0, 0 ) );
+					validate();
+				}
+				
+				public void mouseClicked(MouseEvent e)
+				{
+					tab.getTabbedPanel().removeTab( tab );
+					System.gc();
+				}
+				
+			} );
+		}
+		
+	}

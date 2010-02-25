@@ -1,0 +1,71 @@
+package user2.pageconnec;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+import user2.pageheritage.Page;
+
+
+public class Pageconnecté extends Page implements ActionListener
+{
+	private static final long serialVersionUID = 1L;
+	private JTextField mail;
+	private JPasswordField password;
+	private JLabel label;
+	private JLabel label2;
+	
+	
+	
+		public Pageconnecté()
+		{	super();
+			fenetreprincconnectée();//On initialise notre fenetre
+		}
+	
+		private JPanel contenufenetreconnec()
+		{
+			JPanel panel = new JPanel();
+			
+			panel.setLayout(new FlowLayout());
+			panel.setBackground(new Color(50,50,150)); //on change la couleur de fond de la fenetre
+			JLabel labelbienvenue = new JLabel("Bienvenue dans Chouch messenger"); //message d'acceuil
+			panel.add(labelbienvenue);
+				
+			
+			return panel;
+		}
+		
+		
+		 //fonction pour recup les champs adresse e-mail et mot de passe
+				
+				
+				private void fenetreprincconnectée()
+				{
+					setTitle("Bienvenue ! vous êtes connecté avec succès !"); //On donne un titre a l'application
+					setSize(800,600); //On donne une taille a notre fenetre
+					setLocationRelativeTo(null); //On centre la fenetre sur l'ecran
+					setResizable(false); //On interdit la redimensionnement de la fenetre
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit a l'application de se fermer lors du clic sur la croix
+					setContentPane(Pageglobale());
+					setContentPane(contenufenetreconnec()); //on appelle la methode qui ajoutera du texte dans notre fenetre
+				}
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+	}
+				
+
+
+
+
+	
+	
+	
+	
+	

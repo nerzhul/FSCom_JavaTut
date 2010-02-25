@@ -1,0 +1,31 @@
+package windows.actions;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import windows.window.form_connect;
+import windows.window.form_contact;
+
+public class Bouton_connect implements ActionListener {
+	//contenuUser() et contenuPass();
+	private JFrame fenetre;
+	public void actionPerformed(ActionEvent e) {
+
+		//verif login-->server
+		boolean connectok=true;
+		if(connectok == true)
+		{
+			Dispose();
+			new form_contact();
+		}
+		else{
+			JOptionPane.showMessageDialog(fenetre, "Mauvais mot de passe ou mail");
+		}
+			
+
+	}
+
+}
