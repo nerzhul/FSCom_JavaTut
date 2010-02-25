@@ -2,8 +2,6 @@ package session;
 
 import java.util.Vector;
 
-import misc.Log;
-
 public class SessionHandler {
 
 	private static Vector<session> v_sess;
