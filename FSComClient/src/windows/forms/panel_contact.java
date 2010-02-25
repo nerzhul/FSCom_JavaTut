@@ -135,7 +135,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
-		//GenerateNodes();
+		GenerateNodes();
 
 		tree.repaint();
 	}

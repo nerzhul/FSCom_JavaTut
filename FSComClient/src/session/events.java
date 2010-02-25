@@ -115,12 +115,15 @@ public class events {
 
 	public static void ContactModifyStatus(Object packet) 
 	{
-		// TODO : split the packet
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)packet;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(pck.getUid()))
 				{
-					// TODO: modify contact status
+					ct.setStatus(Integer.decode(pck.getDat()));
 					return;
 				}
 	}

@@ -25,7 +25,7 @@ public class follow_keyboard implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{			
-			box.setText(box.getText()+"J'ai écrit : " + text.getText() + "\n");
+			box.setText(box.getText() + "J'ai écrit : " + text.getText().trim() + "\n");
 			SendMsgTo_handler pck = new SendMsgTo_handler(text.getText().trim(),contact);
 			pck.Send();
 			text.setText("");
