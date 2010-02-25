@@ -12,7 +12,6 @@ import socket.packet.Packet_handler;
 
 public class Listener extends Thread
 {
-	
 	Socket sockt;
 	ObjectInputStream in;
 	

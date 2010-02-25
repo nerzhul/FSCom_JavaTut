@@ -78,6 +78,7 @@ public class events {
 			Log.outError("Malformed Msg to Transmit");
 			return;
 		}
+		
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
 		Log.outError(_uid + msg.getMsg());
@@ -183,7 +184,6 @@ public class events {
 
 	public static void ContactDeleted(Object packet) 
 	{
-		// TODO: split the packet
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
@@ -241,5 +241,34 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
+	}
+
+	public static void GroupAdded(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)data;
+		group gr = new group(pck.getUid(), pck.getDat());
+		Session.getGroups().add(gr);
+		// TODO: refresh tree		
+	}
+
+	public static void GroupDeleted(Object data) 
+	{
+		Integer _gid = Integer.decode(data.toString());
+		if(_gid.equals(0))
+			return;
+		
+		for(group g: Session.getGroups())
+		{
+			if(g.getGid().equals(_gid))
+			{
+				// TODO: delete group and move contacts
+				
+				return;
+			}
+		}
+		
 	}
 }

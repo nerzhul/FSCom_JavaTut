@@ -110,7 +110,10 @@ public class Packet_handler
 					// TODO: force disconnect client
 					break;
 				case 0x26:
-					// TODO: add group and update it
+					events.GroupAdded(data);
+					break;
+				case 0x28:
+					events.GroupDeleted(data);
 					break;
 				case 0x0C:
 				case 0x0F:
@@ -135,6 +138,7 @@ public class Packet_handler
 				case 0x21:
 				case 0x24:
 				case 0x25:
+				case 0x27:
 					pcktrecv = new ServerSide_handler(this.opcode_id);
 					break;
 				default:
