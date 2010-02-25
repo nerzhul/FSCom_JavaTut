@@ -12,7 +12,7 @@ import windows.actions.buttons.CloseAllConversTabs_button;
 import windows.actions.buttons.CloseButton_button;
 
 public class form_communicate extends JFrame{
-
+//essai
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	public TabbedPanel TabPan;
