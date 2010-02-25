@@ -10,7 +10,7 @@ import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
 import thread.threading;
-import windows.windowthread;
+import thread.windowthread;
 import windows.forms.form_communicate;
 import misc.Log;
 

@@ -1,4 +1,4 @@
-package windows;
+package thread;
 
 import javax.swing.SwingUtilities;
 

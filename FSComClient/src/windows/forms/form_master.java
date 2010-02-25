@@ -1,13 +1,11 @@
 package windows.forms;
 
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import windows.SwingExtendLib.SwingEL;
 import windows.actions.menus.*;
 
 public class form_master extends JFrame
@@ -66,8 +64,8 @@ public class form_master extends JFrame
 		JMenu menu1 = new JMenu("Menu");
 		JMenu menu2 = new JMenu("?");
 		
-		AddItem(menu1,"Quitter",new menubar_quit());
-		AddItem(menu1,"A propos",new menubar_a_propos());
+		SwingEL.AddItemToMenuBar(menu1,"Quitter",new menubar_quit());
+		SwingEL.AddItemToMenuBar(menu1,"A propos",new menubar_a_propos());
 		menuBar.add(menu1);
 		menuBar.add(menu2);
 		
@@ -81,25 +79,18 @@ public class form_master extends JFrame
 		JMenu menu2 = new JMenu("?");
 		JMenu menu3 = new JMenu("Option");
 		
-		AddItem(menu1,"Quitter",new menubar_quit());
-		AddItem(menu1,"Ajouter un contact",new menubar_addcontact());
-		AddItem(menu1,"Ajouter un groupe",new menubar_addgroup());
-		AddItem(menu1,"Changer de pseudo",new menubar_changepseudo());
-		AddItem(menu1,"Se déconnecter",new menubar_disconnect(this));
-		AddItem(menu2,"A propos...",new menubar_a_propos());
+		SwingEL.AddItemToMenuBar(menu1,"Quitter",new menubar_quit());
+		SwingEL.AddItemToMenuBar(menu1,"Ajouter un contact",new menubar_addcontact());
+		SwingEL.AddItemToMenuBar(menu1,"Ajouter un groupe",new menubar_addgroup());
+		SwingEL.AddItemToMenuBar(menu1,"Changer de pseudo",new menubar_changepseudo());
+		SwingEL.AddItemToMenuBar(menu1,"Se déconnecter",new menubar_disconnect(this));
+		SwingEL.AddItemToMenuBar(menu2,"A propos...",new menubar_a_propos());
 		//AddItem(menu3,"Préférences",new Menu_pref(getpannel()));
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);
 		menuBar.add(menu2);
 		fram.setJMenuBar(menuBar);
-	}
-
-	private void AddItem(JMenu menu, String label, ActionListener obj)
-	{
-		JMenuItem temp = new JMenuItem(label);
-		temp.addActionListener(obj);
-		menu.add(temp);
 	}
 	
 	public panel_contact getPanContact() { return (panel_contact) pan_contact; } 
