@@ -12,6 +12,7 @@ import socket.packet.objects.Message;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;
+import windows.forms.onglet_communicate;
 import misc.Log;
 
 public class events {
@@ -81,28 +82,28 @@ public class events {
 		
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
-		Log.outError(_uid + msg.getMsg());
 		form_communicate fmSpeak = windowthread.getFmConn().getPanContact().getComm();
 		if(fmSpeak == null)
 		{
 			windowthread.getFmConn().getPanContact().setComm(new form_communicate());
+			fmSpeak = windowthread.getFmConn().getPanContact().getComm();
+		}
+		
+		onglet_communicate ongl = fmSpeak.GetContactConvers(_uid);
+		if(ongl == null)
+		{
 			contact ct = Session.getContactByUid(_uid);
 			if(ct != null)
+			{
 				windowthread.getFmConn().getPanContact().getComm().AddTab(ct);
+				ongl = fmSpeak.GetContactConvers(_uid);
+				ongl.WriteMsg(msg.getMsg());
+			}
 			else
 				Log.outError("Contact" + _uid + " not exist for client");
 		}
 		else
-		{
-			if(fmSpeak.GetContactConvers(_uid) != null)
-			{
-				// TODO: écrire dans l'onglet
-			}
-			else
-			{
-				// TODO: créer onglet et convers
-			}
-		}		
+			ongl.WriteMsg(msg.getMsg());
 	}
 
 	public static void ContactModifyStatus(Object packet) 
@@ -115,7 +116,6 @@ public class events {
 					// TODO: modify contact status
 					return;
 				}
-		
 	}
 
 	public static void ContactModifyPseudo(Object packet) 

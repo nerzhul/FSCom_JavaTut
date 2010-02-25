@@ -18,20 +18,22 @@ public class onglet_communicate extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private contact ct;
+	private JTextArea MainText;
 	public onglet_communicate(contact noeud)
 	{
 		super();
-		ct=noeud;
+		ct	=	noeud;
 		CreateTab();
 	}
 	
-	public void CreateTab(){
+	public void CreateTab()
+	{
 		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
 		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
 
 		JLabel TitleText = new JLabel ("Entrez ici le texte a envoyer : ");
-	    JTextArea MainText = new JTextArea(15,50);
+	    MainText = new JTextArea(15,50);
 	    MainText.setEditable(false);
 	    MainText.setLineWrap(true); 
 	    JTextArea txt = new JTextArea(3,50);
@@ -51,7 +53,10 @@ public class onglet_communicate extends JPanel{
 	    add(envoi);
 	}
 
-	public contact GetContact(){
-		return ct;
+	public void WriteMsg(String msg)
+	{
+		MainText.setText(MainText.getText() + ct.getPseudo() +" a ecrit : "+ msg + "\n");
 	}
+	
+	public contact GetContact() { return ct; }
 }
