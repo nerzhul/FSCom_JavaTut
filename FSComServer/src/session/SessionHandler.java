@@ -2,6 +2,8 @@ package session;
 
 import java.util.Vector;
 
+import misc.Log;
+
 public class SessionHandler {
 
 	private static Vector<session> v_sess;
@@ -13,8 +15,10 @@ public class SessionHandler {
 
 	public static void AddSession(session sess)
 	{
-		if(sess != null)
-			v_sess.add(sess);
+		if(sess == null)
+			return;
+		
+		v_sess.add(sess);
 		for(session s : v_sess)
 			if(!s.equals(sess))
 				if(s.know_contact(sess.getUid()) && !sess.has_blocked(s.getUid()))

@@ -50,8 +50,8 @@ public class session {
 	public void connect_client()
 	{
 		connected = true;
-		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
+		SessionHandler.AddSession(this);
 		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
 		LoadBlockedContacts();
@@ -84,7 +84,7 @@ public class session {
 	public boolean know_contact(Integer _uid)
 	{
 		if(DatabaseTransactions.DataExist("acc_contact", "uid", "contact = '" + _uid + "'" +
-				" AND uid = '" + uid + "'"))
+				" AND uid = '" + this.getUid() + "'"))
 			return true;
 		else
 			return false;

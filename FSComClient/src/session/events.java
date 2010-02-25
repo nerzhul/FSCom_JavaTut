@@ -140,6 +140,9 @@ public class events {
 					if(ct.getCid().equals(pck.getUid()))
 					{
 						ct.setPseudo(pck.getDat());
+						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+						if(fmCom != null)
+							fmCom.ChangeConversTabTitle(pck.getUid(),pck.getDat());
 						return;
 					}
 		}
