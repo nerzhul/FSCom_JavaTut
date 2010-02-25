@@ -1,19 +1,17 @@
 package thread;
 
 import session.Session;
-import socket.sender;
+import socket.Sender;
 import windows.windowthread;
 
-public class threading extends Thread{
-
-	private static sender thsend;
+public class threading extends Thread
+{
+	private static Sender thsend;
 	private Session m_sess;
 	private windowthread m_window;
-	
-	public threading()
-	{
-	}
-	
+
+	public threading()	{}
+
 	public void run()
 	{
 		LaunchSession(true);
@@ -23,38 +21,38 @@ public class threading extends Thread{
 	public static void LaunchSender(boolean new_thr)
 	{
 		if(new_thr)
-			thsend = new sender();
+			thsend = new Sender();
 		thsend.start();
 	}
-	
+
 	public static void StopSender()
 	{
 		if(thsend != null)
 		{
-			thsend.StopListener();
+			Sender.StopListener();
 			thsend.interrupt();
 		}
 	}
-	
+
 	public void LaunchSession(boolean new_thr)
 	{
 		if(new_thr)
 			m_sess = new Session();
 		m_sess.start();
 	}
-	
+
 	public void StopSession()
 	{
 		if(m_sess != null)
 			m_sess.interrupt();
 	}
-	
+
 	public void LaunchSwingInterface()
 	{
 		m_window = new windowthread();
 		m_window.start();
 	}
-	
+
 	public void StopSwingInterface()
 	{
 		if(m_window != null)

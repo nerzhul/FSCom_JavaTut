@@ -10,8 +10,10 @@ import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
-import socket.packet.handlers.senders.cont_connected_handler;
-import socket.packet.handlers.senders.cont_disconct_handler;
+import socket.packet.handlers.senders.Cont_Connected_handler;
+import socket.packet.handlers.senders.Cont_Disconct_handler;
+import socket.packet.objects.IdAndData;
+import socket.packet.objects.Message;
 
 import database.DatabaseFunctions;
 import database.DatabaseTransactions;
@@ -21,6 +23,7 @@ public class session {
 	private boolean connected;
 	private Integer status;
 	private String name;
+	private String pseudo;
 	private String personnal_msg;
 	private Integer uid;
 	private Thread thr_associated;
@@ -35,6 +38,7 @@ public class session {
 		status = 0;
 		name = "";
 		personnal_msg = "";
+		setPseudo("");
 		thr_associated = thr;
 		sess_linked = new Vector<session>();
 		sock = sockt;
@@ -45,6 +49,7 @@ public class session {
 		connected = true;
 		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
+		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
 		LoadBlockedContacts();
 		// TODO : send all invitations
@@ -67,7 +72,7 @@ public class session {
 		
 		if(!block)
 			sess_linked.add(sess);
-		cont_connected_handler pck = new cont_connected_handler(sess.getName(),
+		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
 				sess.getStatus().toString(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
 			pck.Send(sock);
@@ -81,19 +86,29 @@ public class session {
 		else
 			return false;
 	}
+	
+	public boolean has_group(Integer _gid)
+	{
+		if(DatabaseTransactions.DataExist("acc_group", "uid", "gid = '" + _gid + "'" +
+				" AND uid = '" + uid + "'"))
+			return true;
+		else
+			return false;
+	}
+	
 	public void contact_disconnected(session sess, boolean blocked)
 	{
 		if(sess == null)
 			return;
 		
-		cont_disconct_handler pck = new cont_disconct_handler(sess.getUid());
+		Cont_Disconct_handler pck = new Cont_Disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
 		
 		if(!blocked)
-			for(int i=0;i<sess_linked.size();i++)
-				if(sess_linked.get(i).equals(sess))
-					sess_linked.remove(i);
+			for(session s : sess_linked)
+				if(s.equals(sess))
+					sess_linked.remove(s);
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -107,11 +122,21 @@ public class session {
 	
 	public void broadcast_SomethingChanged(int sth) 
 	{
-		for(int i=0;i<sess_linked.size();i++)
+		switch(sth)
+		{
+			case 2:
+				this.SendPseudoToMe(0, name);
+				break;
+			case 3:
+				this.SendMsgPersoToMe(0, personnal_msg);
+				break;
+		}
+		
+		for(session s : sess_linked)
 		{
 			boolean blocked = false;
-			for(int j=0;j<uid_blocked.size();j++)
-				if(uid_blocked.get(i) == sess_linked.get(i).getUid())
+			for(Integer i : uid_blocked)
+				if(i.equals(s.getUid()))
 					blocked = true;
 			
 			if(!blocked)
@@ -119,17 +144,18 @@ public class session {
 				switch(sth)
 				{
 					case 1:
-						sess_linked.get(i).SendStatusToMe(uid, status);
+						s.SendStatusToMe(uid, status);
 						break;
 					case 2:
-						sess_linked.get(i).SendPseudoToMe(uid, name);
+						s.SendPseudoToMe(uid, name);
 						break;
 					case 3:
-						sess_linked.get(i).SendMsgPersoToMe(uid, personnal_msg);
+						s.SendMsgPersoToMe(uid, personnal_msg);
 						break;
 				}
 			}
 		}
+		
 	}
 	
 	private void SendMsgPersoToMe(Integer _uid, String pmsg) 
@@ -154,8 +180,8 @@ public class session {
 		else
 		{
 			contact_connected(SessionHandler.getContactByUID(Integer.decode(c_uid)), true);
-			for(int i=0;i<uid_blocked.size();i++)
-				if(uid_blocked.get(i).equals(Integer.decode(c_uid)))
+			for(Integer i : uid_blocked)
+				if(i.equals(Integer.decode(c_uid)))
 					uid_blocked.remove(i);
 		}
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
@@ -165,23 +191,21 @@ public class session {
 		else
 			DatabaseTransactions.ExecuteQuery("INSERT INTO acc_blocked VALUES ('" + uid + "','" 
 					+ c_uid + "','" + method + "");
-				
 	}
 	
-	
-	
 	public void TransmitMsgTo(Object packet) {
-		String cut_pck[] = packet.toString().split("#-%-#");
-		if(cut_pck.length != 2)
+		if(!packet.getClass().equals((new Message(null,null)).getClass()))
 		{
 			Log.outError("Malformed Msg to Transmit");
 			return;
 		}
 		
-		Integer _uid = Integer.decode(cut_pck[0]);
+		Message msg = (Message) packet;
+		Integer _uid = msg.getDest();
 		if(SessionHandler.getContactByUID(_uid) != null)
 			if(!SessionHandler.getContactByUID(_uid).has_blocked(uid))
-				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,cut_pck[1]);
+				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,msg.getMsg());
+	
 	}
 	
 	private void SendMessageToMe(Integer _uid, String msg)
@@ -214,50 +238,39 @@ public class session {
 		broadcast_SomethingChanged(3);
 	}
 	
-	public String AddContact(Object packet) 
+	public contact AddContact(Object packet) 
 	{
-		String pck[] = packet.toString().split("||[]||");
-		if(pck.length != 2)
-			return "5";
-		
-		String username = pck[0].toString();
-		Integer group = Integer.decode(pck[1]);
-		String result = "1";
+		String username = packet.toString();
 		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'") &&
 				!username.equals(DatabaseFunctions.getAccountNameByUID(uid)))
 		{
 			Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
 			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
 			{
-				if(DatabaseTransactions.DataExist("acc_group", "gid", "uid = '" + uid + "' AND" +
-						" gid = '" + group + "'"))
+				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
+						_uid + "','0','','0'");
+				
+				if(SessionHandler.isConnected(_uid))
 				{
-					
-					DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
-							_uid + "','0','','" + group + "'");
-					
-					if(SessionHandler.isConnected(_uid))
-					{
-						Invitation invit = new Invitation(uid, _uid, true);
-						invit.Send(SessionHandler.getContactByUID(_uid).getSocket());
-					}
-					else
-						new Invitation(uid,_uid,false);
-					
-					result = (0 + "[)[)" + _uid);
+					Invitation invit = new Invitation(uid, _uid, true);
+					invit.Send(SessionHandler.getContactByUID(_uid).getSocket());
 				}
 				else
-					result = (4 + "[)[)" + _uid);
-
+					new Invitation(uid,_uid,false);
+				
+				return new contact(_uid, 0, DatabaseTransactions.StringQuery(
+						"account", "pseudo", "uid = '" + _uid + "'"), 
+						DatabaseTransactions.StringQuery(
+								"account", "phr_perso", "uid = '" + _uid + "'"),
+						DatabaseTransactions.StringQuery("acc_contact", "comment",
+						"contact = '" + _uid + "'"), 0, 0);
 			}
 			else
-				result = (2 + "[)[)" + _uid);
+				return null;
 		}
-		
-		return result;
+		else
+			return null;
 	}
-	
-	
 
 	public void ManageInvitation(Integer _uid, Integer method) 
 	{
@@ -295,10 +308,25 @@ public class session {
 				+ "contact = '" + _uid + "'");
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
 				+ "uid = '" + _uid + "'");
-		if(SessionHandler.isConnected(_uid));
-			for(int i=0;i<sess_linked.size();i++)
-				if(sess_linked.get(i).getUid().equals(_uid))
-					sess_linked.remove(i);
+		if(SessionHandler.isConnected(_uid))
+			for(session s : sess_linked)
+				if(s.getUid().equals(_uid))
+					sess_linked.remove(s);
+	}
+	
+	public void EventContactGroupChange(Object data) 
+	{
+		IdAndData dat = (IdAndData) data;
+		if(dat.getUid() > 0)
+			if(know_contact(dat.getUid()))
+			{
+				Integer tmpgid = Integer.decode(dat.getDat());
+				if(tmpgid >= 0)
+					if(has_group(tmpgid) || tmpgid.equals(0))
+						DatabaseTransactions.ExecuteUQuery("acc_contact", "group",
+							tmpgid.toString(), " contact = '" + dat.getUid() + "'");
+					
+			}
 	}
 	
 	public Vector<session> getLinkedSessions() { return sess_linked; }
@@ -312,6 +340,8 @@ public class session {
 	public String getPersonnalMsg() { return personnal_msg; }
 	public void SetPersonnalMsg(String msg) { personnal_msg = msg; }
 	public Socket getSocket() { return sock; }
+	public void setPseudo(String pseudo) { this.pseudo = pseudo; }
+	public String getPseudo() { return pseudo; }
 
 	
 

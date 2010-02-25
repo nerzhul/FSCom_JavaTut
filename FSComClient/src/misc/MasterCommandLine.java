@@ -38,10 +38,6 @@ public class MasterCommandLine{
 		{
 			pck = new cmd_ping();
 		}
-		else if(command[0].equals("connect"))
-		{
-			pck = new cmd_connect(command[1]);
-		}
 		
 		if(pck != null && pck.HasValidData())
 		{

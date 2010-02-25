@@ -12,10 +12,6 @@ import windows.actions.menus.*;
 
 public class form_master extends JFrame
 {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame fram;
 	private JPanel pan_connect;
@@ -35,7 +31,8 @@ public class form_master extends JFrame
 		fram.setSize(300,600); 
 		fram.setLocationRelativeTo(null);
 		fram.setResizable(false);
-		fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pan_connect = pan_contact = null;
 	}
 	
 	public void BuildPanel(int i) 
@@ -44,47 +41,38 @@ public class form_master extends JFrame
 		{
 			case 1:
 				Menubar_Connect();
-				if(pan_contact!=null)
+				if(pan_contact != null)
 					fram.remove(pan_contact);
+				
 				pan_connect = new panel_connect(this);
-				fram.add(pan_connect);        
+				fram.add(pan_connect);
 				fram.setVisible(true);
 				break;
 			case 2:	
 				Menubar_contact();
-				fram.remove(pan_connect);
+				if(pan_connect != null)
+					fram.remove(pan_connect);
+
 				pan_contact = new panel_contact();
 				fram.add(pan_contact);
 				fram.setVisible(true);
 				break;
 		}
-		
 	}
 
-	public JFrame getFrame(){
-		return this.fram;
-	}
-	
 	private void Menubar_Connect() 
 	{
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu1 = new JMenu("Menu");
 		JMenu menu2 = new JMenu("?");
-		JMenuItem quitter;
-		JMenuItem aPropos;
-		
-		quitter = new JMenuItem("Quitter");
-		quitter.addActionListener(new menubar_quit());
-		menu1.add(quitter);
-		menuBar.add(menu1);
 
-		aPropos = new JMenuItem("A propos");
-		aPropos.addActionListener(new menubar_a_propos());
-		menu2.add(aPropos);
+		AddItem(menu1,"Quitter",new menubar_quit());
+		AddItem(menu2,"A Propos...",new menubar_a_propos());
+
+		menuBar.add(menu1);
 		menuBar.add(menu2);
 		
 		fram.setJMenuBar(menuBar);
-
 	}
 	
 	private void Menubar_contact() 
@@ -98,20 +86,22 @@ public class form_master extends JFrame
 		AddItem(menu1,"Ajouter un contact",new menubar_addcontact());
 		AddItem(menu1,"Ajouter un groupe",new menubar_addgroup());
 		AddItem(menu1,"Changer de pseudo",new menubar_changepseudo());
-		AddItem(menu1,"Se déconnecter",new menubar_disconnect(this));
+		AddItem(menu1,"Se dï¿½connecter",new menubar_disconnect(this));
 		AddItem(menu2,"A propos...",new menubar_a_propos());
-		//AddItem(menu3,"Préférences",new Menu_pref(getpannel()));
+		//AddItem(menu3,"Prï¿½fï¿½rences",new Menu_pref(getpannel()));
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);
 		menuBar.add(menu2);
 		fram.setJMenuBar(menuBar);
 	}
-	
+
 	private void AddItem(JMenu menu, String label, ActionListener obj)
 	{
 		JMenuItem temp = new JMenuItem(label);
 		temp.addActionListener(obj);
 		menu.add(temp);
 	}
+	
+	public panel_contact getPanContact() { return (panel_contact) pan_contact; } 
 }

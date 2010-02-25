@@ -74,6 +74,22 @@ public class DatabaseTransactions {
 		}
 	}
 	
+	public static void ExecuteUQuery(String tb, String chp, String val, String cond)
+	{
+		String query = "UPDATE `" + tb + "` SET `" + chp + "` = '" + val + "'";
+		if(!cond.equals(""))
+			query += " WHERE " + cond;
+		try 
+		{
+			Statement stmt = connect.createStatement();
+			stmt.executeUpdate(query);
+		} 
+		catch (SQLException e) 
+		{
+		      Log.outError("Query : " + query + " failed. Maybe one resource doesn't exist");
+		}
+	}
+	
 	public static Integer IntegerQuery(String table,String col, String cond)
 	{
 		Integer res = 0;
@@ -151,10 +167,8 @@ public class DatabaseTransactions {
 	{
 		Vector<Integer> ints = new Vector<Integer>();
 		Vector<Object> tmpvect = getObjectList(table,col,cond);
-		for(int i=0;i<tmpvect.size();i++)
-		{
-			ints.add(Integer.decode(tmpvect.get(i).toString()));
-		}
+		for(Object o : tmpvect)
+			ints.add(Integer.decode(o.toString()));
 		
 		return ints;
 	}

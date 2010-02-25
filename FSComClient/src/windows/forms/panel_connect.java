@@ -17,13 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import windows.actions.buttons.connect_button;
+import windows.actions.buttons.Connect_button;
 
 public class panel_connect extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel Titre;
 	private JLabel labeluser;
@@ -34,16 +31,14 @@ public class panel_connect extends JPanel {
 	private JComboBox status;
 	private JCheckBox save;
 	private String autouser,autopass;
-	private form_master fram;
 	
-	public panel_connect(form_master formFram){
-		auto();
-		fram=formFram;
+	public panel_connect(form_master formFram)
+	{
+		ReadSavedVariables();
 		BuildFenetre();
-
 	}
 
-	private void auto()
+	private void ReadSavedVariables()
 	{
 		autouser = "";
 		autopass = "";
@@ -98,8 +93,7 @@ public class panel_connect extends JPanel {
 		if(autouser!="" && autopass !="")
 			save.setSelected(true);
 		connect=new JButton("Connexion");
-		connect.addActionListener(new connect_button(status,mail,password,save,fram));
-
+		connect.addActionListener(new Connect_button(status,mail,password,save));
 
 		add(Titre);
 		add(labeluser);

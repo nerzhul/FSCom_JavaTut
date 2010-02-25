@@ -3,8 +3,23 @@ package windows.forms;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.Vector;
-
+import java.awt.Point;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,22 +28,29 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import session.Session;
-import session.objects.group;
-import windows.actions.buttons.changestatus_button;
+import session.contact;
+import session.group;
+import socket.packet.handlers.sends.MoveGroup_handler;
+import windows.actions.buttons.ChangeStatus_button;
 import windows.actions.click.contact_onclick;
 
-public class panel_contact extends JPanel{
+public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel Titre;
 	private JLabel Soustitre;
 	private JTree  tree;
-	private String pseudo;
 	private JComboBox changstatus;
+	private form_communicate comm;
 
+	private DragSource dragSource = null;
+	private DefaultMutableTreeNode selecContact = null;
+	private DefaultMutableTreeNode dropContact = null;
+	
 	private int status2;
 	private JTextField msgperso;
 
@@ -42,9 +64,9 @@ public class panel_contact extends JPanel{
 		
 		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
-		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
+		setLayout(new FlowLayout(FlowLayout.CENTER,400,10));
 		
-		Titre=new JLabel("Vous etes connecté en tant que " + pseudo,JLabel.CENTER);
+		Titre = new JLabel(Session.getPseudo());
 		
 		changstatus= new JComboBox();
 		
@@ -53,8 +75,9 @@ public class panel_contact extends JPanel{
 		changstatus.addItem("AFK");
 		changstatus.addItem("Offline");
 		changstatus.setSelectedIndex(status2);
-		changstatus.addActionListener(new changestatus_button(changstatus));
+		changstatus.addActionListener(new ChangeStatus_button(changstatus));
 		msgperso = new JTextField(20);
+		msgperso.setText(Session.getPerso_msg());
 		
 		Soustitre = new JLabel("Liste de vos contacts : ");
 		
@@ -63,33 +86,14 @@ public class panel_contact extends JPanel{
 		add(msgperso);
 		add(Soustitre);
 		
-		setlistcontact();	    
+		SetListContact();	
+		
+		comm = null;
 	}
 	
-	private void setlistcontact()
+	private void SetListContact()
 	{
-		Vector<group> groups = Session.getGroups();
-		
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Contactlist");
-		 
-		// Adding nodes
-		for(int i=0;i<groups.size();i++)
-		{
-			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(groups.get(i).getGname());
-			root.add(tmp_grp);
-			for(int j=0;j<groups.get(i).getContacts().size();j++)
-			{
-				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(groups.get(i).getContacts().get(j).getPseudo() + "(" +
-						groups.get(i).getContacts().get(j).getMsg_perso() + ")");
-				tmp_grp.add(tmp_contact);	
-			}
-		}
-		     
-		// Construction du modèle de l'arbre.
-		DefaultTreeModel myModel = new DefaultTreeModel(root);
-		 
-		// Construction de l'arbre.
-		tree = new JTree(myModel);
+		GenerateNodes();
 		
 		/*
 		// Construction d'un afficheur par défaut.
@@ -106,13 +110,109 @@ public class panel_contact extends JPanel{
 		myTree.setCellRenderer(myRenderer);
 		*/
 
+		new DropTarget(tree, this);
+	    dragSource = new DragSource();
+	    dragSource.createDefaultDragGestureRecognizer(tree, DnDConstants.ACTION_MOVE, this);
+	 
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		tree.addMouseListener(new contact_onclick(tree));
+		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
 		this.add(tree);
 		JScrollPane Scrollbar = new JScrollPane(tree);
 		Scrollbar.setPreferredSize(new Dimension(150, 300));
 		this.add(Scrollbar);
 	}
+	
+	private void GenerateNodes()
+	{
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Contactlist");
+		
+		for(group g : Session.getGroups())
+		{
+			DefaultMutableTreeNode tmp_grp = new DefaultMutableTreeNode(g);
+			root.add(tmp_grp);
+			for(contact ct : g.getContacts())
+			{
+				DefaultMutableTreeNode tmp_contact = new DefaultMutableTreeNode(ct);
+				tmp_grp.add(tmp_contact);	
+			}
+		}
+		
+		// Construction du modèle de l'arbre.
+		DefaultTreeModel myModel = new DefaultTreeModel(root);
+		 
+		// Construction de l'arbre.
+		tree = new JTree(myModel);
+	}
+	
+	public void RefreshContactList()
+	{
+		GenerateNodes();
+	}
 
+	public void setComm(form_communicate comm) { this.comm = comm; }
+	public form_communicate getComm() { return comm; }
+	
+	public void ChPseudo(String n_pseudo) {	Titre.setText("Pseudo : " + n_pseudo); }
+
+	/*
+	 * Drag and Drop
+	 */
+	public void dragEnter(DropTargetDragEvent e) {	e.acceptDrag(DnDConstants.ACTION_MOVE);	}
+	public void dragGestureRecognized(DragGestureEvent e) 
+	{
+		selecContact = null;
+	    dropContact = null;
+	    Object selected = tree.getSelectionPath();
+
+	    if (selected != null) 
+	    {
+	      TreePath treepath = (TreePath) selected;
+	      selecContact = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+	      if(selecContact.getLevel() == 1)
+	    	  return;
+	      dragSource.startDrag(e, DragSource.DefaultMoveDrop, new StringSelection(selected.toString()), this);
+	    }
+	}
+
+	public void drop(DropTargetDropEvent e) 
+	{
+		 Transferable transferable = e.getTransferable();
+		 
+		 if (transferable.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+		     e.acceptDrop(DnDConstants.ACTION_MOVE);
+		     Point dropPoint = e.getLocation();
+		     TreePath dropPath = tree.getClosestPathForLocation(dropPoint.x,dropPoint.y);
+		     dropContact = (DefaultMutableTreeNode) dropPath.getLastPathComponent();
+		     if(dropContact.getLevel() == 2)
+		    	 return;
+		     e.getDropTargetContext().dropComplete(true);
+		 }
+		 else
+		    e.rejectDrop();
+	}
+	
+	public void dragDropEnd(DragSourceDropEvent e) {
+		if (e.getDropSuccess()) {
+			if (dropContact == null)
+		        return;
+		    else
+		    {
+		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
+			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
+			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
+					  ((group)dropContact.getUserObject()).getGid());
+			  pck.Send();
+			  
+		    }
+		}
+	}
+	
+	public void dragExit(DropTargetEvent arg0) {}
+	public void dragOver(DropTargetDragEvent arg0) {}
+	public void dropActionChanged(DropTargetDragEvent arg0) {}
+	public void dragEnter(DragSourceDragEvent dsde) {}
+	public void dragExit(DragSourceEvent dse) {}
+	public void dragOver(DragSourceDragEvent dsde) {}
+	public void dropActionChanged(DragSourceDragEvent dsde) {}
 }

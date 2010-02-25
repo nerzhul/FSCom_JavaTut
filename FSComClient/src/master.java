@@ -1,13 +1,13 @@
 import java.io.IOException;
 
 import misc.Log;
+import socket.ServerList;
 import thread.*;
 
 public class master
 {
-
 	private static threading thr_lib;
-	final static String version = "Alpha 0.5.5";
+	final static String version = "Alpha 0.5.16";
 	
 	public master()	{}
 	
@@ -15,6 +15,7 @@ public class master
 	{
 		Log.outString("FSS Com Client version " + version);
 		
+		new ServerList();
 		thr_lib = new threading();
 		thr_lib.start();
 	}

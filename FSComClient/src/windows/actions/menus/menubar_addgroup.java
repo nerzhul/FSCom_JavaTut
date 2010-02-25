@@ -15,17 +15,16 @@ public class menubar_addgroup implements ActionListener {
 	
 		reponse = JOptionPane.showInputDialog(fenetre,"Entrez le nom du groupe à ajouter :",
 				"Nouveau groupe",JOptionPane.QUESTION_MESSAGE);
-		if (reponse !=null && !reponse.equalsIgnoreCase(""))
+		if (reponse != null && !reponse.equalsIgnoreCase(""))
 		{
 			if(reponse.length()<20)
 			{
 				//envoi au serveur du nouveau groupe
-				JOptionPane.showMessageDialog(fenetre,"Le groupe "+reponse+" a bien été créé !" );
-			}else
-				JOptionPane.showMessageDialog(fenetre,"Nouveau groupe trop long !" );
+			}
+			else
+				JOptionPane.showMessageDialog(fenetre,"Le nom du groupe est trop long !" );
 			
 		}	
-
 	}
 
 }

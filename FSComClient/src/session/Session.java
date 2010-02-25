@@ -2,8 +2,6 @@ package session;
 
 import java.util.Vector;
 
-import session.objects.contact;
-import session.objects.group;
 
 public class Session extends Thread{
 
@@ -42,10 +40,10 @@ public class Session extends Thread{
 	
 	public static void CreateNewContact(contact cont)
 	{
-		for(int i=0;i<groups.size();i++)
-			if(groups.get(i).getGid() == cont.getGroup())
+		for(group gr:groups)
+			if(gr.getGid().equals(cont.getGroup()))
 			{
-				groups.get(i).AddContact(cont);
+				gr.AddContact(cont);
 				return;
 			}
 	}
@@ -53,6 +51,15 @@ public class Session extends Thread{
 	public static void CreateNewGroup(group grp)
 	{
 		groups.add(grp);
+	}
+	
+	public static contact getContactByUid(Integer _uid)
+	{
+		for(group g: getGroups())
+			for(contact ct: g.getContacts())
+				if(ct.getCid().equals(_uid))
+					return ct;
+		return null;
 	}
 	
 	public static void setStatus(Integer st) { Session.status = st;	}
@@ -66,7 +73,7 @@ public class Session extends Thread{
 	public static void ClearGroups() { getGroups().clear(); }
 	public static void ClearContacts() 
 	{ 
-		for(int i=0;i<getGroups().size();i++)
-			getGroups().get(i).getContacts().clear();		
+		for(group gr:getGroups())
+			gr.getContacts().clear();
 	}
 }
