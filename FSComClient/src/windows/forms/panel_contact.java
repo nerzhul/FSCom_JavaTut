@@ -51,7 +51,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private DefaultMutableTreeNode selecContact = null;
 	private DefaultMutableTreeNode dropContact = null;
 	
-	private int status2;
 	private JTextField msgperso;
 
 	public panel_contact()
@@ -74,7 +73,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		changstatus.addItem("Busy");
 		changstatus.addItem("AFK");
 		changstatus.addItem("Offline");
-		changstatus.setSelectedIndex(status2);
+		changstatus.setSelectedIndex(Session.getStatus());
 		changstatus.addActionListener(new ChangeStatus_button(changstatus));
 		msgperso = new JTextField(20);
 		msgperso.setText(Session.getPerso_msg());

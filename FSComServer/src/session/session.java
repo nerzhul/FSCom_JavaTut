@@ -75,6 +75,8 @@ public class session {
 		
 		if(!block)
 			sess_linked.add(sess);
+		// TODO : handle if blocked
+		sess.sess_linked.add(this);
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
 				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
