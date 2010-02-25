@@ -5,6 +5,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 
 import socket.Sender;
+import socket.packet.ConnectData;
 import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
@@ -52,11 +53,17 @@ public class events {
 
 	public static void ContactConnected(Object packet) 
 	{
+		if(!packet.getClass().equals((new ConnectData("",0,"",0)).getClass()))
+			return;
+		
+		ConnectData cn = (ConnectData)packet;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(cn.getStatus()))
 				{
-					// TODO: declare contact connected to client
+					ct.setStatus(cn.getStatus());
+					ct.setPseudo(cn.getName());
+					ct.setMsg_perso(cn.getPersoP());
 					return;
 				}
 	}

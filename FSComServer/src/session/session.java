@@ -76,7 +76,7 @@ public class session {
 		if(!block)
 			sess_linked.add(sess);
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
-				sess.getStatus().toString(),sess.getPersonnalMsg(),sess.getUid());
+				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
 			pck.Send(sock);
 	}
@@ -109,9 +109,12 @@ public class session {
 			pck.Send(sock);
 		
 		if(!blocked)
-			for(session s : sess_linked)
+			for(int i=0;i<sess_linked.size();i++)
+			{
+				session s = sess_linked.get(i);
 				if(s.equals(sess))
 					sess_linked.remove(s);
+			}				
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -158,7 +161,6 @@ public class session {
 				}
 			}
 		}
-		
 	}
 	
 	private void SendMsgPersoToMe(Integer _uid, String pmsg) 
