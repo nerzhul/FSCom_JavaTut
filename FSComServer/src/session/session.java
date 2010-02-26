@@ -255,7 +255,7 @@ public class session {
 			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
 			{
 				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
-						_uid + "','0','','0'");
+						_uid + "','0','','0')");
 				
 				if(SessionHandler.isConnected(_uid))
 				{

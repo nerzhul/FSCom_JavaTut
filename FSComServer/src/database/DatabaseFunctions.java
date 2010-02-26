@@ -5,7 +5,7 @@ public class DatabaseFunctions {
 	
 	public static Integer getAccountUIDByName(String name)
 	{
-		return DatabaseTransactions.IntegerQuery("account", "uid", "name = '" + name + "'");
+		return DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
 	}
 	
 	public static String getAccountNameByUID(Integer uid)
