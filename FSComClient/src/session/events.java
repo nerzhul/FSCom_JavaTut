@@ -209,15 +209,14 @@ public class events {
 
 	public static void RecvInvitation(Object packet) 
 	{
-		String[] dat = packet.toString().split("[][]");
-		if(dat.length != 2)
-			Log.outError("Bad invitation received !");
-		else
-		{
-			Integer answer = JOptionPane.showConfirmDialog(null, dat[1] + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
-			Answer_Invit_handler arh = new Answer_Invit_handler(Integer.decode(dat[0]), answer);
-			arh.Send();
-		}
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+
+		IdAndData pck = (IdAndData)packet;
+
+		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+		Answer_Invit_handler arh = new Answer_Invit_handler(pck.getUid(), answer);
+		arh.Send();
 	}
 
 	public static void ConnectionError() 
