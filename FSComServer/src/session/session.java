@@ -252,10 +252,11 @@ public class session {
 				!username.equals(DatabaseFunctions.getAccountNameByUID(uid)))
 		{
 			Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
-			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
+			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND contact = '"
+					+ _uid + "'"))
 			{
 				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
-						_uid + "','0','','0')");
+						_uid + "','','0','0')");
 				
 				if(SessionHandler.isConnected(_uid))
 				{

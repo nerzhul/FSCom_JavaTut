@@ -19,7 +19,7 @@ public class Invitation {
 
 	private void RegisterInvitation()
 	{
-		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_invitation VALUES ('" + uid_invited + "','" + uid + "'");
+		DatabaseTransactions.ExecuteQuery("INSERT IGNORE INTO acc_invitation VALUES ('" + uid_invited + "','" + uid + "')");
 	}
 	
 	public void Send(Socket sock) 
