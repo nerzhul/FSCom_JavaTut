@@ -15,7 +15,7 @@ public final class ServerList {
 		iplist = new String[MAX_MIRROR];
 		iplist[0] = "127.0.0.1";
 		iplist[1] = "127.0.0.1";
-		iplist[2] = "127.0.0.1";
+		iplist[2] = "127.0.9.56";
 		iplist[3] = "127.0.0.1";	
 	}
 	
