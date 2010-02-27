@@ -152,6 +152,8 @@ public class Packet_handler
 				case 0x26:
 				case 0x28:
 				case 0x2A:
+				case 0x2B:
+				case 0x2C:
 					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:
