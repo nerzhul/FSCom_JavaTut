@@ -2,7 +2,8 @@ package windows.forms;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -20,6 +21,9 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,6 +40,7 @@ import session.contact;
 import session.group;
 import socket.packet.handlers.sends.MoveGroup_handler;
 import windows.actions.buttons.ChangeStatus_button;
+import windows.actions.click.chang_avatar;
 import windows.actions.click.contact_onclick;
 
 public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
@@ -60,12 +65,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 
 	private void BuildPanel()
 	{
-		
-		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
-		setLayout(new FlowLayout(FlowLayout.CENTER,400,10));
 		
-		Titre = new JLabel(Session.getPseudo());
+		ImageIcon a = new ImageIcon ("avatar.jpg"); //modif par l'image
+	    Image avatar = scale(a.getImage(),80,80);
+	    JLabel image = new JLabel( new ImageIcon(avatar));
+		image.addMouseListener(new chang_avatar());
+	    
+		Titre = new JLabel(Session.getPseudo()+" ");
 		
 		changstatus= new JComboBox();
 		
@@ -80,6 +87,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		
 		Soustitre = new JLabel("Liste de vos contacts : ");
 		
+		add(image);
 		add(Titre);
 		add(changstatus);
 		add(msgperso);
@@ -123,7 +131,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modèle de l'arbre.
+		// Construction du mod?le de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
@@ -137,6 +145,20 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		GenerateNodes();
 
 		tree.repaint();
+		tree.updateUI();/*a essayer 
+			
+		ou
+		
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+		DefaultTreeModel model = new DefaultTreeModel(root);
+		Jtree tree = new JTree(model);
+		tree.repaint();
+
+		ou
+
+		((DefaultTreeModel) tree.getModel()).reload();
+		
+		*/
 	}
 
 	public void setComm(form_communicate comm) { this.comm = comm; }
@@ -192,9 +214,22 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
 					  ((group)dropContact.getUserObject()).getGid());
 			  pck.Send();
-			  
+
 		    }
 		}
+	}
+
+	public static Image scale(Image source, int width, int height) {
+	    /* On crée une nouvelle image aux bonnes dimensions. */
+	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+	    /* On dessine sur le Graphics de l'image bufferisée. */
+	    Graphics2D g = buf.createGraphics();
+	    g.drawImage(source, 10, 10, width, height, null);
+	    g.dispose();
+
+	    /* On retourne l'image bufferisée, qui est une image. */
+	    return buf;
 	}
 	
 	public void dragExit(DropTargetEvent arg0) {}

@@ -1,16 +1,20 @@
 package windows.forms;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.MatteBorder;
 
 import session.contact;
-
 import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
 
@@ -19,6 +23,12 @@ public class onglet_communicate extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private contact ct;
 	private JTextArea MainText;
+
+	
+	/*TO DO : 
+	 * Changement de pseudo + image + status
+	 */
+	
 	public onglet_communicate(contact noeud)
 	{
 		super();
@@ -28,10 +38,8 @@ public class onglet_communicate extends JPanel{
 	
 	public void CreateTab()
 	{
-		setLayout(new FlowLayout());
 		setBackground(new Color(128,128,255));
-		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
-
+		
 		JLabel TitleText = new JLabel ("Entrez ici le texte a envoyer : ");
 	    MainText = new JTextArea(15,50);
 	    MainText.setEditable(false);
@@ -42,9 +50,29 @@ public class onglet_communicate extends JPanel{
 	    txt.setLineWrap(true); 
 	    JButton envoi = new JButton("Envoyer !");
 	    envoi.addActionListener(new SendMsg_button(ct,txt,MainText));
-
+	    
+	    ImageIcon a = new ImageIcon ("avatar.jpg"); //modif par l'image
+	    Image avatar = scale(a.getImage(),80,80);
+	    JLabel image = new JLabel( new ImageIcon(avatar));
+	    image.setText(ct.getPseudo());
+	    
+	    MatteBorder borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
+	    MatteBorder borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
+	    MatteBorder borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
+	    MatteBorder borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
+	    if (ct.getStatus().equals(0) || ct.getStatus().equals(4))
+	    	image.setBorder(borderoffline);
+	    else if (ct.getStatus().equals(1))
+	    	image.setBorder(borderonline);
+	    else if (ct.getStatus().equals(2))
+	    	image.setBorder(borderbusy);
+	    else if (ct.getStatus().equals(3))
+	    	image.setBorder(borderafk);
+	    
+        add(image);
 	    add(MainText);
 	    JScrollPane MainScroll = new JScrollPane(MainText);
+	    MainScroll.setAutoscrolls(true);
 	    add(MainScroll);
 	    add(TitleText);
 	    add(txt);
@@ -59,4 +87,19 @@ public class onglet_communicate extends JPanel{
 	}
 	
 	public contact GetContact() { return ct; }
+	
+	public static Image scale(Image source, int width, int height) {
+	    /* On crée une nouvelle image aux bonnes dimensions. */
+	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+	    /* On dessine sur le Graphics de l'image bufferisée. */
+	    Graphics2D g = buf.createGraphics();
+	    g.drawImage(source, 10, 10, width, height, null);
+	    g.dispose();
+
+	    /* On retourne l'image bufferisée, qui est une image. */
+	    return buf;
+	}
 }
+
+
