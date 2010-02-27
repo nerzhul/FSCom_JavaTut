@@ -6,7 +6,7 @@ import java.io.*;
 import session.events;
 import socket.packet.Packet;
 import thread.threading;
-import windows.windowthread;
+import thread.windowthread;
 
 import misc.Log;
 import misc.MasterCommandLine;

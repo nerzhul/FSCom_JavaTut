@@ -3,22 +3,25 @@ package windows.actions.click;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import session.contact;
+import session.group;
+import windows.SwingExtendLib.SwingEL;
 import windows.forms.form_communicate;
 import windows.forms.panel_contact;
 
 //import windows.window.form_conversation_avec;
-public class contact_onclick implements MouseListener {
+public class contact_onclick implements MouseListener 
+{
 
 	private JTree arbre;
 	private panel_contact pn;
-	public contact_onclick(JTree tree, panel_contact pan) {
+	public contact_onclick(JTree tree, panel_contact pan) 
+	{
 		this.arbre = tree;
 		this.pn = pan;
 	}
@@ -48,33 +51,28 @@ public class contact_onclick implements MouseListener {
         else if (e.getButton() == 3 && noeud != null && noeud.getLevel() == 2)
 		{
 			JPopupMenu menu = new JPopupMenu();
-		      
-			JMenuItem envoi = new JMenuItem("Envoyer un message");
-			envoi.addActionListener(new contact_onclick_sendmsg((contact) noeud.getUserObject(),pn));
-			JMenuItem supprimer = new JMenuItem("Supprimer");
-			supprimer.addActionListener(new contact_delete((contact) noeud.getUserObject()));
-			JMenuItem bloquer = new JMenuItem("Bloquer");
-			bloquer.addActionListener(new contact_onclick_block(noeud));
-			JMenuItem details = new JMenuItem("Voir les d�tails");
-			details.addActionListener(new contact_onclick_details(noeud));
-			menu.add(envoi);
-			menu.add(supprimer);
-			menu.add(bloquer);
-			menu.add(details);
+			
+			SwingEL.AddItemToMenu(menu,"Envoyer un message",new contact_onclick_sendmsg((contact) noeud.getUserObject(),pn));
+			SwingEL.AddItemToMenu(menu,"Supprimer",new contact_delete((contact) noeud.getUserObject()));
+			SwingEL.AddItemToMenu(menu,"Bloquer",new contact_onclick_block(noeud));
+			SwingEL.AddItemToMenu(menu,"Voir les détails",new contact_onclick_details((contact)noeud.getUserObject()));
 			
 	        menu.show (e.getComponent(),e.getX(),e.getY());
 		}
-		else if(e.getButton() == 3)
+		else if(e.getButton() == 3 && noeud != null && noeud.getLevel() == 1)
 		{
-			//renommer grp
-			//supprimer grp
-			//le tout dans un beau PopUp Menu
-			//pas supprimer si c'est le group par defaut
-			// TODO: actions on group
-			System.out.println("click droit sur grp");
+			if(((group)noeud.getUserObject()).getGid().equals(0))
+				return;
+			
+			JPopupMenu menu = new JPopupMenu();
+			SwingEL.AddItemToMenu(menu,"Renommer le groupe", new group_onclick_rename((group) noeud.getUserObject()));
+			SwingEL.AddItemToMenu(menu,"Supprimer le groupe", new group_onclick_delete((group) noeud.getUserObject()));
+			menu.show (e.getComponent(),e.getX(),e.getY());
 		}
 	}
 
+	
+	
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}

@@ -68,9 +68,38 @@ public class Session extends Thread{
 	public static String getPseudo() { return pseudo; }
 	public static void setPerso_msg(String perso_msg) {	Session.perso_msg = perso_msg; }
 	public static String getPerso_msg() { return perso_msg; }
+	
+	/*
+	 * Action on groups
+	 */
+	
 	public static Vector<group> getGroups() { return groups; }
 
+	public static Integer getMaxGid()
+	{
+		Integer max_gid = 0;
+		for(group g: groups)
+			if(g.getGid() > max_gid)
+				max_gid = g.getGid();
+		
+		return max_gid;
+	}
+	
+	public static group getDefaultGroup()
+	{
+		for(group g: getGroups())
+			if(g.getGid().equals(0))
+				return g;
+
+		return null;
+	}
+	
 	public static void ClearGroups() { getGroups().clear(); }
+	
+	/*
+	 * Actions on contact
+	 */
+	
 	public static void ClearContacts() 
 	{ 
 		for(group gr:getGroups())

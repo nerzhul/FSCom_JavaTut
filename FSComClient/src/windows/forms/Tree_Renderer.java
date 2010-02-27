@@ -9,22 +9,12 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 import session.contact;
 
-public class MyRenderer extends DefaultTreeCellRenderer {
+public class Tree_Renderer extends DefaultTreeCellRenderer {
  
  
 	private static final long serialVersionUID = -3991603773928897980L;
-	private ImageIcon afkIcon;
-	private ImageIcon busyIcon;
-	private ImageIcon offlineIcon;
-	private ImageIcon onlineIcon;
-
  
-	public MyRenderer(String afk, String busy, String offline, String online) {
-		afkIcon = new ImageIcon(afk);
-		busyIcon = new ImageIcon(busy);
-		offlineIcon = new ImageIcon(offline);
-		onlineIcon = new ImageIcon(online);
-	}
+	public Tree_Renderer() {}
  
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 	    super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
@@ -33,19 +23,18 @@ public class MyRenderer extends DefaultTreeCellRenderer {
 	    if(node.getLevel() == 2){
 		    contact info = (contact)node.getUserObject();
 		    Integer status = info.getStatus();
-		    if (status.equals(0)){
-		    	setIcon(offlineIcon);
-		    } else if (status.equals(1)) {
-		    	setIcon(onlineIcon);
-		    } else if (status.equals(2)) {
-		    	setIcon(busyIcon);
-		    } else if (status.equals(3)) {
-		    	setIcon(afkIcon);
-		    }
+		    if (status.equals(0) || status.equals(4))
+		    	setIcon(new ImageIcon("offline.png"));
+		    else if (status.equals(1))
+		    	setIcon(new ImageIcon("online.png"));
+		    else if (status.equals(2))
+		    	setIcon(new ImageIcon("busy.png"));
+		    else if (status.equals(3))
+		    	setIcon(new ImageIcon("afk.png"));
 	   }
 
-	    setOpenIcon(new ImageIcon("ouvert.png"));
-	    setClosedIcon(new ImageIcon("fermer.png"));
+	    setOpenIcon(new ImageIcon("minus.png"));
+	    setClosedIcon(new ImageIcon("plus.png"));
 	    return this;
 	}
 }

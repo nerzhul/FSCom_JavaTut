@@ -32,7 +32,7 @@ public class Connect_button implements ActionListener {
 		if(need_save.isSelected())
 			SaveFile();
 		// Store status in session
-		Session.setStatus(status.getSelectedIndex() + 1);
+		Session.setStatus(status.getSelectedIndex());
 
 		// Launcher socket with server
 		threading.LaunchSender(true);

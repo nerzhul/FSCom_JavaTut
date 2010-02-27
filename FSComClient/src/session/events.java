@@ -5,12 +5,13 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 
 import socket.Sender;
+import socket.packet.ConnectData;
 import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
 import thread.threading;
-import windows.windowthread;
+import thread.windowthread;
 import windows.forms.form_communicate;
 import windows.forms.onglet_communicate;
 import misc.Log;
@@ -52,11 +53,17 @@ public class events {
 
 	public static void ContactConnected(Object packet) 
 	{
+		if(!packet.getClass().equals((new ConnectData("",0,"",0)).getClass()))
+			return;
+		
+		ConnectData cn = (ConnectData)packet;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(cn.getStatus()))
 				{
-					// TODO: declare contact connected to client
+					ct.setStatus(cn.getStatus());
+					ct.setPseudo(cn.getName());
+					ct.setMsg_perso(cn.getPersoP());
 					return;
 				}
 	}
@@ -79,47 +86,46 @@ public class events {
 			Log.outError("Malformed Msg to Transmit");
 			return;
 		}
+		
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
 		form_communicate fmSpeak = windowthread.getFmConn().getPanContact().getComm();
-		Log.outError(_uid + msg.getMsg());
 		if(fmSpeak == null)
 		{
 			windowthread.getFmConn().getPanContact().setComm(new form_communicate());
-			
+			fmSpeak = windowthread.getFmConn().getPanContact().getComm();
 		}
-
-		fmSpeak = windowthread.getFmConn().getPanContact().getComm();
-		onglet_communicate ongletconvers = fmSpeak.GetContactConvers(_uid);
-		if(ongletconvers == null)
+		
+		onglet_communicate ongl = fmSpeak.GetContactConvers(_uid);
+		if(ongl == null)
 		{
 			contact ct = Session.getContactByUid(_uid);
 			if(ct != null)
 			{
 				windowthread.getFmConn().getPanContact().getComm().AddTab(ct);
-				ongletconvers = fmSpeak.GetContactConvers(_uid);
-				ongletconvers.ajout_texte(msg.getMsg());
+				ongl = fmSpeak.GetContactConvers(_uid);
+				ongl.WriteMsg(msg.getMsg());
 			}
 			else
 				Log.outError("Contact" + _uid + " not exist for client");
 		}
 		else
-		{
-			ongletconvers.ajout_texte(msg.getMsg());
-		}	
+			ongl.WriteMsg(msg.getMsg());
 	}
 
 	public static void ContactModifyStatus(Object packet) 
 	{
-		// TODO : split the packet
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)packet;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(pck.getUid()))
 				{
-					// TODO: modify contact status
+					ct.setStatus(Integer.decode(pck.getDat()));
 					return;
 				}
-		
 	}
 
 	public static void ContactModifyPseudo(Object packet) 
@@ -144,6 +150,9 @@ public class events {
 					if(ct.getCid().equals(pck.getUid()))
 					{
 						ct.setPseudo(pck.getDat());
+						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+						if(fmCom != null)
+							fmCom.ChangeConversTabTitle(pck.getUid(),pck.getDat());
 						return;
 					}
 		}
@@ -188,13 +197,11 @@ public class events {
 
 	public static void ContactDeleted(Object packet) 
 	{
-		// TODO: split the packet
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					g.getContacts().remove(ct);
-					//TODO : dont work
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -202,15 +209,14 @@ public class events {
 
 	public static void RecvInvitation(Object packet) 
 	{
-		String[] dat = packet.toString().split("[][]");
-		if(dat.length != 2)
-			Log.outError("Bad invitation received !");
-		else
-		{
-			Integer answer = JOptionPane.showConfirmDialog(null, dat[1] + " vous a ajoutï¿½, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
-			Answer_Invit_handler arh = new Answer_Invit_handler(Integer.decode(dat[0]), answer);
-			arh.Send();
-		}
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+
+		IdAndData pck = (IdAndData)packet;
+
+		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+		Answer_Invit_handler arh = new Answer_Invit_handler(pck.getUid(), answer);
+		arh.Send();
 	}
 
 	public static void ConnectionError() 
@@ -246,5 +252,64 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
+	}
+
+	public static void GroupAdded(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)data;
+		group gr = new group(pck.getUid(), pck.getDat());
+		Session.getGroups().add(gr);
+		windowthread.getFmConn().getPanContact().RefreshContactList();		
+	}
+
+	public static void GroupDeleted(Object data) 
+	{
+		Integer _gid = Integer.decode(data.toString());
+		if(_gid.equals(0))
+			return;
+		
+		for(group g: Session.getGroups())
+		{
+			if(g.getGid().equals(_gid))
+			{
+				group move_gr = Session.getDefaultGroup();
+				if(move_gr == null)
+					return;
+				
+				for(contact ct: g.getContacts())
+				{
+					move_gr.AddContact(ct);
+					g.getContacts().remove(ct);
+				}
+				
+				g.getContacts().clear();
+				windowthread.getFmConn().getPanContact().RefreshContactList();
+				return;
+			}
+		}
+	}
+
+	public static void GroupRenamed(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)data;
+		Integer _gid = pck.getUid();
+		String newName = pck.getDat();
+		
+		for(group g: Session.getGroups())
+		{
+			if(g.getGid().equals(_gid))
+			{
+				g.setGname(newName);
+				windowthread.getFmConn().getPanContact().RefreshContactList();
+				return;
+			}
+		}
+		
 	}
 }

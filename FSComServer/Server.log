@@ -1,116 +1,37 @@
-FSS Com Server version Alpha 0.4.2b
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Packet received from /127.0.0.1 (opcode :28)
-FSS Com Server version Alpha 0.4.2b
+FSS Com Server version Beta 0.5.3
 Starting Database Thread...
 Starting Session handler thread...
 Starting master listener thread...
 Master listener thread started succesfully
 Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
 Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :9)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.4
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-FSS Com Server version Alpha 0.4.4
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.4
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.4
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
 Starting Database Thread...
 Starting Session handler thread...
 Starting master listener thread...
@@ -119,19 +40,10 @@ Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.4
-Starting Session handler thread...
+FSS Com Server version Beta 0.5.3
 Starting Database Thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
+Starting Session handler thread...
+FSS Com Server version Beta 0.5.3
 Starting Database Thread...
 Starting Session handler thread...
 Starting master listener thread...
@@ -140,204 +52,11 @@ Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting master listener thread...
-Starting Session handler thread...
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Session handler thread...
-Starting Database Thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-FSS Com Server version Alpha 0.4.5
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :14)
-Packet received from /127.0.0.1 (opcode :11)
 Packet received from /127.0.0.1 (opcode :19)
+FSS Com Server version Beta 0.5.3
+Starting Database Thread...
+Starting master listener thread...
+Starting Session handler thread...
 Master listener thread started succesfully
 Master listener thread started succesfully
 Master listener thread started succesfully
@@ -357,7 +76,151 @@ Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.6
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting Database Thread...
+Starting Session handler thread...
+Starting master listener thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+Packet received from /127.0.0.1 (opcode :19)
+FSS Com Server version Beta 0.5.3
+Starting Database Thread...
+Starting Session handler thread...
+Starting master listener thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting Database Thread...
+Starting master listener thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting master listener thread...
+Starting Database Thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting master listener thread...
+Starting Database Thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting master listener thread...
+Starting Session handler thread...
+Starting Database Thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting master listener thread...
+Starting Database Thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting master listener thread...
+Starting Database Thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting master listener thread...
+Starting Database Thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
 Starting Session handler thread...
 Starting Database Thread...
 Starting master listener thread...
@@ -369,16 +232,91 @@ Packet received from /127.0.0.1 (opcode :33)
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.6b
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
+Starting Database Thread...
+Starting master listener thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
 Starting Database Thread...
 Starting Session handler thread...
 Starting master listener thread...
-FSS Com Server version Alpha 0.4.6b
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+FSS Com Server version Beta 0.5.3
 Starting Database Thread...
-Starting Session handler thread...
 Starting master listener thread...
+Starting Session handler thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :4)
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :33)
+Master listener thread started succesfully
+Master listener thread started succesfully
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
@@ -403,39 +341,26 @@ Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.6b
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.6b
-Starting Session handler thread...
-Starting Database Thread...
-Starting master listener thread...
+Master listener thread started succesfully
+Master listener thread started succesfully
+Packet received from /127.0.0.1 (opcode :0)
+Packet received from /127.0.0.1 (opcode :4)
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
 Master listener thread started succesfully
 Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
@@ -453,304 +378,3 @@ Master listener thread started succesfully
 Packet received from /127.0.0.1 (opcode :4)
 Packet received from /127.0.0.1 (opcode :0)
 Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.7
-Starting Session handler thread...
-Starting Database Thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :36)
-Packet received from /127.0.0.1 (opcode :36)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Session handler thread...
-Starting Database Thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Session handler thread...
-Starting Database Thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Database Thread...
-Starting master listener thread...
-Starting Session handler thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8c
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8d
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8d
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :9)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8d
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :36)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :36)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8d
-Starting Session handler thread...
-Starting Database Thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-FSS Com Server version Alpha 0.4.8d
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :0)
-FSS Com Server version Alpha 0.4.8d
-Starting Database Thread...
-Starting Session handler thread...
-Starting master listener thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :28)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :28)
-Packet received from /127.0.0.1 (opcode :28)
-Packet received from /127.0.0.1 (opcode :28)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :28)
-FSS Com Server version Alpha 0.4.8e
-Starting master listener thread...
-Starting Database Thread...
-Starting Session handler thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-FSS Com Server version Alpha 0.4.8e
-Starting master listener thread...
-Starting Database Thread...
-Starting Session handler thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-Packet received from /127.0.0.1 (opcode :19)
-FSS Com Server version Alpha 0.4.8e
-Starting Database Thread...
-Starting master listener thread...
-Starting Session handler thread...
-Master listener thread started succesfully
-Master listener thread started succesfully
-Packet received from /127.0.0.1 (opcode :4)
-Packet received from /127.0.0.1 (opcode :0)
-Packet received from /127.0.0.1 (opcode :33)
-Packet received from /127.0.0.1 (opcode :19)

@@ -12,7 +12,7 @@ import windows.actions.buttons.CloseAllConversTabs_button;
 import windows.actions.buttons.CloseButton_button;
 
 public class form_communicate extends JFrame{
-//essai
+
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	public TabbedPanel TabPan;
@@ -24,7 +24,7 @@ public class form_communicate extends JFrame{
 		frame = new JFrame();
 		frame.setSize(new Dimension(200,200));
 		frame.setTitle("Cookie Messenger - Conversation"); 
-		frame.setSize(600,500);
+		frame.setSize(600,600);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
@@ -48,7 +48,6 @@ public class form_communicate extends JFrame{
 		{
 			TitledTab tab = new TitledTab(noeud.getPseudo(), null, new onglet_communicate(noeud), null );
 			tab.setTitleComponent( new CloseButton_button(tab,frame ) );
-			
 			TabPan.addTab(tab) ;
 			TabPan.setSelectedTab(tab);
 		 	frame.add(TabPan);
@@ -68,8 +67,17 @@ public class form_communicate extends JFrame{
 		return null;
 	}
 	
-	public JFrame getfram(){
-		return this;
+	public void ChangeConversTabTitle(Integer _uid, String name)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+		{
+			contact ct = ((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).GetContact();
+    		if(ct.getCid().equals(_uid))
+    		{
+    			((TitledTab)TabPan.getTabAt(i)).setText(name);
+    			return;
+    		}
+		}
 	}
-
 }

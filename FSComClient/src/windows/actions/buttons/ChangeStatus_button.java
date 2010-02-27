@@ -19,7 +19,7 @@ public class ChangeStatus_button implements ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		Integer st = newstatus.getSelectedIndex();
-		Send_handler pck = new StatusSender_handler(st);
+		Send_handler pck = new StatusSender_handler(st+1);
 		pck.Send();				
 	}
 }

@@ -6,6 +6,9 @@ import java.util.Vector;
 import misc.Log;
 
 import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
+import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
+import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
+import socket.packet.handlers.senders.ConfirmGroupRenamed_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
@@ -47,8 +50,8 @@ public class session {
 	public void connect_client()
 	{
 		connected = true;
-		SessionHandler.AddSession(this);
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
+		SessionHandler.AddSession(this);
 		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
 		LoadBlockedContacts();
@@ -72,8 +75,10 @@ public class session {
 		
 		if(!block)
 			sess_linked.add(sess);
+		// TODO : handle if blocked
+		sess.sess_linked.add(this);
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
-				sess.getStatus().toString(),sess.getPersonnalMsg(),sess.getUid());
+				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid());
 		if(pck != null)
 			pck.Send(sock);
 	}
@@ -81,7 +86,7 @@ public class session {
 	public boolean know_contact(Integer _uid)
 	{
 		if(DatabaseTransactions.DataExist("acc_contact", "uid", "contact = '" + _uid + "'" +
-				" AND uid = '" + uid + "'"))
+				" AND uid = '" + this.getUid() + "'"))
 			return true;
 		else
 			return false;
@@ -106,9 +111,12 @@ public class session {
 			pck.Send(sock);
 		
 		if(!blocked)
-			for(session s : sess_linked)
+			for(int i=0;i<sess_linked.size();i++)
+			{
+				session s = sess_linked.get(i);
 				if(s.equals(sess))
 					sess_linked.remove(s);
+			}				
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -155,7 +163,6 @@ public class session {
 				}
 			}
 		}
-		
 	}
 	
 	private void SendMsgPersoToMe(Integer _uid, String pmsg) 
@@ -248,7 +255,7 @@ public class session {
 			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND"))
 			{
 				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
-						_uid + "','0','','0'");
+						_uid + "','0','','0')");
 				
 				if(SessionHandler.isConnected(_uid))
 				{
@@ -342,6 +349,52 @@ public class session {
 	public Socket getSocket() { return sock; }
 	public void setPseudo(String pseudo) { this.pseudo = pseudo; }
 	public String getPseudo() { return pseudo; }
+
+	public void EventGroupAdd(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"").getClass())))
+			return;
+		
+		IdAndData pck = (IdAndData) data;
+		if(pck.getUid().equals(0))
+			return;
+		
+		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_group VALUES ('" +
+				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "'");
+		
+		ConfirmGroupAdded_handler pkt = new ConfirmGroupAdded_handler(pck.getUid());
+		pkt.Send(sock);
+	}
+
+	public void EventGroupDel(Object data) 
+	{
+		Integer _gid = Integer.decode(data.toString());
+		if(_gid.equals(0))
+			return;
+		
+		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_group where uid = '" +
+				this.getUid() + "' AND gid = '" + _gid + "'");
+		DatabaseTransactions.ExecuteUQuery("acc_contact", "group", "0", "uid = '" +
+				this.getUid() + "' AND `group` = '" + _gid + "'");
+		
+		ConfirmGroupDeleted_handler pkt = new ConfirmGroupDeleted_handler(_gid);
+		pkt.Send(sock);
+	}
+
+	public void EventGroupRen(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,""))))
+			return;
+		
+		IdAndData pck = (IdAndData)data;
+		Integer _gid = pck.getUid();
+		String gName = pck.getDat();
+		
+		DatabaseTransactions.ExecuteUQuery("acc_group", "name", gName, "uid = '" +
+				this.getUid() + "' AND gid = '" + _gid + "'");
+		ConfirmGroupRenamed_handler pkt = new ConfirmGroupRenamed_handler(_gid,gName);
+		pkt.Send(sock);
+	}
 
 	
 

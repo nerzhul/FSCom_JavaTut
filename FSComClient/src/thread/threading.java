@@ -2,7 +2,6 @@ package thread;
 
 import session.Session;
 import socket.Sender;
-import windows.windowthread;
 
 public class threading extends Thread
 {
