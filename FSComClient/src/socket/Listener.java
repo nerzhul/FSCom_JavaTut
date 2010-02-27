@@ -64,7 +64,6 @@ public class Listener extends Thread
 	
 	public void TreatPacket(Packet packt) throws IOException
 	{
-		// show the packet
 		Packet_handler packopt = new Packet_handler(packt,sockt);
 		packopt.Destroy();
 	}
