@@ -7,7 +7,8 @@ public class threading extends Thread
 {
 	private static Sender thsend;
 	private Session m_sess;
-	private windowthread m_window;
+	private static windowthread m_window;
+	private static thr_listen_p2p thp2p;
 
 	public threading()	{}
 
@@ -46,15 +47,29 @@ public class threading extends Thread
 			m_sess.interrupt();
 	}
 
-	public void LaunchSwingInterface()
+	public static void LaunchSwingInterface()
 	{
 		m_window = new windowthread();
 		m_window.start();
 	}
 
-	public void StopSwingInterface()
+	public static void StopSwingInterface()
 	{
 		if(m_window != null)
 			m_window.interrupt();
+	}
+	
+	public static void Launchp2pListener()
+	{
+		if(thp2p != null)
+			thp2p.interrupt();
+		thp2p = new thr_listen_p2p();
+		thp2p.start();
+	}
+	
+	public static void Stopp2pListener()
+	{
+		if(thp2p != null)
+			thp2p.interrupt();
 	}
 }

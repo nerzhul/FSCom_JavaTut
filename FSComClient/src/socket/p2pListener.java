@@ -7,8 +7,6 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 import socket.packet.Packet;
-import socket.packet.Packet_handler;
-
 import misc.Log;
 
 public class p2pListener extends Thread
@@ -43,7 +41,7 @@ public class p2pListener extends Thread
 		{
 			Log.outTimed("Client " + sock.getInetAddress() + " was disconnected...");
 			try 
-			{ sock.close(); } 
+			{ sock.close(); }
 			catch (IOException e1) {}
 			
 		}
