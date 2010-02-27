@@ -78,7 +78,7 @@ public class onglet_communicate extends JPanel{
 	    add(txt);
 	    JScrollPane SendScroll = new JScrollPane(txt);        
 	    add(SendScroll);
-	    add(envoi);    
+	    add(envoi);
 	}
 
 	public void WriteMsg(String msg)
@@ -89,15 +89,15 @@ public class onglet_communicate extends JPanel{
 	public contact GetContact() { return ct; }
 	
 	public static Image scale(Image source, int width, int height) {
-	    /* On crÃ©e une nouvelle image aux bonnes dimensions. */
+	    /* On crée une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisÃ©e. */
+	    /* On dessine sur le Graphics de l'image bufferisée. */
 	    Graphics2D g = buf.createGraphics();
 	    g.drawImage(source, 10, 10, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisÃ©e, qui est une image. */
+	    /* On retourne l'image bufferisée, qui est une image. */
 	    return buf;
 	}
 }

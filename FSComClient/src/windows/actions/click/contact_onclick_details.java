@@ -17,8 +17,8 @@ public class contact_onclick_details implements ActionListener
 
 	public void actionPerformed(ActionEvent e) {
 		JOptionPane.showMessageDialog(null,"Pseudo : " + contact.getPseudo()+"\n"+ "Message personnel : " + contact.getMsg_perso() );
-		/*TO DO :
-		 *	affichage de l'identifiant (servant a se connecté + a etre ajouté) 
+		/* TODO :
+		 *	show username & other stuff
 		*/
 	}
 

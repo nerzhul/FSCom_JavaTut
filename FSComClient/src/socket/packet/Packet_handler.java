@@ -143,6 +143,8 @@ public class Packet_handler
 				case 0x25:
 				case 0x27:
 				case 0x29:
+				case 0x2B:
+				case 0x2C:
 					pcktrecv = new ServerSide_handler(this.opcode_id);
 					break;
 				default:

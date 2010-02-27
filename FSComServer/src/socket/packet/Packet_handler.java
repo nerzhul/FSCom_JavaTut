@@ -100,6 +100,7 @@ public class Packet_handler
 				case 0x1A:
 					pkthandle = new AddContact_handler(m_sess,data);
 					((Send_handler) pkthandle).Send(mysock);
+					break;
 				case 0x1C:
 					pkthandle = new Req_DelContact_handler(m_sess,data);
 					break;
@@ -151,6 +152,8 @@ public class Packet_handler
 				case 0x26:
 				case 0x28:
 				case 0x2A:
+				case 0x2B:
+				case 0x2C:
 					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:

@@ -131,7 +131,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modï¿½le de l'arbre.
+		// Construction du mod?le de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
@@ -153,9 +153,9 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		DefaultTreeModel model = new DefaultTreeModel(root);
 		Jtree tree = new JTree(model);
 		tree.repaint();
-		
+
 		ou
-		
+
 		((DefaultTreeModel) tree.getModel()).reload();
 		
 		*/
@@ -214,21 +214,21 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
 					  ((group)dropContact.getUserObject()).getGid());
 			  pck.Send();
-			  
+
 		    }
 		}
 	}
-	
+
 	public static Image scale(Image source, int width, int height) {
-	    /* On crÃ©e une nouvelle image aux bonnes dimensions. */
+	    /* On crée une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisÃ©e. */
+	    /* On dessine sur le Graphics de l'image bufferisée. */
 	    Graphics2D g = buf.createGraphics();
 	    g.drawImage(source, 10, 10, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisÃ©e, qui est une image. */
+	    /* On retourne l'image bufferisée, qui est une image. */
 	    return buf;
 	}
 	

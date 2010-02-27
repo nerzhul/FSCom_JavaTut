@@ -6,16 +6,19 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
+import windows.SwingExtendLib.Image_filter;
+
 import misc.Log;
 
 public class chang_avatar implements MouseListener {
 
 	private JFileChooser fc;
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent arg0) 
+	{
 		if (fc == null) 
 		{
             fc = new JFileChooser();
-            fc.addChoosableFileFilter(new Filtre_image());
+            fc.addChoosableFileFilter(new Image_filter());
             fc.setAcceptAllFileFilterUsed(false);
         }
         int returnVal = fc.showDialog(null,"Choisir");

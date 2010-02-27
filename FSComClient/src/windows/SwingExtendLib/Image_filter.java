@@ -1,15 +1,15 @@
-package windows.actions.click;
+package windows.SwingExtendLib;
 
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 
-public class Filtre_image extends FileFilter {
+public class Image_filter extends FileFilter {
 
 	public boolean accept(File f) {
 		if (f.isDirectory())
             return true;
- 
+
         String extension = getExtension(f);
         if (extension != null) 
         {
