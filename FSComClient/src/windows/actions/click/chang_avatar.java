@@ -6,6 +6,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
+import thread.windowthread;
 import windows.SwingExtendLib.Image_filter;
 
 public class chang_avatar implements MouseListener {
@@ -25,9 +26,9 @@ public class chang_avatar implements MouseListener {
         if (returnVal == JFileChooser.APPROVE_OPTION) 
         {
             File avatar = fc.getSelectedFile();
-            /* TODO : 
-             * envoi au serveur ou je ne sais pas quoi de "avatar" !!
-            */
+            windowthread.getFmConn().getPanContact().ChangeMyAvatar(avatar.toString());
+            if(windowthread.getFmConn().getPanContact().getComm() != null)
+            	windowthread.getFmConn().getPanContact().getComm().ChangeAllMyAvatarsInTab(avatar.toString());
         }
         fc.setSelectedFile(null);
 	}

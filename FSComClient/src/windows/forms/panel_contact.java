@@ -44,7 +44,10 @@ import session.group;
 import socket.packet.handlers.sends.MoveGroup_handler;
 import windows.SwingExtendLib.Tree_Renderer;
 import windows.actions.buttons.ChangeStatus_button;
+import windows.actions.click.chang_avatar;
+import windows.actions.click.chang_msgperso;
 import windows.actions.click.contact_onclick;
+import windows.actions.menus.menubar_changepseudo;
 
 public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
 
@@ -84,6 +87,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         setLayout(new GridBagLayout());
 
         Titre.setText(Session.getPseudo());
+        Titre.addMouseListener(new menubar_changepseudo());
+        Titre.setToolTipText("Cliquez ici pour changer de pseudo !");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -93,6 +98,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 
         ChangeMyAvatar("avatar.jpg");
         ChangeBorderStatus();
+        image.addMouseListener(new chang_avatar());
+        image.setToolTipText("Cliquez ici pour changer d'Avatar !");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -108,7 +115,9 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(changstatus, gridBagConstraints);
 
-        msgperso.setText("Messager personnel");
+        msgperso.setText(Session.getPerso_msg());
+        msgperso.addMouseListener(new chang_msgperso());
+        msgperso.setToolTipText("Cliquez ici pour changer de phrase personnelle !");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;

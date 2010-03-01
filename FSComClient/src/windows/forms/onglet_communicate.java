@@ -145,7 +145,7 @@ public class onglet_communicate extends JPanel{
 		
 	}
 
-	private void ChangeMyAvatar(String path)
+	public void ChangeMyAvatar(String path)
 	{
 		ImageIcon a2 = new ImageIcon (path);
 	    Image avatar2 = scale(a2.getImage(),80,80);

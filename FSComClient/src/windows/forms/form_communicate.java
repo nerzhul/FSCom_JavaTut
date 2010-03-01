@@ -101,6 +101,13 @@ public class form_communicate extends JFrame{
 			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyBorderStatus();
 	}
 
+	public void ChangeAllMyAvatarsInTab(String path)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyAvatar(path);
+	}
+	
 	public void ChangeContactAvatar(Integer _uid, Image img) 
 	{
 		
@@ -111,6 +118,7 @@ public class form_communicate extends JFrame{
     		if(ct.getCid().equals(_uid))
     		{
     			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeContactAvatar(img);
+    			return;
     		}
 		}
 		
