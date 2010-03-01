@@ -13,6 +13,7 @@ import socket.packet.objects.Message;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;
+import windows.forms.form_inscription;
 import windows.forms.onglet_communicate;
 import misc.Log;
 
@@ -315,6 +316,23 @@ public class events {
 				return;
 			}
 		}
-		
+	}
+
+	public static void CreateAccountAnswer(Object data) 
+	{
+		Integer res = Integer.decode(data.toString());
+		form_inscription fmInsc = windowthread.getFmConn().getPanConnect().getFmInsc();
+		if(fmInsc == null)
+			return;
+		threading.StopSender();
+		if(res != 1)
+		{
+			JOptionPane.showMessageDialog(null,"Compte déjà existant !");
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
+			fmInsc.dispose();
+		}
 	}
 }

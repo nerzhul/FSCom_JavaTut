@@ -31,6 +31,7 @@ public class panel_connect extends JPanel {
 	private JComboBox status;
 	private JCheckBox save;
 	private String autouser,autopass;
+	private form_inscription frmInsc;
 	
 	public panel_connect(form_master formFram)
 	{
@@ -105,5 +106,6 @@ public class panel_connect extends JPanel {
 		add(connect);
 	}
 	
-	
+	public void setFmInsc(form_inscription insc) { frmInsc = insc; }
+	public form_inscription getFmInsc() { return frmInsc; }
 }

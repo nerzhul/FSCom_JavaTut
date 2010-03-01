@@ -65,7 +65,8 @@ public class form_master extends JFrame
 		JMenu menu2 = new JMenu("?");
 		
 		SwingEL.AddItemToMenuBar(menu1,"Quitter",new menubar_quit());
-		SwingEL.AddItemToMenuBar(menu1,"A propos",new menubar_a_propos());
+		SwingEL.AddItemToMenuBar(menu2,"A propos",new menubar_a_propos());
+		SwingEL.AddItemToMenuBar(menu1,"Inscription",new menubar_inscr());
 		menuBar.add(menu1);
 		menuBar.add(menu2);
 		
@@ -93,5 +94,6 @@ public class form_master extends JFrame
 		fram.setJMenuBar(menuBar);
 	}
 	
-	public panel_contact getPanContact() { return (panel_contact) pan_contact; } 
+	public panel_contact getPanContact() { return (panel_contact) pan_contact; }
+	public panel_connect getPanConnect() { return (panel_connect) pan_connect; }
 }

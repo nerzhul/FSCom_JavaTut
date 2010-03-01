@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
 
+import session.SessionHandler;
 import session.session;
 import socket.Sender;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listened.*;
+import socket.packet.handlers.senders.AccCreate_handler;
 import socket.packet.handlers.senders.AddContact_handler;
 import socket.packet.handlers.senders.BlockContact_handler;
 import socket.packet.handlers.senders.Connect2_handler;
@@ -127,7 +129,8 @@ public class Packet_handler
 					m_sess.EventGroupRen(data);
 					break;
 				case 0x2D:
-					// TODO: handle group create
+					pkthandle = new AccCreate_handler(SessionHandler.AccountCreate(data));
+					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x0B:
 				case 0x0E:

@@ -122,7 +122,7 @@ public class Packet_handler
 					// TODO: handle p2p packet
 					break;
 				case 0x2E:
-					
+					events.CreateAccountAnswer(data);
 					break;
 				case 0x0C:
 				case 0x0F:

@@ -2,6 +2,10 @@ package session;
 
 import java.util.Vector;
 
+import database.DatabaseTransactions;
+
+import socket.packet.objects.AccCreateDatas;
+
 public class SessionHandler {
 
 	private static Vector<session> v_sess;
@@ -67,5 +71,22 @@ public class SessionHandler {
 			}
 		}
 		thr.interrupt();
+	}
+	
+	public static Integer AccountCreate(Object data)
+	{
+		if(!data.getClass().equals((new AccCreateDatas("","")).getClass()))
+			return 0;
+		AccCreateDatas pck = (AccCreateDatas)data;
+		String _user = pck.getName();
+		String _pwd = pck.getPwd();
+		Integer result = 0;
+		if(!DatabaseTransactions.DataExist("account","user", "user = '" + _user + "'"))
+		{
+			DatabaseTransactions.ExecuteQuery("INSERT INTO account(user,sha_pass,pseudo) values ('" + _user +
+					"','" + _pwd + "','" + _user + "')");
+			result = 1;
+		}
+		return result;
 	}
 }

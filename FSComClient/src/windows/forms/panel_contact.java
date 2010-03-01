@@ -39,6 +39,7 @@ import session.Session;
 import session.contact;
 import session.group;
 import socket.packet.handlers.sends.MoveGroup_handler;
+import windows.SwingExtendLib.Tree_Renderer;
 import windows.actions.buttons.ChangeStatus_button;
 import windows.actions.click.chang_avatar;
 import windows.actions.click.contact_onclick;

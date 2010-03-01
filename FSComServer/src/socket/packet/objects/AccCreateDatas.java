@@ -16,4 +16,7 @@ public class AccCreateDatas implements Serializable
 		acc_name = name;
 		password = pwd;
 	}
+	
+	public String getName() { return acc_name; }
+	public String getPwd() { return password; }
 }

@@ -272,7 +272,7 @@ public class session {
 						DatabaseTransactions.StringQuery(
 								"account", "phr_perso", "uid = '" + _uid + "'"),
 						DatabaseTransactions.StringQuery("acc_contact", "comment",
-						"contact = '" + _uid + "'"), 0, 0);
+						"contact = '" + _uid + "'"), 0, 0,username);
 			}
 			else
 				return null;

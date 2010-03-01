@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
 import misc.Log;
@@ -54,6 +55,10 @@ public class Listener extends Thread
 		catch (SocketTimeoutException ste) 
 		{
 			Log.outTimed("Server connection timeout");
+		}
+		catch (SocketException e)
+		{
+			this.interrupt();
 		}
 		catch (Exception e) 
 		{
