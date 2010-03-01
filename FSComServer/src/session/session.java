@@ -51,9 +51,10 @@ public class session {
 	{
 		connected = true;
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
-		SessionHandler.AddSession(this);
 		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
+		
+		SessionHandler.AddSession(this);
 		LoadBlockedContacts();
 		// TODO : send all invitations
 	}
@@ -78,7 +79,7 @@ public class session {
 		// TODO : handle if blocked
 		sess.sess_linked.add(this);
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
-				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid());
+				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid(),sess.getPseudo());
 		if(pck != null)
 			pck.Send(sock);
 	}
@@ -271,7 +272,7 @@ public class session {
 						DatabaseTransactions.StringQuery(
 								"account", "phr_perso", "uid = '" + _uid + "'"),
 						DatabaseTransactions.StringQuery("acc_contact", "comment",
-						"contact = '" + _uid + "'"), 0, 0);
+						"contact = '" + _uid + "'"), 0, 0,username);
 			}
 			else
 				return null;
@@ -361,7 +362,7 @@ public class session {
 			return;
 		
 		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_group VALUES ('" +
-				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "'");
+				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "')");
 		
 		ConfirmGroupAdded_handler pkt = new ConfirmGroupAdded_handler(pck.getUid());
 		pkt.Send(sock);
@@ -384,7 +385,7 @@ public class session {
 
 	public void EventGroupRen(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,""))))
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
 			return;
 		
 		IdAndData pck = (IdAndData)data;

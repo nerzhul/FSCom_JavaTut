@@ -13,9 +13,10 @@ public class contact implements Serializable
 	private Integer status;
 	private String comment;
 	private Integer group;
+	private String name;
 	
 	public contact(Integer _cid, Integer _blocked, String _pseudo, String _msg_perso,
-			String _comment, Integer _status, Integer _grp)
+			String _comment, Integer _status, Integer _grp, String _name)
 	{
 		cid = _cid;
 		blocked = (_blocked == 1) ? true : false;
@@ -24,6 +25,7 @@ public class contact implements Serializable
 		comment = _comment;
 		status = _status;
 		setGroup(_grp);
+		name = _name;
 	}
 	public void setCid(Integer cid) { this.cid = cid; }
 	public Integer getCid() { return cid; }
@@ -40,4 +42,6 @@ public class contact implements Serializable
 	public void setGroup(Integer group) { this.group = group; }
 	public Integer getGroup() { return group; }
 	public String toString() { return getPseudo(); }
+	public void setName(String nm) { name = nm; }
+	public String getName() { return name; }
 }

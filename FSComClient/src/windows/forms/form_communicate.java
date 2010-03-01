@@ -22,11 +22,10 @@ public class form_communicate extends JFrame{
 		TabPan = new TabbedPanel();
 
 		frame = new JFrame();
-		frame.setSize(new Dimension(200,200));
 		frame.setTitle("Cookie Messenger - Conversation"); 
-		frame.setSize(600,600);
+		frame.setSize(800,530);
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(true);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
 	    frame.addWindowListener(new CloseAllConversTabs_button(frame,TabPan));
 	}
@@ -65,6 +64,20 @@ public class form_communicate extends JFrame{
     			return (onglet_communicate)TabPan.getTabAt(i).getContentComponent();
 		}
 		return null;
+	}
+	
+	public void ChangeConversStatusForContact(Integer _uid)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+		{
+			contact ct = ((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).GetContact();
+    		if(ct.getCid().equals(_uid))
+    		{
+    			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeBorderStatus();
+    			return;
+    		}
+		}
 	}
 	
 	public void ChangeConversTabTitle(Integer _uid, String name)

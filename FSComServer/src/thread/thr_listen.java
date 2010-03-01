@@ -31,6 +31,5 @@ public class thr_listen extends Thread
 		{
 		      e.printStackTrace();
 		}
-
 	}
 }

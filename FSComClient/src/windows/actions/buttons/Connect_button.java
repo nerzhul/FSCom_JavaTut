@@ -13,6 +13,7 @@ import socket.packet.handlers.Send_handler;
 import socket.packet.handlers.sends.Connect_handler;
 import java.io.*;
 import thread.threading;
+import thread.windowthread;
 
 public class Connect_button implements ActionListener {
 	private JComboBox status;
@@ -34,6 +35,11 @@ public class Connect_button implements ActionListener {
 		// Store status in session
 		Session.setStatus(status.getSelectedIndex());
 
+		if(windowthread.getFmConn().getPanConnect().getFmInsc() != null)
+		{
+			windowthread.getFmConn().getPanConnect().getFmInsc().dispose();
+			threading.StopSender();
+		}
 		// Launcher socket with server
 		threading.LaunchSender(true);
 		

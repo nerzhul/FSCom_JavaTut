@@ -21,9 +21,11 @@ public class contact implements Serializable{
 	@SuppressWarnings("unused")
 	private String comment;
 	private Integer group;
+	@SuppressWarnings("unused")
+	private String name;
 	
 	public contact(Integer _cid, Integer _blocked, String _pseudo, String _msg_perso,
-			String _comment, Integer _status, Integer _grp)
+			String _comment, Integer _status, Integer _grp, String nm)
 	{
 		cid = _cid;
 		blocked = (_blocked == 1) ? true : false;
@@ -32,6 +34,7 @@ public class contact implements Serializable{
 		comment = _comment;
 		status = _status;
 		setGroup(_grp);
+		name = nm;
 	}
 	public void setCid(Integer cid) { this.cid = cid; }
 	public void setBlocked(boolean blocked) { this.blocked = blocked; }

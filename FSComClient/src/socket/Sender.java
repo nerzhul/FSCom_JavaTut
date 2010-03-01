@@ -65,6 +65,7 @@ public class Sender extends Thread
 		    listn = new Listener(socket);
 		    listn.start();
 		    
+		    threading.Launchp2pListener();
 		    MasterCommandLine.DoCommand("ping");
 		    while (true) 
 		    {
@@ -77,14 +78,17 @@ public class Sender extends Thread
 	    
 		    Log.outString("Close connection with server !");
 		    StopListener();
-		    socket.close();
+		    StopSocket();
 		    cmdline.Destroy();
 
 		} 
 		catch (Exception e) 
 		{
-	      this.interrupt();
-	      e.printStackTrace();
+			StopListener();
+		    StopSocket();
+		    threading.Stopp2pListener();
+		    this.interrupt();
+		    e.printStackTrace();
 	    }
 	}
 	
@@ -121,7 +125,7 @@ public class Sender extends Thread
 	    	 Log.outString("Close connection with server");
 	    	 socket.close();
 	     } 
-	     catch (IOException e) 
+	     catch (IOException e)
 	     {
 			 Log.outError("Could not close socket");
 			 System.exit(-1);

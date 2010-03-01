@@ -1,4 +1,4 @@
-package windows.forms;
+package windows.SwingExtendLib;
 
 import java.awt.Component;
 

@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
 import misc.Log;
@@ -55,6 +56,10 @@ public class Listener extends Thread
 		{
 			Log.outTimed("Server connection timeout");
 		}
+		catch (SocketException e)
+		{
+			this.interrupt();
+		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -64,7 +69,6 @@ public class Listener extends Thread
 	
 	public void TreatPacket(Packet packt) throws IOException
 	{
-		// show the packet
 		Packet_handler packopt = new Packet_handler(packt,sockt);
 		packopt.Destroy();
 	}

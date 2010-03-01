@@ -13,14 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.text.MaskFormatter;
 
-import windows.forms.buttons.cancel_inscription_button;
-import windows.forms.buttons.valid_inscription_button;
+import windows.actions.buttons.cancel_inscription_button;
+import windows.actions.buttons.valid_inscription_button;
 
-public class inscription extends JFrame{
+public class form_inscription extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	public inscription(){
+	public form_inscription()
+	{
 		frame = new JFrame();
 		frame.setTitle("Cookie Messenger - Inscription"); 
 		frame.setSize(300,250);
@@ -31,7 +32,8 @@ public class inscription extends JFrame{
 		panel();
 	}
 	
-	public void panel(){
+	public void panel()
+	{
 		GridBagConstraints gridBagConstraints;
 		JPanel pane = new JPanel();
         JLabel Titre = new JLabel();
@@ -61,7 +63,7 @@ public class inscription extends JFrame{
         pane.add(Titre, gridBagConstraints);
 
         valider.setText("Valider");
-        valider.addActionListener(new valid_inscription_button(frame,idtxt,passtxt,passtxt2));
+        valider.addActionListener(new valid_inscription_button(idtxt,passtxt,passtxt2));
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
@@ -79,7 +81,7 @@ public class inscription extends JFrame{
         pane.add(annuler, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
-        passtxt.setToolTipText("Doit Ãªtre diffÃ©rent de l'identifiant !");
+        passtxt.setToolTipText("Doit être différent de l'identifiant !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -87,7 +89,7 @@ public class inscription extends JFrame{
         pane.add(passtxt, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
-        passtxt2.setToolTipText("Doit Ãªtre Ã©gal au pass entrÃ© prÃ©cÃ©demment !");
+        passtxt2.setToolTipText("Doit être égal au pass entré précédemment !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -116,7 +118,7 @@ public class inscription extends JFrame{
         pane.add(identifiant, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
-        idtxt.setToolTipText("Maximum dix caractÃ¨res !");
+        idtxt.setToolTipText("Maximum dix caractères !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;

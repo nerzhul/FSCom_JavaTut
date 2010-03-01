@@ -13,6 +13,7 @@ import socket.packet.objects.Message;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;
+import windows.forms.form_inscription;
 import windows.forms.onglet_communicate;
 import misc.Log;
 
@@ -42,28 +43,32 @@ public class events {
 
 	public static void ContactDisconnected(Object packet) 
 	{
+		Integer st = Integer.decode(packet.toString());
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(st))
 				{
-					// TODO: declare contact disconnected to client
+					ct.setStatus(st);
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}
 
 	public static void ContactConnected(Object packet) 
 	{
-		if(!packet.getClass().equals((new ConnectData("",0,"",0)).getClass()))
+		if(!packet.getClass().equals((new ConnectData("",0,"",0,"")).getClass()))
 			return;
 		
 		ConnectData cn = (ConnectData)packet;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(cn.getStatus()))
+				if(ct.getCid().equals(cn.getUid()))
 				{
 					ct.setStatus(cn.getStatus());
-					ct.setPseudo(cn.getName());
+					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
+					//TODO : handle convers window
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}
@@ -124,6 +129,10 @@ public class events {
 				if(ct.getCid().equals(pck.getUid()))
 				{
 					ct.setStatus(Integer.decode(pck.getDat()));
+					windowthread.getFmConn().getPanContact().RefreshContactList();
+					form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+					if(fmCom != null)
+						fmCom.ChangeConversStatusForContact(ct.getCid());
 					return;
 				}
 	}
@@ -131,10 +140,7 @@ public class events {
 	public static void ContactModifyPseudo(Object packet) 
 	{
 		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
-		{
-			Log.outError("Malformed Data Received");
 			return;
-		}
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))
@@ -310,6 +316,23 @@ public class events {
 				return;
 			}
 		}
-		
+	}
+
+	public static void CreateAccountAnswer(Object data) 
+	{
+		Integer res = Integer.decode(data.toString());
+		form_inscription fmInsc = windowthread.getFmConn().getPanConnect().getFmInsc();
+		if(fmInsc == null)
+			return;
+		threading.StopSender();
+		if(res != 1)
+		{
+			JOptionPane.showMessageDialog(null,"Compte déjà existant !");
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
+			fmInsc.dispose();
+		}
 	}
 }
