@@ -266,7 +266,7 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
-		Session.setStatus(pck.getStatus());
+		Session.setStatus(pck.getStatus()+1);
 	}
 
 	public static void GroupAdded(Object data) 

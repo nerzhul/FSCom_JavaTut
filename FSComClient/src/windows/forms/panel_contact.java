@@ -72,7 +72,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		setBackground(new Color(128,128,255));
 		
-		
 		GridBagConstraints gridBagConstraints;
 
         Titre = new JLabel();
@@ -101,7 +100,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         add(image, gridBagConstraints);
 
         changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "AFK", "Offline" }));
-		changstatus.setSelectedIndex(Session.getStatus());
+		changstatus.setSelectedIndex(Session.getStatus()-1);
 		changstatus.addActionListener(new ChangeStatus_button(changstatus));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
