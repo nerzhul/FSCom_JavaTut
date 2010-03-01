@@ -124,6 +124,9 @@ public class Packet_handler
 				case 0x2E:
 					events.CreateAccountAnswer(data);
 					break;
+				case 0x30:
+					// TODO: handle server answer for p2p
+					break;
 				case 0x0C:
 				case 0x0F:
 				case 0x0A:
@@ -151,6 +154,7 @@ public class Packet_handler
 				case 0x29:
 				case 0x2B:
 				case 0x2D:
+				case 0x2F:
 					pcktrecv = new ServerSide_handler(this.opcode_id);
 					break;
 				default:

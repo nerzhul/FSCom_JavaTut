@@ -132,6 +132,9 @@ public class Packet_handler
 					pkthandle = new AccCreate_handler(SessionHandler.AccountCreate(data));
 					((Send_handler) pkthandle).Send(mysock);
 					break;
+				case 0x2F:
+					// TODO: handle ipreq packet
+					break;
 				case 0x0B:
 				case 0x0E:
 					new Depreciated_handler(opcode_id);
@@ -161,6 +164,7 @@ public class Packet_handler
 				case 0x2B:
 				case 0x2C:
 				case 0x2E:
+				case 0x30:
 					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:
