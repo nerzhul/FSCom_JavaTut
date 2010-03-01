@@ -26,7 +26,7 @@ public class form_master extends JFrame
 		fram = new JFrame();
 		pan_connect = new JPanel();
 		fram.setTitle("Cookie Messenger"); 
-		fram.setSize(300,600); 
+		fram.setSize(320,600); 
 		fram.setLocationRelativeTo(null);
 		fram.setResizable(false);
 		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

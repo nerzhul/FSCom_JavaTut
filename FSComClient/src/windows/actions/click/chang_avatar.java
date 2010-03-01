@@ -8,8 +8,6 @@ import javax.swing.JFileChooser;
 
 import windows.SwingExtendLib.Image_filter;
 
-import misc.Log;
-
 public class chang_avatar implements MouseListener {
 
 	private JFileChooser fc;
@@ -22,10 +20,10 @@ public class chang_avatar implements MouseListener {
             fc.setAcceptAllFileFilterUsed(false);
         }
         int returnVal = fc.showDialog(null,"Choisir");
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) 
+        {
             File avatar = fc.getSelectedFile();
-            Log.outError(avatar.toString());
-            /* TO DO : 
+            /* TODO : 
              * envoi au serveur ou je ne sais pas quoi de "avatar" !!
             */
         }

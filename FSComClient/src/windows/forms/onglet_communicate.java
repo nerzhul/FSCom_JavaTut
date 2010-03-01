@@ -48,10 +48,7 @@ public class onglet_communicate extends JPanel{
 	    JButton envoi = new JButton("Envoyer !");
 	    envoi.addActionListener(new SendMsg_button(ct,txt,MainText));
 	    
-	    ImageIcon a = new ImageIcon ("avatar.jpg"); //modif par l'image
-	    Image avatar = scale(a.getImage(),80,80);
-	    image = new JLabel( new ImageIcon(avatar));
-	    image.setText(ct.getPseudo());
+	    ChangeContactAvatar("avatar.jpg");
 	    
 	    CreateBorders();
 	    ChangeBorderStatus();
@@ -68,6 +65,13 @@ public class onglet_communicate extends JPanel{
 	    add(envoi);
 	}
 
+	public void ChangeContactAvatar(String path)
+	{
+		ImageIcon a = new ImageIcon (path);
+	    Image avatar = scale(a.getImage(),80,80);
+	    image = new JLabel( new ImageIcon(avatar));
+	}
+	
 	private void CreateBorders()
 	{
 		borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);

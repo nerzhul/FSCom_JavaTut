@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.border.MatteBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -58,6 +59,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private DefaultMutableTreeNode dropContact = null;
 	
 	private JTextField msgperso;
+	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
+	private JLabel image;
 
 	public panel_contact()
 	{
@@ -68,9 +71,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		setBackground(new Color(128,128,255));
 		
-		ImageIcon a = new ImageIcon ("avatar.jpg"); //modif par l'image
-	    Image avatar = scale(a.getImage(),80,80);
-	    JLabel image = new JLabel( new ImageIcon(avatar));
+		ChangeMyAvatar("avatar.jpg");
 		image.addMouseListener(new chang_avatar());
 	    
 		Titre = new JLabel(Session.getPseudo()+" ");
@@ -147,13 +148,32 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		for(int i=0;i<Session.getGroups().size();i++)
 			tree.expandRow(i);
 	}
+	
 	public void RefreshContactList()
 	{
-		//GenerateNodes();
 		((DefaultTreeModel) tree.getModel()).reload();
 		OpenContactList();
 	}
 
+	public void ChangeBorderStatus()
+	{
+		if (Session.getStatus().equals(0) || Session.getStatus().equals(4))
+	    	image.setBorder(borderoffline);
+	    else if (Session.getStatus().equals(1))
+	    	image.setBorder(borderonline);
+	    else if (Session.getStatus().equals(2))
+	    	image.setBorder(borderbusy);
+	    else if (Session.getStatus().equals(3))
+	    	image.setBorder(borderafk);
+	}
+	
+	public void ChangeMyAvatar(String path)
+	{
+		ImageIcon a = new ImageIcon (path);
+	    Image avatar = scale(a.getImage(),80,80);
+	    image = new JLabel( new ImageIcon(avatar));
+	}
+	
 	public void setComm(form_communicate comm) { this.comm = comm; }
 	public form_communicate getComm() { return comm; }
 	
