@@ -142,23 +142,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
-		GenerateNodes();
-
-		tree.repaint();
-		tree.updateUI();/*a essayer 
-			
-		ou
-		
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		DefaultTreeModel model = new DefaultTreeModel(root);
-		Jtree tree = new JTree(model);
-		tree.repaint();
-
-		ou
-
 		((DefaultTreeModel) tree.getModel()).reload();
-		
-		*/
 	}
 
 	public void setComm(form_communicate comm) { this.comm = comm; }

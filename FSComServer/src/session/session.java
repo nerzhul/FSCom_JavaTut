@@ -384,7 +384,7 @@ public class session {
 
 	public void EventGroupRen(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,""))))
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
