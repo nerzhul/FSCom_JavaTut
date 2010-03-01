@@ -23,16 +23,13 @@ public class onglet_communicate extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private contact ct;
 	private JTextArea MainText;
-
-	
-	/*TO DO : 
-	 * Changement de pseudo + image + status
-	 */
+	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
+	private JLabel image;
 	
 	public onglet_communicate(contact noeud)
 	{
 		super();
-		ct	=	noeud;
+		ct = noeud;
 		CreateTab();
 	}
 	
@@ -53,21 +50,11 @@ public class onglet_communicate extends JPanel{
 	    
 	    ImageIcon a = new ImageIcon ("avatar.jpg"); //modif par l'image
 	    Image avatar = scale(a.getImage(),80,80);
-	    JLabel image = new JLabel( new ImageIcon(avatar));
+	    image = new JLabel( new ImageIcon(avatar));
 	    image.setText(ct.getPseudo());
 	    
-	    MatteBorder borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
-	    MatteBorder borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
-	    MatteBorder borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
-	    MatteBorder borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
-	    if (ct.getStatus().equals(0) || ct.getStatus().equals(4))
-	    	image.setBorder(borderoffline);
-	    else if (ct.getStatus().equals(1))
-	    	image.setBorder(borderonline);
-	    else if (ct.getStatus().equals(2))
-	    	image.setBorder(borderbusy);
-	    else if (ct.getStatus().equals(3))
-	    	image.setBorder(borderafk);
+	    CreateBorders();
+	    ChangeBorderStatus();
 	    
         add(image);
 	    add(MainText);
@@ -81,6 +68,26 @@ public class onglet_communicate extends JPanel{
 	    add(envoi);
 	}
 
+	private void CreateBorders()
+	{
+		borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
+	    borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
+	    borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
+	    borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
+	}
+	
+	public void ChangeBorderStatus()
+	{
+		if (ct.getStatus().equals(0) || ct.getStatus().equals(4))
+	    	image.setBorder(borderoffline);
+	    else if (ct.getStatus().equals(1))
+	    	image.setBorder(borderonline);
+	    else if (ct.getStatus().equals(2))
+	    	image.setBorder(borderbusy);
+	    else if (ct.getStatus().equals(3))
+	    	image.setBorder(borderafk);
+	}
+	
 	public void WriteMsg(String msg)
 	{
 		MainText.setText(MainText.getText() + ct.getPseudo() +" a ecrit : "+ msg + "\n");

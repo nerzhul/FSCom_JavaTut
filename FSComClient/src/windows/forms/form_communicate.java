@@ -67,6 +67,20 @@ public class form_communicate extends JFrame{
 		return null;
 	}
 	
+	public void ChangeConversStatusForContact(Integer _uid)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+		{
+			contact ct = ((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).GetContact();
+    		if(ct.getCid().equals(_uid))
+    		{
+    			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeBorderStatus();
+    			return;
+    		}
+		}
+	}
+	
 	public void ChangeConversTabTitle(Integer _uid, String name)
 	{
 		int nbonglet = TabPan.getTabCount();

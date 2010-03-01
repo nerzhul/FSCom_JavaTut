@@ -129,6 +129,9 @@ public class events {
 				{
 					ct.setStatus(Integer.decode(pck.getDat()));
 					windowthread.getFmConn().getPanContact().RefreshContactList();
+					form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+					if(fmCom != null)
+						fmCom.ChangeConversStatusForContact(ct.getCid());
 					return;
 				}
 	}
@@ -136,10 +139,7 @@ public class events {
 	public static void ContactModifyPseudo(Object packet) 
 	{
 		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
-		{
-			Log.outError("Malformed Data Received");
 			return;
-		}
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))
