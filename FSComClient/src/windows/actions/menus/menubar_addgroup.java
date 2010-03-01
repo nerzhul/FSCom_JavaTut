@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import session.Session;
+import socket.packet.handlers.sends.AddGroup_handler;
 
 public class menubar_addgroup implements ActionListener {
 
@@ -21,8 +22,8 @@ public class menubar_addgroup implements ActionListener {
 		{
 			if(reponse.length()<20)
 			{
-				Session.getMaxGid();
-				//envoi au serveur du nouveau groupe
+				AddGroup_handler pck = new AddGroup_handler(Session.getMaxGid()+1,reponse);
+				pck.Send();				
 			}
 			else
 				JOptionPane.showMessageDialog(fenetre,"Le nom du groupe est trop long !" );

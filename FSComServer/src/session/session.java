@@ -361,7 +361,7 @@ public class session {
 			return;
 		
 		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_group VALUES ('" +
-				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "'");
+				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "')");
 		
 		ConfirmGroupAdded_handler pkt = new ConfirmGroupAdded_handler(pck.getUid());
 		pkt.Send(sock);
