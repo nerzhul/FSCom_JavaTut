@@ -1,5 +1,7 @@
 package windows.forms;
 
+import java.awt.Image;
+
 import javax.swing.JFrame;
 
 import net.infonode.tabbedpanel.Tab;
@@ -97,5 +99,20 @@ public class form_communicate extends JFrame{
 		int nbonglet = TabPan.getTabCount();
 		for(int i=0;i<nbonglet;i++)
 			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyBorderStatus();
+	}
+
+	public void ChangeContactAvatar(Integer _uid, Image img) 
+	{
+		
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+		{
+			contact ct = ((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).GetContact();
+    		if(ct.getCid().equals(_uid))
+    		{
+    			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeContactAvatar(img);
+    		}
+		}
+		
 	}
 }

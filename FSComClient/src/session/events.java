@@ -1,5 +1,6 @@
 package session;
 
+import java.awt.Image;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
+import socket.packet.p2pobjects.Avatar;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;
@@ -344,5 +346,19 @@ public class events {
 			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
 			fmInsc.dispose();
 		}
+	}
+
+	public static void ChangeContactAvatar(Object data) 
+	{
+		if(!data.getClass().equals((new Avatar(0,(Image)new Object()).getClass())))
+			return;
+		
+		Avatar av = (Avatar)data;
+		Integer _uid = av.getUid();
+		Image img = av.getImg();
+		form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+		if(fmCom == null)
+			return;
+		fmCom.ChangeContactAvatar(_uid,img);
 	}
 }

@@ -17,13 +17,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.MatteBorder;
 
-import misc.Log;
-
 import session.Session;
 import session.contact;
+import windows.actions.buttons.Retablir_button;
 import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
-import windows.actions.buttons.Retablir_button;
 
 public class onglet_communicate extends JPanel{
 
@@ -137,6 +135,14 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.insets = new Insets(12, 5, 0, 5);
         add(myimage, gridBagConstraints);
+        
+        RequestContactAvatar();
+	}
+
+	private void RequestContactAvatar() 
+	{
+		
+		
 	}
 
 	private void ChangeMyAvatar(String path)
@@ -151,6 +157,11 @@ public class onglet_communicate extends JPanel{
 		ImageIcon a = new ImageIcon (path);
 	    Image avatar = scale(a.getImage(),80,80);
 	    image = new JLabel( new ImageIcon(avatar));
+	}
+	
+	public void ChangeContactAvatar(Image img)
+	{
+		image = new JLabel( new ImageIcon(img));
 	}
 	
 	private void CreateBorders()

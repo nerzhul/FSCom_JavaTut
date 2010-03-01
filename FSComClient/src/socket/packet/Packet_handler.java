@@ -119,7 +119,7 @@ public class Packet_handler
 					events.GroupRenamed(data);
 					break;
 				case 0x2C:
-					// TODO: handle p2p packet
+					events.ChangeContactAvatar(data);
 					break;
 				case 0x2E:
 					events.CreateAccountAnswer(data);
