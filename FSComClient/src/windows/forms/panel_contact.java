@@ -24,6 +24,7 @@ import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -74,6 +75,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	    
 		Titre = new JLabel(Session.getPseudo()+" ");
 		
+		
 		changstatus= new JComboBox();
 		
 		changstatus.addItem("Online");
@@ -86,7 +88,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		msgperso.setText(Session.getPerso_msg());
 		
 		Soustitre = new JLabel("Liste de vos contacts : ");
-		
+
 		add(image);
 		add(Titre);
 		add(changstatus);
@@ -113,6 +115,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		JScrollPane Scrollbar = new JScrollPane(tree);
 		Scrollbar.setPreferredSize(new Dimension(150, 300));
 		this.add(Scrollbar);
+
 	}
 	
 	private void GenerateNodes()
@@ -142,7 +145,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
-		GenerateNodes();
+		/*GenerateNodes();
 
 		tree.repaint();
 		tree.updateUI();/*a essayer 
@@ -154,11 +157,11 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		Jtree tree = new JTree(model);
 		tree.repaint();
 
-		ou
+		ou*/
 
 		((DefaultTreeModel) tree.getModel()).reload();
 		
-		*/
+		
 	}
 
 	public void setComm(form_communicate comm) { this.comm = comm; }
@@ -220,15 +223,15 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	}
 
 	public static Image scale(Image source, int width, int height) {
-	    /* On crée une nouvelle image aux bonnes dimensions. */
+	    /* On crï¿½e une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisée. */
+	    /* On dessine sur le Graphics de l'image bufferisï¿½e. */
 	    Graphics2D g = buf.createGraphics();
 	    g.drawImage(source, 10, 10, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisée, qui est une image. */
+	    /* On retourne l'image bufferisï¿½e, qui est une image. */
 	    return buf;
 	}
 	

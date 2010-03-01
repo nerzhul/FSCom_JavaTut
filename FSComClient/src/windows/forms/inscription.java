@@ -1,16 +1,24 @@
 package windows.forms;
 
-import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.text.ParseException;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+
+import windows.forms.buttons.cancel_inscription_button;
+import windows.forms.buttons.valid_inscription_button;
 
 public class inscription extends JFrame{
 
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	public inscription(){
 		frame = new JFrame();
@@ -18,127 +26,105 @@ public class inscription extends JFrame{
 		frame.setSize(300,250);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(true);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setVisible(true);
 		panel();
 	}
 	
 	public void panel(){
-		java.awt.GridBagConstraints gridBagConstraints;
+		GridBagConstraints gridBagConstraints;
 		JPanel pane = new JPanel();
-        JLabel Titre = new javax.swing.JLabel();
-        JButton jButton1 = new javax.swing.JButton();
-        JButton jButton2 = new javax.swing.JButton();
-        JPasswordField passtxt = new javax.swing.JPasswordField();
-        JPasswordField passtxt2 = new javax.swing.JPasswordField();
-        JLabel pass = new javax.swing.JLabel();
-        JLabel pass2 = new javax.swing.JLabel();
-        JTextField persotxt = new javax.swing.JTextField();
-        JLabel perso = new javax.swing.JLabel();
-        JLabel pseudo = new javax.swing.JLabel();
-        JLabel identifiant = new javax.swing.JLabel();
-        JTextField pseudotxt = new javax.swing.JTextField();
-        JTextField idtxt = new javax.swing.JTextField();
+        JLabel Titre = new JLabel();
+        JButton valider = new JButton();
+        JButton annuler = new JButton();
+        JPasswordField passtxt = new JPasswordField();
+        JPasswordField passtxt2 = new JPasswordField();
+        JLabel pass = new JLabel();
+        JLabel pass2 = new JLabel();
+        MaskFormatter Mask10 = null;
+		try {
+			Mask10 = new MaskFormatter("************");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+        JLabel identifiant = new JLabel();
+        JFormattedTextField idtxt = new JFormattedTextField(Mask10);
 
-        pane.setLayout(new java.awt.GridBagLayout());
+        pane.setLayout(new GridBagLayout());
 
-        Titre.setText("Bienvenu sur la page d'inscription !");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        Titre.setText("Bienvenue sur la page d'inscription !");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(16, 4, 16, 4);
+        gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
+        gridBagConstraints.insets = new Insets(16, 4, 16, 4);
         pane.add(Titre, gridBagConstraints);
 
-        jButton1.setText("Valider");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        valider.setText("Valider");
+        valider.addActionListener(new valid_inscription_button(frame,idtxt,passtxt,passtxt2));
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        pane.add(jButton1, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.WEST;
+        gridBagConstraints.insets = new Insets(10, 0, 10, 0);
+        pane.add(valider, gridBagConstraints);
 
-        jButton2.setText("Annuler");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        annuler.setText("Annuler");
+        annuler.addActionListener(new cancel_inscription_button(frame));
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
-        pane.add(jButton2, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.EAST;
+        gridBagConstraints.insets = new Insets(0, 5, 0, 5);
+        pane.add(annuler, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
+        passtxt.setToolTipText("Doit être différent de l'identifiant !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(0, 5, 0, 5);
         pane.add(passtxt, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
+        passtxt2.setToolTipText("Doit être égal au pass entré précédemment !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(0, 5, 0, 5);
         pane.add(passtxt2, gridBagConstraints);
 
         pass.setText("Mot de passe :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         pane.add(pass, gridBagConstraints);
 
         pass2.setText("Confirmation :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         pane.add(pass2, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
-        pane.add(persotxt, gridBagConstraints);
-
-        perso.setText("Phrase Perso :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(5, 4, 5, 4);
-        pane.add(perso, gridBagConstraints);
-
-        pseudo.setText("Pseudo :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(6, 4, 6, 4);
-        pane.add(pseudo, gridBagConstraints);
-
         identifiant.setText("Identifiant :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         pane.add(identifiant, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 4);
-        pane.add(pseudotxt, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
+        idtxt.setToolTipText("Maximum dix caractères !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 152;
-        gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 4);
+        gridBagConstraints.insets = new Insets(0, 4, 0, 4);
         pane.add(idtxt, gridBagConstraints);
+        
         frame.add(pane);
         pane.setVisible(true);
 	}
-	
-	
 }
