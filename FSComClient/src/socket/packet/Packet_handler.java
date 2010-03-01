@@ -118,8 +118,11 @@ public class Packet_handler
 				case 0x2A:
 					events.GroupRenamed(data);
 					break;
-				case 0x2B:
+				case 0x2C:
 					// TODO: handle p2p packet
+					break;
+				case 0x2E:
+					
 					break;
 				case 0x0C:
 				case 0x0F:
@@ -146,7 +149,8 @@ public class Packet_handler
 				case 0x25:
 				case 0x27:
 				case 0x29:
-				case 0x2C:
+				case 0x2B:
+				case 0x2D:
 					pcktrecv = new ServerSide_handler(this.opcode_id);
 					break;
 				default:

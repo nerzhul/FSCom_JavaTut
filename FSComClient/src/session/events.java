@@ -42,28 +42,32 @@ public class events {
 
 	public static void ContactDisconnected(Object packet) 
 	{
+		Integer st = Integer.decode(packet.toString());
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(st))
 				{
-					// TODO: declare contact disconnected to client
+					ct.setStatus(st);
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}
 
 	public static void ContactConnected(Object packet) 
 	{
-		if(!packet.getClass().equals((new ConnectData("",0,"",0)).getClass()))
+		if(!packet.getClass().equals((new ConnectData("",0,"",0,"")).getClass()))
 			return;
 		
 		ConnectData cn = (ConnectData)packet;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(cn.getStatus()))
+				if(ct.getCid().equals(cn.getUid()))
 				{
 					ct.setStatus(cn.getStatus());
-					ct.setPseudo(cn.getName());
+					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
+					//TODO : handle convers window
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}
@@ -124,6 +128,7 @@ public class events {
 				if(ct.getCid().equals(pck.getUid()))
 				{
 					ct.setStatus(Integer.decode(pck.getDat()));
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}

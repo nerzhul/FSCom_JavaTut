@@ -138,12 +138,19 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		// Construction de l'arbre.
 		tree = new JTree(myModel);
 		tree.setCellRenderer(new Tree_Renderer());
+		OpenContactList();
 	}
 	
+	private void OpenContactList()
+	{
+		for(int i=0;i<Session.getGroups().size();i++)
+			tree.expandRow(i);
+	}
 	public void RefreshContactList()
 	{
-		GenerateNodes();
+		//GenerateNodes();
 		((DefaultTreeModel) tree.getModel()).reload();
+		OpenContactList();
 	}
 
 	public void setComm(form_communicate comm) { this.comm = comm; }

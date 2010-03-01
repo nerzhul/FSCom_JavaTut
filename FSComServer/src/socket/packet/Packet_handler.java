@@ -126,6 +126,9 @@ public class Packet_handler
 				case 0x29:
 					m_sess.EventGroupRen(data);
 					break;
+				case 0x2D:
+					// TODO: handle group create
+					break;
 				case 0x0B:
 				case 0x0E:
 					new Depreciated_handler(opcode_id);
@@ -154,6 +157,7 @@ public class Packet_handler
 				case 0x2A:
 				case 0x2B:
 				case 0x2C:
+				case 0x2E:
 					pkthandle = new ClientSide_handler(this.opcode_id);
 					break;
 				default:

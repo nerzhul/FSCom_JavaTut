@@ -51,9 +51,10 @@ public class session {
 	{
 		connected = true;
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
-		SessionHandler.AddSession(this);
 		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
+		
+		SessionHandler.AddSession(this);
 		LoadBlockedContacts();
 		// TODO : send all invitations
 	}
@@ -78,7 +79,7 @@ public class session {
 		// TODO : handle if blocked
 		sess.sess_linked.add(this);
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
-				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid());
+				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid(),sess.getPseudo());
 		if(pck != null)
 			pck.Send(sock);
 	}
