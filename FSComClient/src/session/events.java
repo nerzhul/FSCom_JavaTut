@@ -1,8 +1,8 @@
 package session;
 
-import java.awt.Image;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import socket.Sender;
@@ -347,12 +347,12 @@ public class events {
 
 	public static void ChangeContactAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new Avatar(0,(Image)new Object()).getClass())))
+		if(!data.getClass().equals((new Avatar(0,(ImageIcon)new Object()).getClass())))
 			return;
 		
 		Avatar av = (Avatar)data;
 		Integer _uid = av.getUid();
-		Image img = av.getImg();
+		ImageIcon img = av.getImg();
 		form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
 		if(fmCom == null)
 			return;

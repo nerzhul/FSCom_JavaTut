@@ -47,6 +47,7 @@ public class onglet_communicate extends JPanel{
 		GridBagConstraints gridBagConstraints;
 
         image = new JLabel();
+        myimage = new JLabel();
         JButton envoi = new JButton();
         JScrollPane MainScroll = new JScrollPane();
         MainText = new JTextArea();
@@ -147,21 +148,21 @@ public class onglet_communicate extends JPanel{
 
 	public void ChangeMyAvatar(String path)
 	{
-		ImageIcon a2 = new ImageIcon (path);
-	    Image avatar2 = scale(a2.getImage(),80,80);
-	    myimage = new JLabel( new ImageIcon(avatar2));
+		ImageIcon a = new ImageIcon (path);
+	    Image avatar = scale(a.getImage(),80,80);
+	    myimage.setIcon( new ImageIcon(avatar));
 	}
 
 	public void ChangeContactAvatar(String path)
 	{
 		ImageIcon a = new ImageIcon (path);
 	    Image avatar = scale(a.getImage(),80,80);
-	    image = new JLabel( new ImageIcon(avatar));
+	    image.setIcon( new ImageIcon(avatar));
 	}
 	
-	public void ChangeContactAvatar(Image img)
+	public void ChangeContactAvatar(ImageIcon img)
 	{
-		image = new JLabel( new ImageIcon(img));
+		image.setIcon(img);
 	}
 	
 	private void CreateBorders()

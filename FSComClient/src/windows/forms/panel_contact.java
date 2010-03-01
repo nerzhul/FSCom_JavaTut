@@ -214,7 +214,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		ImageIcon a = new ImageIcon (path);
 	    Image avatar = scale(a.getImage(),80,80);
-	    image = new JLabel( new ImageIcon(avatar));
+	    image.setIcon( new ImageIcon(avatar));
 	}
 	
 	public void setComm(form_communicate comm) { this.comm = comm; }

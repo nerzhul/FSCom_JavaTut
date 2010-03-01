@@ -1,7 +1,6 @@
 package windows.forms;
 
-import java.awt.Image;
-
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import net.infonode.tabbedpanel.Tab;
@@ -108,7 +107,7 @@ public class form_communicate extends JFrame{
 			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyAvatar(path);
 	}
 	
-	public void ChangeContactAvatar(Integer _uid, Image img) 
+	public void ChangeContactAvatar(Integer _uid, ImageIcon img) 
 	{
 		
 		int nbonglet = TabPan.getTabCount();
