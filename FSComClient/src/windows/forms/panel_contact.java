@@ -3,7 +3,10 @@ package windows.forms;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -23,6 +26,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -30,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.border.MatteBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -50,6 +55,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel Titre;
 	private JLabel Soustitre;
 	private JTree  tree;
+	private JScrollPane scrolltree;
 	private JComboBox changstatus;
 	private form_communicate comm;
 
@@ -57,7 +63,9 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private DefaultMutableTreeNode selecContact = null;
 	private DefaultMutableTreeNode dropContact = null;
 	
-	private JTextField msgperso;
+	private JLabel msgperso;
+	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
+	private JLabel image;
 
 	public panel_contact()
 	{
@@ -68,9 +76,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		setBackground(new Color(128,128,255));
 		
-		ImageIcon a = new ImageIcon ("avatar.jpg"); //modif par l'image
-	    Image avatar = scale(a.getImage(),80,80);
-	    JLabel image = new JLabel( new ImageIcon(avatar));
+		/*ChangeMyAvatar("avatar.jpg");
 		image.addMouseListener(new chang_avatar());
 	    
 		Titre = new JLabel(Session.getPseudo()+" ");
@@ -96,6 +102,70 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		
 		SetListContact();	
 		
+		comm = null;*/
+		
+		GridBagConstraints gridBagConstraints;
+
+        Titre = new JLabel();
+        image = new JLabel();
+        changstatus = new JComboBox();
+        msgperso = new JLabel();
+        Soustitre = new JLabel();
+        scrolltree = new JScrollPane();
+
+        setLayout(new GridBagLayout());
+
+        Titre.setText(Session.getPseudo());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        add(Titre, gridBagConstraints);
+
+        ChangeMyAvatar("avatar.jpg");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(image, gridBagConstraints);
+
+        changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "AFK", "Offline" }));
+		changstatus.setSelectedIndex(Session.getStatus());
+		changstatus.addActionListener(new ChangeStatus_button(changstatus));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(changstatus, gridBagConstraints);
+
+        msgperso.setText("Messager personnel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        add(msgperso, gridBagConstraints);
+
+        Soustitre.setText("Liste de vos contacts :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        add(Soustitre, gridBagConstraints);
+		
+        SetListContact();
+        
+        
+		scrolltree.setViewportView(tree);
+		scrolltree.setPreferredSize(new Dimension(150,300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        add(scrolltree, gridBagConstraints);
+        
 		comm = null;
 	}
 	
@@ -111,9 +181,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
 		this.add(tree);
-		JScrollPane Scrollbar = new JScrollPane(tree);
-		Scrollbar.setPreferredSize(new Dimension(150, 300));
-		this.add(Scrollbar);
 	}
 	
 	private void GenerateNodes()
@@ -139,6 +206,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		// Construction de l'arbre.
 		tree = new JTree(myModel);
 		tree.setCellRenderer(new Tree_Renderer());
+
 		OpenContactList();
 	}
 	
@@ -147,17 +215,36 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		for(int i=0;i<Session.getGroups().size();i++)
 			tree.expandRow(i);
 	}
+	
 	public void RefreshContactList()
 	{
-		//GenerateNodes();
 		((DefaultTreeModel) tree.getModel()).reload();
 		OpenContactList();
 	}
 
+	public void ChangeBorderStatus()
+	{
+		if (Session.getStatus().equals(0) || Session.getStatus().equals(4))
+	    	image.setBorder(borderoffline);
+	    else if (Session.getStatus().equals(1))
+	    	image.setBorder(borderonline);
+	    else if (Session.getStatus().equals(2))
+	    	image.setBorder(borderbusy);
+	    else if (Session.getStatus().equals(3))
+	    	image.setBorder(borderafk);
+	}
+	
+	public void ChangeMyAvatar(String path)
+	{
+		ImageIcon a = new ImageIcon (path);
+	    Image avatar = scale(a.getImage(),80,80);
+	    image = new JLabel( new ImageIcon(avatar));
+	}
+	
 	public void setComm(form_communicate comm) { this.comm = comm; }
 	public form_communicate getComm() { return comm; }
 	
-	public void ChPseudo(String n_pseudo) {	Titre.setText("Pseudo : " + n_pseudo); }
+	public void ChPseudo(String n_pseudo) {	Titre.setText(n_pseudo); }
 
 	/*
 	 * Drag and Drop
@@ -213,15 +300,15 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	}
 
 	public static Image scale(Image source, int width, int height) {
-	    /* On crée une nouvelle image aux bonnes dimensions. */
+	    /* On crï¿½e une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisée. */
+	    /* On dessine sur le Graphics de l'image bufferisï¿½e. */
 	    Graphics2D g = buf.createGraphics();
 	    g.drawImage(source, 10, 10, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisée, qui est une image. */
+	    /* On retourne l'image bufferisï¿½e, qui est une image. */
 	    return buf;
 	}
 	

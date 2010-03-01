@@ -22,10 +22,11 @@ public class form_communicate extends JFrame{
 		TabPan = new TabbedPanel();
 
 		frame = new JFrame();
+		frame.setSize(new Dimension(200,200));
 		frame.setTitle("Cookie Messenger - Conversation"); 
-		frame.setSize(800,530);
+		frame.setSize(600,600);
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
 	    frame.addWindowListener(new CloseAllConversTabs_button(frame,TabPan));
 	}
