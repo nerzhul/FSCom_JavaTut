@@ -91,4 +91,11 @@ public class form_communicate extends JFrame{
     		}
 		}
 	}
+	
+	public void ChangeAllMyStatusBorder()
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyBorderStatus();
+	}
 }

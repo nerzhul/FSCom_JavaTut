@@ -133,6 +133,9 @@ public class session {
 	{
 		switch(sth)
 		{
+			case 1:
+				this.SendStatusToMe(0, status);
+				break;
 			case 2:
 				this.SendPseudoToMe(0, name);
 				break;

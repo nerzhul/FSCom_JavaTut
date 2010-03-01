@@ -17,6 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.MatteBorder;
 
+import misc.Log;
+
+import session.Session;
 import session.contact;
 import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
@@ -41,97 +44,99 @@ public class onglet_communicate extends JPanel{
 	public void CreateTab()
 	{
 		setBackground(new Color(128,128,255));
+		CreateBorders();
 		
-		 GridBagConstraints gridBagConstraints;
+		GridBagConstraints gridBagConstraints;
 
-	        image = new JLabel();
-	        JButton envoi = new JButton();
-	        JScrollPane MainScroll = new JScrollPane();
-	        MainText = new JTextArea();
-	        JScrollPane SendScroll = new JScrollPane();
-	        JTextArea txt = new JTextArea();
-	        JLabel TitleText = new JLabel();
-	        JButton retablir = new JButton();
+        image = new JLabel();
+        JButton envoi = new JButton();
+        JScrollPane MainScroll = new JScrollPane();
+        MainText = new JTextArea();
+        JScrollPane SendScroll = new JScrollPane();
+        JTextArea txt = new JTextArea();
+        JLabel TitleText = new JLabel();
+        JButton retablir = new JButton();
 
-	        setLayout(new GridBagLayout());
-	        CreateBorders();
-		    ChangeBorderStatus();
-	        ChangeContactAvatar("avatar.jpg");
-		    
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 0;
-	        gridBagConstraints.gridy = 1;
-	        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-	        gridBagConstraints.ipadx = 20;
-	        gridBagConstraints.anchor = GridBagConstraints.NORTH;
-	        gridBagConstraints.insets = new Insets(22, 5, 0, 5);
-	        add(image, gridBagConstraints);
+        setLayout(new GridBagLayout());
+        
+	    
+        ChangeContactAvatar("avatar.jpg");
+        ChangeBorderStatus();
+        
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new Insets(22, 5, 0, 5);
+        add(image, gridBagConstraints);
 
-	        envoi.setText("Envoyer !");
-	        envoi.addActionListener(new SendMsg_button(ct,txt,MainText));
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 2;
-	        gridBagConstraints.gridy = 3;
-	        gridBagConstraints.anchor = GridBagConstraints.NORTH;
-	        gridBagConstraints.insets = new Insets(0, 6, 10, 6);
-	        add(envoi, gridBagConstraints);
+        envoi.setText("Envoyer !");
+        envoi.addActionListener(new SendMsg_button(ct,txt,MainText));
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new Insets(0, 6, 10, 6);
+        add(envoi, gridBagConstraints);
 
-	        MainText.setColumns(20);
-	        MainText.setEditable(false);
-	        MainText.setLineWrap(true);
-	        MainText.setRows(5);
-	        MainText.setAutoscrolls(true);
-	        MainScroll.setViewportView(MainText);
+        MainText.setColumns(20);
+        MainText.setEditable(false);
+        MainText.setLineWrap(true);
+        MainText.setRows(5);
+        MainText.setAutoscrolls(true);
+        MainScroll.setViewportView(MainText);
 
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 1;
-	        gridBagConstraints.gridy = 1;
-	        gridBagConstraints.fill = GridBagConstraints.VERTICAL;
-	        gridBagConstraints.ipadx = 300;
-	        gridBagConstraints.ipady = 200;
-	        gridBagConstraints.insets = new Insets(20, 6, 10, 6);
-	        add(MainScroll, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.ipady = 200;
+        gridBagConstraints.insets = new Insets(20, 6, 10, 6);
+        add(MainScroll, gridBagConstraints);
 
-	        txt.setColumns(20);
-	        txt.setLineWrap(true);
-	        txt.setRows(5);
-	        txt.setText("\n");
-	        txt.addKeyListener(new follow_keyboard(ct,txt,MainText));
-	        SendScroll.setViewportView(txt);
-	        
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 1;
-	        gridBagConstraints.gridy = 3;
-	        gridBagConstraints.ipadx = 300;
-	        gridBagConstraints.ipady = -35;
-	        gridBagConstraints.insets = new Insets(10, 0, 20, 0);
-	        add(SendScroll, gridBagConstraints);
+        txt.setColumns(20);
+        txt.setLineWrap(true);
+        txt.setRows(5);
+        txt.setText("\n");
+        txt.addKeyListener(new follow_keyboard(ct,txt,MainText));
+        SendScroll.setViewportView(txt);
+        
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 300;
+        gridBagConstraints.ipady = -35;
+        gridBagConstraints.insets = new Insets(10, 0, 20, 0);
+        add(SendScroll, gridBagConstraints);
 
-	        TitleText.setText("Entrer ici le message à envoyer :");
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 1;
-	        gridBagConstraints.gridy = 2;
-	        add(TitleText, gridBagConstraints);
+        TitleText.setText("Entrer ici le message à envoyer :");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        add(TitleText, gridBagConstraints);
 
-	        retablir.setText("Retablir");
-	        retablir.addActionListener(new Retablir_button(txt));
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 2;
-	        gridBagConstraints.gridy = 3;
-	        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-	        gridBagConstraints.ipady = 1;
-	        gridBagConstraints.anchor = GridBagConstraints.SOUTH;
-	        gridBagConstraints.insets = new Insets(0, 6, 10, 6);
-	        add(retablir,gridBagConstraints);
+        retablir.setText("Retablir");
+        retablir.addActionListener(new Retablir_button(txt));
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.anchor = GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new Insets(0, 6, 10, 6);
+        add(retablir,gridBagConstraints);
 
-	        ChangeMyAvatar("avatar.jpg");
-	        gridBagConstraints = new GridBagConstraints();
-	        gridBagConstraints.gridx = 0;
-	        gridBagConstraints.gridy = 3;
-	        gridBagConstraints.anchor = GridBagConstraints.NORTH;
-	        gridBagConstraints.insets = new Insets(12, 5, 0, 5);
-	        add(myimage, gridBagConstraints);
-
+        ChangeMyAvatar("avatar.jpg");
+        ChangeMyBorderStatus();
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new Insets(12, 5, 0, 5);
+        add(myimage, gridBagConstraints);
 	}
 
 	private void ChangeMyAvatar(String path)
@@ -139,7 +144,6 @@ public class onglet_communicate extends JPanel{
 		ImageIcon a2 = new ImageIcon (path);
 	    Image avatar2 = scale(a2.getImage(),80,80);
 	    myimage = new JLabel( new ImageIcon(avatar2));
-		
 	}
 
 	public void ChangeContactAvatar(String path)
@@ -167,6 +171,19 @@ public class onglet_communicate extends JPanel{
 	    	image.setBorder(borderbusy);
 	    else if (ct.getStatus().equals(3))
 	    	image.setBorder(borderafk);
+	}
+	
+	public void ChangeMyBorderStatus()
+	{
+		Log.outError(""+Session.getStatus());
+		if (Session.getStatus().equals(0) || Session.getStatus().equals(4))
+			myimage.setBorder(borderoffline);
+	    else if (Session.getStatus().equals(1))
+	    	myimage.setBorder(borderonline);
+	    else if (Session.getStatus().equals(2))
+	    	myimage.setBorder(borderbusy);
+	    else if (Session.getStatus().equals(3))
+	    	myimage.setBorder(borderafk);
 	}
 	
 	public void WriteMsg(String msg)

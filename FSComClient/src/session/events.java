@@ -124,17 +124,27 @@ public class events {
 			return;
 		
 		IdAndData pck = (IdAndData)packet;
-		for(group g : Session.getGroups())
-			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(pck.getUid()))
-				{
-					ct.setStatus(Integer.decode(pck.getDat()));
-					windowthread.getFmConn().getPanContact().RefreshContactList();
-					form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
-					if(fmCom != null)
-						fmCom.ChangeConversStatusForContact(ct.getCid());
-					return;
-				}
+		if(pck.getUid().equals(0))
+		{
+			Session.setStatus(Integer.decode(pck.getDat()));
+			form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+				if(fmCom != null)
+					fmCom.ChangeAllMyStatusBorder();
+		}
+		else
+		{
+			for(group g : Session.getGroups())
+				for(contact ct : g.getContacts())
+					if(ct.getCid().equals(pck.getUid()))
+					{
+						ct.setStatus(Integer.decode(pck.getDat()));
+						windowthread.getFmConn().getPanContact().RefreshContactList();
+						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+						if(fmCom != null)
+							fmCom.ChangeConversStatusForContact(ct.getCid());
+						return;
+					}
+		}
 	}
 
 	public static void ContactModifyPseudo(Object packet) 
