@@ -179,10 +179,7 @@ public class events {
 	public static void ContactModifyPmsg(Object packet) 
 	{
 		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
-		{
-			Log.outError("Malformed Data Received");
 			return;
-		}
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))

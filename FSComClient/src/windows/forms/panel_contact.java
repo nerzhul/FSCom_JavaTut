@@ -3,6 +3,8 @@ package windows.forms;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
@@ -23,12 +25,12 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.border.MatteBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -42,7 +44,6 @@ import session.group;
 import socket.packet.handlers.sends.MoveGroup_handler;
 import windows.SwingExtendLib.Tree_Renderer;
 import windows.actions.buttons.ChangeStatus_button;
-import windows.actions.click.chang_avatar;
 import windows.actions.click.contact_onclick;
 
 public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
@@ -58,7 +59,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private DefaultMutableTreeNode selecContact = null;
 	private DefaultMutableTreeNode dropContact = null;
 	
-	private JTextField msgperso;
+	private JLabel msgperso;
 	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
 	private JLabel image;
 
@@ -71,36 +72,70 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		setBackground(new Color(128,128,255));
 		
-		ChangeMyAvatar("avatar.jpg");
-		ChangeBorderStatus();
-		image.addMouseListener(new chang_avatar());
-	    
-		Titre = new JLabel(Session.getPseudo()+" ");
 		
-		changstatus= new JComboBox();
-		
-		changstatus.addItem("Online");
-		changstatus.addItem("Busy");
-		changstatus.addItem("AFK");
-		changstatus.addItem("Offline");
+		GridBagConstraints gridBagConstraints;
+
+        Titre = new JLabel();
+        image = new JLabel();
+        changstatus = new JComboBox();
+        msgperso = new JLabel();
+        Soustitre = new JLabel();
+        JScrollPane scrolltree = new JScrollPane();
+
+        setLayout(new GridBagLayout());
+
+        Titre.setText(Session.getPseudo());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        add(Titre, gridBagConstraints);
+
+        ChangeMyAvatar("avatar.jpg");
+        ChangeBorderStatus();
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(image, gridBagConstraints);
+
+        changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "AFK", "Offline" }));
 		changstatus.setSelectedIndex(Session.getStatus());
 		changstatus.addActionListener(new ChangeStatus_button(changstatus));
-		msgperso = new JTextField(20);
-		msgperso.setText(Session.getPerso_msg());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(changstatus, gridBagConstraints);
+
+        msgperso.setText("Messager personnel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        add(msgperso, gridBagConstraints);
+
+        Soustitre.setText("Liste de vos contacts :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        add(Soustitre, gridBagConstraints);
 		
-		Soustitre = new JLabel("Liste de vos contacts : ");
-		
-		add(image);
-		add(Titre);
-		add(changstatus);
-		add(msgperso);
-		add(Soustitre);
-		
-		SetListContact();	
-		
+        SetListContact();
+        
+		scrolltree.setViewportView(tree);
+		scrolltree.setPreferredSize(new Dimension(150,300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        add(scrolltree, gridBagConstraints);
+        
 		comm = null;
-		
-		
 	}
 	
 	private void SetListContact()
@@ -115,9 +150,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
 		this.add(tree);
-		JScrollPane Scrollbar = new JScrollPane(tree);
-		Scrollbar.setPreferredSize(new Dimension(150, 300));
-		this.add(Scrollbar);
 	}
 	
 	private void GenerateNodes()
@@ -136,7 +168,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du mod?le de l'arbre.
+		// Construction du modèle de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
