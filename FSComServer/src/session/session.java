@@ -9,6 +9,7 @@ import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
 import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
 import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
 import socket.packet.handlers.senders.ConfirmGroupRenamed_handler;
+import socket.packet.handlers.senders.IPToClient_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
@@ -399,6 +400,18 @@ public class session {
 				this.getUid() + "' AND gid = '" + _gid + "'");
 		ConfirmGroupRenamed_handler pkt = new ConfirmGroupRenamed_handler(_gid,gName);
 		pkt.Send(sock);
+	}
+
+	public void SearchIp(Object data) 
+	{
+		Integer _uid = Integer.decode(data.toString());
+		
+		String IP = SessionHandler.SearchAccountIPbyUid(_uid);
+		if(IP != null)
+		{
+			IPToClient_handler pck = new IPToClient_handler(_uid,IP);
+			pck.Send(sock);
+		}
 	}
 
 	
