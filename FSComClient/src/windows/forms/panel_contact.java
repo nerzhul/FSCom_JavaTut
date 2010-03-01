@@ -72,6 +72,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		setBackground(new Color(128,128,255));
 		
 		ChangeMyAvatar("avatar.jpg");
+		ChangeBorderStatus();
 		image.addMouseListener(new chang_avatar());
 	    
 		Titre = new JLabel(Session.getPseudo()+" ");
@@ -98,6 +99,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		SetListContact();	
 		
 		comm = null;
+		
+		
 	}
 	
 	private void SetListContact()

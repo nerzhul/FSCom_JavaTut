@@ -260,7 +260,6 @@ public class events {
 	{
 		if(!packet.getClass().equals((new ClientDatas()).getClass()))
 		{
-			Log.outError("Malformed Data Received");
 			return;
 		}
 		ClientDatas pck = (ClientDatas) packet;
@@ -268,6 +267,7 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
+		Session.setStatus(pck.getStatus());
 	}
 
 	public static void GroupAdded(Object data) 

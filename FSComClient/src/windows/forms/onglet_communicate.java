@@ -175,7 +175,6 @@ public class onglet_communicate extends JPanel{
 	
 	public void ChangeMyBorderStatus()
 	{
-		Log.outError(""+Session.getStatus());
 		if (Session.getStatus().equals(0) || Session.getStatus().equals(4))
 			myimage.setBorder(borderoffline);
 	    else if (Session.getStatus().equals(1))
