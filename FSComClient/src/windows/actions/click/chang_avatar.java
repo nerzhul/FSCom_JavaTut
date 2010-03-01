@@ -11,6 +11,8 @@ import windows.SwingExtendLib.Image_filter;
 public class chang_avatar implements MouseListener {
 
 	private JFileChooser fc;
+	
+	public chang_avatar(){}
 	public void mouseClicked(MouseEvent arg0) 
 	{
 		if (fc == null) 

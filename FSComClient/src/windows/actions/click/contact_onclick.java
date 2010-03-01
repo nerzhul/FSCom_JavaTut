@@ -34,6 +34,7 @@ public class contact_onclick implements MouseListener
 				pn.setComm(new form_communicate());
 			
 			pn.getComm().AddTab((contact) noeud.getUserObject());
+			pn.getComm().ChangeAllMyStatusBorder();
 		}		   
 	}
 

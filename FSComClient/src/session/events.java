@@ -1,5 +1,6 @@
 package session;
 
+import java.awt.Image;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
+import socket.packet.p2pobjects.Avatar;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;
@@ -124,17 +126,27 @@ public class events {
 			return;
 		
 		IdAndData pck = (IdAndData)packet;
-		for(group g : Session.getGroups())
-			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(pck.getUid()))
-				{
-					ct.setStatus(Integer.decode(pck.getDat()));
-					windowthread.getFmConn().getPanContact().RefreshContactList();
-					form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
-					if(fmCom != null)
-						fmCom.ChangeConversStatusForContact(ct.getCid());
-					return;
-				}
+		if(pck.getUid().equals(0))
+		{
+			Session.setStatus(Integer.decode(pck.getDat()));
+			form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+				if(fmCom != null)
+					fmCom.ChangeAllMyStatusBorder();
+		}
+		else
+		{
+			for(group g : Session.getGroups())
+				for(contact ct : g.getContacts())
+					if(ct.getCid().equals(pck.getUid()))
+					{
+						ct.setStatus(Integer.decode(pck.getDat()));
+						windowthread.getFmConn().getPanContact().RefreshContactList();
+						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+						if(fmCom != null)
+							fmCom.ChangeConversStatusForContact(ct.getCid());
+						return;
+					}
+		}
 	}
 
 	public static void ContactModifyPseudo(Object packet) 
@@ -167,10 +179,7 @@ public class events {
 	public static void ContactModifyPmsg(Object packet) 
 	{
 		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
-		{
-			Log.outError("Malformed Data Received");
 			return;
-		}
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))
@@ -250,7 +259,6 @@ public class events {
 	{
 		if(!packet.getClass().equals((new ClientDatas()).getClass()))
 		{
-			Log.outError("Malformed Data Received");
 			return;
 		}
 		ClientDatas pck = (ClientDatas) packet;
@@ -258,6 +266,7 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
+		Session.setStatus(pck.getStatus());
 	}
 
 	public static void GroupAdded(Object data) 
@@ -334,5 +343,19 @@ public class events {
 			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
 			fmInsc.dispose();
 		}
+	}
+
+	public static void ChangeContactAvatar(Object data) 
+	{
+		if(!data.getClass().equals((new Avatar(0,(Image)new Object()).getClass())))
+			return;
+		
+		Avatar av = (Avatar)data;
+		Integer _uid = av.getUid();
+		Image img = av.getImg();
+		form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+		if(fmCom == null)
+			return;
+		fmCom.ChangeContactAvatar(_uid,img);
 	}
 }

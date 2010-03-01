@@ -28,7 +28,7 @@ public class form_master extends JFrame
 		fram.setTitle("Cookie Messenger"); 
 		fram.setSize(320,600); 
 		fram.setLocationRelativeTo(null);
-		fram.setResizable(true);
+		fram.setResizable(false);
 		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pan_connect = pan_contact = null;
 	}
@@ -84,9 +84,9 @@ public class form_master extends JFrame
 		SwingEL.AddItemToMenuBar(menu1,"Ajouter un contact",new menubar_addcontact());
 		SwingEL.AddItemToMenuBar(menu1,"Ajouter un groupe",new menubar_addgroup());
 		SwingEL.AddItemToMenuBar(menu1,"Changer de pseudo",new menubar_changepseudo());
-		SwingEL.AddItemToMenuBar(menu1,"Se dï¿½connecter",new menubar_disconnect(this));
+		SwingEL.AddItemToMenuBar(menu1,"Se déconnecter",new menubar_disconnect(this));
 		SwingEL.AddItemToMenuBar(menu2,"A propos...",new menubar_a_propos());
-		//AddItem(menu3,"Prï¿½fï¿½rences",new Menu_pref(getpannel()));
+		//AddItem(menu3,"Préférences",new Menu_pref(getpannel()));
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);

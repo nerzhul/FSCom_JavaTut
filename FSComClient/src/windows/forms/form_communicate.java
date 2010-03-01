@@ -1,6 +1,6 @@
 package windows.forms;
 
-import java.awt.Dimension;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 
@@ -22,11 +22,10 @@ public class form_communicate extends JFrame{
 		TabPan = new TabbedPanel();
 
 		frame = new JFrame();
-		frame.setSize(new Dimension(200,200));
 		frame.setTitle("Cookie Messenger - Conversation"); 
-		frame.setSize(600,600);
+		frame.setSize(800,530);
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(true);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
 	    frame.addWindowListener(new CloseAllConversTabs_button(frame,TabPan));
 	}
@@ -93,5 +92,27 @@ public class form_communicate extends JFrame{
     			return;
     		}
 		}
+	}
+	
+	public void ChangeAllMyStatusBorder()
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyBorderStatus();
+	}
+
+	public void ChangeContactAvatar(Integer _uid, Image img) 
+	{
+		
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+		{
+			contact ct = ((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).GetContact();
+    		if(ct.getCid().equals(_uid))
+    		{
+    			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeContactAvatar(img);
+    		}
+		}
+		
 	}
 }

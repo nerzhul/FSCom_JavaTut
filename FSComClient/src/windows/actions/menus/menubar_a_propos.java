@@ -9,7 +9,7 @@ public class menubar_a_propos extends menubar_main implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		JOptionPane.showMessageDialog(frame,"DUT 2008-2010");
+		JOptionPane.showMessageDialog(null,"DUT 2008-2010");
 	}
 
 }

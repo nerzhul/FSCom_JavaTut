@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 
 import socket.packet.handlers.Send_handler;
 import socket.packet.handlers.sends.StatusSender_handler;
+import thread.windowthread;
 
 public class ChangeStatus_button implements ActionListener {
 
@@ -18,6 +19,8 @@ public class ChangeStatus_button implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
+		if(windowthread.getFmConn().getPanContact().getComm() != null)
+			windowthread.getFmConn().getPanContact().getComm().ChangeAllMyStatusBorder();
 		Integer st = newstatus.getSelectedIndex();
 		Send_handler pck = new StatusSender_handler(st+1);
 		pck.Send();				

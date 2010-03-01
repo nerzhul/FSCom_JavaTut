@@ -26,7 +26,7 @@ public class contact_onclick_sendmsg implements ActionListener {
 			mypn.setComm(new form_communicate());
 		
 		mypn.getComm().AddTab(contact);
-
+		mypn.getComm().ChangeAllMyStatusBorder();
 	}
 }
 
