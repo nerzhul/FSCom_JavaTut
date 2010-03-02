@@ -193,14 +193,20 @@ public class events {
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))
-			; // TODO: modify my personal phrase on client
+			if(windowthread.getFmConn() != null)
+				if(windowthread.getFmConn().getPanContact() != null)
+					windowthread.getFmConn().getPanContact().ChPPers(pck.getDat());
 		else
 		{
 			for(group g : Session.getGroups())
 				for(contact ct : g.getContacts())
 					if(ct.getCid().equals(pck.getUid()))
 					{
-						// TODO: modify contact Pmsg
+						ct.setMsg_perso(pck.getDat());
+						// TODO: modify into conversation tab
+						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+						if(fmCom != null)
+							/**/;
 						return;
 					}
 		}

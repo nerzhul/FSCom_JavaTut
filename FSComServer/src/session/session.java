@@ -199,9 +199,13 @@ public class session {
 		else
 		{
 			contact_connected(SessionHandler.getContactByUID(c_uid), true);
-			for(Integer i : uid_blocked)
-				if(i.equals(c_uid))
-					uid_blocked.remove(i);
+			for(int i=0;i<uid_blocked.size();i++)
+			{
+				Integer j = uid_blocked.get(i);
+				if(j.equals(c_uid))
+					uid_blocked.remove(j);
+			}
+				
 		}
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
 				uid + "' AND contact = '" + c_uid + "'"))
