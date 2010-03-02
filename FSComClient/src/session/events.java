@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import socket.Sender;
 import socket.packet.ConnectData;
 import socket.packet.handlers.sends.Answer_Invit_handler;
+import socket.packet.handlers.sends.Disconnect_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
@@ -66,10 +67,9 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(cn.getUid()))
 				{
-					ct.setStatus(cn.getStatus());
+					ct.setStatus(cn.getStatus()+1);
 					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
-					//TODO : handle convers window
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -268,6 +268,8 @@ public class events {
 
 	public static void DisconnectCurrentClient() 
 	{
+		Disconnect_handler pck = new Disconnect_handler();
+		pck.Send();
 		Sender.StopSocket();
 		threading.StopSender();
 	}
