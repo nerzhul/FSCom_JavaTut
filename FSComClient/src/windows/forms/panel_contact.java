@@ -25,7 +25,6 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -84,7 +83,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         msgperso = new JLabel();
         Soustitre = new JLabel();
         JScrollPane scrolltree = new JScrollPane();
-        CreateBorders();
 
         setLayout(new GridBagLayout());
 
@@ -178,7 +176,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modï¿½le de l'arbre.
+		// Construction du modèle de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
@@ -199,14 +197,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		((DefaultTreeModel) tree.getModel()).reload();
 		OpenContactList();
 	}
-	
-	private void CreateBorders()
-	{
-		borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
-	    borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
-	    borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
-	    borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
-	}
 
 	public void ChangeBorderStatus()
 	{
@@ -224,7 +214,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		ImageIcon a = new ImageIcon (path);
 	    Image avatar = scale(a.getImage(),80,80);
-	    image = new JLabel( new ImageIcon(avatar));
+	    image.setIcon( new ImageIcon(avatar));
 	}
 	
 	public void setComm(form_communicate comm) { this.comm = comm; }
@@ -286,15 +276,15 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	}
 
 	public static Image scale(Image source, int width, int height) {
-	    /* On crï¿½e une nouvelle image aux bonnes dimensions. */
+	    /* On crée une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisï¿½e. */
+	    /* On dessine sur le Graphics de l'image bufferisée. */
 	    Graphics2D g = buf.createGraphics();
 	    g.drawImage(source, 10, 10, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisï¿½e, qui est une image. */
+	    /* On retourne l'image bufferisée, qui est une image. */
 	    return buf;
 	}
 	

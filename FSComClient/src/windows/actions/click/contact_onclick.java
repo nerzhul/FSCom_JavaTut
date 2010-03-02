@@ -55,7 +55,7 @@ public class contact_onclick implements MouseListener
 			
 			SwingEL.AddItemToMenu(menu,"Envoyer un message",new contact_onclick_sendmsg((contact) noeud.getUserObject(),pn));
 			SwingEL.AddItemToMenu(menu,"Supprimer",new contact_delete((contact) noeud.getUserObject()));
-			SwingEL.AddItemToMenu(menu,"Bloquer",new contact_onclick_block(noeud));
+			SwingEL.AddItemToMenu(menu,"Bloquer",new contact_onclick_block((contact)noeud.getUserObject()));
 			SwingEL.AddItemToMenu(menu,"Voir les détails",new contact_onclick_details((contact)noeud.getUserObject()));
 			
 	        menu.show (e.getComponent(),e.getX(),e.getY());

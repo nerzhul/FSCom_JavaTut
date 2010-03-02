@@ -89,4 +89,14 @@ public class SessionHandler {
 		}
 		return result;
 	}
+	
+	public static String SearchAccountIPbyUid(Integer _uid)
+	{
+		for(session s:v_sess)
+		{
+			if(s.getUid().equals(_uid))
+				return s.getSocket().getInetAddress().toString();
+		}
+		return null;
+	}
 }

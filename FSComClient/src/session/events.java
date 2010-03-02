@@ -1,8 +1,8 @@
 package session;
 
-import java.awt.Image;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import socket.Sender;
@@ -77,11 +77,21 @@ public class events {
 
 	public static void BlockContact(Object packet) 
 	{
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)packet;
+		Integer _uid = pck.getUid();
+		Integer method = Integer.decode(pck.getDat());
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(_uid))
 				{
-					// TODO: declare contact blocked to client
+					ct.setBlocked((method == 1) ? true: false);
+					if(ct.isBlocked())
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été bloqué");
+					else
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été débloqué");
 					return;
 				}
 	}
@@ -347,12 +357,12 @@ public class events {
 
 	public static void ChangeContactAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new Avatar(0,(Image)new Object()).getClass())))
+		if(!data.getClass().equals((new Avatar(0,(ImageIcon)new Object()).getClass())))
 			return;
 		
 		Avatar av = (Avatar)data;
 		Integer _uid = av.getUid();
-		Image img = av.getImg();
+		ImageIcon img = av.getImg();
 		form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
 		if(fmCom == null)
 			return;

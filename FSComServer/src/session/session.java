@@ -6,9 +6,11 @@ import java.util.Vector;
 import misc.Log;
 
 import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
+import socket.packet.handlers.senders.BlockContact_handler;
 import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
 import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
 import socket.packet.handlers.senders.ConfirmGroupRenamed_handler;
+import socket.packet.handlers.senders.IPToClient_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
@@ -181,18 +183,24 @@ public class session {
 		pck.Send(sock);
 	}
 
-	public void block_contact(String c_uid, String method) 
+	public void block_contact(Object packet) 
 	{
-		if(method.equals("1"))
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)packet;
+		Integer method = Integer.decode(pck.getDat());
+		Integer c_uid = pck.getUid();
+		if(method.equals(1))
 		{
-			contact_disconnected(SessionHandler.getContactByUID(Integer.decode(c_uid)),true);
-			uid_blocked.add(Integer.decode(c_uid));
+			contact_disconnected(SessionHandler.getContactByUID(c_uid),true);
+			uid_blocked.add(c_uid);
 		}
 		else
 		{
-			contact_connected(SessionHandler.getContactByUID(Integer.decode(c_uid)), true);
+			contact_connected(SessionHandler.getContactByUID(c_uid), true);
 			for(Integer i : uid_blocked)
-				if(i.equals(Integer.decode(c_uid)))
+				if(i.equals(c_uid))
 					uid_blocked.remove(i);
 		}
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
@@ -201,7 +209,9 @@ public class session {
 					"' where uid = '" + uid + "' AND contact = '" + c_uid + "'");
 		else
 			DatabaseTransactions.ExecuteQuery("INSERT INTO acc_blocked VALUES ('" + uid + "','" 
-					+ c_uid + "','" + method + "");
+					+ c_uid + "','" + method + "')");
+		BlockContact_handler pack = new BlockContact_handler(c_uid,method);
+		pack.Send(sock);
 	}
 	
 	public void TransmitMsgTo(Object packet) {
@@ -399,6 +409,18 @@ public class session {
 				this.getUid() + "' AND gid = '" + _gid + "'");
 		ConfirmGroupRenamed_handler pkt = new ConfirmGroupRenamed_handler(_gid,gName);
 		pkt.Send(sock);
+	}
+
+	public void SearchIp(Object data) 
+	{
+		Integer _uid = Integer.decode(data.toString());
+		
+		String IP = SessionHandler.SearchAccountIPbyUid(_uid);
+		if(IP != null)
+		{
+			IPToClient_handler pck = new IPToClient_handler(_uid,IP);
+			pck.Send(sock);
+		}
 	}
 
 	
