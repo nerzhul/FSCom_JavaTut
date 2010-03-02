@@ -23,14 +23,36 @@ public class Tree_Renderer extends DefaultTreeCellRenderer {
 	    if(node.getLevel() == 2){
 		    contact info = (contact)node.getUserObject();
 		    Integer status = info.getStatus();
+		    boolean block = info.isBlocked();
 		    if (status.equals(0) || status.equals(4))
-		    	setIcon(new ImageIcon("offline.png"));
+		    {
+		    	if(block)
+		    		setIcon(new ImageIcon("offlineblock.png"));
+		    	else
+		    		setIcon(new ImageIcon("offline.png"));
+		    	
+		    }
 		    else if (status.equals(1))
-		    	setIcon(new ImageIcon("online.png"));
+		    {
+		    	if(block)
+		    		setIcon(new ImageIcon("onlineblock.png"));
+		    	else
+		    		setIcon(new ImageIcon("online.png"));
+		    }
 		    else if (status.equals(2))
-		    	setIcon(new ImageIcon("busy.png"));
+		    {
+		    	if(block)
+		    		setIcon(new ImageIcon("busyblock.png"));
+		    	else
+		    		setIcon(new ImageIcon("busy.png"));
+		    }
 		    else if (status.equals(3))
-		    	setIcon(new ImageIcon("afk.png"));
+		    {
+		    	if(block)
+		    		setIcon(new ImageIcon("afkblock.png"));
+		    	else
+		    		setIcon(new ImageIcon("afk.png"));
+		    }
 	   }
 
 	    setOpenIcon(new ImageIcon("minus.png"));

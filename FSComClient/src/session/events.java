@@ -50,7 +50,7 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(st))
 				{
-					ct.setStatus(st);
+					ct.setStatus(0);
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -89,9 +89,10 @@ public class events {
 				{
 					ct.setBlocked((method == 1) ? true: false);
 					if(ct.isBlocked())
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été bloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été bloqué");
 					else
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été débloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été débloqué");
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}

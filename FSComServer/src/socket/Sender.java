@@ -41,7 +41,11 @@ public class Sender
 			out.flush();
 	    	Log.outTimed("Send packet " + pck.getOpcode() + ": " + pck.getData() + " to client : " + socket.getInetAddress());
 		
-		} 
+		}
+		catch(SocketException e)
+		{
+			CloseConnection();
+		}
 		catch (IOException e) 
 		{
 			e.printStackTrace();

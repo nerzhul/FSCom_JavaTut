@@ -25,6 +25,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -83,7 +84,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         msgperso = new JLabel();
         Soustitre = new JLabel();
         JScrollPane scrolltree = new JScrollPane();
-
+        CreateBorders();
+        
         setLayout(new GridBagLayout());
 
         Titre.setText(Session.getPseudo());
@@ -208,6 +210,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	    	image.setBorder(borderbusy);
 	    else if (Session.getStatus().equals(3))
 	    	image.setBorder(borderafk);
+	}
+	
+	private void CreateBorders()
+	{
+		borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
+	    borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
+	    borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
+	    borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
 	}
 	
 	public void ChangeMyAvatar(String path)
