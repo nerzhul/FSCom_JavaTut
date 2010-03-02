@@ -11,7 +11,6 @@ import socket.packet.handlers.*;
 import socket.packet.handlers.listened.*;
 import socket.packet.handlers.senders.AccCreate_handler;
 import socket.packet.handlers.senders.AddContact_handler;
-import socket.packet.handlers.senders.BlockContact_handler;
 import socket.packet.handlers.senders.Connect2_handler;
 import socket.packet.handlers.senders.Connect_handler;
 import socket.packet.handlers.senders.Invitation_Answer_handler;
@@ -87,8 +86,7 @@ public class Packet_handler
 					pkthandle = new Status_handler(m_sess,data);
 					break;
 				case 0x11:
-					pkthandle = new BlockContact_handler(m_sess,data);
-					((Send_handler) pkthandle).Send(mysock);
+					m_sess.block_contact(data);
 					break;
 				case 0x13:
 					pkthandle = new MsgToPlatform_handler(m_sess,data);

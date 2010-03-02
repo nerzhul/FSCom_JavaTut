@@ -77,11 +77,21 @@ public class events {
 
 	public static void BlockContact(Object packet) 
 	{
+		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)packet;
+		Integer _uid = pck.getUid();
+		Integer method = Integer.decode(pck.getDat());
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
-				if(ct.getCid().equals(Integer.decode(packet.toString())))
+				if(ct.getCid().equals(_uid))
 				{
-					// TODO: declare contact blocked to client
+					ct.setBlocked((method == 1) ? true: false);
+					if(ct.isBlocked())
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été bloqué");
+					else
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été débloqué");
 					return;
 				}
 	}

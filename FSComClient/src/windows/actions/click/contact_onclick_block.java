@@ -3,22 +3,23 @@ package windows.actions.click;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import session.contact;
+import socket.packet.handlers.sends.BlockContact_handler;
 
 public class contact_onclick_block implements ActionListener {
 
-	private Object contact;
-	private JFrame fenetre;
-	public contact_onclick_block(Object contactabloquer) {
-		this.contact=contactabloquer;
+	private contact contact;
+	public contact_onclick_block(contact ct) {
+		this.contact = ct;
 	}
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		//envoi au serveur pour bloqué "contact"
-		//puis maj list
-		JOptionPane.showMessageDialog(fenetre,"Le contact "+ contact +" a été bloqué avec succès !");
+		Integer method = 0;
+		if(!contact.isBlocked())
+			method = 1;
+		BlockContact_handler pck = new BlockContact_handler(contact.getCid(),method);
+		pck.Send();
 	}
 
 }
