@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 
 import socket.Sender;
 import socket.packet.ConnectData;
+import socket.packet.TransferObjects.Avatar;
 import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.handlers.sends.Disconnect_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
-import socket.packet.p2pobjects.Avatar;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;

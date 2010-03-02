@@ -19,6 +19,7 @@ import javax.swing.border.MatteBorder;
 
 import session.Session;
 import session.contact;
+import socket.packet.handlers.sends.ReqContactAvatar_handler;
 import windows.actions.buttons.Retablir_button;
 import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
@@ -142,8 +143,8 @@ public class onglet_communicate extends JPanel{
 
 	private void RequestContactAvatar() 
 	{
-		
-		
+		ReqContactAvatar_handler pck = new ReqContactAvatar_handler(ct.getCid());
+		pck.Send();
 	}
 
 	public void ChangeMyAvatar(String path)

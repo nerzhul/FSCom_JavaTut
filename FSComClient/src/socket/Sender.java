@@ -79,7 +79,6 @@ public class Sender extends Thread
 		    StopListener();
 		    StopSocket();
 		    cmdline.Destroy();
-
 		} 
 		catch (Exception e) 
 		{
