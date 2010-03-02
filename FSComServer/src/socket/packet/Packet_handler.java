@@ -131,8 +131,6 @@ public class Packet_handler
 					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x2F:
-					m_sess.SearchIp(data);
-					break;
 				case 0x0B:
 				case 0x0E:
 					new Depreciated_handler(opcode_id);

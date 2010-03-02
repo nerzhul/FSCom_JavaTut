@@ -118,15 +118,13 @@ public class Packet_handler
 				case 0x2A:
 					events.GroupRenamed(data);
 					break;
-				case 0x2C:
-					events.ChangeContactAvatar(data);
-					break;
 				case 0x2E:
 					events.CreateAccountAnswer(data);
 					break;
 				case 0x30:
 					// TODO: handle server answer for p2p
 					break;
+				case 0x2C:
 				case 0x0C:
 				case 0x0F:
 				case 0x0A:
