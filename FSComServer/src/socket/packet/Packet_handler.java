@@ -77,7 +77,7 @@ public class Packet_handler
 					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x05:
-					// disconnect
+					m_sess.disconnect_client();
 					break;
 				case 0x06:
 					// request disconnect socket

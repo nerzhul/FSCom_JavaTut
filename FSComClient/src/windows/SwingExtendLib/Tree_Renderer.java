@@ -30,6 +30,7 @@ public class Tree_Renderer extends DefaultTreeCellRenderer {
 		    		setIcon(new ImageIcon("offlineblock.png"));
 		    	else
 		    		setIcon(new ImageIcon("offline.png"));
+		    	
 		    }
 		    else if (status.equals(1))
 		    {
@@ -41,7 +42,7 @@ public class Tree_Renderer extends DefaultTreeCellRenderer {
 		    else if (status.equals(2))
 		    {
 		    	if(block)
-		    		setIcon(new ImageIcon("bussyblock.png"));
+		    		setIcon(new ImageIcon("busyblock.png"));
 		    	else
 		    		setIcon(new ImageIcon("busy.png"));
 		    }

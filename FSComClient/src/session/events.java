@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import socket.Sender;
 import socket.packet.ConnectData;
 import socket.packet.handlers.sends.Answer_Invit_handler;
+import socket.packet.handlers.sends.Disconnect_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
@@ -50,7 +51,7 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(st))
 				{
-					ct.setStatus(st);
+					ct.setStatus(0);
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -66,10 +67,9 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(cn.getUid()))
 				{
-					ct.setStatus(cn.getStatus());
+					ct.setStatus(cn.getStatus()+1);
 					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
-					//TODO : handle convers window
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -89,9 +89,10 @@ public class events {
 				{
 					ct.setBlocked((method == 1) ? true: false);
 					if(ct.isBlocked())
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été bloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été bloqué");
 					else
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  "a été débloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été débloqué");
+					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
 	}
@@ -193,14 +194,20 @@ public class events {
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))
-			; // TODO: modify my personal phrase on client
+			if(windowthread.getFmConn() != null)
+				if(windowthread.getFmConn().getPanContact() != null)
+					windowthread.getFmConn().getPanContact().ChPPers(pck.getDat());
 		else
 		{
 			for(group g : Session.getGroups())
 				for(contact ct : g.getContacts())
 					if(ct.getCid().equals(pck.getUid()))
 					{
-						// TODO: modify contact Pmsg
+						ct.setMsg_perso(pck.getDat());
+						// TODO: modify into conversation tab
+						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+						if(fmCom != null)
+							/**/;
 						return;
 					}
 		}
@@ -261,6 +268,8 @@ public class events {
 
 	public static void DisconnectCurrentClient() 
 	{
+		Disconnect_handler pck = new Disconnect_handler();
+		pck.Send();
 		Sender.StopSocket();
 		threading.StopSender();
 	}

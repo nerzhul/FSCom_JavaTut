@@ -25,6 +25,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -83,7 +84,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         msgperso = new JLabel();
         Soustitre = new JLabel();
         JScrollPane scrolltree = new JScrollPane();
-
+        CreateBorders();
+        
         setLayout(new GridBagLayout());
 
         Titre.setText(Session.getPseudo());
@@ -210,6 +212,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	    	image.setBorder(borderafk);
 	}
 	
+	private void CreateBorders()
+	{
+		borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
+	    borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
+	    borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
+	    borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
+	}
+	
 	public void ChangeMyAvatar(String path)
 	{
 		ImageIcon a = new ImageIcon (path);
@@ -221,6 +231,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	public form_communicate getComm() { return comm; }
 	
 	public void ChPseudo(String n_pseudo) {	Titre.setText(n_pseudo); }
+	public void ChPPers(String n_perso) { msgperso.setText(n_perso); }
 
 	/*
 	 * Drag and Drop

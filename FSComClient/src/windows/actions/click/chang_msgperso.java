@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+import socket.packet.handlers.sends.ChangeMsgPerso_handler;
+
 public class chang_msgperso implements MouseListener {
 
 	private String newmsgperso;
@@ -15,9 +17,8 @@ public class chang_msgperso implements MouseListener {
 		{
 			if(newmsgperso.length()<25 && newmsgperso.length() > 1)
 			{
-				/*Send_handler pck = new ChangeMsgPerso_handler(newmsgperso);
-				if(pck != null)
-					pck.Send();*/
+				ChangeMsgPerso_handler pck = new ChangeMsgPerso_handler(newmsgperso);
+				pck.Send();
 			}
 			else
 				JOptionPane.showMessageDialog(null,"Longueur de message personnel invalide" );

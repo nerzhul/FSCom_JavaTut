@@ -63,7 +63,7 @@ public class session {
 	
 	private void LoadBlockedContacts() 
 	{
-		uid_blocked = DatabaseTransactions.getIntegerList("acc_blocked", "contact", "uid = '" + uid + "'");
+		uid_blocked = DatabaseTransactions.getIntegerList("acc_blocked", "contact", "uid = '" + uid + "' AND blocked != '0'");
 	}
 
 	public void disconnect_client()
@@ -78,7 +78,6 @@ public class session {
 		
 		if(!block)
 			sess_linked.add(sess);
-		// TODO : handle if blocked
 		sess.sess_linked.add(this);
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
 				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid(),sess.getPseudo());
@@ -148,11 +147,13 @@ public class session {
 		
 		for(session s : sess_linked)
 		{
+			
 			boolean blocked = false;
 			for(Integer i : uid_blocked)
 				if(i.equals(s.getUid()))
 					blocked = true;
-			
+			if(!blocked)
+				Log.outError(s.name);
 			if(!blocked)
 			{
 				switch(sth)
@@ -199,9 +200,13 @@ public class session {
 		else
 		{
 			contact_connected(SessionHandler.getContactByUID(c_uid), true);
-			for(Integer i : uid_blocked)
-				if(i.equals(c_uid))
-					uid_blocked.remove(i);
+			for(int i=0;i<uid_blocked.size();i++)
+			{
+				Integer j = uid_blocked.get(i);
+				if(j.equals(c_uid))
+					uid_blocked.remove(j);
+			}
+				
 		}
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
 				uid + "' AND contact = '" + c_uid + "'"))
@@ -216,10 +221,7 @@ public class session {
 	
 	public void TransmitMsgTo(Object packet) {
 		if(!packet.getClass().equals((new Message(null,null)).getClass()))
-		{
-			Log.outError("Malformed Msg to Transmit");
 			return;
-		}
 		
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();

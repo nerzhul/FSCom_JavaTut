@@ -1,5 +1,8 @@
 package windows.forms;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -30,6 +33,8 @@ public class form_master extends JFrame
 		fram.setLocationRelativeTo(null);
 		fram.setResizable(false);
 		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Image icone = Toolkit.getDefaultToolkit().getImage("cookie.jpg");
+		fram.setIconImage(icone);
 		pan_connect = pan_contact = null;
 	}
 	
@@ -84,9 +89,9 @@ public class form_master extends JFrame
 		SwingEL.AddItemToMenuBar(menu1,"Ajouter un contact",new menubar_addcontact());
 		SwingEL.AddItemToMenuBar(menu1,"Ajouter un groupe",new menubar_addgroup());
 		SwingEL.AddItemToMenuBar(menu1,"Changer de pseudo",new menubar_changepseudo());
-		SwingEL.AddItemToMenuBar(menu1,"Se déconnecter",new menubar_disconnect(this));
+		SwingEL.AddItemToMenuBar(menu1,"Se dï¿½connecter",new menubar_disconnect(this));
 		SwingEL.AddItemToMenuBar(menu2,"A propos...",new menubar_a_propos());
-		//AddItem(menu3,"Préférences",new Menu_pref(getpannel()));
+		//AddItem(menu3,"Prï¿½fï¿½rences",new Menu_pref(getpannel()));
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);
