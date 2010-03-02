@@ -9,15 +9,16 @@ import javax.swing.JOptionPane;
 public class contact_onclick_block implements ActionListener {
 
 	private Object contact;
+	private JFrame fenetre;
 	public contact_onclick_block(Object contactabloquer) {
 		this.contact=contactabloquer;
 	}
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		//envoi au serveur pour bloquï¿½ "contact"
+		//envoi au serveur pour bloqué "contact"
 		//puis maj list
-		JOptionPane.showMessageDialog(null,"Le contact "+ contact +" a ï¿½tï¿½ bloquï¿½ avec succï¿½s !");
+		JOptionPane.showMessageDialog(fenetre,"Le contact "+ contact +" a été bloqué avec succès !");
 	}
 
 }

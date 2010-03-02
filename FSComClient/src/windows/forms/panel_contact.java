@@ -25,6 +25,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -75,7 +76,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		setBackground(new Color(128,128,255));
 		
-		
 		GridBagConstraints gridBagConstraints;
 
         Titre = new JLabel();
@@ -84,6 +84,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         msgperso = new JLabel();
         Soustitre = new JLabel();
         JScrollPane scrolltree = new JScrollPane();
+        CreateBorders();
 
         setLayout(new GridBagLayout());
 
@@ -108,7 +109,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         add(image, gridBagConstraints);
 
         changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "AFK", "Offline" }));
-		changstatus.setSelectedIndex(Session.getStatus());
+		changstatus.setSelectedIndex(Session.getStatus()-1);
 		changstatus.addActionListener(new ChangeStatus_button(changstatus));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -197,6 +198,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		((DefaultTreeModel) tree.getModel()).reload();
 		OpenContactList();
+	}
+	
+	private void CreateBorders()
+	{
+		borderafk = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.orange);
+	    borderbusy = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.red);
+	    borderonline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.green);
+	    borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
 	}
 
 	public void ChangeBorderStatus()
