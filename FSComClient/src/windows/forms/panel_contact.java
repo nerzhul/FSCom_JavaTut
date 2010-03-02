@@ -39,6 +39,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import misc.Log;
+
 import session.Session;
 import session.contact;
 import session.group;
@@ -178,7 +180,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modèle de l'arbre.
+		// Construction du modï¿½le de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
@@ -287,15 +289,15 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	}
 
 	public static Image scale(Image source, int width, int height) {
-	    /* On crée une nouvelle image aux bonnes dimensions. */
+	    /* On crï¿½e une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisée. */
+	    /* On dessine sur le Graphics de l'image bufferisï¿½e. */
 	    Graphics2D g = buf.createGraphics();
-	    g.drawImage(source, 10, 10, width, height, null);
+	    g.drawImage(source, 0, 0, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisée, qui est une image. */
+	    /* On retourne l'image bufferisï¿½e, qui est une image. */
 	    return buf;
 	}
 	
