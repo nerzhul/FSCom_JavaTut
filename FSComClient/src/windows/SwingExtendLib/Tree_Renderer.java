@@ -26,28 +26,28 @@ public class Tree_Renderer extends DefaultTreeCellRenderer {
 		    boolean block = info.isBlocked();
 		    if (status.equals(0) || status.equals(4))
 		    {
-		    	if(block==true)
+		    	if(block)
 		    		setIcon(new ImageIcon("offlineblock.png"));
 		    	else
 		    		setIcon(new ImageIcon("offline.png"));
 		    }
 		    else if (status.equals(1))
 		    {
-		    	if(block==true)
+		    	if(block)
 		    		setIcon(new ImageIcon("onlineblock.png"));
 		    	else
 		    		setIcon(new ImageIcon("online.png"));
 		    }
 		    else if (status.equals(2))
 		    {
-		    	if(block==true)
+		    	if(block)
 		    		setIcon(new ImageIcon("bussyblock.png"));
 		    	else
 		    		setIcon(new ImageIcon("busy.png"));
 		    }
 		    else if (status.equals(3))
 		    {
-		    	if(block==true)
+		    	if(block)
 		    		setIcon(new ImageIcon("afkblock.png"));
 		    	else
 		    		setIcon(new ImageIcon("afk.png"));
