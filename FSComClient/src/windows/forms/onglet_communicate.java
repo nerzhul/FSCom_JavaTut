@@ -19,6 +19,7 @@ import javax.swing.border.MatteBorder;
 
 import session.Session;
 import session.contact;
+import socket.packet.handlers.sends.ReqContactAvatar_handler;
 import windows.actions.buttons.Retablir_button;
 import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
@@ -61,6 +62,7 @@ public class onglet_communicate extends JPanel{
 	    
         ChangeContactAvatar("avatar.jpg");
         ChangeBorderStatus();
+        
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -109,7 +111,7 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.insets = new Insets(10, 0, 20, 0);
         add(SendScroll, gridBagConstraints);
 
-        TitleText.setText("Entrer ici le message ï¿½ envoyer :");
+        TitleText.setText("Entrer ici le message à envoyer :");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -140,8 +142,8 @@ public class onglet_communicate extends JPanel{
 
 	private void RequestContactAvatar() 
 	{
-		
-		
+		ReqContactAvatar_handler pck = new ReqContactAvatar_handler(ct.getCid());
+		pck.Send();
 	}
 
 	public void ChangeMyAvatar(String path)
@@ -203,15 +205,15 @@ public class onglet_communicate extends JPanel{
 	public contact GetContact() { return ct; }
 	
 	public static Image scale(Image source, int width, int height) {
-	    /* On crï¿½e une nouvelle image aux bonnes dimensions. */
+	    /* On crée une nouvelle image aux bonnes dimensions. */
 	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-	    /* On dessine sur le Graphics de l'image bufferisï¿½e. */
+	    /* On dessine sur le Graphics de l'image bufferisée. */
 	    Graphics2D g = buf.createGraphics();
 	    g.drawImage(source, 0, 0, width, height, null);
 	    g.dispose();
 
-	    /* On retourne l'image bufferisï¿½e, qui est une image. */
+	    /* On retourne l'image bufferisée, qui est une image. */
 	    return buf;
 	}
 }

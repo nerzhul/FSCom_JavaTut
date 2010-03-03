@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 
 import socket.Sender;
 import socket.packet.ConnectData;
+import socket.packet.TransferObjects.Avatar;
 import socket.packet.handlers.sends.Answer_Invit_handler;
 import socket.packet.handlers.sends.Disconnect_handler;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
-import socket.packet.p2pobjects.Avatar;
 import thread.threading;
 import thread.windowthread;
 import windows.forms.form_communicate;
@@ -89,9 +89,9 @@ public class events {
 				{
 					ct.setBlocked((method == 1) ? true: false);
 					if(ct.isBlocked())
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été bloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a ï¿½tï¿½ bloquï¿½");
 					else
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été débloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a ï¿½tï¿½ dï¿½bloquï¿½");
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -143,6 +143,8 @@ public class events {
 			form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
 				if(fmCom != null)
 					fmCom.ChangeAllMyStatusBorder();
+				windowthread.getFmConn().getPanContact().ChangeBorderStatus();
+
 		}
 		else
 		{
@@ -246,7 +248,7 @@ public class events {
 
 		IdAndData pck = (IdAndData)packet;
 
-		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajoutï¿½, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
 		Answer_Invit_handler arh = new Answer_Invit_handler(pck.getUid(), answer);
 		arh.Send();
 	}
@@ -355,11 +357,11 @@ public class events {
 		threading.StopSender();
 		if(res != 1)
 		{
-			JOptionPane.showMessageDialog(null,"Compte déjà existant !");
+			JOptionPane.showMessageDialog(null,"Compte dï¿½jï¿½ existant !");
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
+			JOptionPane.showMessageDialog(null,"Compte crï¿½ï¿½ avec succï¿½s !");
 			fmInsc.dispose();
 		}
 	}

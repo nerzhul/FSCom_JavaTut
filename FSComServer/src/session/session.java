@@ -4,22 +4,20 @@ import java.net.Socket;
 import java.util.Vector;
 
 import misc.Log;
-
 import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
 import socket.packet.handlers.senders.BlockContact_handler;
 import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
 import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
 import socket.packet.handlers.senders.ConfirmGroupRenamed_handler;
+import socket.packet.handlers.senders.Cont_Connected_handler;
+import socket.packet.handlers.senders.Cont_Disconct_handler;
 import socket.packet.handlers.senders.IPToClient_handler;
 import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
-import socket.packet.handlers.senders.Cont_Connected_handler;
-import socket.packet.handlers.senders.Cont_Disconct_handler;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
-
 import database.DatabaseFunctions;
 import database.DatabaseTransactions;
 
@@ -423,6 +421,16 @@ public class session {
 			IPToClient_handler pck = new IPToClient_handler(_uid,IP);
 			pck.Send(sock);
 		}
+	}
+
+	public void EventReqAvatar(Object data) 
+	{
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+			return;
+		
+		IdAndData pck = (IdAndData)data;
+		Integer _uid = pck.getUid();
+		// TODO: get avatar from memory
 	}
 
 	

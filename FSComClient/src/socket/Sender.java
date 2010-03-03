@@ -65,7 +65,6 @@ public class Sender extends Thread
 		    listn = new Listener(socket);
 		    listn.start();
 		    
-		    threading.Launchp2pListener();
 		    MasterCommandLine.DoCommand("ping");
 		    while (true) 
 		    {
@@ -80,13 +79,11 @@ public class Sender extends Thread
 		    StopListener();
 		    StopSocket();
 		    cmdline.Destroy();
-
 		} 
 		catch (Exception e) 
 		{
 			StopListener();
 		    StopSocket();
-		    threading.Stopp2pListener();
 		    this.interrupt();
 		    e.printStackTrace();
 	    }

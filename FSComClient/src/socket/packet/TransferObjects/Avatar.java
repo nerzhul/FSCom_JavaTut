@@ -1,4 +1,4 @@
-package socket.packet.p2pobjects;
+package socket.packet.TransferObjects;
 
 import java.io.Serializable;
 

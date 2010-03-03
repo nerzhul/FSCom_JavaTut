@@ -39,8 +39,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import misc.Log;
-
 import session.Session;
 import session.contact;
 import session.group;
@@ -77,6 +75,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private void BuildPanel()
 	{
 		setBackground(new Color(128,128,255));
+        CreateBorders();
 		
 		GridBagConstraints gridBagConstraints;
 
@@ -86,7 +85,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         msgperso = new JLabel();
         Soustitre = new JLabel();
         JScrollPane scrolltree = new JScrollPane();
-        CreateBorders();
         
         setLayout(new GridBagLayout());
 

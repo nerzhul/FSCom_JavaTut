@@ -79,6 +79,8 @@ public class form_communicate extends JFrame{
 		}
 	}
 	
+
+	
 	public void ChangeConversTabTitle(Integer _uid, String name)
 	{
 		int nbonglet = TabPan.getTabCount();
