@@ -57,6 +57,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel Soustitre;
 	private JTree  tree;
 	private JComboBox changstatus;
+	private JScrollPane scrolltree;
 	private form_communicate comm;
 
 	private DragSource dragSource = null;
@@ -83,7 +84,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         changstatus = new JComboBox();
         msgperso = new JLabel();
         Soustitre = new JLabel();
-        JScrollPane scrolltree = new JScrollPane();
+        scrolltree = new JScrollPane();
         CreateBorders();
         
         setLayout(new GridBagLayout());
@@ -159,7 +160,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
-		this.add(tree);
 	}
 	
 	private void GenerateNodes()

@@ -326,6 +326,8 @@ public class events {
 				}
 				
 				g.getContacts().clear();
+				Session.getGroups().remove(g);
+				
 				windowthread.getFmConn().getPanContact().RefreshContactList();
 				return;
 			}
