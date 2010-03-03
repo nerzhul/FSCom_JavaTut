@@ -17,7 +17,7 @@ import javax.swing.border.MatteBorder;
 
 import session.Session;
 import session.contact;
-import socket.packet.handlers.sends.ReqContactAvatar_handler;
+import socket.packet.handlers.sends.contact_handlers.ReqContactAvatar_handler;
 import thread.windowthread;
 import windows.SwingExtendLib.SwingEL;
 import windows.actions.buttons.Retablir_button;

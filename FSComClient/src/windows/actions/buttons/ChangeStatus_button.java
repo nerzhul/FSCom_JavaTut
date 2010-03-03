@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 
 import socket.packet.handlers.Send_handler;
-import socket.packet.handlers.sends.StatusSender_handler;
+import socket.packet.handlers.sends.client_handlers.StatusSender_handler;
 
 public class ChangeStatus_button implements ActionListener {
 

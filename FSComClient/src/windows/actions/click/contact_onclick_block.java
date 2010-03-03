@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import session.contact;
-import socket.packet.handlers.sends.BlockContact_handler;
+import socket.packet.handlers.sends.contact_handlers.BlockContact_handler;
 
 public class contact_onclick_block implements ActionListener {
 

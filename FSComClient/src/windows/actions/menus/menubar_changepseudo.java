@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import socket.packet.handlers.Send_handler;
-import socket.packet.handlers.sends.ChangePseudo_handler;
+import socket.packet.handlers.sends.client_handlers.ChangePseudo_handler;
 
 public class menubar_changepseudo extends menubar_main implements ActionListener, MouseListener  {
 

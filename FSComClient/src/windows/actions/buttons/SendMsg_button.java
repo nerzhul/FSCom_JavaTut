@@ -7,7 +7,7 @@ import javax.swing.JTextArea;
 
 import session.contact;
 import socket.packet.handlers.Send_handler;
-import socket.packet.handlers.sends.SendMsgTo_handler;
+import socket.packet.handlers.sends.client_handlers.SendMsgTo_handler;
 
 public class SendMsg_button implements ActionListener {
 

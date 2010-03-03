@@ -7,7 +7,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import socket.packet.handlers.sends.AccCreate_handler;
+import socket.packet.handlers.sends.client_handlers.AccCreate_handler;
 import thread.threading;
 
 public class valid_inscription_button implements ActionListener 

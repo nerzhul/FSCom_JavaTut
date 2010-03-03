@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
-import socket.packet.handlers.sends.ChangeMsgPerso_handler;
+import socket.packet.handlers.sends.client_handlers.ChangeMsgPerso_handler;
 
 public class chang_msgperso implements MouseListener {
 

@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import session.Session;
-import socket.packet.handlers.sends.AddGroup_handler;
+import socket.packet.handlers.sends.group_handlers.AddGroup_handler;
 
 public class menubar_addgroup implements ActionListener {
 

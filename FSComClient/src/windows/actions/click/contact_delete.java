@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import session.contact;
-import socket.packet.handlers.sends.DelContact_handler;
+import socket.packet.handlers.sends.contact_handlers.DelContact_handler;
 
 public class contact_delete implements ActionListener 
 {

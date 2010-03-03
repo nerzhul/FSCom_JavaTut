@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import socket.packet.handlers.sends.AddContact_handler;
+import socket.packet.handlers.sends.contact_handlers.AddContact_handler;
 
 public class menubar_addcontact implements ActionListener {
 
