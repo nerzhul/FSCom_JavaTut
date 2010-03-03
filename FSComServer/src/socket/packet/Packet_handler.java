@@ -133,6 +133,9 @@ public class Packet_handler
 				case 0x31:
 					m_sess.EventReqAvatar(data);
 					break;
+				case 0x33:
+					m_sess.EventStoreAvatar(data);
+					break;
 				case 0x2F:
 				case 0x0B:
 				case 0x0E:

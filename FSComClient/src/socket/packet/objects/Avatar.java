@@ -1,4 +1,4 @@
-package socket.packet.TransferObjects;
+package socket.packet.objects;
 
 import java.io.Serializable;
 

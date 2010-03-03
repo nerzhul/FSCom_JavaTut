@@ -1,6 +1,7 @@
 package socket;
 
 import java.io.BufferedInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -36,10 +37,11 @@ public class Listener extends Thread
 				{
 					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 				}
-				catch(IOException e)
+				catch(EOFException e)
 				{
-					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
+					//in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 				}
+				
 				Packet message = (Packet) in.readObject();
 				Log.outString("Packet received from server (opcode :" + message.getOpcode() + ")");
 				

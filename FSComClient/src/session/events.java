@@ -1,5 +1,6 @@
 package session;
 
+import java.awt.Image;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -7,14 +8,16 @@ import javax.swing.JOptionPane;
 
 import socket.Sender;
 import socket.packet.ConnectData;
-import socket.packet.TransferObjects.Avatar;
 import socket.packet.handlers.sends.Answer_Invit_handler;
+import socket.packet.handlers.sends.AvatarSender_handler;
 import socket.packet.handlers.sends.Disconnect_handler;
+import socket.packet.objects.Avatar;
 import socket.packet.objects.ClientDatas;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
 import thread.threading;
 import thread.windowthread;
+import windows.SwingExtendLib.SwingEL;
 import windows.forms.form_communicate;
 import windows.forms.form_inscription;
 import windows.forms.onglet_communicate;
@@ -143,6 +146,7 @@ public class events {
 			form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
 				if(fmCom != null)
 					fmCom.ChangeAllMyStatusBorder();
+			windowthread.getFmConn().getPanContact().ChangeBorderStatus();
 		}
 		else
 		{
@@ -277,15 +281,17 @@ public class events {
 	public static void StoreAllDatas(Object packet) 
 	{
 		if(!packet.getClass().equals((new ClientDatas()).getClass()))
-		{
 			return;
-		}
 		ClientDatas pck = (ClientDatas) packet;
 		Session.setPerso_msg(pck.getPperso());
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
 		Session.setStatus(pck.getStatus()+1);
+		
+		AvatarSender_handler pkt = new AvatarSender_handler(new ImageIcon(SwingEL.scale(
+				(new ImageIcon("avatar.jpg")).getImage())));
+		pkt.Send();
 	}
 
 	public static void GroupAdded(Object data) 
@@ -370,11 +376,22 @@ public class events {
 			return;
 		
 		Avatar av = (Avatar)data;
+		if(av == null)
+			return;
+		
 		Integer _uid = av.getUid();
+		if(av.getImg() == null)
+		{
+			ImageIcon a = new ImageIcon ("cookie.jpg");
+		    Image avatar = SwingEL.scale(a.getImage());
+		    av.setImg(new ImageIcon(avatar));
+		}
+		
 		ImageIcon img = av.getImg();
 		form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
 		if(fmCom == null)
 			return;
+		
 		fmCom.ChangeContactAvatar(_uid,img);
 	}
 }

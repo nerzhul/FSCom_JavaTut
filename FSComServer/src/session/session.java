@@ -3,8 +3,11 @@ package session;
 import java.net.Socket;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
+
 import misc.Log;
 import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
+import socket.packet.handlers.senders.AvatarAnswer_handler;
 import socket.packet.handlers.senders.BlockContact_handler;
 import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
 import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
@@ -16,6 +19,7 @@ import socket.packet.handlers.senders.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.MsgToClient_Handler;
 import socket.packet.handlers.senders.PseudoToClient_handler;
 import socket.packet.handlers.senders.StatusToClient_Handler;
+import socket.packet.objects.Avatar;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
 import database.DatabaseFunctions;
@@ -425,12 +429,24 @@ public class session {
 
 	public void EventReqAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(data == null || !data.getClass().equals((new IdAndData(0,"")).getClass()))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
 		Integer _uid = pck.getUid();
-		// TODO: get avatar from memory
+		AvatarAnswer_handler pkt = new AvatarAnswer_handler(AvatarHandler.getAvatarByUID(_uid));
+		pkt.Send(sock);
+	}
+
+	public void EventStoreAvatar(Object data) 
+	{
+		if(!data.getClass().equals((new Avatar(0,new ImageIcon()))))
+			return;
+		
+		Avatar pck = (Avatar)data;
+		pck.setUid(this.getUid());
+		if(pck != null)
+			AvatarHandler.AddAvatar(pck);
 	}
 
 	

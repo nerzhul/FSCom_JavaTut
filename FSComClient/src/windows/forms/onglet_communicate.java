@@ -1,12 +1,10 @@
 package windows.forms;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,6 +18,7 @@ import javax.swing.border.MatteBorder;
 import session.Session;
 import session.contact;
 import socket.packet.handlers.sends.ReqContactAvatar_handler;
+import windows.SwingExtendLib.SwingEL;
 import windows.actions.buttons.Retablir_button;
 import windows.actions.buttons.SendMsg_button;
 import windows.actions.keylisteners.follow_keyboard;
@@ -149,14 +148,14 @@ public class onglet_communicate extends JPanel{
 	public void ChangeMyAvatar(String path)
 	{
 		ImageIcon a = new ImageIcon (path);
-	    Image avatar = scale(a.getImage(),80,80);
+	    Image avatar = SwingEL.scale(a.getImage());
 	    myimage.setIcon( new ImageIcon(avatar));
 	}
 
 	public void ChangeContactAvatar(String path)
 	{
 		ImageIcon a = new ImageIcon (path);
-	    Image avatar = scale(a.getImage(),80,80);
+	    Image avatar = SwingEL.scale(a.getImage());
 	    image.setIcon( new ImageIcon(avatar));
 	}
 	
@@ -204,18 +203,7 @@ public class onglet_communicate extends JPanel{
 	
 	public contact GetContact() { return ct; }
 	
-	public static Image scale(Image source, int width, int height) {
-	    /* On crée une nouvelle image aux bonnes dimensions. */
-	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-	    /* On dessine sur le Graphics de l'image bufferisée. */
-	    Graphics2D g = buf.createGraphics();
-	    g.drawImage(source, 0, 0, width, height, null);
-	    g.dispose();
-
-	    /* On retourne l'image bufferisée, qui est une image. */
-	    return buf;
-	}
+	
 }
 
 
