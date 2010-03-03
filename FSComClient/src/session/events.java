@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 import socket.Sender;
 import socket.packet.ConnectData;
 import socket.packet.handlers.sends.Disconnect_handler;
@@ -25,7 +24,6 @@ import misc.Log;
 
 public class events {
 
-	
 	public static void StoreStatus(Integer st)
 	{
 		Session.setStatus(st);
@@ -227,6 +225,7 @@ public class events {
 			if(g.getGid().equals(0))
 			{
 				g.AddContact(ct);
+				windowthread.getFmConn().getPanContact().HardRefreshContactList();
 				return;
 			}
 	}
@@ -238,7 +237,7 @@ public class events {
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
 				{
 					g.getContacts().remove(ct);
-					windowthread.getFmConn().getPanContact().RefreshContactList();
+					windowthread.getFmConn().getPanContact().HardRefreshContactList();
 					return;
 				}
 	}
@@ -296,13 +295,13 @@ public class events {
 
 	public static void GroupAdded(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))		
 			return;
 		
 		IdAndData pck = (IdAndData)data;
 		group gr = new group(pck.getUid(), pck.getDat());
 		Session.getGroups().add(gr);
-		windowthread.getFmConn().getPanContact().RefreshContactList();		
+		windowthread.getFmConn().getPanContact().HardRefreshContactList();		
 	}
 
 	public static void GroupDeleted(Object data) 
@@ -328,7 +327,7 @@ public class events {
 				g.getContacts().clear();
 				Session.getGroups().remove(g);
 				
-				windowthread.getFmConn().getPanContact().RefreshContactList();
+				windowthread.getFmConn().getPanContact().HardRefreshContactList();
 				return;
 			}
 		}

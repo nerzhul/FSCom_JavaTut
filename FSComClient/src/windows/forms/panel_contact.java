@@ -67,6 +67,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel msgperso;
 	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
 	private JLabel image;
+	
+	private GridBagConstraints gridBagConstraints;
 
 	public panel_contact()
 	{
@@ -77,7 +79,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		setBackground(new Color(128,128,255));
 		
-		GridBagConstraints gridBagConstraints;
+
 
         Titre = new JLabel();
         image = new JLabel();
@@ -138,13 +140,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		
         SetListContact();
         
-		scrolltree.setViewportView(tree);
-		scrolltree.setPreferredSize(new Dimension(150,300));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        add(scrolltree, gridBagConstraints);
+
         
 		comm = null;
 	}
@@ -160,6 +156,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
+		
+		scrolltree.setViewportView(tree);
+		scrolltree.setPreferredSize(new Dimension(150,300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        add(scrolltree, gridBagConstraints);
 	}
 	
 	private void GenerateNodes()
@@ -196,11 +200,23 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
-		GenerateNodes();
+		//---->rename group + changement de pseudo si plus grand plus de "..."
 		((DefaultTreeModel) tree.getModel()).reload();
-		OpenContactList();
+		tree.updateUI();
 	}
 
+	public void HardRefreshContactList()
+	{
+		//----> ajout/suppression contact OK  + delete group
+		DefaultTreeModel model = ((DefaultTreeModel) tree.getModel());
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+		root.removeAllChildren();
+		model.reload();
+		SetListContact();
+		tree.repaint();
+		tree.updateUI();
+	}
+	
 	public void ChangeBorderStatus()
 	{
 		if (Session.getStatus().equals(0) || Session.getStatus().equals(4))
@@ -293,6 +309,10 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 
 		    }
 		}
+	}
+	
+	public JTree recup(){
+		return tree;
 	}
 	
 	public void dragExit(DropTargetEvent arg0) {}
