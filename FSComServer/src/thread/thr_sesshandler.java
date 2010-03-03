@@ -1,5 +1,6 @@
 package thread;
 
+import session.AvatarHandler;
 import session.SessionHandler;
 import misc.Log;
 
@@ -10,6 +11,7 @@ public class thr_sesshandler extends Thread{
 	{
 		Log.outString("Starting Session handler thread...");
 		new SessionHandler();
+		new AvatarHandler();
 		while(true)
 		{
 			try 
