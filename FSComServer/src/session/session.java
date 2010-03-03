@@ -335,9 +335,12 @@ public class session {
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
 				+ "uid = '" + _uid + "'");
 		if(SessionHandler.isConnected(_uid))
-			for(session s : sess_linked)
-				if(s.getUid().equals(_uid))
-					sess_linked.remove(s);
+			synchronized(sess_linked)
+			{
+				for(session s : sess_linked)
+					if(s.getUid().equals(_uid))
+						sess_linked.remove(s);
+			}
 	}
 	
 	public void EventContactGroupChange(Object data) 
