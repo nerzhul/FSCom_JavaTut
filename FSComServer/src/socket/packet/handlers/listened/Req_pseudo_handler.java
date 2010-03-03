@@ -3,7 +3,7 @@ package socket.packet.handlers.listened;
 import database.DatabaseFunctions;
 import session.session;
 import socket.packet.handlers.Listen_handler;
-import socket.packet.handlers.senders.PseudoToClient_handler;
+import socket.packet.handlers.senders.contact_handlers.PseudoToClient_handler;
 
 public class Req_pseudo_handler extends Listen_handler {
 

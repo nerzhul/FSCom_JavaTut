@@ -1,4 +1,4 @@
-package socket.packet.handlers.senders;
+package socket.packet.handlers.senders.connect_handlers;
 
 import session.session;
 import socket.packet.handlers.Send_handler;

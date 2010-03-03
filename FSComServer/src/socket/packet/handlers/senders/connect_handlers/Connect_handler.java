@@ -1,4 +1,4 @@
-package socket.packet.handlers.senders;
+package socket.packet.handlers.senders.connect_handlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

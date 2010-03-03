@@ -1,4 +1,4 @@
-package socket.packet.handlers.senders;
+package socket.packet.handlers.senders.contact_handlers;
 
 import socket.packet.handlers.Send_handler;
 
