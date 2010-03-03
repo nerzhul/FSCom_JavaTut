@@ -7,7 +7,7 @@ import thread.*;
 public class master
 {
 	private static threading thr_lib;
-	final static String version = "Bêta 0.7.8c";
+	final static String version = "Bêta 0.7.8d";
 	
 	public master()	{}
 	

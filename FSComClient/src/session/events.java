@@ -290,7 +290,7 @@ public class events {
 		Session.setStatus(pck.getStatus()+1);
 		
 		AvatarSender_handler pkt = new AvatarSender_handler(new ImageIcon(SwingEL.scale(
-				(new ImageIcon("avatar.jpg")).getImage())));
+				(new ImageIcon("avatar.png")).getImage())));
 		pkt.Send();
 	}
 

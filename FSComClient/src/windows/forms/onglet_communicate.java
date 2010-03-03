@@ -62,7 +62,7 @@ public class onglet_communicate extends JPanel{
         setLayout(new GridBagLayout());
         
 	    
-        ChangeContactAvatar("avatar.jpg");
+        ChangeContactAvatar("avatar.png");
         ChangeBorderStatus();
         
         gridBagConstraints = new GridBagConstraints();
