@@ -52,7 +52,11 @@ public class Listener extends Thread
 		{
 			Log.outTimed("Client " + sockt.getInetAddress() + " timeout");
 		}
-		catch (Exception e) 
+		catch (InterruptedException e) 
+		{
+			Log.outError("Listener Thread Error !");
+		} 
+		catch (IOException e) 
 		{
 			Log.outTimed("Client " + sockt.getInetAddress() + " was disconnected...");
 			try 
@@ -60,6 +64,14 @@ public class Listener extends Thread
 			catch (IOException e1) {}
 			
 			SessionHandler.DestroySession(sess, this);
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	

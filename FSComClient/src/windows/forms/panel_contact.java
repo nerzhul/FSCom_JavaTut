@@ -2,7 +2,6 @@ package windows.forms;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -23,7 +22,6 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -42,7 +40,9 @@ import javax.swing.tree.TreeSelectionModel;
 import session.Session;
 import session.contact;
 import session.group;
-import socket.packet.handlers.sends.MoveGroup_handler;
+import socket.packet.handlers.sends.client_handlers.AvatarSender_handler;
+import socket.packet.handlers.sends.group_handlers.MoveGroup_handler;
+import windows.SwingExtendLib.SwingEL;
 import windows.SwingExtendLib.Tree_Renderer;
 import windows.actions.buttons.ChangeStatus_button;
 import windows.actions.click.chang_avatar;
@@ -57,6 +57,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel Soustitre;
 	private JTree  tree;
 	private JComboBox changstatus;
+	private JScrollPane scrolltree;
 	private form_communicate comm;
 
 	private DragSource dragSource = null;
@@ -66,6 +67,8 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel msgperso;
 	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
 	private JLabel image;
+	
+	private 		GridBagConstraints gridBagConstraints;
 
 	public panel_contact()
 	{
@@ -75,16 +78,16 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private void BuildPanel()
 	{
 		setBackground(new Color(128,128,255));
-        CreateBorders();
 		
-		GridBagConstraints gridBagConstraints;
+
 
         Titre = new JLabel();
         image = new JLabel();
         changstatus = new JComboBox();
         msgperso = new JLabel();
         Soustitre = new JLabel();
-        JScrollPane scrolltree = new JScrollPane();
+        scrolltree = new JScrollPane();
+        CreateBorders();
         
         setLayout(new GridBagLayout());
 
@@ -98,7 +101,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(Titre, gridBagConstraints);
 
-        ChangeMyAvatar("avatar.jpg");
+        ChangeMyAvatar("avatar.png",false);
         ChangeBorderStatus();
         image.addMouseListener(new chang_avatar());
         image.setToolTipText("Cliquez ici pour changer d'Avatar !");
@@ -137,13 +140,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		
         SetListContact();
         
-		scrolltree.setViewportView(tree);
-		scrolltree.setPreferredSize(new Dimension(150,300));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        add(scrolltree, gridBagConstraints);
+
         
 		comm = null;
 	}
@@ -159,7 +156,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.addMouseListener(new contact_onclick(tree,this));
 		tree.setRootVisible(false);
-		this.add(tree);
+		
+		scrolltree.setViewportView(tree);
+		scrolltree.setPreferredSize(new Dimension(150,300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        add(scrolltree, gridBagConstraints);
 	}
 	
 	private void GenerateNodes()
@@ -196,10 +200,23 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
+		//---->rename group + changement de pseudo si plus grand plus de "..."
 		((DefaultTreeModel) tree.getModel()).reload();
-		OpenContactList();
+		tree.updateUI();
 	}
 
+	public void HardRefreshContactList()
+	{
+		//----> ajout/suppression contact OK  + delete group
+		DefaultTreeModel model = ((DefaultTreeModel) tree.getModel());
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+		root.removeAllChildren();
+		model.reload();
+		SetListContact();
+		tree.repaint();
+		tree.updateUI();
+	}
+	
 	public void ChangeBorderStatus()
 	{
 		if (Session.getStatus().equals(0) || Session.getStatus().equals(4))
@@ -220,15 +237,23 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	    borderoffline = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black);
 	}
 	
-	public void ChangeMyAvatar(String path)
+	public void ChangeMyAvatar(String path, boolean save)
 	{
 		ImageIcon a = new ImageIcon (path);
-	    Image avatar = scale(a.getImage(),80,80);
+	    Image avatar;
+	    if(save)
+	    	avatar = SwingEL.scale(a.getImage());
+	    else
+	    	avatar = SwingEL.scaleWithoutSave(a.getImage());
 	    image.setIcon( new ImageIcon(avatar));
+	    
+	    AvatarSender_handler pck = new AvatarSender_handler(new ImageIcon(avatar));
+	    pck.Send();
 	}
 	
 	public void setComm(form_communicate comm) { this.comm = comm; }
 	public form_communicate getComm() { return comm; }
+	public JLabel getMyImage() { return image; }
 	
 	public void ChPseudo(String n_pseudo) {	Titre.setText(n_pseudo); }
 	public void ChPPers(String n_perso) { msgperso.setText(n_perso); }
@@ -285,18 +310,9 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		    }
 		}
 	}
-
-	public static Image scale(Image source, int width, int height) {
-	    /* On cr�e une nouvelle image aux bonnes dimensions. */
-	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-	    /* On dessine sur le Graphics de l'image bufferis�e. */
-	    Graphics2D g = buf.createGraphics();
-	    g.drawImage(source, 0, 0, width, height, null);
-	    g.dispose();
-
-	    /* On retourne l'image bufferis�e, qui est une image. */
-	    return buf;
+	
+	public JTree recup(){
+		return tree;
 	}
 	
 	public void dragExit(DropTargetEvent arg0) {}

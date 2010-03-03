@@ -26,7 +26,7 @@ public class chang_avatar implements MouseListener {
         if (returnVal == JFileChooser.APPROVE_OPTION) 
         {
             File avatar = fc.getSelectedFile();
-            windowthread.getFmConn().getPanContact().ChangeMyAvatar(avatar.toString());
+            windowthread.getFmConn().getPanContact().ChangeMyAvatar(avatar.toString(),true);
             if(windowthread.getFmConn().getPanContact().getComm() != null)
             	windowthread.getFmConn().getPanContact().getComm().ChangeAllMyAvatarsInTab(avatar.toString());
         }

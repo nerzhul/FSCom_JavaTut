@@ -10,12 +10,12 @@ import socket.Sender;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listened.*;
 import socket.packet.handlers.senders.AccCreate_handler;
-import socket.packet.handlers.senders.AddContact_handler;
-import socket.packet.handlers.senders.Connect2_handler;
-import socket.packet.handlers.senders.Connect_handler;
 import socket.packet.handlers.senders.Invitation_Answer_handler;
 import socket.packet.handlers.senders.Pong_handler;
-import socket.packet.handlers.senders.Status_handler;
+import socket.packet.handlers.senders.connect_handlers.Connect2_handler;
+import socket.packet.handlers.senders.connect_handlers.Connect_handler;
+import socket.packet.handlers.senders.contact_handlers.AddContact_handler;
+import socket.packet.handlers.senders.contact_handlers.Status_handler;
 
 
 import misc.Log;
@@ -132,6 +132,9 @@ public class Packet_handler
 					break;
 				case 0x31:
 					m_sess.EventReqAvatar(data);
+					break;
+				case 0x33:
+					m_sess.EventStoreAvatar(data);
 					break;
 				case 0x2F:
 				case 0x0B:

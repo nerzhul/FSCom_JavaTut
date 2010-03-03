@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JTextArea;
 
 import session.contact;
-import socket.packet.handlers.sends.SendMsgTo_handler;
+import socket.packet.handlers.sends.client_handlers.SendMsgTo_handler;
  
 public class follow_keyboard implements KeyListener {
  

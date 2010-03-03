@@ -9,7 +9,6 @@ import thread.threading;
 import thread.windowthread;
 
 import misc.Log;
-import misc.MasterCommandLine;
 
 public class Sender extends Thread
 {
@@ -56,7 +55,6 @@ public class Sender extends Thread
 		{
 			// create a socket on mine IP.
 		    Log.outString("Initialising Master Command Line...");
-		    MasterCommandLine cmdline = new MasterCommandLine();
 		    Log.outString("Master Command Line Initialized");
 		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -65,20 +63,17 @@ public class Sender extends Thread
 		    listn = new Listener(socket);
 		    listn.start();
 		    
-		    MasterCommandLine.DoCommand("ping");
 		    while (true) 
 		    {
 		    	Log.outPrompt();
 		    	line = reader.readLine();
 		    	if(line.equals("close"))
 		    		break;
-		    	MasterCommandLine.DoCommand(line);
 		    }
 	    
 		    Log.outString("Close connection with server !");
 		    StopListener();
 		    StopSocket();
-		    cmdline.Destroy();
 		} 
 		catch (Exception e) 
 		{

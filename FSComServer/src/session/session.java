@@ -3,19 +3,23 @@ package session;
 import java.net.Socket;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
+
 import misc.Log;
-import socket.packet.handlers.senders.AddContactWithoutInvite_handler;
-import socket.packet.handlers.senders.BlockContact_handler;
-import socket.packet.handlers.senders.ConfirmGroupAdded_handler;
-import socket.packet.handlers.senders.ConfirmGroupDeleted_handler;
-import socket.packet.handlers.senders.ConfirmGroupRenamed_handler;
-import socket.packet.handlers.senders.Cont_Connected_handler;
-import socket.packet.handlers.senders.Cont_Disconct_handler;
-import socket.packet.handlers.senders.IPToClient_handler;
-import socket.packet.handlers.senders.MsgPersoToClient_handler;
-import socket.packet.handlers.senders.MsgToClient_Handler;
-import socket.packet.handlers.senders.PseudoToClient_handler;
-import socket.packet.handlers.senders.StatusToClient_Handler;
+import socket.packet.handlers.senders.AvatarAnswer_handler;
+import socket.packet.handlers.senders.connect_handlers.Cont_Connected_handler;
+import socket.packet.handlers.senders.connect_handlers.Cont_Disconct_handler;
+import socket.packet.handlers.senders.contact_handlers.AddContactWithoutInvite_handler;
+import socket.packet.handlers.senders.contact_handlers.BlockContact_handler;
+import socket.packet.handlers.senders.contact_handlers.IPToClient_handler;
+import socket.packet.handlers.senders.contact_handlers.MsgPersoToClient_handler;
+import socket.packet.handlers.senders.contact_handlers.MsgToClient_Handler;
+import socket.packet.handlers.senders.contact_handlers.PseudoToClient_handler;
+import socket.packet.handlers.senders.contact_handlers.StatusToClient_Handler;
+import socket.packet.handlers.senders.group_handlers.ConfirmGroupAdded_handler;
+import socket.packet.handlers.senders.group_handlers.ConfirmGroupDeleted_handler;
+import socket.packet.handlers.senders.group_handlers.ConfirmGroupRenamed_handler;
+import socket.packet.objects.Avatar;
 import socket.packet.objects.IdAndData;
 import socket.packet.objects.Message;
 import database.DatabaseFunctions;
@@ -331,9 +335,12 @@ public class session {
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
 				+ "uid = '" + _uid + "'");
 		if(SessionHandler.isConnected(_uid))
-			for(session s : sess_linked)
-				if(s.getUid().equals(_uid))
-					sess_linked.remove(s);
+			synchronized(sess_linked)
+			{
+				for(session s : sess_linked)
+					if(s.getUid().equals(_uid))
+						sess_linked.remove(s);
+			}
 	}
 	
 	public void EventContactGroupChange(Object data) 
@@ -425,12 +432,25 @@ public class session {
 
 	public void EventReqAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(data == null || !data.getClass().equals((new IdAndData(0,"")).getClass()))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
 		Integer _uid = pck.getUid();
-		// TODO: get avatar from memory
+		AvatarAnswer_handler pkt = new AvatarAnswer_handler(AvatarHandler.getAvatarByUID(_uid));
+		pkt.Send(sock);
+	}
+
+	public void EventStoreAvatar(Object data) 
+	{
+		if(!data.getClass().equals((new Avatar(0,new ImageIcon())).getClass()))
+			return;
+		
+		Avatar pck = (Avatar)data;
+		pck.setUid(this.getUid());
+		
+		if(pck != null)
+			AvatarHandler.AddAvatar(pck);
 	}
 
 	

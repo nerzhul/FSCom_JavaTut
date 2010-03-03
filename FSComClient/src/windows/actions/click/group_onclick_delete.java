@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import session.group;
-import socket.packet.handlers.sends.DelGroup_handler;
+import socket.packet.handlers.sends.group_handlers.DelGroup_handler;
 
 public class group_onclick_delete implements ActionListener 
 {

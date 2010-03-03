@@ -79,8 +79,6 @@ public class form_communicate extends JFrame{
 		}
 	}
 	
-
-	
 	public void ChangeConversTabTitle(Integer _uid, String name)
 	{
 		int nbonglet = TabPan.getTabCount();
@@ -106,7 +104,7 @@ public class form_communicate extends JFrame{
 	{
 		int nbonglet = TabPan.getTabCount();
 		for(int i=0;i<nbonglet;i++)
-			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyAvatar(path);
+			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).ChangeMyAvatar();
 	}
 	
 	public void ChangeContactAvatar(Integer _uid, ImageIcon img) 
