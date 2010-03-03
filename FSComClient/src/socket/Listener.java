@@ -39,7 +39,7 @@ public class Listener extends Thread
 				}
 				catch(EOFException e)
 				{
-					//in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
+					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 				}
 				
 				Packet message = (Packet) in.readObject();

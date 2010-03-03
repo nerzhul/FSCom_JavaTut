@@ -2,6 +2,7 @@ package session;
 
 import java.util.Vector;
 
+import socket.packet.handlers.senders.AvatarAnswer_handler;
 import socket.packet.objects.Avatar;
 
 public class AvatarHandler 
@@ -26,6 +27,14 @@ public class AvatarHandler
 						if(av.getUid().equals(a.getUid()))
 						{
 							a.setImg(av.getImg());
+							
+							Vector<session> v_sess = SessionHandler.getContactByUID(a.getUid()).getLinkedSessions();
+							synchronized(v_sess)
+							{
+								AvatarAnswer_handler pck = new AvatarAnswer_handler(a);
+								for(session s: v_sess)
+									pck.Send(s.getSocket());
+							}
 							return;
 						}
 					v_ava.add(av);			
@@ -41,8 +50,11 @@ public class AvatarHandler
 			synchronized(v_ava)
 			{
 				for(Avatar av: v_ava)
+				{
 					if(av.getUid().equals(uid))
 						return av;
+				}
+					
 			}
 		}
 		return null;

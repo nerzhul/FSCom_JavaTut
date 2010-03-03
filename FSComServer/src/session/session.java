@@ -440,11 +440,12 @@ public class session {
 
 	public void EventStoreAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new Avatar(0,new ImageIcon()))))
+		if(!data.getClass().equals((new Avatar(0,new ImageIcon())).getClass()))
 			return;
 		
 		Avatar pck = (Avatar)data;
 		pck.setUid(this.getUid());
+		
 		if(pck != null)
 			AvatarHandler.AddAvatar(pck);
 	}

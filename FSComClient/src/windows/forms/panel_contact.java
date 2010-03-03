@@ -42,6 +42,7 @@ import javax.swing.tree.TreeSelectionModel;
 import session.Session;
 import session.contact;
 import session.group;
+import socket.packet.handlers.sends.AvatarSender_handler;
 import socket.packet.handlers.sends.MoveGroup_handler;
 import windows.SwingExtendLib.Tree_Renderer;
 import windows.actions.buttons.ChangeStatus_button;
@@ -225,10 +226,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		ImageIcon a = new ImageIcon (path);
 	    Image avatar = scale(a.getImage(),80,80);
 	    image.setIcon( new ImageIcon(avatar));
+	    
+	    AvatarSender_handler pck = new AvatarSender_handler(new ImageIcon(avatar));
+	    pck.Send();
 	}
 	
 	public void setComm(form_communicate comm) { this.comm = comm; }
 	public form_communicate getComm() { return comm; }
+	public JLabel getMyImage() { return image; }
 	
 	public void ChPseudo(String n_pseudo) {	Titre.setText(n_pseudo); }
 	public void ChPPers(String n_perso) { msgperso.setText(n_perso); }

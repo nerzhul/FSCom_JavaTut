@@ -372,7 +372,7 @@ public class events {
 
 	public static void ChangeContactAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new Avatar(0,(ImageIcon)new Object()).getClass())))
+		if(data == null || !data.getClass().equals((new Avatar(0,new ImageIcon()).getClass())))
 			return;
 		
 		Avatar av = (Avatar)data;

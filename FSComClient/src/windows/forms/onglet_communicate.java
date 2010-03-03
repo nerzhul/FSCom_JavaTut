@@ -18,9 +18,11 @@ import javax.swing.border.MatteBorder;
 import session.Session;
 import session.contact;
 import socket.packet.handlers.sends.ReqContactAvatar_handler;
+import thread.windowthread;
 import windows.SwingExtendLib.SwingEL;
 import windows.actions.buttons.Retablir_button;
 import windows.actions.buttons.SendMsg_button;
+import windows.actions.click.chang_avatar;
 import windows.actions.keylisteners.follow_keyboard;
 
 public class onglet_communicate extends JPanel{
@@ -48,6 +50,7 @@ public class onglet_communicate extends JPanel{
 
         image = new JLabel();
         myimage = new JLabel();
+        myimage.addMouseListener(new chang_avatar());
         JButton envoi = new JButton();
         JScrollPane MainScroll = new JScrollPane();
         MainText = new JTextArea();
@@ -127,7 +130,7 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.insets = new Insets(0, 6, 10, 6);
         add(retablir,gridBagConstraints);
 
-        ChangeMyAvatar("avatar.jpg");
+        ChangeMyAvatar();
         ChangeMyBorderStatus();
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -145,11 +148,9 @@ public class onglet_communicate extends JPanel{
 		pck.Send();
 	}
 
-	public void ChangeMyAvatar(String path)
+	public void ChangeMyAvatar()
 	{
-		ImageIcon a = new ImageIcon (path);
-	    Image avatar = SwingEL.scale(a.getImage());
-	    myimage.setIcon( new ImageIcon(avatar));
+		myimage.setIcon(windowthread.getFmConn().getPanContact().getMyImage().getIcon());
 	}
 
 	public void ChangeContactAvatar(String path)
