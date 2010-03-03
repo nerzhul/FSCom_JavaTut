@@ -292,7 +292,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 
 	    /* On dessine sur le Graphics de l'image bufferisée. */
 	    Graphics2D g = buf.createGraphics();
-	    g.drawImage(source, 10, 10, width, height, null);
+	    g.drawImage(source, 0, 0, width, height, null);
 	    g.dispose();
 
 	    /* On retourne l'image bufferisée, qui est une image. */

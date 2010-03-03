@@ -3,7 +3,7 @@ import misc.Log;
 import thread.*;
 public class master 
 {
-	final static String version = "Beta 0.5.8b";
+	final static String version = "Beta 0.6.0";
 	
 	public static void main(String args[])
 	{
@@ -15,8 +15,7 @@ public class master
 		dbt.start();
 		thr_sesshandler tsh = new thr_sesshandler();
 		tsh.start();
-		thr_Transferlistener ttl = new thr_Transferlistener();
-		ttl.start();
+		
 	}
 }
 

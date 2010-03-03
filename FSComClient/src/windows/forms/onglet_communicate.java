@@ -67,7 +67,6 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.insets = new Insets(22, 5, 0, 5);
         add(image, gridBagConstraints);
@@ -211,7 +210,7 @@ public class onglet_communicate extends JPanel{
 
 	    /* On dessine sur le Graphics de l'image bufferisée. */
 	    Graphics2D g = buf.createGraphics();
-	    g.drawImage(source, 10, 10, width, height, null);
+	    g.drawImage(source, 0, 0, width, height, null);
 	    g.dispose();
 
 	    /* On retourne l'image bufferisée, qui est une image. */
