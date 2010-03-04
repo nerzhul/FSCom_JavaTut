@@ -11,6 +11,7 @@ import socket.packet.handlers.senders.connect_handlers.Cont_Connected_handler;
 import socket.packet.handlers.senders.connect_handlers.Cont_Disconct_handler;
 import socket.packet.handlers.senders.contact_handlers.AddContactWithoutInvite_handler;
 import socket.packet.handlers.senders.contact_handlers.BlockContact_handler;
+import socket.packet.handlers.senders.contact_handlers.ContactDeleted_handler;
 import socket.packet.handlers.senders.contact_handlers.IPToClient_handler;
 import socket.packet.handlers.senders.contact_handlers.MsgPersoToClient_handler;
 import socket.packet.handlers.senders.contact_handlers.MsgToClient_Handler;
@@ -196,12 +197,12 @@ public class session {
 		Integer c_uid = pck.getUid();
 		if(method.equals(1))
 		{
-			contact_disconnected(SessionHandler.getContactByUID(c_uid),true);
+			SessionHandler.getContactByUID(c_uid).contact_disconnected(this,true);
 			uid_blocked.add(c_uid);
 		}
 		else
 		{
-			contact_connected(SessionHandler.getContactByUID(c_uid), true);
+			SessionHandler.getContactByUID(c_uid).contact_connected(this, true);
 			for(int i=0;i<uid_blocked.size();i++)
 			{
 				Integer j = uid_blocked.get(i);
@@ -335,12 +336,17 @@ public class session {
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
 				+ "uid = '" + _uid + "'");
 		if(SessionHandler.isConnected(_uid))
+		{
 			synchronized(sess_linked)
 			{
 				for(session s : sess_linked)
 					if(s.getUid().equals(_uid))
 						sess_linked.remove(s);
 			}
+			SessionHandler.getContactByUID(_uid).contact_disconnected(this, true);
+		}
+		ContactDeleted_handler pack = new ContactDeleted_handler(_uid);
+		pack.Send(getSocket());
 	}
 	
 	public void EventContactGroupChange(Object data) 
