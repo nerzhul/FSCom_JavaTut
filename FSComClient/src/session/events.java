@@ -54,6 +54,8 @@ public class events {
 				{
 					ct.setStatus(0);
 					windowthread.getFmConn().getPanContact().RefreshContactList();
+					if(windowthread.getFmConn().getPanContact().getComm() != null)
+						windowthread.getFmConn().getPanContact().getComm().ChangeConversStatusForContact(ct.getCid());;
 					return;
 				}
 	}
@@ -72,6 +74,8 @@ public class events {
 					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
 					windowthread.getFmConn().getPanContact().RefreshContactList();
+					if(windowthread.getFmConn().getPanContact().getComm() != null)
+						windowthread.getFmConn().getPanContact().getComm().ChangeConversStatusForContact(ct.getCid());;
 					return;
 				}
 	}

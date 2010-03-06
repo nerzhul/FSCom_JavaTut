@@ -6,6 +6,7 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 
 import misc.Log;
+import misc.Misc;
 import socket.packet.handlers.senders.AvatarAnswer_handler;
 import socket.packet.handlers.senders.connect_handlers.Cont_Connected_handler;
 import socket.packet.handlers.senders.connect_handlers.Cont_Disconct_handler;
@@ -79,9 +80,12 @@ public class session {
 		if(sess == null)
 			return;
 		
-		if(!block)
-			sess_linked.add(sess);
-		sess.sess_linked.add(this);
+		synchronized(sess_linked)
+		{
+			if(!block)
+				sess_linked.add(sess);
+			sess.sess_linked.add(this);
+		}
 		Cont_Connected_handler pck = new Cont_Connected_handler(sess.getName(),
 				sess.getStatus(),sess.getPersonnalMsg(),sess.getUid(),sess.getPseudo());
 		if(pck != null)
@@ -114,14 +118,13 @@ public class session {
 		Cont_Disconct_handler pck = new Cont_Disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
-		
-		if(!blocked)
-			for(int i=0;i<sess_linked.size();i++)
-			{
-				session s = sess_linked.get(i);
-				if(s.equals(sess))
-					sess_linked.remove(s);
-			}				
+		synchronized(sess_linked)
+		{
+			if(!blocked)
+				for(session s: sess_linked)
+					if(s.equals(sess))
+						sess_linked.remove(s);
+		}
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -148,28 +151,33 @@ public class session {
 				break;
 		}
 		
-		for(session s : sess_linked)
+		synchronized(sess_linked)
 		{
-			
-			boolean blocked = false;
-			for(Integer i : uid_blocked)
-				if(i.equals(s.getUid()))
-					blocked = true;
-			if(!blocked)
-				Log.outError(s.name);
-			if(!blocked)
+			for(session s : sess_linked)
 			{
-				switch(sth)
+				
+				boolean blocked = false;
+				synchronized(uid_blocked)
 				{
-					case 1:
-						s.SendStatusToMe(uid, status);
-						break;
-					case 2:
-						s.SendPseudoToMe(uid, name);
-						break;
-					case 3:
-						s.SendMsgPersoToMe(uid, personnal_msg);
-						break;
+					for(Integer i : uid_blocked)
+						if(i.equals(s.getUid()))
+							blocked = true;
+				}
+				
+				if(!blocked)
+				{
+					switch(sth)
+					{
+						case 1:
+							s.SendStatusToMe(uid, status);
+							break;
+						case 2:
+							s.SendPseudoToMe(uid, name);
+							break;
+						case 3:
+							s.SendMsgPersoToMe(uid, personnal_msg);
+							break;
+					}
 				}
 			}
 		}
@@ -189,7 +197,7 @@ public class session {
 
 	public void block_contact(Object packet) 
 	{
-		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(packet, new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)packet;
@@ -197,20 +205,25 @@ public class session {
 		Integer c_uid = pck.getUid();
 		if(method.equals(1))
 		{
-			SessionHandler.getContactByUID(c_uid).contact_disconnected(this,true);
-			uid_blocked.add(c_uid);
+			if(SessionHandler.getContactByUID(c_uid) != null)
+				SessionHandler.getContactByUID(c_uid).contact_disconnected(this,true);
+			synchronized(uid_blocked)
+			{
+				uid_blocked.add(c_uid);
+			}
 		}
 		else
 		{
-			SessionHandler.getContactByUID(c_uid).contact_connected(this, true);
-			for(int i=0;i<uid_blocked.size();i++)
+			if(SessionHandler.getContactByUID(c_uid) != null)
+				SessionHandler.getContactByUID(c_uid).contact_connected(this, true);
+			synchronized(uid_blocked)
 			{
-				Integer j = uid_blocked.get(i);
-				if(j.equals(c_uid))
-					uid_blocked.remove(j);
+				for(Integer i: uid_blocked)
+					if(i.equals(c_uid))
+						uid_blocked.remove(i);
 			}
-				
 		}
+		
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
 				uid + "' AND contact = '" + c_uid + "'"))
 			DatabaseTransactions.ExecuteQuery("UPDATE acc_blocked SET blocked = '" + method + 
@@ -223,7 +236,7 @@ public class session {
 	}
 	
 	public void TransmitMsgTo(Object packet) {
-		if(!packet.getClass().equals((new Message(null,null)).getClass()))
+		if(Misc.isWrongType(packet, new Message(null,null)))
 			return;
 		
 		Message msg = (Message) packet;
@@ -248,6 +261,9 @@ public class session {
 	
 	public void ChangePseudo(Object packet) 
 	{
+		if(Misc.isWrongType(packet, new String()))
+			return;
+		
 		String pck = packet.toString();
 		SetName(pck);
 		DatabaseTransactions.ExecuteQuery("UPDATE account SET pseudo = '" + pck + 
@@ -257,6 +273,9 @@ public class session {
 	
 	public void ChangeMsgPerso(Object packet)
 	{
+		if(Misc.isWrongType(packet, new String()))
+			return;
+		
 		String pck = packet.toString();
 		SetPersonnalMsg(pck);
 		DatabaseTransactions.ExecuteQuery("UPDATE account SET phr_perso = '" + pck +
@@ -266,6 +285,9 @@ public class session {
 	
 	public contact AddContact(Object packet) 
 	{
+		if(Misc.isWrongType(packet, new String()))
+			return null;
+		
 		String username = packet.toString();
 		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'") &&
 				!username.equals(DatabaseFunctions.getAccountNameByUID(uid)))
@@ -351,6 +373,9 @@ public class session {
 	
 	public void EventContactGroupChange(Object data) 
 	{
+		if(Misc.isWrongType(data, new IdAndData(0,"")))
+			return;
+		
 		IdAndData dat = (IdAndData) data;
 		if(dat.getUid() > 0)
 			if(know_contact(dat.getUid()))
@@ -380,7 +405,7 @@ public class session {
 
 	public void EventGroupAdd(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"").getClass())))
+		if(Misc.isWrongType(data, new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData) data;
@@ -396,7 +421,10 @@ public class session {
 
 	public void EventGroupDel(Object data) 
 	{
-		Integer _gid = Integer.decode(data.toString());
+		if(Misc.isWrongType(data, new Integer(0)))
+			return;
+		
+		Integer _gid = (Integer)data;
 		if(_gid.equals(0))
 			return;
 		
@@ -411,7 +439,7 @@ public class session {
 
 	public void EventGroupRen(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(data, new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
@@ -426,6 +454,7 @@ public class session {
 
 	public void SearchIp(Object data) 
 	{
+		// Unused packet
 		Integer _uid = Integer.decode(data.toString());
 		
 		String IP = SessionHandler.SearchAccountIPbyUid(_uid);
@@ -438,7 +467,7 @@ public class session {
 
 	public void EventReqAvatar(Object data) 
 	{
-		if(data == null || !data.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(data, new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
@@ -449,7 +478,7 @@ public class session {
 
 	public void EventStoreAvatar(Object data) 
 	{
-		if(!data.getClass().equals((new Avatar(0,new ImageIcon())).getClass()))
+		if(Misc.isWrongType(data, new Avatar(0,new ImageIcon())))
 			return;
 		
 		Avatar pck = (Avatar)data;

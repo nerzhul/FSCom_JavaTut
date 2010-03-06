@@ -3,6 +3,7 @@ package socket;
 import java.net.*;
 import java.io.*;
 
+import session.session;
 import socket.packet.Packet;
 
 import misc.Log;
@@ -11,10 +12,12 @@ public class Sender
 {
 	private Socket socket;
 	private Packet pck;
-	public Sender(Socket sock,Integer op,Object packet)
+	private session sess;
+	public Sender(Socket sock,Integer op,Object packet,session _sess)
 	{
 		socket = sock;
 		pck = new Packet(op,packet);
+		sess = _sess;
 	}
 
 	public void CloseConnection()
@@ -25,8 +28,10 @@ public class Sender
 		} 
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			Log.outError("Socket with " + socket.getInetAddress() + " already closed");
 		}
+		if(sess != null)
+			sess.disconnect_client();
 	}
 	
 	public void SendPacket()
@@ -48,7 +53,12 @@ public class Sender
 		}
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			Log.outError("Socket Write error, closing connection with " + socket.getInetAddress());
+			CloseConnection();
+		}
+		catch(Exception e)
+		{
+			
 		}
 	}
 }

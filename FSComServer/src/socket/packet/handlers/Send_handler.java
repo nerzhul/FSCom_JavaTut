@@ -11,7 +11,7 @@ public class Send_handler extends Abstract_handler {
 	void PrintError(){}
 	public void Send(Socket sock)
 	{
-		Sender snd = new Sender(sock, opcode, data);
+		Sender snd = new Sender(sock, opcode, data,m_sess);
 		snd.SendPacket();
 	}
 

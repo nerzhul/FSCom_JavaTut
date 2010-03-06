@@ -29,7 +29,9 @@ public class thr_listen extends Thread
 		}
 		catch (Exception e) 
 		{
-		      e.printStackTrace();
+			Log.outError("Threading error on Master Listener, process aborted");
+		    e.printStackTrace();
+		    System.exit(-1);
 		}
 	}
 }

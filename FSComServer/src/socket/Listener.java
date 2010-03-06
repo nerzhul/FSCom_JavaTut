@@ -67,7 +67,7 @@ public class Listener extends Thread
 		} 
 		catch (ClassNotFoundException e) 
 		{
-			e.printStackTrace();
+			Log.outError("Client " + sockt.getInetAddress() + " send invalid packet");
 		}
 		catch(Exception e)
 		{
@@ -80,6 +80,4 @@ public class Listener extends Thread
 		packopt = new Packet_handler(packt,sockt, sess);
 		packopt.Destroy();
 	}
-	
-	
 }
