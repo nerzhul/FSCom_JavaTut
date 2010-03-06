@@ -1,14 +1,16 @@
+import misc.Config;
 import misc.Log;
 
 import thread.*;
 public class master 
 {
-	final static String version = "Release 1.1.0";
+	final static String version = "Release 1.1.1";
 	
 	public static void main(String args[])
 	{
 		Log.outString("FSS Com Server version " + version);
-		Log.outError("Test des logs erreur...");
+		Log.outString("Loading configuration file");
+		Config.LoadConfig();
 		thr_listen lst = new thr_listen();
 		lst.start();
 		thr_database dbt = new thr_database();

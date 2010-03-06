@@ -3,14 +3,15 @@ package database;
 import java.sql.*;
 import java.util.Vector;
 
+import misc.Config;
 import misc.Log;
 
 public class DatabaseTransactions {
 	
 	
-	final static String URL = "jdbc:mysql://localhost/messenger";
-	final static String username = "nerzhul";
-	final static String passwd = "root";
+	final static String URL = "jdbc:mysql://"+Config.getDbAddress()+"/"+Config.getDbName();
+	final static String username = Config.getDbUser();
+	final static String passwd = Config.getDbPwd();
 	
 	static Connection connect;
 	public DatabaseTransactions() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException
@@ -23,6 +24,8 @@ public class DatabaseTransactions {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Log.outString("Connect to database : " + Config.getDbName() + " on "
+					+ Config.getDbUser() + ":" + Config.getDbPwd() + "@ "+ Config.getDbAddress()); 
 			connect = DriverManager.getConnection(URL,username,passwd);
 		}
 		catch(SQLException e)
