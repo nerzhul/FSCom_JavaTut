@@ -29,7 +29,7 @@ public class CloseAllConversTabs_button implements WindowListener {
 			return;
 		}
 		
-        if (JOptionPane.showConfirmDialog(window,"Vous allez fermer toutes " +
+        if (JOptionPane.showConfirmDialog(null,"Vous allez fermer toutes " +
         		"vos fenêtres de conversation, êtes vous sur ?","Confirmation",
         		JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE) == 0)
         {

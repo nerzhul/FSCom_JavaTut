@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import session.events;
+import thread.windowthread;
+import windows.forms.form_communicate;
 import windows.forms.form_master;
 
 public class menubar_disconnect implements ActionListener {
@@ -17,6 +19,9 @@ public class menubar_disconnect implements ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		events.DisconnectCurrentClient();
+		form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
+		if(fmCom != null)
+			fmCom.closepan();		
 		window.BuildPanel(1);
 	}
 

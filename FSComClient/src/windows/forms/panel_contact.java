@@ -22,6 +22,13 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -67,20 +74,58 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel msgperso;
 	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
 	private JLabel image;
+	private String couleur;
 	
-	private 		GridBagConstraints gridBagConstraints;
+	private GridBagConstraints gridBagConstraints;
 
 	public panel_contact()
 	{
+		ReadSavedVariables();
 		BuildPanel();
 	}
 
+	private void ReadSavedVariables()
+	{
+		couleur = "127,127,255";
+		String file = "savedvariables";
+		String chaine = "";
+		try{
+			InputStream ips=new FileInputStream(file); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null){
+				chaine+=ligne+"\n";
+			}
+			br.close();
+			String tab[]=chaine.split("\n");
+			couleur=tab[2];
+		}		
+		catch (Exception e)
+		{
+			try 
+			{
+				FileWriter fw = new FileWriter(file);
+				fw.close();
+			} 
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
+			}
+		}
+	}
+	
 	private void BuildPanel()
 	{
-		setBackground(new Color(128,128,255));
-		
 
+		StringTokenizer st = new StringTokenizer(couleur, ",");
+		int fr 	= Integer.parseInt(st.nextToken());
+		int fg 	= Integer.parseInt(st.nextToken());
+		int fb 	= Integer.parseInt(st.nextToken());
+		Color c  	= new Color(fr, fg, fb);
 
+		setBackground(c);
+	
         Titre = new JLabel();
         image = new JLabel();
         changstatus = new JComboBox();
@@ -182,7 +227,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modï¿½le de l'arbre.
+		// Construction du modèle de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 

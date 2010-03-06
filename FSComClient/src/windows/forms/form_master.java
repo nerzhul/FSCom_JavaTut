@@ -6,6 +6,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import windows.SwingExtendLib.SwingEL;
+import windows.actions.click.chang_avatar;
+import windows.actions.click.chang_msgperso;
 import windows.actions.menus.*;
 
 public class form_master extends JFrame
@@ -81,12 +83,14 @@ public class form_master extends JFrame
 		JMenu menu3 = new JMenu("Option");
 		
 		SwingEL.AddItemToMenuBar(menu1,"Quitter",new menubar_quit());
-		SwingEL.AddItemToMenuBar(menu1,"Ajouter un contact",new menubar_addcontact());
-		SwingEL.AddItemToMenuBar(menu1,"Ajouter un groupe",new menubar_addgroup());
-		SwingEL.AddItemToMenuBar(menu1,"Changer de pseudo",new menubar_changepseudo());
+		SwingEL.AddItemToMenuBar(menu3,"Ajouter un contact",new menubar_addcontact());
+		SwingEL.AddItemToMenuBar(menu3,"Ajouter un groupe",new menubar_addgroup());
+		SwingEL.AddItemToMenuBar(menu3,"Changer de pseudo",new menubar_changepseudo());
+		SwingEL.AddItemToMenuBar(menu3,"Changer de message perso",new chang_msgperso());
+		SwingEL.AddItemToMenuBar(menu3,"Changer d'avatar",new chang_avatar());
 		SwingEL.AddItemToMenuBar(menu1,"Se déconnecter",new menubar_disconnect(this));
 		SwingEL.AddItemToMenuBar(menu2,"A propos...",new menubar_a_propos());
-		//AddItem(menu3,"Préférences",new Menu_pref(getpannel()));
+		SwingEL.AddItemToMenuBar(menu3, "Changer la couleur de la fenêtre", new menubar_changecolorframe());
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);

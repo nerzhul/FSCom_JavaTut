@@ -8,7 +8,6 @@ import windows.forms.form_inscription;
 
 public class menubar_inscr implements ActionListener {
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {	
 		if(windowthread.getFmConn().getPanConnect().getFmInsc() == null)
 			windowthread.getFmConn().getPanConnect().setFmInsc(new form_inscription()); 

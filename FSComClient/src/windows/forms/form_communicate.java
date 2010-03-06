@@ -1,5 +1,7 @@
 package windows.forms;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -93,6 +95,13 @@ public class form_communicate extends JFrame{
 		}
 	}
 	
+	public void ChangeTabbedpanColor(Color bg)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).setBackground(bg);
+	}
+	
 	public void ChangeAllMyStatusBorder()
 	{
 		int nbonglet = TabPan.getTabCount();
@@ -120,6 +129,9 @@ public class form_communicate extends JFrame{
     			return;
     		}
 		}
-		
+	}
+	
+	public void closepan(){
+		frame.dispose();
 	}
 }

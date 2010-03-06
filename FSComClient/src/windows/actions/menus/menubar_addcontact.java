@@ -10,12 +10,11 @@ import socket.packet.handlers.sends.contact_handlers.AddContact_handler;
 
 public class menubar_addcontact implements ActionListener {
 
-	private JFrame fenetre;
 	private String reponse;
 
 	public void actionPerformed(ActionEvent e) {
 	
-		reponse = JOptionPane.showInputDialog(fenetre,"Entrez le nom du contact à ajouter :",
+		reponse = JOptionPane.showInputDialog(null,"Entrez le nom du contact à ajouter :",
 				"Nouveau contact",JOptionPane.QUESTION_MESSAGE);
 		if (reponse != null && !reponse.equalsIgnoreCase(""))
 		{

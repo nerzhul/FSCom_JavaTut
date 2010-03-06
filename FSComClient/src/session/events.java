@@ -5,8 +5,6 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTree;
-
 import socket.Sender;
 import socket.packet.ConnectData;
 import socket.packet.handlers.sends.Disconnect_handler;
@@ -26,7 +24,6 @@ import misc.Log;
 
 public class events {
 
-	
 	public static void StoreStatus(Integer st)
 	{
 		Session.setStatus(st);
@@ -93,9 +90,9 @@ public class events {
 				{
 					ct.setBlocked((method == 1) ? true: false);
 					if(ct.isBlocked())
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a ï¿½tï¿½ bloquï¿½");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été bloqué");
 					else
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a ï¿½tï¿½ dï¿½bloquï¿½");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été débloqué");
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -252,7 +249,7 @@ public class events {
 
 		IdAndData pck = (IdAndData)packet;
 
-		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajoutï¿½, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
 		Answer_Invit_handler arh = new Answer_Invit_handler(pck.getUid(), answer);
 		arh.Send();
 	}
@@ -365,11 +362,11 @@ public class events {
 		threading.StopSender();
 		if(res != 1)
 		{
-			JOptionPane.showMessageDialog(null,"Compte dï¿½jï¿½ existant !");
+			JOptionPane.showMessageDialog(null,"Compte déjà existant !");
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null,"Compte crï¿½ï¿½ avec succï¿½s !");
+			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
 			fmInsc.dispose();
 		}
 	}

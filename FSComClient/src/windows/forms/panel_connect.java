@@ -32,6 +32,7 @@ public class panel_connect extends JPanel {
 	private JCheckBox save;
 	private String autouser,autopass;
 	private form_inscription frmInsc;
+	private String couleur;
 	
 	public panel_connect(form_master formFram)
 	{
@@ -43,6 +44,7 @@ public class panel_connect extends JPanel {
 	{
 		autouser = "";
 		autopass = "";
+		couleur = "128,128,255";
 		String file = "savedvariables";
 		String chaine = "";
 		try{
@@ -57,6 +59,8 @@ public class panel_connect extends JPanel {
 			String tab[]=chaine.split("\n");
 				autouser=tab[0];
 				autopass=tab[1];
+				if(!tab[2].equalsIgnoreCase("null"))
+					couleur=tab[2];
 		}		
 		catch (Exception e)
 		{
@@ -94,7 +98,7 @@ public class panel_connect extends JPanel {
 		if(autouser!="" && autopass !="")
 			save.setSelected(true);
 		connect=new JButton("Connexion");
-		connect.addActionListener(new Connect_button(status,mail,password,save));
+		connect.addActionListener(new Connect_button(status,mail,password,save,couleur));
 
 		add(Titre);
 		add(labeluser);

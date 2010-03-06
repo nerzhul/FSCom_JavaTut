@@ -20,11 +20,13 @@ public class Connect_button implements ActionListener {
 	private JTextField username;
 	private JPasswordField passwd;
 	private JCheckBox need_save;
-	public Connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save) 
+	private String color;
+	public Connect_button(JComboBox statusco, JTextField mail, JPasswordField password, JCheckBox save, String couleur) 
 	{
 		this.status=statusco;
 		this.username=mail;
 		this.passwd=password;
+		color = couleur;
 		need_save = save;
 	}
 	
@@ -55,7 +57,8 @@ public class Connect_button implements ActionListener {
 			BufferedWriter bw = new BufferedWriter (fw);
 			PrintWriter wfile = new PrintWriter (bw); 
 			wfile.println (username.getText()); 
-			wfile.println (passwd.getPassword()); 
+			wfile.println (passwd.getPassword());
+			wfile.println (color); 
 			wfile.close();
 		}
 		catch (Exception e){
