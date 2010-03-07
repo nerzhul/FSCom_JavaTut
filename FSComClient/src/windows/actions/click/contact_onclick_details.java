@@ -16,10 +16,17 @@ public class contact_onclick_details implements ActionListener
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null,"Pseudo : " + contact.getPseudo()+"\n"+ "Message personnel : " + contact.getMsg_perso() );
-		/* TODO :
-		 *	show username & other stuff
-		*/
+		Integer status = contact.getStatus();
+		String stat ="";
+		if (status.equals(0) || status.equals(4))
+			stat="Offline";
+	    else if (status.equals(1))
+	    		stat="Online";
+	    else if (status.equals(2))
+	    		stat="Busy";
+	    else if (status.equals(3))
+	    		stat="Idle";
+		JOptionPane.showMessageDialog(null,"Identifiant : "+contact.getName()+"\n Pseudo : " + contact.getPseudo()+"\n Message personnel : " + contact.getMsg_perso() +"\n Statuts : "+stat);
 	}
 
 }

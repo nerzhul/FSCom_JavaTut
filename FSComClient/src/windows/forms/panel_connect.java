@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -82,9 +83,9 @@ public class panel_connect extends JPanel {
 		setBackground(new Color(128,128,255));
 		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
 
+		JLabel Image = new JLabel(new ImageIcon("icone.png"),JLabel.CENTER);
 		Titre=new JLabel("Bienvenue dans Cookie Messenger",JLabel.CENTER);
-		//image
-		labeluser = new JLabel("Adresse e-mail");
+		labeluser = new JLabel("Identifiant");
 		mail = new JTextField(autouser,15);
 		labelpass = new JLabel("Mot de passe");
 		password = new JPasswordField(autopass,15);
@@ -92,7 +93,7 @@ public class panel_connect extends JPanel {
 		
 		status.addItem("Online");
 		status.addItem("Busy");
-		status.addItem("AFK");
+		status.addItem("Idle");
 		status.addItem("Offline");
 		save = new JCheckBox("Enregistrer les infos");
 		if(autouser!="" && autopass !="")
@@ -101,6 +102,7 @@ public class panel_connect extends JPanel {
 		connect.addActionListener(new Connect_button(status,mail,password,save,couleur));
 
 		add(Titre);
+		add(Image);
 		add(labeluser);
 		add(mail);
 		add(labelpass);

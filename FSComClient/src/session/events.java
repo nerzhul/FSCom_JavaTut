@@ -347,7 +347,7 @@ public class events {
 			if(g.getGid().equals(_gid))
 			{
 				g.setGname(newName);
-				windowthread.getFmConn().getPanContact().RefreshContactList();
+				windowthread.getFmConn().getPanContact().HardRefreshContactList();
 				return;
 			}
 		}

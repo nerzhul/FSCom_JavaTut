@@ -156,7 +156,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(image, gridBagConstraints);
 
-        changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "AFK", "Offline" }));
+        changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "Idle", "Offline" }));
 		changstatus.setSelectedIndex(Session.getStatus()-1);
 		changstatus.addActionListener(new ChangeStatus_button(changstatus));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -239,26 +239,24 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	private void OpenContactList()
 	{
-		for(int i=0;i<Session.getGroups().size();i++)
+		for(int i=0;i<=Session.getGroups().size();i++)
 			tree.expandRow(i);
 	}
 	
 	public void RefreshContactList()
 	{
-		//---->rename group + changement de pseudo si plus grand plus de "..."
 		((DefaultTreeModel) tree.getModel()).reload();
+		OpenContactList();
 		tree.updateUI();
 	}
 
 	public void HardRefreshContactList()
 	{
-		//----> ajout/suppression contact OK  + delete group
 		DefaultTreeModel model = ((DefaultTreeModel) tree.getModel());
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 		root.removeAllChildren();
 		model.reload();
 		SetListContact();
-		tree.repaint();
 		tree.updateUI();
 	}
 	

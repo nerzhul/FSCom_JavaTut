@@ -1,5 +1,8 @@
 package windows.forms;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -8,7 +11,14 @@ import javax.swing.JPanel;
 import windows.SwingExtendLib.SwingEL;
 import windows.actions.click.chang_avatar;
 import windows.actions.click.chang_msgperso;
-import windows.actions.menus.*;
+import windows.actions.menus.menubar_a_propos;
+import windows.actions.menus.menubar_addcontact;
+import windows.actions.menus.menubar_addgroup;
+import windows.actions.menus.menubar_changecolorframe;
+import windows.actions.menus.menubar_changepseudo;
+import windows.actions.menus.menubar_disconnect;
+import windows.actions.menus.menubar_inscr;
+import windows.actions.menus.menubar_quit;
 
 public class form_master extends JFrame
 {
@@ -32,6 +42,8 @@ public class form_master extends JFrame
 		fram.setLocationRelativeTo(null);
 		fram.setResizable(false);
 		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Image icone = Toolkit.getDefaultToolkit().getImage("icone.png");
+		fram.setIconImage(icone);
 		pan_connect = pan_contact = null;
 	}
 	

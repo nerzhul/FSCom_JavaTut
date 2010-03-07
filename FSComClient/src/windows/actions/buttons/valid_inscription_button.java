@@ -35,7 +35,7 @@ public class valid_inscription_button implements ActionListener
 			pck.Send();
 		}
 		else
-			JOptionPane.showMessageDialog(null,"Informations incorrectes !");
+			JOptionPane.showMessageDialog(null,"Informations incorrectes !","Erreur !", JOptionPane.ERROR_MESSAGE);
 
 
 	}
