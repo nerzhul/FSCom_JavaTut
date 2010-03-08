@@ -56,7 +56,6 @@ public class Sender extends Thread
 		{
 			// create a socket on mine IP.
 		    Log.outString("Initialising Master Command Line...");
-		    Log.outString("Master Command Line Initialized");
 		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line;
@@ -92,7 +91,6 @@ public class Sender extends Thread
 		
 		try 
 		{
-			// send packet
 			Packet pck = new Packet(opcode,packt);
 			out.writeObject(pck);
 			out.flush();

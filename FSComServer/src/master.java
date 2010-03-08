@@ -4,7 +4,7 @@ import misc.Log;
 import thread.*;
 public class master 
 {
-	final static String version = "Release 1.2.0";
+	final static String version = "Release 1.2.1";
 	
 	public static void main(String args[])
 	{

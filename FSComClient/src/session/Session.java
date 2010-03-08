@@ -2,6 +2,10 @@ package session;
 
 import java.util.Vector;
 
+import misc.Log;
+
+import socket.packet.handlers.sends.Ping_handler;
+
 
 public class Session extends Thread{
 
@@ -29,11 +33,13 @@ public class Session extends Thread{
 		{
 			try 
 			{
-				sleep(100);
+				Ping_handler pck = new Ping_handler();
+				pck.Send();
+				sleep(10000);
 			}
 			catch (InterruptedException e) 
 			{
-				e.printStackTrace();
+				Log.outError("Thread Error");
 			}
 		}
 	}

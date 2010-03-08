@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50136
 File Encoding         : 65001
 
-Date: 2010-03-06 09:55:34
+Date: 2010-03-08 16:53:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `acc_blocked` (
 INSERT INTO `acc_blocked` VALUES ('1', '2', '0');
 INSERT INTO `acc_blocked` VALUES ('2', '3', '0');
 INSERT INTO `acc_blocked` VALUES ('2', '1', '0');
+INSERT INTO `acc_blocked` VALUES ('2', '5', '0');
 
 -- ----------------------------
 -- Table structure for `acc_contact`
@@ -48,9 +49,11 @@ CREATE TABLE `acc_contact` (
 -- ----------------------------
 -- Records of acc_contact
 -- ----------------------------
-INSERT INTO `acc_contact` VALUES ('1', '2', 'sdfsdf', '1', '1');
-INSERT INTO `acc_contact` VALUES ('1', '3', 'sdfsgfll', '0', '1');
 INSERT INTO `acc_contact` VALUES ('2', '1', '', '0', '0');
+INSERT INTO `acc_contact` VALUES ('5', '2', '', '0', '0');
+INSERT INTO `acc_contact` VALUES ('1', '3', 'sdfsgfll', '0', '1');
+INSERT INTO `acc_contact` VALUES ('2', '5', '', '0', '0');
+INSERT INTO `acc_contact` VALUES ('1', '2', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `acc_group`
@@ -66,8 +69,19 @@ CREATE TABLE `acc_group` (
 -- ----------------------------
 -- Records of acc_group
 -- ----------------------------
-INSERT INTO `acc_group` VALUES ('1', '1', 'blop');
-INSERT INTO `acc_group` VALUES ('2', '2', 'kikoo');
+INSERT INTO `acc_group` VALUES ('1', '1', 'vvv');
+INSERT INTO `acc_group` VALUES ('1', '2', 'ssss');
+INSERT INTO `acc_group` VALUES ('2', '2', 'sdffds');
+INSERT INTO `acc_group` VALUES ('2', '5', 'zzzz');
+INSERT INTO `acc_group` VALUES ('2', '6', 'eeeee');
+INSERT INTO `acc_group` VALUES ('2', '7', 'ffff');
+INSERT INTO `acc_group` VALUES ('2', '8', 'vvvv');
+INSERT INTO `acc_group` VALUES ('2', '9', 'aaaaaaaaaa');
+INSERT INTO `acc_group` VALUES ('2', '10', 'vvvvvvvvvvvvvv');
+INSERT INTO `acc_group` VALUES ('2', '11', 'bbbbbbbbb');
+INSERT INTO `acc_group` VALUES ('2', '12', 'nnnnnnnnn');
+INSERT INTO `acc_group` VALUES ('2', '13', ',,,,,');
+INSERT INTO `acc_group` VALUES ('2', '14', 'vvvvvvv');
 
 -- ----------------------------
 -- Table structure for `acc_invitation`
@@ -110,13 +124,16 @@ CREATE TABLE `account` (
   `phr_perso` varchar(25) NOT NULL DEFAULT 'msg personnel',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `user` (`user`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('1', 'toto', 'toto', 'mlknhfgn', 'rtyuiop');
+INSERT INTO `account` VALUES ('1', 'toto', 'toto', 'Nerzhul', 'rtyuiop');
 INSERT INTO `account` VALUES ('2', 'msdi', 'tutu', 'Jean-Baptiste', 'dfhfghfgj');
 INSERT INTO `account` VALUES ('3', 'dsfghjk', 'sggjhfjgj', 'ghjhfjdfsdf', 'sdfsf');
 INSERT INTO `account` VALUES ('4', 'bubu', 'tutut', 'sdf', 'sfsdfsdf');
 INSERT INTO `account` VALUES ('5', 'azerty', 'azertyu', 'azerty', 'eqp,g');
+INSERT INTO `account` VALUES ('6', 'toto2', 'tatata', 'toto2', 'msg personnel');
+INSERT INTO `account` VALUES ('7', 'toto3', 'tototo', 'toto3', 'msg personnel');
+INSERT INTO `account` VALUES ('8', 'dsfdfdfs', 'azerty', 'dsfdfdfs', 'msg personnel');

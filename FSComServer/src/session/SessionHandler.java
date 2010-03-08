@@ -17,8 +17,13 @@ public class SessionHandler {
 
 	public synchronized static void DisconnectAllClients()
 	{
-		for(session s: v_sess)
+		//for(session s: v_sess)
+		for(int i=0;i<v_sess.size();i++)
+		{
+			session s = v_sess.get(i);
 			s.disconnect_client();
+		}
+			
 	}
 	
 	public synchronized static void AddSession(session sess)

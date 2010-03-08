@@ -33,14 +33,8 @@ public class Listener extends Thread
 		{
 			while(true)
 			{
-				try
-				{
-					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
-				}
-				catch(EOFException e)
-				{
-					in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
-				}
+
+				in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 				
 				Packet message = (Packet) in.readObject();
 				Log.outString("Packet received from server (opcode :" + message.getOpcode() + ")");
@@ -57,6 +51,15 @@ public class Listener extends Thread
 		catch (SocketTimeoutException ste) 
 		{
 			Log.outTimed("Server connection timeout");
+		}
+		catch(EOFException e)
+		{
+			try {
+				sockt.close();
+			} catch (IOException e1) {
+				this.interrupt();
+			}
+			this.interrupt();
 		}
 		catch (SocketException e)
 		{
