@@ -3,10 +3,8 @@ package session;
 import java.util.Vector;
 
 import misc.Misc;
-
-import database.DatabaseTransactions;
-
 import socket.packet.objects.AccCreateDatas;
+import database.DatabaseTransactions;
 
 public class SessionHandler {
 
@@ -17,28 +15,23 @@ public class SessionHandler {
 		v_sess = new Vector<session>();
 	}
 
-	public static void AddSession(session sess)
+	public synchronized static void AddSession(session sess)
 	{
 		if(sess == null)
 			return;
-		synchronized(v_sess)
-		{
-			v_sess.add(sess);
-			for(session s : v_sess)
-				if(!s.equals(sess))
-					if(s.know_contact(sess.getUid()) && !sess.has_blocked(s.getUid()))
-						s.contact_connected(sess, false);
-		}
+
+		v_sess.add(sess);
+		for(session s : v_sess)
+			if(!s.equals(sess))
+				if(s.know_contact(sess.getUid()) && !sess.has_blocked(s.getUid()))
+					s.contact_connected(sess, false);
 	}
 
-	public static session getContactByUID(Integer _uid)
+	public synchronized static session getContactByUID(Integer _uid)
 	{
-		synchronized(v_sess)
-		{
-			for(session s : v_sess)
-				if(s.getUid().equals(_uid))
-					return s;
-		}
+		for(session s : v_sess)
+			if(s.getUid().equals(_uid))
+				return s;
 		return null;
 	}
 	
@@ -60,21 +53,20 @@ public class SessionHandler {
 		 */
 	}
 
-	public static void DestroySession(session sess, Thread thr) 
+	public synchronized static void DestroySession(session sess, Thread thr) 
 	{
-		synchronized(v_sess)
+		if(!v_sess.isEmpty())
 		{
-			if(!v_sess.isEmpty())
+			for(int i=0;i<v_sess.size();i++)
+			//for(session s: v_sess)
 			{
-				for(session s: v_sess)
+				session s = v_sess.get(i);
+				if(s.equals(sess))
+					v_sess.remove(sess);
+				else
 				{
-					if(s.equals(sess))
-						v_sess.remove(sess);
-					else
-					{
-						if(s.know_contact(sess.getUid()))
-							s.contact_disconnected(sess,false);
-					}
+					if(s.know_contact(sess.getUid()))
+						s.contact_disconnected(sess,false);
 				}
 			}
 		}
@@ -88,25 +80,21 @@ public class SessionHandler {
 		AccCreateDatas pck = (AccCreateDatas)data;
 		String _user = pck.getName();
 		String _pwd = pck.getPwd();
-		Integer result = 0;
 		if(!DatabaseTransactions.DataExist("account","user", "user = '" + _user + "'"))
 		{
 			DatabaseTransactions.ExecuteQuery("INSERT INTO account(user,sha_pass,pseudo) values ('" + _user +
 					"','" + _pwd + "','" + _user + "')");
-			result = 1;
+			return 1;
 		}
-		return result;
+		return 0;
 	}
 	
-	public static String SearchAccountIPbyUid(Integer _uid)
+	public synchronized static String SearchAccountIPbyUid(Integer _uid)
 	{
-		synchronized(v_sess)
+		for(session s:v_sess)
 		{
-			for(session s:v_sess)
-			{
-				if(s.getUid().equals(_uid))
-					return s.getSocket().getInetAddress().toString();
-			}
+			if(s.getUid().equals(_uid))
+				return s.getSocket().getInetAddress().toString();
 		}
 		return null;
 	}

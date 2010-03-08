@@ -62,7 +62,8 @@ public class ClientDatas implements Serializable
 					DatabaseTransactions.StringQuery("account", "phr_perso", "uid = '" + v_cont.get(i) + "'"),
 					DatabaseTransactions.StringQuery("acc_contact", "comment", acc_contact_get),
 					(SessionHandler.isConnected(v_cont.get(i)) ? SessionHandler.getContactByUID(v_cont.get(i)).getStatus() : 0),
-					DatabaseTransactions.IntegerQuery("acc_contact", "group", acc_contact_get),sess.getName());
+					DatabaseTransactions.IntegerQuery("acc_contact", "group", acc_contact_get),
+					DatabaseTransactions.StringQuery("account", "user", "uid = '" + v_cont.get(i) + "'"));
 			ct.add(tmp_contact);
 		}
 	}
