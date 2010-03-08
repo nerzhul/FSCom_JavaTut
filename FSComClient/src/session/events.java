@@ -219,9 +219,10 @@ public class events {
 	public static void ContactAdded(Object packet) 
 	{
 		contact ct = (contact)packet;
-		if(ct == null)
+		if(ct == null){
+			Log.ShowPopup("Le contact ajouté n'existe pas !", true);
 			return;
-		
+		}
 		for(group g: Session.getGroups())
 			if(g.getGid().equals(0))
 			{
