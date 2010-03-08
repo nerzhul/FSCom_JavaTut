@@ -4,6 +4,7 @@ import java.net.Socket;
 
 import session.Session;
 import session.events;
+import socket.ServerList;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listens.Depreciated_handler;
 import socket.packet.handlers.listens.Null_handler;
@@ -104,6 +105,7 @@ public class Packet_handler
 					break;
 				case 0x22:
 					events.StoreAllDatas(data);
+					ServerList.ClosePopup();
 					events.ShowConnectedFrame();
 					break;
 				case 0x23:

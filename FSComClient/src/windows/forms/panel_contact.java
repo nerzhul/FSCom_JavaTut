@@ -46,6 +46,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import session.Session;
 import session.contact;
+import session.events;
 import session.group;
 import socket.packet.handlers.sends.client_handlers.AvatarSender_handler;
 import socket.packet.handlers.sends.group_handlers.MoveGroup_handler;
@@ -209,6 +210,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         add(scrolltree, gridBagConstraints);
+        OpenContactList();
 	}
 	
 	private void GenerateNodes()
@@ -227,19 +229,19 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modèle de l'arbre.
+		// Construction du modï¿½le de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
 		// Construction de l'arbre.
 		tree = new JTree(myModel);
 		tree.setCellRenderer(new Tree_Renderer());
-		OpenContactList();
+		
 	}
 	
 	private void OpenContactList()
 	{
-		for(int i=0;i<=Session.getGroups().size();i++)
+		for(int i=0;i<Session.getGroups().size();i++)
 			tree.expandRow(i);
 	}
 	
@@ -346,8 +348,9 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
 			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
 			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
-					  ((group)dropContact.getUserObject()).getGid());
+		      ((group)dropContact.getUserObject()).getGid());
 			  pck.Send();
+			  events.ContactChangeGroup(((contact)selecContact.getUserObject()),((group)dropContact.getUserObject()).getGid());
 
 		    }
 		}

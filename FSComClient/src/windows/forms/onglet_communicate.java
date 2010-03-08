@@ -104,7 +104,7 @@ public class onglet_communicate extends JPanel{
         JTextArea txt = new JTextArea();
         JLabel TitleText = new JLabel();
         JButton retablir = new JButton();
-
+        
         setLayout(new GridBagLayout());
         
 	    
@@ -159,7 +159,7 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.insets = new Insets(10, 0, 20, 0);
         add(SendScroll, gridBagConstraints);
 
-        TitleText.setText("Entrer ici le message à envoyer :");
+        TitleText.setText("Entrer ici le message ï¿½ envoyer :");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -185,7 +185,7 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.insets = new Insets(12, 5, 0, 5);
         add(myimage, gridBagConstraints);
-        
+
         RequestContactAvatar();
 	}
 

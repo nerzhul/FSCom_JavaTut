@@ -81,7 +81,7 @@ public class form_inscription extends JFrame{
         pane.add(annuler, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
-        passtxt.setToolTipText("Doit être différent de l'identifiant et comporter au minimum 4 caractères !");
+        passtxt.setToolTipText("Doit ï¿½tre diffï¿½rent de l'identifiant et comporter au minimum 4 caractï¿½res !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -89,7 +89,7 @@ public class form_inscription extends JFrame{
         pane.add(passtxt, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
-        passtxt2.setToolTipText("Doit être égal au mot de passe entré précédemment !");
+        passtxt2.setToolTipText("Doit ï¿½tre ï¿½gal au mot de passe entrï¿½ prï¿½cï¿½demment !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
@@ -118,7 +118,7 @@ public class form_inscription extends JFrame{
         pane.add(identifiant, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
-        idtxt.setToolTipText("Maximum 15 caractères !");
+        idtxt.setToolTipText("Maximum 15 caractï¿½res !");
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
