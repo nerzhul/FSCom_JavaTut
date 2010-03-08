@@ -22,6 +22,13 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -39,6 +46,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import session.Session;
 import session.contact;
+import session.events;
 import session.group;
 import socket.packet.handlers.sends.client_handlers.AvatarSender_handler;
 import socket.packet.handlers.sends.group_handlers.MoveGroup_handler;
@@ -67,20 +75,58 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	private JLabel msgperso;
 	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
 	private JLabel image;
+	private String couleur;
 	
 	private GridBagConstraints gridBagConstraints;
 
 	public panel_contact()
 	{
+		ReadSavedVariables();
 		BuildPanel();
 	}
 
+	private void ReadSavedVariables()
+	{
+		couleur = "127,127,255";
+		String file = "savedvariables";
+		String chaine = "";
+		try{
+			InputStream ips=new FileInputStream(file); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null){
+				chaine+=ligne+"\n";
+			}
+			br.close();
+			String tab[]=chaine.split("\n");
+			couleur=tab[2];
+		}		
+		catch (Exception e)
+		{
+			try 
+			{
+				FileWriter fw = new FileWriter(file);
+				fw.close();
+			} 
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
+			}
+		}
+	}
+	
 	private void BuildPanel()
 	{
-		setBackground(new Color(128,128,255));
-		
 
+		StringTokenizer st = new StringTokenizer(couleur, ",");
+		int fr 	= Integer.parseInt(st.nextToken());
+		int fg 	= Integer.parseInt(st.nextToken());
+		int fb 	= Integer.parseInt(st.nextToken());
+		Color c  	= new Color(fr, fg, fb);
 
+		setBackground(c);
+	
         Titre = new JLabel();
         image = new JLabel();
         changstatus = new JComboBox();
@@ -111,7 +157,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(image, gridBagConstraints);
 
-        changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "AFK", "Offline" }));
+        changstatus.setModel(new DefaultComboBoxModel(new String[] { "Online", "Busy", "Idle", "Offline" }));
 		changstatus.setSelectedIndex(Session.getStatus()-1);
 		changstatus.addActionListener(new ChangeStatus_button(changstatus));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -158,12 +204,13 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.setRootVisible(false);
 		
 		scrolltree.setViewportView(tree);
-		scrolltree.setPreferredSize(new Dimension(150,300));
+		scrolltree.setPreferredSize(new Dimension(200,300));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         add(scrolltree, gridBagConstraints);
+        OpenContactList();
 	}
 	
 	private void GenerateNodes()
@@ -182,14 +229,14 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 			}
 		}
 		
-		// Construction du modèle de l'arbre.
+		// Construction du modï¿½le de l'arbre.
 		DefaultTreeModel myModel = new DefaultTreeModel(root);
 		myModel.setAsksAllowsChildren(true);
 
 		// Construction de l'arbre.
 		tree = new JTree(myModel);
 		tree.setCellRenderer(new Tree_Renderer());
-		OpenContactList();
+		
 	}
 	
 	private void OpenContactList()
@@ -200,20 +247,17 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	public void RefreshContactList()
 	{
-		//---->rename group + changement de pseudo si plus grand plus de "..."
 		((DefaultTreeModel) tree.getModel()).reload();
 		OpenContactList();
 	}
 
 	public void HardRefreshContactList()
 	{
-		//----> ajout/suppression contact OK  + delete group
 		DefaultTreeModel model = ((DefaultTreeModel) tree.getModel());
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 		root.removeAllChildren();
 		model.reload();
 		SetListContact();
-		tree.repaint();
 		tree.updateUI();
 	}
 	
@@ -304,8 +348,9 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		      ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(selecContact);
 			  ((DefaultTreeModel) tree.getModel()).insertNodeInto(selecContact, dropContact, dropContact.getChildCount());
 			  MoveGroup_handler pck = new MoveGroup_handler(((contact)selecContact.getUserObject()).getCid(),
-					  ((group)dropContact.getUserObject()).getGid());
+		      ((group)dropContact.getUserObject()).getGid());
 			  pck.Send();
+			  events.ContactChangeGroup(((contact)selecContact.getUserObject()),((group)dropContact.getUserObject()).getGid());
 
 		    }
 		}

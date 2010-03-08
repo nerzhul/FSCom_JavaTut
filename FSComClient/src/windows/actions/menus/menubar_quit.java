@@ -8,7 +8,7 @@ public class menubar_quit implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{ 
 		/* 
-		 * TODO : confirm window
+		 * TODO : 
 		 * clean socket correctly
 		 */
 		

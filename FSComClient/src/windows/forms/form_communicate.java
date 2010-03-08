@@ -1,5 +1,7 @@
 package windows.forms;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -48,6 +50,7 @@ public class form_communicate extends JFrame{
 			tab.setTitleComponent( new CloseButton_button(tab,frame ) );
 			TabPan.addTab(tab) ;
 			TabPan.setSelectedTab(tab);
+			((onglet_communicate)TabPan.getTabAt(TabPan.getTabCount()-1).getContentComponent()).RequestContactAvatar();
 		 	frame.add(TabPan);
 		 	frame.setVisible(true);
 		}
@@ -93,6 +96,13 @@ public class form_communicate extends JFrame{
 		}
 	}
 	
+	public void ChangeTabbedpanColor(Color bg)
+	{
+		int nbonglet = TabPan.getTabCount();
+		for(int i=0;i<nbonglet;i++)
+			((onglet_communicate) TabPan.getTabAt(i).getContentComponent()).setBackground(bg);
+	}
+	
 	public void ChangeAllMyStatusBorder()
 	{
 		int nbonglet = TabPan.getTabCount();
@@ -120,6 +130,9 @@ public class form_communicate extends JFrame{
     			return;
     		}
 		}
-		
+	}
+	
+	public void closepan(){
+		frame.dispose();
 	}
 }

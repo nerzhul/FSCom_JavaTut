@@ -14,9 +14,9 @@ public final class ServerList {
 	{
 		curr_mirror = 0;
 		iplist = new String[MAX_MIRROR];
-		iplist[0] = "127.0.0.1";
+		iplist[2] = "127.0.0.1";
 		iplist[1] = "www.blackdiamondserver.com";
-		iplist[2] = "172.20.9.56";
+		iplist[0] = "172.20.9.56";
 		iplist[3] = "127.0.0.1";	
 	}
 	
@@ -38,6 +38,8 @@ public final class ServerList {
 		return curr_mirror;
 	}
 
+	
+	
 	public static Integer getBestMirror()
 	{
 		Integer i=0;
@@ -52,6 +54,7 @@ public final class ServerList {
 				sock.close();
 				pop.interrupt();
 				return i;
+				
 			}
 			catch (Exception e) 
 			{
@@ -60,14 +63,13 @@ public final class ServerList {
 			}
 		}
 		while(i<MAX_MIRROR && !found);
-		
 		pop.interrupt();
-		return -1;
+		
+		return i;
 	}
 	
-	public static void ClosePopup()
-	{
-		if(pop != null)
+	public static void ClosePopup(){
+		if(pop!=null)
 			pop.interrupt();
 	}
 }

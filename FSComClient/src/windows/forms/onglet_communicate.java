@@ -5,6 +5,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -32,18 +39,57 @@ public class onglet_communicate extends JPanel{
 	private JTextArea MainText;
 	private MatteBorder borderafk,borderbusy,borderonline,borderoffline;
 	private JLabel image,myimage;
-	
+	private String couleur;
 	
 	public onglet_communicate(contact noeud)
 	{
 		super();
 		ct = noeud;
+		ReadSavedVariables();
 		CreateTab();
+	}
+	
+	private void ReadSavedVariables()
+	{
+		couleur = "127,127,255";
+		String file = "savedvariables";
+		String chaine = "";
+		try{
+			InputStream ips=new FileInputStream(file); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null){
+				chaine+=ligne+"\n";
+			}
+			br.close();
+			String tab[]=chaine.split("\n");
+			couleur=tab[2];
+		}		
+		catch (Exception e)
+		{
+			try 
+			{
+				FileWriter fw = new FileWriter(file);
+				fw.close();
+			} 
+			catch (IOException e1) 
+			{
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 	public void CreateTab()
 	{
-		setBackground(new Color(128,128,255));
+		StringTokenizer st = new StringTokenizer(couleur, ",");
+		int fr 	= Integer.parseInt(st.nextToken());
+		int fg 	= Integer.parseInt(st.nextToken());
+		int fb 	= Integer.parseInt(st.nextToken());
+		Color c  	= new Color(fr, fg, fb);
+
+		setBackground(c);
+		
 		CreateBorders();
 		
 		GridBagConstraints gridBagConstraints;
@@ -58,7 +104,7 @@ public class onglet_communicate extends JPanel{
         JTextArea txt = new JTextArea();
         JLabel TitleText = new JLabel();
         JButton retablir = new JButton();
-
+        
         setLayout(new GridBagLayout());
         
 	    
@@ -113,7 +159,7 @@ public class onglet_communicate extends JPanel{
         gridBagConstraints.insets = new Insets(10, 0, 20, 0);
         add(SendScroll, gridBagConstraints);
 
-        TitleText.setText("Entrer ici le message à envoyer :");
+        TitleText.setText("Entrer ici le message ï¿½ envoyer :");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -132,17 +178,18 @@ public class onglet_communicate extends JPanel{
 
         ChangeMyAvatar();
         ChangeMyBorderStatus();
+		myimage.setToolTipText("Cliquez ici pour changer d'Avatar !");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.insets = new Insets(12, 5, 0, 5);
         add(myimage, gridBagConstraints);
-        
+
         RequestContactAvatar();
 	}
 
-	private void RequestContactAvatar() 
+	public void RequestContactAvatar() 
 	{
 		ReqContactAvatar_handler pck = new ReqContactAvatar_handler(ct.getCid());
 		pck.Send();

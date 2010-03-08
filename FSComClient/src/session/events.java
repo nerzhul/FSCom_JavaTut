@@ -54,8 +54,6 @@ public class events {
 				{
 					ct.setStatus(0);
 					windowthread.getFmConn().getPanContact().RefreshContactList();
-					if(windowthread.getFmConn().getPanContact().getComm() != null)
-						windowthread.getFmConn().getPanContact().getComm().ChangeConversStatusForContact(ct.getCid());;
 					return;
 				}
 	}
@@ -70,12 +68,10 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(cn.getUid()))
 				{
-					ct.setStatus(cn.getStatus()+1);
+					ct.setStatus(cn.getStatus());
 					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
 					windowthread.getFmConn().getPanContact().RefreshContactList();
-					if(windowthread.getFmConn().getPanContact().getComm() != null)
-						windowthread.getFmConn().getPanContact().getComm().ChangeConversStatusForContact(ct.getCid());;
 					return;
 				}
 	}
@@ -94,9 +90,9 @@ public class events {
 				{
 					ct.setBlocked((method == 1) ? true: false);
 					if(ct.isBlocked())
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été bloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a ï¿½tï¿½ bloquï¿½");
 					else
-						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a été débloqué");
+						JOptionPane.showMessageDialog(null, "Le contact " + ct.getPseudo() +  " a ï¿½tï¿½ dï¿½bloquï¿½");
 					windowthread.getFmConn().getPanContact().RefreshContactList();
 					return;
 				}
@@ -185,6 +181,7 @@ public class events {
 					if(ct.getCid().equals(pck.getUid()))
 					{
 						ct.setPseudo(pck.getDat());
+						windowthread.getFmConn().getPanContact().RefreshContactList();
 						form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
 						if(fmCom != null)
 							fmCom.ChangeConversTabTitle(pck.getUid(),pck.getDat());
@@ -222,9 +219,10 @@ public class events {
 	public static void ContactAdded(Object packet) 
 	{
 		contact ct = (contact)packet;
-		if(ct == null)
+		if(ct == null){
+			Log.ShowPopup("Le contact ajoutÃ© n'existe pas !", true);
 			return;
-		
+		}
 		for(group g: Session.getGroups())
 			if(g.getGid().equals(0))
 			{
@@ -253,8 +251,9 @@ public class events {
 
 		IdAndData pck = (IdAndData)packet;
 
-		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajoutï¿½, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
 		Answer_Invit_handler arh = new Answer_Invit_handler(pck.getUid(), answer);
+		Log.outError(answer.toString());
 		arh.Send();
 	}
 
@@ -290,7 +289,7 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
-		Session.setStatus(pck.getStatus()+1);
+		Session.setStatus(pck.getStatus());
 		
 		AvatarSender_handler pkt = new AvatarSender_handler(new ImageIcon(SwingEL.scale(
 				(new ImageIcon("avatar.png")).getImage())));
@@ -308,7 +307,7 @@ public class events {
 		windowthread.getFmConn().getPanContact().HardRefreshContactList();		
 	}
 
-	public static void GroupDeleted(Object data) 
+	public synchronized static void GroupDeleted(Object data) 
 	{
 		Integer _gid = Integer.decode(data.toString());
 		if(_gid.equals(0))
@@ -322,8 +321,10 @@ public class events {
 				if(move_gr == null)
 					return;
 				
-				for(contact ct: g.getContacts())
+				//for(contact ct: g.getContacts())
+				for(int i=0;i<g.getContacts().size();i++)
 				{
+					contact ct = g.getContacts().get(i);
 					move_gr.AddContact(ct);
 					g.getContacts().remove(ct);
 				}
@@ -351,7 +352,7 @@ public class events {
 			if(g.getGid().equals(_gid))
 			{
 				g.setGname(newName);
-				windowthread.getFmConn().getPanContact().RefreshContactList();
+				windowthread.getFmConn().getPanContact().HardRefreshContactList();
 				return;
 			}
 		}
@@ -366,11 +367,12 @@ public class events {
 		threading.StopSender();
 		if(res != 1)
 		{
-			JOptionPane.showMessageDialog(null,"Compte déjà existant !");
+			JOptionPane.showMessageDialog(null,"Compte dï¿½jï¿½ existant !");
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
+			JOptionPane.showMessageDialog(null,"Compte crï¿½ï¿½ avec succï¿½s !");
+			windowthread.getFmConn().getPanConnect().setFmInsc(null);
 			fmInsc.dispose();
 		}
 	}
@@ -398,5 +400,24 @@ public class events {
 			return;
 		
 		fmCom.ChangeContactAvatar(_uid,img);
+	}
+	
+	public synchronized static void ContactChangeGroup(contact ct,Integer gid) {
+		for(group g: Session.getGroups()){
+			//for(contact c:g.getContacts()){
+			for(int i=0;i<g.getContacts().size();i++){
+				contact c = g.getContacts().get(i);
+				if(ct.equals(c))
+					g.getContacts().remove(c);
+			}
+		}
+		
+		for(group g: Session.getGroups()){
+			if(g.getGid().equals(gid)){
+				g.AddContact(ct);
+			return;
+			}
+		}
+			
 	}
 }

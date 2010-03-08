@@ -42,6 +42,6 @@ public class contact implements Serializable
 	public void setGroup(Integer group) { this.group = group; }
 	public Integer getGroup() { return group; }
 	public String toString() { return getPseudo(); }
-	public void setName(String nm) { name = nm; }
+	public void setName(String nm) { this.name = nm; }
 	public String getName() { return name; }
 }

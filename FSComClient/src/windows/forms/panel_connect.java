@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -32,6 +33,7 @@ public class panel_connect extends JPanel {
 	private JCheckBox save;
 	private String autouser,autopass;
 	private form_inscription frmInsc;
+	private String couleur;
 	
 	public panel_connect(form_master formFram)
 	{
@@ -43,6 +45,7 @@ public class panel_connect extends JPanel {
 	{
 		autouser = "";
 		autopass = "";
+		couleur = "128,128,255";
 		String file = "savedvariables";
 		String chaine = "";
 		try{
@@ -57,6 +60,8 @@ public class panel_connect extends JPanel {
 			String tab[]=chaine.split("\n");
 				autouser=tab[0];
 				autopass=tab[1];
+				if(!tab[2].equalsIgnoreCase("null"))
+					couleur=tab[2];
 		}		
 		catch (Exception e)
 		{
@@ -78,9 +83,9 @@ public class panel_connect extends JPanel {
 		setBackground(new Color(128,128,255));
 		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
 
+		JLabel Image = new JLabel(new ImageIcon("icone.png"),JLabel.CENTER);
 		Titre=new JLabel("Bienvenue dans Cookie Messenger",JLabel.CENTER);
-		//image
-		labeluser = new JLabel("Adresse e-mail");
+		labeluser = new JLabel("Identifiant");
 		mail = new JTextField(autouser,15);
 		labelpass = new JLabel("Mot de passe");
 		password = new JPasswordField(autopass,15);
@@ -88,15 +93,16 @@ public class panel_connect extends JPanel {
 		
 		status.addItem("Online");
 		status.addItem("Busy");
-		status.addItem("AFK");
+		status.addItem("Idle");
 		status.addItem("Offline");
 		save = new JCheckBox("Enregistrer les infos");
 		if(autouser!="" && autopass !="")
 			save.setSelected(true);
 		connect=new JButton("Connexion");
-		connect.addActionListener(new Connect_button(status,mail,password,save));
+		connect.addActionListener(new Connect_button(status,mail,password,save,couleur));
 
 		add(Titre);
+		add(Image);
 		add(labeluser);
 		add(mail);
 		add(labelpass);

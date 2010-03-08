@@ -45,17 +45,13 @@ public class contact_onclick implements MouseListener
         arbre.setSelectionPath(index);
         DefaultMutableTreeNode noeud = (DefaultMutableTreeNode) arbre.getLastSelectedPathComponent();
         
-        if(noeud == null)
-        {
-        	// TODO : basic actions (add group, add contact...)
-        }
-        else if (e.getButton() == 3 && noeud != null && noeud.getLevel() == 2)
+        if (e.getButton() == 3 && noeud != null && noeud.getLevel() == 2)
 		{
 			JPopupMenu menu = new JPopupMenu();
 			contact user = (contact) noeud.getUserObject();
 			SwingEL.AddItemToMenu(menu,"Envoyer un message",new contact_onclick_sendmsg(user,pn));
 			SwingEL.AddItemToMenu(menu,"Supprimer",new contact_delete(user));
-			SwingEL.AddItemToMenu(menu,(user.isBlocked()) ? "Débloquer" : "Bloquer",new contact_onclick_block(user));
+			SwingEL.AddItemToMenu(menu,(user.isBlocked()) ? "Autoriser" : "Ignorer",new contact_onclick_block(user));
 			SwingEL.AddItemToMenu(menu,"Voir les détails",new contact_onclick_details(user));
 			
 	        menu.show (e.getComponent(),e.getX(),e.getY());

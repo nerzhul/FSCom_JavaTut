@@ -30,6 +30,7 @@ public class Sender extends Thread
 		{
 			try 
 			{
+
 				socket = new Socket(ServerList.GetMirror(mir),port);
 				out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 				connected = true;
@@ -101,7 +102,7 @@ public class Sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
-			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
+			Log.ShowPopup("Vous avez ï¿½tï¿½ dï¿½connectï¿½ du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
 			Connect();
 		}
 		catch (IOException e) 
