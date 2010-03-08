@@ -26,7 +26,7 @@ public class contact_onclick_details implements ActionListener
 	    		stat="Busy";
 	    else if (status.equals(3))
 	    		stat="Idle";
-		JOptionPane.showMessageDialog(null,"Identifiant : "+contact.getName()+"\n Pseudo : " + contact.getPseudo()+"\n Message personnel : " + contact.getMsg_perso() +"\n Statuts : "+stat);
+		JOptionPane.showMessageDialog(null,"Identifiant : "+contact.getName()+"\nPseudo : " + contact.getPseudo()+"\nMessage personnel : " + contact.getMsg_perso() +"\nStatuts : "+stat);
 	}
 
 }

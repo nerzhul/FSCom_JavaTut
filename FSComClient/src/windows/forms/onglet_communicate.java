@@ -178,6 +178,7 @@ public class onglet_communicate extends JPanel{
 
         ChangeMyAvatar();
         ChangeMyBorderStatus();
+		myimage.setToolTipText("Cliquez ici pour changer d'Avatar !");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;

@@ -13,7 +13,7 @@ public final class ServerList {
 	{
 		curr_mirror = 0;
 		iplist = new String[MAX_MIRROR];
-		iplist[0] = "192.168.1.21";
+		iplist[0] = "127.0.0.1";
 		iplist[1] = "www.blackdiamondserver.com";
 		iplist[2] = "172.20.9.56";
 		iplist[3] = "127.0.0.1";	

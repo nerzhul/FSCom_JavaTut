@@ -247,7 +247,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		((DefaultTreeModel) tree.getModel()).reload();
 		OpenContactList();
-		tree.updateUI();
 	}
 
 	public void HardRefreshContactList()
