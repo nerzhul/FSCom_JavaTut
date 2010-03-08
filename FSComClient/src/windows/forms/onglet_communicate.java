@@ -189,7 +189,7 @@ public class onglet_communicate extends JPanel{
         RequestContactAvatar();
 	}
 
-	private void RequestContactAvatar() 
+	public void RequestContactAvatar() 
 	{
 		ReqContactAvatar_handler pck = new ReqContactAvatar_handler(ct.getCid());
 		pck.Send();

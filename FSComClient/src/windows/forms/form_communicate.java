@@ -50,6 +50,7 @@ public class form_communicate extends JFrame{
 			tab.setTitleComponent( new CloseButton_button(tab,frame ) );
 			TabPan.addTab(tab) ;
 			TabPan.setSelectedTab(tab);
+			((onglet_communicate)TabPan.getTabAt(TabPan.getTabCount()-1).getContentComponent()).RequestContactAvatar();
 		 	frame.add(TabPan);
 		 	frame.setVisible(true);
 		}

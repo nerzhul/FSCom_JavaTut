@@ -204,7 +204,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 		tree.setRootVisible(false);
 		
 		scrolltree.setViewportView(tree);
-		scrolltree.setPreferredSize(new Dimension(150,300));
+		scrolltree.setPreferredSize(new Dimension(200,300));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;

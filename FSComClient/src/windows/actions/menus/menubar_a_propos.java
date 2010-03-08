@@ -9,7 +9,7 @@ public class menubar_a_propos extends menubar_main implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		JOptionPane.showMessageDialog(null,"Réalisé par Jean-Baptiste Blandureau et Loic Blot dans le cadre de leur projet tuteuré de 2ème année à l'IUT informatique d'Amiens.");
+		JOptionPane.showMessageDialog(null,"Rï¿½alisï¿½ par Jean-Baptiste Blandureau \net Loic Blot dans le cadre de leur \nprojet tuteurï¿½ de 2ï¿½me annï¿½e ï¿½ \nl'IUT informatique d'Amiens.");
 	}
 
 }
