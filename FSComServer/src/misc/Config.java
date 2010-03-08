@@ -9,6 +9,7 @@ public class Config {
 
 	
 	private static String db_ip,db_name,db_user,db_pwd;
+	private static Integer server_id;
 
 	public static void LoadConfig()
 	{
@@ -46,10 +47,13 @@ public class Config {
 			db_pwd = KeyValTab[1];
 		else if(KeyValTab[0].equals("database_address"))
 			db_ip = KeyValTab[1];
+		else if(KeyValTab[0].equals("server_id"))
+			server_id = Integer.decode(KeyValTab[1]);
 	}
 	
 	public static String getDbName() { return db_name; }
 	public static String getDbUser() { return db_user; }
 	public static String getDbAddress() { return db_ip; }
 	public static String getDbPwd() { return db_pwd; }
+	public static Integer getServerId() { return server_id; }
 }
