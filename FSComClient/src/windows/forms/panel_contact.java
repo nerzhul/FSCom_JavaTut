@@ -202,7 +202,6 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	{
 		//---->rename group + changement de pseudo si plus grand plus de "..."
 		((DefaultTreeModel) tree.getModel()).reload();
-		tree.updateUI();
 		OpenContactList();
 	}
 

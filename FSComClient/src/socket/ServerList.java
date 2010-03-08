@@ -9,6 +9,7 @@ public final class ServerList {
 	private static String[] iplist;
 	private static Integer curr_mirror;
 	private static Integer MAX_MIRROR = 4;
+	private static thr_popup pop;
 	public ServerList()
 	{
 		curr_mirror = 0;
@@ -41,7 +42,7 @@ public final class ServerList {
 	{
 		Integer i=0;
 		boolean found=false;
-		thr_popup pop = new thr_popup("Recherche du meilleur miroir...", false);
+		pop = new thr_popup("Recherche du meilleur miroir...", false);
 		pop.start();
 		do
 		{
@@ -54,6 +55,7 @@ public final class ServerList {
 			}
 			catch (Exception e) 
 			{
+				e.printStackTrace();
 				i++;
 			}
 		}
@@ -61,5 +63,11 @@ public final class ServerList {
 		
 		pop.interrupt();
 		return -1;
+	}
+	
+	public static void ClosePopup()
+	{
+		if(pop != null)
+			pop.interrupt();
 	}
 }

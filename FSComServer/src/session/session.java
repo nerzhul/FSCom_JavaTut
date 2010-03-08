@@ -62,9 +62,19 @@ public class session {
 		
 		SessionHandler.AddSession(this);
 		LoadBlockedContacts();
-		// TODO : send all invitations
+		LoadAndSendInvitation();
 	}
 	
+	private void LoadAndSendInvitation() 
+	{
+		Vector<Integer> invit = DatabaseTransactions.getIntegerList("acc_invitation", "contact", "uid = '" + uid + "'");
+		for(Integer i: invit)
+		{
+			Invitation inv = new Invitation(i, uid, true);
+			inv.Send(getSocket());
+		}
+	}
+
 	private void LoadBlockedContacts() 
 	{
 		uid_blocked = DatabaseTransactions.getIntegerList("acc_blocked", "contact", "uid = '" + uid + "' AND blocked != '0'");
@@ -110,7 +120,7 @@ public class session {
 			return false;
 	}
 	
-	public void contact_disconnected(session sess, boolean blocked)
+	public synchronized void contact_disconnected(session sess, boolean blocked)
 	{
 		if(sess == null)
 			return;
@@ -118,13 +128,16 @@ public class session {
 		Cont_Disconct_handler pck = new Cont_Disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
-		synchronized(sess_linked)
-		{
 			if(!blocked)
-				for(session s: sess_linked)
+			{
+				for(int i=0;i<sess_linked.size();i++)
+				//for(session s: sess_linked)
+				{
+					session s = sess_linked.get(i);
 					if(s.equals(sess))
 						sess_linked.remove(s);
-		}
+				}
+			}
 	}
 	
 	public boolean has_blocked(Integer _uid) 
@@ -217,10 +230,8 @@ public class session {
 			if(SessionHandler.getContactByUID(c_uid) != null)
 				SessionHandler.getContactByUID(c_uid).contact_connected(this, true);
 			synchronized(uid_blocked)
-			{
-				for(Integer i: uid_blocked)
-					if(i.equals(c_uid))
-						uid_blocked.remove(i);
+			{	
+				uid_blocked.remove(c_uid);
 			}
 		}
 		
@@ -325,19 +336,22 @@ public class session {
 	{
 		switch(method)
 		{
-			case 0:
-				// nothing, not accept the client
-				break;
 			case 1:
 				DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE uid = '" + uid + "' AND" +
 						" contact = '" + _uid + "'");
 				break;
-			case 2:
+			case 0:
 				DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE uid = '" + uid + "' AND" +
 						" contact = '" + _uid + "'");
 				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + _uid + "','" + 
 						uid + "','0','','0'");
 				AddContactToClientList(_uid);
+				if(SessionHandler.getContactByUID(_uid).IsConnected())
+				{
+					SendStatusToMe(_uid,SessionHandler.getContactByUID(_uid).getStatus());
+					SessionHandler.getContactByUID(_uid).SendStatusToMe(uid, this.getStatus());
+				}
+				
 				break;
 			default:
 				Log.outError("Invalid response from ManageInvitation");
@@ -347,11 +361,16 @@ public class session {
 	
 	private void AddContactToClientList(Integer _uid) 
 	{
-		AddContactWithoutInvite_handler ACWI = new AddContactWithoutInvite_handler(this,(0 + "[)[)" + _uid));
+		AddContactWithoutInvite_handler ACWI = new AddContactWithoutInvite_handler(this,new contact(_uid, 0, DatabaseTransactions.StringQuery(
+				"account", "pseudo", "uid = '" + _uid + "'"), 
+				DatabaseTransactions.StringQuery(
+						"account", "phr_perso", "uid = '" + _uid + "'"),
+				DatabaseTransactions.StringQuery("acc_contact", "comment",
+				"contact = '" + _uid + "'"), 0, 0,DatabaseTransactions.StringQuery("account","user", "uid = '" + _uid + "'")));
 		ACWI.Send(sock);
 	}
 	
-	public void DelContact(Integer _uid, Integer blocked) 
+	public synchronized void DelContact(Integer _uid, Integer blocked) 
 	{
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_contact WHERE uid = '" + uid + "' AND " 
 				+ "contact = '" + _uid + "'");
@@ -359,12 +378,9 @@ public class session {
 				+ "uid = '" + _uid + "'");
 		if(SessionHandler.isConnected(_uid))
 		{
-			synchronized(sess_linked)
-			{
-				for(session s : sess_linked)
-					if(s.getUid().equals(_uid))
-						sess_linked.remove(s);
-			}
+			for(session s : sess_linked)
+				if(s.getUid().equals(_uid))
+					sess_linked.remove(s);
 			SessionHandler.getContactByUID(_uid).contact_disconnected(this, true);
 		}
 		ContactDeleted_handler pack = new ContactDeleted_handler(_uid);
