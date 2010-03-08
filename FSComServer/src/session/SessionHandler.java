@@ -15,6 +15,12 @@ public class SessionHandler {
 		v_sess = new Vector<session>();
 	}
 
+	public synchronized static void DisconnectAllClients()
+	{
+		for(session s: v_sess)
+			s.disconnect_client();
+	}
+	
 	public synchronized static void AddSession(session sess)
 	{
 		if(sess == null)

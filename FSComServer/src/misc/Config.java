@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import session.ServerList;
+
 public class Config {
 
 	
@@ -48,7 +50,14 @@ public class Config {
 		else if(KeyValTab[0].equals("database_address"))
 			db_ip = KeyValTab[1];
 		else if(KeyValTab[0].equals("server_id"))
+		{
 			server_id = Integer.decode(KeyValTab[1]);
+			if(server_id > ServerList.getMaxMirrorList())
+			{
+				Log.outError("Bad Mirror Id");
+				System.exit(-1);
+			}
+		}
 	}
 	
 	public static String getDbName() { return db_name; }

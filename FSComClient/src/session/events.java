@@ -220,7 +220,7 @@ public class events {
 	{
 		contact ct = (contact)packet;
 		if(ct == null){
-			Log.ShowPopup("Le contact ajoutÃ© n'existe pas !", true);
+			Log.ShowPopup("Le contact ajouté n'existe pas !", true);
 			return;
 		}
 		for(group g: Session.getGroups())
@@ -251,7 +251,7 @@ public class events {
 
 		IdAndData pck = (IdAndData)packet;
 
-		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajoutï¿½, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
+		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajouté, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
 		Answer_Invit_handler arh = new Answer_Invit_handler(pck.getUid(), answer);
 		Log.outError(answer.toString());
 		arh.Send();
@@ -367,11 +367,11 @@ public class events {
 		threading.StopSender();
 		if(res != 1)
 		{
-			JOptionPane.showMessageDialog(null,"Compte dï¿½jï¿½ existant !");
+			JOptionPane.showMessageDialog(null,"Compte déjà existant !");
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null,"Compte crï¿½ï¿½ avec succï¿½s !");
+			JOptionPane.showMessageDialog(null,"Compte créé avec succès !");
 			windowthread.getFmConn().getPanConnect().setFmInsc(null);
 			fmInsc.dispose();
 		}

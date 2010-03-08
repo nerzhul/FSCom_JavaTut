@@ -1,5 +1,6 @@
 package session;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.Vector;
 
@@ -82,6 +83,11 @@ public class session {
 
 	public void disconnect_client()
 	{
+		try 
+		{
+			getSocket().close();
+		} 
+		catch (IOException e) {}
 		SessionHandler.DestroySession(this,thr_associated);
 	}
 
