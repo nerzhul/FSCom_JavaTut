@@ -68,7 +68,7 @@ public class events {
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(cn.getUid()))
 				{
-					ct.setStatus(cn.getStatus()+1);
+					ct.setStatus(cn.getStatus());
 					ct.setPseudo(cn.getPseudo());
 					ct.setMsg_perso(cn.getPersoP());
 					windowthread.getFmConn().getPanContact().RefreshContactList();
@@ -289,7 +289,7 @@ public class events {
 		Session.setPseudo(pck.getPseudo());
 		events.StoreGroups(pck.GetMyGroups());
 		events.StoreContacts(pck.GetMyContacts());
-		Session.setStatus(pck.getStatus()+1);
+		Session.setStatus(pck.getStatus());
 		
 		AvatarSender_handler pkt = new AvatarSender_handler(new ImageIcon(SwingEL.scale(
 				(new ImageIcon("avatar.png")).getImage())));

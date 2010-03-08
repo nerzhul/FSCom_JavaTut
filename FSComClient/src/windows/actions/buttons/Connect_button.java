@@ -35,7 +35,7 @@ public class Connect_button implements ActionListener {
 		if(need_save.isSelected())
 			SaveFile();
 		// Store status in session
-		Session.setStatus(status.getSelectedIndex());
+		Session.setStatus(status.getSelectedIndex()+1);
 
 		if(windowthread.getFmConn().getPanConnect().getFmInsc() != null)
 		{

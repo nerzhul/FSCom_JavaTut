@@ -57,6 +57,7 @@ public class Log {
 	public static void ShowPopup(String text,boolean error)
 	{
 		JOptionPane.showMessageDialog(new JFrame(), text);
+		
 		if(error)
 			outError(text);
 	}
