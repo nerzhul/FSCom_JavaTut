@@ -100,9 +100,9 @@ public class form_master extends JFrame
 		SwingEL.AddItemToMenuBar(menu3,"Changer de pseudo",new menubar_changepseudo());
 		SwingEL.AddItemToMenuBar(menu3,"Changer de message perso",new chang_msgperso());
 		SwingEL.AddItemToMenuBar(menu3,"Changer d'avatar",new chang_avatar());
-		SwingEL.AddItemToMenuBar(menu1,"Se dï¿½connecter",new menubar_disconnect(this));
+		SwingEL.AddItemToMenuBar(menu1,"Se déconnecter",new menubar_disconnect(this));
 		SwingEL.AddItemToMenuBar(menu2,"A propos...",new menubar_a_propos());
-		SwingEL.AddItemToMenuBar(menu3, "Changer la couleur de la fenï¿½tre", new menubar_changecolorframe());
+		SwingEL.AddItemToMenuBar(menu3, "Changer la couleur de la fenêtre", new menubar_changecolorframe());
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);

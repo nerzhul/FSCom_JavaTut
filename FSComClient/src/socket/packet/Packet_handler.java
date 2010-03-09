@@ -108,9 +108,6 @@ public class Packet_handler
 					ServerList.ClosePopup();
 					events.ShowConnectedFrame();
 					break;
-				case 0x23:
-					// TODO: force disconnect client
-					break;
 				case 0x26:
 					events.GroupAdded(data);
 					break;
@@ -131,6 +128,7 @@ public class Packet_handler
 				case 0x0C:
 				case 0x0F:
 				case 0x0A:
+				case 0x23:
 					new Depreciated_handler(opcode_id);
 					break;
 				case 0x00:

@@ -21,6 +21,7 @@ import windows.forms.form_communicate;
 import windows.forms.form_inscription;
 import windows.forms.onglet_communicate;
 import misc.Log;
+import misc.Misc;
 
 public class events {
 
@@ -47,6 +48,8 @@ public class events {
 
 	public static void ContactDisconnected(Object packet) 
 	{
+		if(Misc.isWrongType(packet, new Integer(0)))
+			return;
 		Integer st = Integer.decode(packet.toString());
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
@@ -60,7 +63,7 @@ public class events {
 
 	public static void ContactConnected(Object packet) 
 	{
-		if(!packet.getClass().equals((new ConnectData("",0,"",0,"")).getClass()))
+		if(Misc.isWrongType(packet, new ConnectData("",0,"",0,"")))
 			return;
 		
 		ConnectData cn = (ConnectData)packet;
@@ -78,7 +81,7 @@ public class events {
 
 	public static void BlockContact(Object packet) 
 	{
-		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(packet, new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)packet;
@@ -100,11 +103,8 @@ public class events {
 
 	public static void RecvMsg(Object packet) 
 	{
-		if(!packet.getClass().equals((new Message(null,null)).getClass()))
-		{
-			Log.outError("Malformed Msg to Transmit");
+		if(Misc.isWrongType(packet, new Message(null,null)))
 			return;
-		}
 		
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
@@ -134,7 +134,7 @@ public class events {
 
 	public static void ContactModifyStatus(Object packet) 
 	{
-		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(packet, new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)packet;
@@ -164,7 +164,7 @@ public class events {
 
 	public static void ContactModifyPseudo(Object packet) 
 	{
-		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
+		if(Misc.isWrongType(packet,new IdAndData(null,null)))
 			return;
 		
 		IdAndData pck = (IdAndData) packet;
@@ -192,7 +192,7 @@ public class events {
 
 	public static void ContactModifyPmsg(Object packet) 
 	{
-		if(!packet.getClass().equals((new IdAndData(null,null)).getClass()))
+		if(Misc.isWrongType(packet,new IdAndData(null,null)))
 			return;
 		
 		IdAndData pck = (IdAndData) packet;
@@ -218,9 +218,11 @@ public class events {
 
 	public static void ContactAdded(Object packet) 
 	{
+		if(Misc.isWrongType(packet,new contact(null, null, null, null, null, null, null, null)))
+			return;
 		contact ct = (contact)packet;
 		if(ct == null){
-			Log.ShowPopup("Le contact ajouté n'existe pas !", true);
+			Log.ShowPopup("Le contact ajout� n'existe pas !", true);
 			return;
 		}
 		for(group g: Session.getGroups())
@@ -234,6 +236,8 @@ public class events {
 
 	public static void ContactDeleted(Object packet) 
 	{
+		if(Misc.isWrongType(packet,new Integer(0)))
+			return;
 		for(group g : Session.getGroups())
 			for(contact ct : g.getContacts())
 				if(ct.getCid().equals(Integer.decode(packet.toString())))
@@ -246,9 +250,9 @@ public class events {
 
 	public static void RecvInvitation(Object packet) 
 	{
-		if(!packet.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(packet,new IdAndData(0,"")))
 			return;
-
+		
 		IdAndData pck = (IdAndData)packet;
 
 		Integer answer = JOptionPane.showConfirmDialog(null, pck.getDat() + " vous a ajout�, voulez vous l'accepter ?","Nouveau contact !",JOptionPane.YES_NO_CANCEL_OPTION);
@@ -282,8 +286,9 @@ public class events {
 
 	public static void StoreAllDatas(Object packet) 
 	{
-		if(!packet.getClass().equals((new ClientDatas()).getClass()))
+		if(Misc.isWrongType(packet,new ClientDatas()))
 			return;
+		
 		ClientDatas pck = (ClientDatas) packet;
 		Session.setPerso_msg(pck.getPperso());
 		Session.setPseudo(pck.getPseudo());
@@ -298,7 +303,7 @@ public class events {
 
 	public static void GroupAdded(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))		
+		if(Misc.isWrongType(data,new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
@@ -309,6 +314,9 @@ public class events {
 
 	public synchronized static void GroupDeleted(Object data) 
 	{
+		if(Misc.isWrongType(data,new Integer(0)))
+			return;
+		
 		Integer _gid = Integer.decode(data.toString());
 		if(_gid.equals(0))
 			return;
@@ -340,7 +348,7 @@ public class events {
 
 	public static void GroupRenamed(Object data) 
 	{
-		if(!data.getClass().equals((new IdAndData(0,"")).getClass()))
+		if(Misc.isWrongType(data,new IdAndData(0,"")))
 			return;
 		
 		IdAndData pck = (IdAndData)data;
@@ -360,6 +368,9 @@ public class events {
 
 	public static void CreateAccountAnswer(Object data) 
 	{
+		if(Misc.isWrongType(data,new Integer(0)))
+			return;
+		
 		Integer res = Integer.decode(data.toString());
 		form_inscription fmInsc = windowthread.getFmConn().getPanConnect().getFmInsc();
 		if(fmInsc == null)
@@ -379,7 +390,7 @@ public class events {
 
 	public static void ChangeContactAvatar(Object data) 
 	{
-		if(data == null || !data.getClass().equals((new Avatar(0,new ImageIcon()).getClass())))
+		if(Misc.isWrongType(data,new Avatar(0,new ImageIcon())))
 			return;
 		
 		Avatar av = (Avatar)data;

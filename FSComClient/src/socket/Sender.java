@@ -56,7 +56,6 @@ public class Sender extends Thread
 		{
 			// create a socket on mine IP.
 		    Log.outString("Initialising Master Command Line...");
-		    Log.outString("Master Command Line Initialized");
 		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    String line;
@@ -92,7 +91,6 @@ public class Sender extends Thread
 		
 		try 
 		{
-			// send packet
 			Packet pck = new Packet(opcode,packt);
 			out.writeObject(pck);
 			out.flush();
@@ -102,7 +100,7 @@ public class Sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
-			Log.ShowPopup("Vous avez ï¿½tï¿½ dï¿½connectï¿½ du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
+			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
 			Connect();
 		}
 		catch (IOException e) 
