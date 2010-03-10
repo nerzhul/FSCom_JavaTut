@@ -1,5 +1,6 @@
 package thread;
 
+import misc.Config;
 import misc.Log;
 import session.MirrorHandler;
 import session.ServerList;
@@ -19,7 +20,7 @@ public class thr_mirrorhandler extends Thread {
 			while(true)
 			{
 				MirrorHandler.Update();
-				Thread.sleep(30000);
+				Thread.sleep(30*Config.getLatency());
 			}
 		}
 		catch (InterruptedException e) 

@@ -9,7 +9,7 @@ import thread.*;
  */
 public class master 
 {
-	private final static String version = "Release 1.2.4";
+	private final static String version = "Release 1.2.5";
 	
 	public static void main(String args[])
 	{

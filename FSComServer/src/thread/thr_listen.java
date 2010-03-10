@@ -2,6 +2,8 @@ package thread;
 
 import socket.Listener;
 import java.net.*;
+
+import misc.Config;
 import misc.Log;
 
 public class thr_listen extends Thread
@@ -24,7 +26,8 @@ public class thr_listen extends Thread
 		        Socket socketClient = MasterListener.accept();
 		        Listener listen_t = new Listener(socketClient);
 		        listen_t.start();
-		     }
+		        sleep(Config.getLatency());
+		    }
 		}
 		catch (Exception e) 
 		{

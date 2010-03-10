@@ -2,11 +2,12 @@ package thread;
 
 import session.AvatarHandler;
 import session.SessionHandler;
+import misc.Config;
 import misc.Log;
 
 public class thr_sesshandler extends Thread{
 
-	private static int uDiff;
+	private static int uDiff = 5*Config.getLatency();;
 	public void run()
 	{
 		Log.outString("Starting Session handler thread...");
@@ -16,9 +17,9 @@ public class thr_sesshandler extends Thread{
 		{
 			try 
 			{
-				sleep(500);
-				uDiff = 1000;
+				
 				SessionHandler.Update(uDiff);
+				sleep(uDiff);
 			} 
 			catch (InterruptedException e) 
 			{

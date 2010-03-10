@@ -36,11 +36,18 @@ public class SessionHandler {
 		 *  add the session to vector and declare him connected to all contacts
 		 *  if the contact is'nt blocked
 		 */
-		v_sess.add(sess);
+		
 		for(session s : v_sess)
-			if(!s.equals(sess))
-				if(s.know_contact(sess.getUid()) && !sess.has_blocked(s.getUid()))
-					s.contact_connected(sess, false);
+			if(s.getUid().equals(sess.getUid()))
+			{
+				s.disconnect_client();
+				break;
+			}
+		
+		for(session s : v_sess)
+			if(s.know_contact(sess.getUid()) && !sess.has_blocked(s.getUid()))
+				s.contact_connected(sess, false);
+		v_sess.add(sess);
 	}
 
 	public synchronized static session getContactByUID(Integer _uid)
