@@ -10,6 +10,9 @@ import javax.swing.JOptionPane;
 import socket.packet.handlers.Send_handler;
 import socket.packet.handlers.sends.client_handlers.ChangePseudo_handler;
 
+/*
+ * Action sur changement de pseudo (menu + click sur le pseudo)
+ */
 public class menubar_changepseudo extends menubar_main implements ActionListener, MouseListener  {
 
 	private String newpseud;
@@ -19,18 +22,20 @@ public class menubar_changepseudo extends menubar_main implements ActionListener
 	public void actionPerformed(ActionEvent e) { ChangePseudo(); }
 	private void ChangePseudo()
 	{
+		//on récupère le nouveau pseudo
 		newpseud = JOptionPane.showInputDialog(null,"Entrez votre nouveau pseudo :",
 				"Nouveau pseudo",JOptionPane.QUESTION_MESSAGE);
 		if (newpseud != null && !newpseud.equalsIgnoreCase("")) 
-		{
+		{//on fait quelques vérifications
 			if(newpseud.length()<20 && newpseud.length() > 1)
 			{
-				Send_handler pck = new ChangePseudo_handler(newpseud);
+				Send_handler pck = new ChangePseudo_handler(newpseud);//on créait le packet
 				if(pck != null)
-					pck.Send();
+					pck.Send();//on envoi le packet
 			}
 			else
 				JOptionPane.showMessageDialog(null,"Longueur de pseudo invalide" );
+			//on affiche un popup d'erreur si le nouveau pseudo est invalide
 		}	
 	}
 

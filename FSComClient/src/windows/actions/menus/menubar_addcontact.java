@@ -7,18 +7,21 @@ import javax.swing.JOptionPane;
 
 import socket.packet.handlers.sends.contact_handlers.AddContact_handler;
 
+/*
+ * Action sur ajout contact du menu
+ */
 public class menubar_addcontact implements ActionListener {
 
 	private String reponse;
 
 	public void actionPerformed(ActionEvent e) {
-	
-		reponse = JOptionPane.showInputDialog(null,"Entrez l'identifiant du contact à ajouter :",
+	//popup pour recuperer le nom du contact
+		reponse = JOptionPane.showInputDialog(null,"Entrez l'identifiant du contact ï¿½ ajouter :",
 				"Nouveau contact",JOptionPane.QUESTION_MESSAGE);
-		if (reponse != null && !reponse.equalsIgnoreCase(""))
+		if (reponse != null && !reponse.equalsIgnoreCase(""))//si la rÃ©ponse n'est pas vide
 		{
-			AddContact_handler pck = new AddContact_handler(reponse);
-			pck.Send();
+			AddContact_handler pck = new AddContact_handler(reponse);//creation du packet
+			pck.Send();//envoi du packet
 		}	
 
 	}

@@ -70,7 +70,7 @@ public class form_inscription extends JFrame{
         pane.add(Titre, gridBagConstraints);
 
         valider.setText("Valider");
-        valider.addActionListener(new valid_inscription_button(idtxt,passtxt,passtxt2));
+        valider.addActionListener(new valid_inscription_button(idtxt,passtxt,passtxt2));//ajout du listener sur le bouton
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
@@ -79,7 +79,7 @@ public class form_inscription extends JFrame{
         pane.add(valider, gridBagConstraints);
 
         annuler.setText("Annuler");
-        annuler.addActionListener(new cancel_inscription_button(frame));
+        annuler.addActionListener(new cancel_inscription_button(frame));//ajout du listener sur le bouton
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
