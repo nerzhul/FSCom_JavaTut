@@ -1,5 +1,9 @@
 package database;
 
+/*
+ * This class is only for doing functions useful on database
+ * See name of functions to know what they do
+ */
 public class DatabaseFunctions {
 
 	

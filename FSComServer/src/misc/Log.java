@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
+/*
+ * Log class
+ */
 public class Log {
 
 	private static String logfile = "Server.log";
@@ -11,12 +14,17 @@ public class Log {
 	
 	public static void outTimed(String str)
 	{
+		if(Config.getLoglevel() < 3)
+			return;
+		
 		Date dt = new Date();
 		System.out.println(dt + ": " + str);
 	}
 	
 	public static void outString(String str)
 	{
+		if(Config.getLoglevel() < 2)
+			return;
 		System.out.println(str);
 		str += "\r\n";
 		FileWriter writer = null;
@@ -44,6 +52,9 @@ public class Log {
 	
 	public static void outError(String str)
 	{
+		if(Config.getLoglevel() < 1)
+			return;
+		
 		FileWriter writer = null;
 		try
 		{

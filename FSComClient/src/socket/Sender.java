@@ -54,7 +54,6 @@ public class Sender extends Thread
 		
 		try
 		{
-			// create a socket on mine IP.
 		    Log.outString("Initialising Master Command Line...");
 		    
 		    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -101,9 +100,17 @@ public class Sender extends Thread
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
 			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
+			windowthread.SwitchPanel(1);
+			threading.StopSender();
 			Connect();
 		}
 		catch (IOException e) 
+		{
+			windowthread.SwitchPanel(1);
+			threading.StopSender();
+			
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

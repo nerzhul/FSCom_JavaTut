@@ -1,5 +1,8 @@
 package misc;
 
+/*
+ * depreciated class to set System.exit codes
+ */
 public enum error_codes {
 
 	DATABASE_ERROR(-1);
