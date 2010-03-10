@@ -1,5 +1,8 @@
 package socket.packet;
 
+/*
+ * contain the packet identifier
+ */
 public enum Opcodes {
 
 	CMSG_REQUEST_PING(0x00),

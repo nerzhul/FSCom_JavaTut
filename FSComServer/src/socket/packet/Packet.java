@@ -2,6 +2,9 @@ package socket.packet;
 
 import java.io.Serializable;
 
+/*
+ * packet definition
+ */
 public class Packet implements Serializable
 {
 

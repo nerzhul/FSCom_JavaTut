@@ -2,6 +2,9 @@ package socket.packet;
 
 import java.io.Serializable;
 
+/*
+ * packet with client datas
+ */
 public class ConnectData implements Serializable{
 
 	/**

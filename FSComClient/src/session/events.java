@@ -197,9 +197,11 @@ public class events {
 		
 		IdAndData pck = (IdAndData) packet;
 		if(pck.getUid().equals(0))
+		{
 			if(windowthread.getFmConn() != null)
 				if(windowthread.getFmConn().getPanContact() != null)
 					windowthread.getFmConn().getPanContact().ChPPers(pck.getDat());
+		}
 		else
 		{
 			for(group g : Session.getGroups())
