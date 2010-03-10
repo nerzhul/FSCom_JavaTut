@@ -10,11 +10,11 @@ import session.contact;
 import session.group;
 import session.session;
 
+/*
+ * basic object which contains all client needed datas
+ */
 public class ClientDatas implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String pseudo;
 	private String pperso;

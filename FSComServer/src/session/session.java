@@ -413,8 +413,14 @@ public class session {
 		ACWI.Send(sock);
 	}
 	
-	public synchronized void DelContact(Integer _uid, Integer blocked) 
+	public synchronized void DelContact(Object packet) 
 	{
+		if(Misc.isWrongType(packet, new IdAndData(0,"")))
+			return;
+		
+		IdAndData pck = (IdAndData)packet;
+		Integer _uid = pck.getUid();
+
 		// delete contact & clean db
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_contact WHERE uid = '" + uid + "' AND " 
 				+ "contact = '" + _uid + "'");

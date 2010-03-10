@@ -3,6 +3,9 @@ package socket.packet.handlers.senders.contact_handlers;
 import socket.packet.handlers.Send_handler;
 import socket.packet.objects.IdAndData;
 
+/*
+ * unused packet which sent ip requested to client
+ */
 public class IPToClient_handler extends Send_handler {
 
 	public IPToClient_handler(Integer _uid, String ip)

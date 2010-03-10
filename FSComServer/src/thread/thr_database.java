@@ -6,6 +6,9 @@ import misc.Log;
 
 import database.DatabaseTransactions;
 
+/*
+ * thread for run database
+ */
 public class thr_database extends Thread{
 
 	DatabaseTransactions DB;
@@ -31,10 +34,5 @@ public class thr_database extends Thread{
 	private void initDB() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException
 	{
 		DB = new DatabaseTransactions();
-	}
-	
-	public void closeDB()
-	{
-		// TODO: clore la DB
 	}
 }

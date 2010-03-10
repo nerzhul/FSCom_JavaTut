@@ -10,7 +10,6 @@ import socket.Sender;
 import socket.packet.handlers.*;
 import socket.packet.handlers.listened.*;
 import socket.packet.handlers.senders.AccCreate_handler;
-import socket.packet.handlers.senders.Invitation_Answer_handler;
 import socket.packet.handlers.senders.Pong_handler;
 import socket.packet.handlers.senders.connect_handlers.Connect2_handler;
 import socket.packet.handlers.senders.connect_handlers.Connect_handler;
@@ -97,11 +96,10 @@ public class Packet_handler
 					m_sess.block_contact(data);
 					break;
 				case 0x13:
-					new MsgToPlatform_handler(m_sess,data);
 					m_sess.TransmitMsgTo(data);
 					break;
 				case 0x16:
-					new PseudoToPlatform_handler(m_sess,data);
+					m_sess.ChangePseudo(data);
 					break;
 				case 0x18:
 					m_sess.ChangeMsgPerso(data);
@@ -111,7 +109,7 @@ public class Packet_handler
 					((Send_handler) pkthandle).Send(mysock);
 					break;
 				case 0x1C:
-					new Req_DelContact_handler(m_sess,data);
+					m_sess.DelContact(data);
 					break;
 				case 0x1F:
 					new Invitation_Answer_handler(m_sess,data);

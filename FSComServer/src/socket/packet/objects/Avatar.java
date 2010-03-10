@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
+/*
+ * basic object for Avatar transmission
+ */
 public class Avatar implements Serializable
 {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer uid;
 	private ImageIcon img;

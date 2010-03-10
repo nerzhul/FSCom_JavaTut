@@ -4,12 +4,10 @@ import session.session;
 import socket.packet.handlers.Send_handler;
 import socket.packet.objects.ClientDatas;
 
+/*
+ * datas sent to client because he success his connection
+ */
 public class Connect2_handler extends Send_handler{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	public Connect2_handler(session sess, Object dat)
 	{

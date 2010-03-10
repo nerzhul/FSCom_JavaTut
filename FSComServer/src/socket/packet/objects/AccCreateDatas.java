@@ -2,12 +2,11 @@ package socket.packet.objects;
 
 import java.io.Serializable;
 
+/*
+ * basic object for account creation
+ */
 public class AccCreateDatas implements Serializable
 {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	String acc_name,password;
 	

@@ -4,6 +4,9 @@ import socket.packet.handlers.Send_handler;
 import socket.packet.objects.IdAndData;
 import database.DatabaseFunctions;
 
+/*
+ * invitation sent to client
+ */
 public class Invitation_handler extends Send_handler {
 
 	public Invitation_handler(Integer uid) {

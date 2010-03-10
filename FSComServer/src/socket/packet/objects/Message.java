@@ -2,11 +2,12 @@ package socket.packet.objects;
 
 import java.io.Serializable;
 
-public class Message implements Serializable{
-
-	/**
-	 * 
-	 */
+/*
+ * basic object which contains message and uid. Seems like IdAndData object but this packet 
+ * can be changed in future
+ */
+public class Message implements Serializable
+{
 	private static final long serialVersionUID = 1L;
 	private String msg;
 	private Integer dest;

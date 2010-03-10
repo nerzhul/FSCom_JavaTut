@@ -5,6 +5,10 @@ import session.SessionHandler;
 import misc.Config;
 import misc.Log;
 
+/*
+ * unused sessionhandler, must be improved to close threads for disconnected
+ * client by network cause
+ */
 public class thr_sesshandler extends Thread{
 
 	private static int uDiff = 5*Config.getLatency();;
@@ -17,13 +21,16 @@ public class thr_sesshandler extends Thread{
 		{
 			try 
 			{
-				
+				/*
+				 * must send ping to all clients and wait their answer
+				 */
 				SessionHandler.Update(uDiff);
 				sleep(uDiff);
 			} 
 			catch (InterruptedException e) 
 			{
-				e.printStackTrace();
+				// sessionhandler could'nt verify clients ? bye bye.
+				System.exit(-1);
 			}
 			
 		}

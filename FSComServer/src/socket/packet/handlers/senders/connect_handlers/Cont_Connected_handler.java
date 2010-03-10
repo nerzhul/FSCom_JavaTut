@@ -3,6 +3,9 @@ package socket.packet.handlers.senders.connect_handlers;
 import socket.packet.ConnectData;
 import socket.packet.handlers.Send_handler;
 
+/*
+ * contact data sent to a client
+ */
 public class Cont_Connected_handler extends Send_handler {
 
 	public Cont_Connected_handler(String name, Integer status, String pp, Integer uid, String pseudo)

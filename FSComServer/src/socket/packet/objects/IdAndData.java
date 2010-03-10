@@ -2,11 +2,11 @@ package socket.packet.objects;
 
 import java.io.Serializable;
 
-public class IdAndData  implements Serializable{
-
-	/**
-	 * 
-	 */
+/*
+ * basic object which contain one ID and one Data
+ */
+public class IdAndData  implements Serializable
+{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer uid;

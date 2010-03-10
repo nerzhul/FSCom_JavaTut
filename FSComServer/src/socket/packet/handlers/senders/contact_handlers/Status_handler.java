@@ -3,6 +3,9 @@ package socket.packet.handlers.senders.contact_handlers;
 import session.session;
 import socket.packet.handlers.Send_handler;
 
+/*
+ * pseudo requested answer and confirmation. Need improvement, confirmation was sent in 2 ways
+ */
 public class Status_handler extends Send_handler {
 
 	public Status_handler(session sess, Object packet)
@@ -12,6 +15,5 @@ public class Status_handler extends Send_handler {
 		m_sess = sess;
 		sess.SetStatus((Integer) packet);
 		sess.broadcast_SomethingChanged(1);
-
 	}
 }

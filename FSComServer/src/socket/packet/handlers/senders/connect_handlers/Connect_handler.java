@@ -8,6 +8,9 @@ import session.onconnect_answer;
 import session.session;
 import socket.packet.handlers.Send_handler;
 
+/*
+ * old style packet for connection, must be changed in future rev
+ */
 public class Connect_handler extends Send_handler {
 
 	public Connect_handler(Object args, session sess) throws SQLException
