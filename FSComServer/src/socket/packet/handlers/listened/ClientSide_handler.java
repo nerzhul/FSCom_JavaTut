@@ -6,6 +6,9 @@ import socket.packet.handlers.Listen_handler;
 
 import misc.Log;
 
+/*
+ * Listen_only packet which block server packets on himself
+ */
 public class ClientSide_handler extends Listen_handler{
 
 	public ClientSide_handler(Integer error) throws IOException

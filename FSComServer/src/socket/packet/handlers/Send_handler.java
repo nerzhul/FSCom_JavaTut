@@ -5,6 +5,9 @@ import java.net.Socket;
 import session.session;
 import socket.Sender;
 
+/*
+ *	used on every packet to send 
+ */
 public class Send_handler extends Abstract_handler {
 
 	protected session m_sess;

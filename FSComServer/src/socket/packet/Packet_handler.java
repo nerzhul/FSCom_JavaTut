@@ -98,12 +98,13 @@ public class Packet_handler
 					break;
 				case 0x13:
 					new MsgToPlatform_handler(m_sess,data);
+					m_sess.TransmitMsgTo(data);
 					break;
 				case 0x16:
 					new PseudoToPlatform_handler(m_sess,data);
 					break;
 				case 0x18:
-					new MsgPersoToPlatform_handler(m_sess,data);
+					m_sess.ChangeMsgPerso(data);
 					break;
 				case 0x1A:
 					pkthandle = new AddContact_handler(m_sess,data);

@@ -7,6 +7,9 @@ import socket.packet.handlers.Listen_handler;
 
 import misc.Log;
 
+/*
+ * listen pong
+ */
 public class CliPong_handler extends Listen_handler {
 
 	public CliPong_handler(Socket sock)

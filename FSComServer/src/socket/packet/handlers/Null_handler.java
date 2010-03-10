@@ -3,6 +3,9 @@ package socket.packet.handlers;
 import java.io.IOException;
 import misc.Log;
 
+/*
+ * for packet which aren't handled
+ */
 public class Null_handler extends Abstract_handler{
 
 
