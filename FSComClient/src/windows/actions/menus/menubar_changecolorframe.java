@@ -17,21 +17,26 @@ import javax.swing.JColorChooser;
 import thread.windowthread;
 import windows.forms.form_communicate;
 
+/*
+ * Action sur "le changement de couleur" du menu
+ */
 public class menubar_changecolorframe implements ActionListener {
 	
 	private String autouser,autopass;
 
 	public void actionPerformed(ActionEvent e) {
+		//popup avec un color chooser avec la couleur par defaut préselectionné
 		Color couleur = JColorChooser.showDialog(null,"Choix de la nouvelle couleur",new Color(128,128,255));
 		if(couleur != null)
-		{
+		{//si l'utilisateur choisit une couleur valide
 			ReadSavedVariables();
-			windowthread.getFmConn().getPanContact().setBackground(couleur);
+			windowthread.getFmConn().getPanContact().setBackground(couleur);//on change la couleur de la fenetre principale
 			form_communicate fmCom = windowthread.getFmConn().getPanContact().getComm();
-			if(fmCom != null)
+			if(fmCom != null)//on change la couleur des onglets
 				fmCom.ChangeTabbedpanColor(couleur);
 			
 			String file = "savedvariables";
+			//et on la sauvegarde dans un fichier pour les prochaines connexions
 			try {
 				FileWriter fw = new FileWriter (file);
 				BufferedWriter bw = new BufferedWriter (fw);
@@ -47,6 +52,7 @@ public class menubar_changecolorframe implements ActionListener {
 		}
 	}
 	
+	//on lis le fichier pour ne pas perdre l'id/pass déja stocké
 	private void ReadSavedVariables()
 	{
 		autouser = "";

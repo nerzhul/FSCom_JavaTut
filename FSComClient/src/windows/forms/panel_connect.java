@@ -83,7 +83,7 @@ public class panel_connect extends JPanel {
 		setBackground(new Color(128,128,255));
 		setLayout(new FlowLayout(FlowLayout.CENTER,200,10));
 
-		JLabel Image = new JLabel(new ImageIcon("icone.png"),JLabel.CENTER);
+		JLabel Image = new JLabel(new ImageIcon("./icone.png"),JLabel.CENTER);
 		Titre=new JLabel("Bienvenue dans Cookie Messenger",JLabel.CENTER);
 		labeluser = new JLabel("Identifiant");
 		mail = new JTextField(autouser,15);

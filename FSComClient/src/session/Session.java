@@ -6,7 +6,6 @@ import misc.Log;
 
 import socket.packet.handlers.sends.Ping_handler;
 
-
 public class Session extends Thread{
 
 	private static Integer status;
@@ -14,14 +13,16 @@ public class Session extends Thread{
 	private static String pseudo;
 	private static String perso_msg;
 	
+	//fonction définissant l'objet session
 	public Session()
 	{
-		setStatus(0);
-		setPseudo("");
-		groups = new Vector<group>();
-		setPerso_msg("");
+		setStatus(0);//avec un statut(offline)
+		setPseudo("");//un pseudo(vide)
+		groups = new Vector<group>();//un vecteur de groupe (contenant les contacts)
+		setPerso_msg("");//un message perso (vide)
 	}
 	
+	//on lance le thread
 	public void run()
 	{
 		Update();
@@ -44,21 +45,24 @@ public class Session extends Thread{
 		}
 	}
 	
+	//fonction pour la création d'un contact
 	public static void CreateNewContact(contact cont)
 	{
 		for(group gr:groups)
 			if(gr.getGid().equals(cont.getGroup()))
 			{
-				gr.AddContact(cont);
+				gr.AddContact(cont);//on l'ajout au groupe
 				return;
 			}
 	}
 	
+	//fonction pour la création de groupe
 	public static void CreateNewGroup(group grp)
 	{
-		groups.add(grp);
+		groups.add(grp);//on l'ajoute au vecteur de groupe
 	}
 	
+	//fonction pour afficher les contacts dans l'ordre de leur uid
 	public static contact getContactByUid(Integer _uid)
 	{
 		for(group g: getGroups())
@@ -67,7 +71,7 @@ public class Session extends Thread{
 					return ct;
 		return null;
 	}
-	
+	//fonctions d'accès aux variables
 	public static void setStatus(Integer st) { Session.status = st;	}
 	public static Integer getStatus() {	return status; }
 	public static void setPseudo(String pseudo) { Session.pseudo = pseudo; }

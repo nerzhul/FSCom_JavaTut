@@ -6,5 +6,4 @@ public abstract class Abstract_handler {
 	protected Object data;
 	abstract void PrintError();
 	public void Destroy(){}
-	public abstract boolean HasValidData();
 }

@@ -16,6 +16,9 @@ import javax.swing.text.MaskFormatter;
 import windows.actions.buttons.cancel_inscription_button;
 import windows.actions.buttons.valid_inscription_button;
 
+/*
+ * Fenetre d'inscription (+panel)
+ */
 public class form_inscription extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -23,15 +26,16 @@ public class form_inscription extends JFrame{
 	public form_inscription()
 	{
 		frame = new JFrame();
-		frame.setTitle("Cookie Messenger - Inscription"); 
-		frame.setSize(300,250);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(true);
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setTitle("Cookie Messenger - Inscription"); //titre
+		frame.setSize(300,250);//taille
+		frame.setLocationRelativeTo(null);//position
+		frame.setResizable(false);//pas redimmensionnable
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//on fait rien lorsque l'on click sur la croix
 		frame.setVisible(true);
 		panel();
 	}
 	
+	//fonction de création du panel
 	public void panel()
 	{
 		GridBagConstraints gridBagConstraints;
@@ -44,6 +48,7 @@ public class form_inscription extends JFrame{
         JLabel pass = new JLabel();
         JLabel pass2 = new JLabel();
         MaskFormatter Mask10 = null;
+        //maximum 15caractères dans le champ de l'identifiant
 		try {
 			Mask10 = new MaskFormatter("*****************");
 		} catch (ParseException e1) {
@@ -52,8 +57,10 @@ public class form_inscription extends JFrame{
         JLabel identifiant = new JLabel();
         JFormattedTextField idtxt = new JFormattedTextField(Mask10);
 
+        //on met le layout dans le panel
         pane.setLayout(new GridBagLayout());
-
+        
+        //puis on ajoute tout les composants avec leur position dans le layout
         Titre.setText("Bienvenue sur la page d'inscription !");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;

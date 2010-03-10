@@ -11,7 +11,9 @@ import java.net.SocketTimeoutException;
 import misc.Log;
 import socket.packet.Packet;
 import socket.packet.Packet_handler;
-
+/*
+ * thread d'écoute
+ */
 public class Listener extends Thread
 {
 	Socket sockt;
@@ -31,7 +33,7 @@ public class Listener extends Thread
 	{
 		try
 		{
-			while(true)
+			while(true)//boucle d'écoute
 			{
 
 				in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
@@ -64,6 +66,10 @@ public class Listener extends Thread
 		catch (SocketException e)
 		{
 			this.interrupt();
+		}
+		catch(InterruptedException e)
+		{
+			// nothing to do client was already disconnected
 		}
 		catch (Exception e) 
 		{

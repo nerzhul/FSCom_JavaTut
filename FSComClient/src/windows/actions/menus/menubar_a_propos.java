@@ -5,11 +5,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import misc.Misc;
+
+/*
+ * Action sur apropos du menu
+ */
 public class menubar_a_propos extends menubar_main implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		JOptionPane.showMessageDialog(null,"Réalisé par Jean-Baptiste Blandureau \net Loïc Blot dans le cadre de leur \nprojet tutoré de 2ème année à \nl'IUT informatique d'Amiens.");
+		//affichage d'un popup avec des informations
+		JOptionPane.showMessageDialog(null,"Rï¿½alisï¿½ par Jean-Baptiste Blandureau \net Loï¿½c Blot dans le cadre de leur \nprojet tutorï¿½ de 2ï¿½me annï¿½e ï¿½ \nl'IUT informatique d'Amiens.\n\n Version du client : "+ Misc.GetVersion());
 	}
 
 }

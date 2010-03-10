@@ -8,13 +8,16 @@ import javax.swing.JOptionPane;
 import session.Session;
 import socket.packet.handlers.sends.group_handlers.AddGroup_handler;
 
+/*
+ * Action sur ajout contact du menu
+ */
 public class menubar_addgroup implements ActionListener {
 
 	private String reponse;
 
 	public void actionPerformed(ActionEvent e) {
 	
-		reponse = JOptionPane.showInputDialog(null,"Entrez le nom du groupe à ajouter :",
+		reponse = JOptionPane.showInputDialog(null,"Entrez le nom du groupe ï¿½ ajouter :",
 				"Nouveau groupe",JOptionPane.QUESTION_MESSAGE);
 		if (reponse != null && !reponse.equalsIgnoreCase(""))
 		{

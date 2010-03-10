@@ -1,5 +1,6 @@
 package socket.packet;
 
+//enum avec tout les codes d'opérations
 public enum Opcodes {
 
 	CMSG_REQUEST_PING(0x00),

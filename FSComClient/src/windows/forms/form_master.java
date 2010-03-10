@@ -20,6 +20,9 @@ import windows.actions.menus.menubar_disconnect;
 import windows.actions.menus.menubar_inscr;
 import windows.actions.menus.menubar_quit;
 
+/*
+ * Fenetre servant pour le switch entre le panel de connection et celui principal
+ */
 public class form_master extends JFrame
 {
 	private static final long serialVersionUID = 1L;
@@ -37,34 +40,40 @@ public class form_master extends JFrame
 	{
 		fram = new JFrame();
 		pan_connect = new JPanel();
-		fram.setTitle("Cookie Messenger"); 
-		fram.setSize(320,550); 
-		fram.setLocationRelativeTo(null);
-		fram.setResizable(false);
-		fram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fram.setTitle("Cookie Messenger"); //titre
+		fram.setSize(320,550); //taille
+		fram.setLocationRelativeTo(null);//position
+		fram.setResizable(false);//pas redimenssionable
+		fram.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//on fait rien lors du click sur la croix
+		fram.addWindowListener(new menubar_quit());//on ajoute un listener sur la fenetre
 		Image icone = Toolkit.getDefaultToolkit().getImage("icone.png");
-		fram.setIconImage(icone);
+		fram.setIconImage(icone);//on met un icone a la place de l'icone de java
 		pan_connect = pan_contact = null;
 	}
 	
+	//Creation des panels pour le switch
 	public void BuildPanel(int i) 
 	{
 		switch(i)
 		{
 			case 1:
 				Menubar_Connect();
-				if(pan_contact != null)
+				if(pan_contact != null){
 					fram.remove(pan_contact);
-				
+					pan_contact =null;
+					fram.validate();
+				}
 				pan_connect = new panel_connect(this);
 				fram.add(pan_connect);
 				fram.setVisible(true);
 				break;
 			case 2:	
 				Menubar_contact();
-				if(pan_connect != null)
+				if(pan_connect != null){
 					fram.remove(pan_connect);
-
+					pan_connect=null;
+					fram.validate();
+				}
 				pan_contact = new panel_contact();
 				fram.add(pan_contact);
 				fram.setVisible(true);
@@ -72,6 +81,7 @@ public class form_master extends JFrame
 		}
 	}
 
+	//fonction pour le menu dans la fenetre de connexion
 	private void Menubar_Connect() 
 	{
 		JMenuBar menuBar = new JMenuBar();
@@ -87,6 +97,7 @@ public class form_master extends JFrame
 		fram.setJMenuBar(menuBar);
 	}
 	
+	//fonction pour le menu dans la fenetre principal
 	private void Menubar_contact() 
 	{
 		JMenuBar menuBar = new JMenuBar();
@@ -100,9 +111,9 @@ public class form_master extends JFrame
 		SwingEL.AddItemToMenuBar(menu3,"Changer de pseudo",new menubar_changepseudo());
 		SwingEL.AddItemToMenuBar(menu3,"Changer de message perso",new chang_msgperso());
 		SwingEL.AddItemToMenuBar(menu3,"Changer d'avatar",new chang_avatar());
-		SwingEL.AddItemToMenuBar(menu1,"Se déconnecter",new menubar_disconnect(this));
+		SwingEL.AddItemToMenuBar(menu1,"Se dï¿½connecter",new menubar_disconnect(this));
 		SwingEL.AddItemToMenuBar(menu2,"A propos...",new menubar_a_propos());
-		SwingEL.AddItemToMenuBar(menu3, "Changer la couleur de la fenêtre", new menubar_changecolorframe());
+		SwingEL.AddItemToMenuBar(menu3, "Changer la couleur de la fenï¿½tre", new menubar_changecolorframe());
 		
 		menuBar.add(menu1);
 		menuBar.add(menu3);

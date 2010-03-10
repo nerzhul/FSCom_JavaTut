@@ -9,8 +9,4 @@ public abstract class Send_handler extends Abstract_handler {
 	{
 		Sender.SendPacket(opcode,data);
 	}
-	public boolean HasValidData() {
-		return true;
-	}
-
 }

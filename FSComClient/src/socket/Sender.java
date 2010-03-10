@@ -10,6 +10,9 @@ import thread.windowthread;
 
 import misc.Log;
 
+/*
+ * thread d'envoi
+ */
 public class Sender extends Thread
 {
 	private final static int port = 5677;
@@ -22,7 +25,7 @@ public class Sender extends Thread
 	{
 		Connect();
 	}
-	
+	 
 	public static void Connect()
 	{
 		Integer mir = ServerList.getBestMirror();
@@ -100,6 +103,7 @@ public class Sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
+			//popup d'erreur
 			Log.ShowPopup("Vous avez �t� d�connect� du serveur. (m_" + ServerList.getCurrentMirror()+ ")","Erreur de connexion...",true);
 			Connect();
 		}
@@ -107,6 +111,7 @@ public class Sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
+			//popup d'erreur
 			Log.ShowPopup("Vous avez �t� d�connect� du serveur. (m_" + ServerList.getCurrentMirror()+ ")","Erreur de connexion...",true);
 			Connect();
 		}
@@ -117,7 +122,7 @@ public class Sender extends Thread
 	     try
 	     {
 	    	 Log.outString("Close connection with server");
-	    	 socket.close();
+	    	 if(socket!=null)socket.close();
 	     } 
 	     catch (IOException e)
 	     {

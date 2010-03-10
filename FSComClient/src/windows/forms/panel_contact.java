@@ -41,8 +41,11 @@ import javax.swing.JTree;
 import javax.swing.border.MatteBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+
+import misc.Log;
 
 import session.Session;
 import session.contact;
@@ -55,7 +58,7 @@ import windows.SwingExtendLib.Tree_Renderer;
 import windows.actions.buttons.ChangeStatus_button;
 import windows.actions.click.chang_avatar;
 import windows.actions.click.chang_msgperso;
-import windows.actions.click.contact_onclick;
+import windows.actions.click.contact_group_onclick;
 import windows.actions.menus.menubar_changepseudo;
 
 public class panel_contact extends JPanel implements DropTargetListener, DragGestureListener, DragSourceListener{
@@ -200,7 +203,7 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	    dragSource.createDefaultDragGestureRecognizer(tree, DnDConstants.ACTION_MOVE, this);
 	 
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		tree.addMouseListener(new contact_onclick(tree,this));
+		tree.addMouseListener(new contact_group_onclick(tree,this));
 		tree.setRootVisible(false);
 		
 		scrolltree.setViewportView(tree);
@@ -241,8 +244,11 @@ public class panel_contact extends JPanel implements DropTargetListener, DragGes
 	
 	private void OpenContactList()
 	{
-		for(int i=0;i<Session.getGroups().size();i++)
-			tree.expandRow(i);
+		int row = 0;
+	    while (row < tree.getRowCount()) {
+	      tree.expandRow(row);
+	      row++;
+	      }
 	}
 	
 	public void RefreshContactList()

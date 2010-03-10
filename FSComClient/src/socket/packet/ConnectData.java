@@ -2,11 +2,9 @@ package socket.packet;
 
 import java.io.Serializable;
 
+//fonction contenant les données de connexion
 public class ConnectData implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private String name,persoP,pseudo;
@@ -19,6 +17,8 @@ public class ConnectData implements Serializable{
 		persoP = _pp;
 		uid = _uid;
 	}
+	
+	//fonctions d'accès aux variables
 	public String getName() { return name; }
 	public Integer getStatus() { return status; }
 	public String getPersoP() { return persoP; }
