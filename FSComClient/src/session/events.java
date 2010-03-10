@@ -222,7 +222,7 @@ public class events {
 			return;
 		contact ct = (contact)packet;
 		if(ct == null){
-			Log.ShowPopup("Le contact ajout� n'existe pas !", true);
+			Log.ShowPopup("Le contact ajout� n'existe pas !","Contact inexistant !", true);
 			return;
 		}
 		for(group g: Session.getGroups())
@@ -263,12 +263,12 @@ public class events {
 
 	public static void ConnectionError() 
 	{
-		Log.ShowPopup("Erreur de connexion avec le serveur", true);
+		Log.ShowPopup("Erreur de connexion avec le serveur","Erreur de connexion...", true);
 	}
 
 	public static void BadLoginInformations() 
 	{
-		Log.ShowPopup("Login incorrect", true);
+		Log.ShowPopup("Login incorrect","Erreur de connexion...", true);
 	}
 
 	public static void ShowConnectedFrame() 
@@ -280,8 +280,8 @@ public class events {
 	{
 		Disconnect_handler pck = new Disconnect_handler();
 		pck.Send();
-		Sender.StopSocket();
 		threading.StopSender();
+		Sender.StopSocket();
 	}
 
 	public static void StoreAllDatas(Object packet) 

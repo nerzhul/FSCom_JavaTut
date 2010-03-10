@@ -14,10 +14,10 @@ public final class ServerList {
 	{
 		curr_mirror = 0;
 		iplist = new String[MAX_MIRROR];
-		iplist[1] = "172.20.9.203";
+		iplist[2] = "172.20.9.203";
 		iplist[3] = "www.blackdiamondserver.com";
-		iplist[0] = "172.20.9.56";
-		iplist[3] = "127.0.0.1";	
+		iplist[1] = "172.20.9.56";
+		iplist[0] = "127.0.0.1";	
 	}
 	
 	public static String GetMirror(Integer i)
@@ -44,7 +44,7 @@ public final class ServerList {
 	{
 		Integer i=0;
 		boolean found=false;
-		pop = new thr_popup("Recherche du meilleur miroir...", false);
+		pop = new thr_popup("Recherche du meilleur miroir...","Connexion en cours....", false);
 		pop.start();
 		do
 		{

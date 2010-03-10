@@ -100,12 +100,15 @@ public class Sender extends Thread
 		{
 			windowthread.SwitchPanel(1);
 			threading.StopSender();
-			Log.ShowPopup("Vous avez été déconnecté du serveur. (m_" + ServerList.getCurrentMirror()+ ")",true);
+			Log.ShowPopup("Vous avez ï¿½tï¿½ dï¿½connectï¿½ du serveur. (m_" + ServerList.getCurrentMirror()+ ")","Erreur de connexion...",true);
 			Connect();
 		}
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			windowthread.SwitchPanel(1);
+			threading.StopSender();
+			Log.ShowPopup("Vous avez ï¿½tï¿½ dï¿½connectï¿½ du serveur. (m_" + ServerList.getCurrentMirror()+ ")","Erreur de connexion...",true);
+			Connect();
 		}
 	}
 	

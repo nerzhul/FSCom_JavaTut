@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Log {
@@ -54,10 +53,9 @@ public class Log {
 		System.out.print("Command> ");
 	}
 	
-	public static void ShowPopup(String text,boolean error)
+	public static void ShowPopup(String text,String title,boolean error)
 	{
-		JOptionPane.showMessageDialog(new JFrame(), text);
-		
+		JOptionPane.showMessageDialog(null, text,title,error ? JOptionPane.ERROR_MESSAGE : JOptionPane.INFORMATION_MESSAGE);
 		if(error)
 			outError(text);
 	}
