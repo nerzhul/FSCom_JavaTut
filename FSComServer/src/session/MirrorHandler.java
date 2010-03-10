@@ -6,24 +6,27 @@ import java.net.UnknownHostException;
 
 import misc.Config;
 
+/*
+ * Mirror handler for prevent machine failure
+ */
 public class MirrorHandler {
 
-	private static Integer myId;
-	public MirrorHandler()
-	{
-		myId = Config.getServerId();
-	}
+	// store id
+	private final static Integer myId = Config.getServerId();
 	
 	public static void Update()
 	{
+		// if it's master mirror, don't speak with other servers
 		if(myId.equals(1))
 			return;
 		
 		for(int i=0;i<myId;i++)
 		{
+			// trying to connect to upper mirror
 			try 
 			{
 				Socket sock = new Socket(ServerList.GetMirror(i),5677);
+				// success, we disconnect all clients
 				SessionHandler.DisconnectAllClients();
 				sock.close();
 				return;
@@ -36,7 +39,6 @@ public class MirrorHandler {
 			{
 				continue;
 			}
-			
 		}
 	}
 }

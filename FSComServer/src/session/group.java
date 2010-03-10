@@ -2,6 +2,9 @@ package session;
 
 import java.io.Serializable;
 
+/*
+ * group object for transaction between client and server
+ */
 public class group implements Serializable{
 
 	/**

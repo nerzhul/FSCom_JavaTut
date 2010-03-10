@@ -1,5 +1,8 @@
 package session.defines;
 
+/*
+ * depreciated or future use.
+ */
 public enum AddContactState {
 	EXIST(0),
 	NOT_EXIST(1),

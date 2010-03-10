@@ -2,11 +2,11 @@ package session;
 
 import java.io.Serializable;
 
+/*
+ * Contact object for transaction between client & server
+ */
 public class contact implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("unused")
 	private Integer cid;

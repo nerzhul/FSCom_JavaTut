@@ -1,5 +1,8 @@
 package session;
 
+/*
+ * Enum information for status, unused
+ */
 public enum clientstatus {
 	DISCONNECTED(0),
 	CONNECTED(1),

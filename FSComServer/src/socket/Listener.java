@@ -8,8 +8,12 @@ import session.session;
 import socket.packet.Packet;
 import socket.packet.Packet_handler;
 
+import misc.Config;
 import misc.Log;
 
+/*
+ * Listen thread for one client
+ */
 public class Listener extends Thread
 {
 	private Socket sockt;
@@ -29,32 +33,45 @@ public class Listener extends Thread
 	
 	public void ListenAndDo()
 	{
+		// famous try catch for network prog
 		try
 		{
 			Log.outTimed("Client "  + sockt.getInetAddress() + " request connect to server");
+			// new client connected => session
 			sess = new session((Thread)this,sockt);
+			// buffer the listening stream
 			in = new ObjectInputStream(new BufferedInputStream(sockt.getInputStream()));
 
 			while(true)
 			{
+				// read the stream
 				Packet message = (Packet) in.readObject();
 				
+				// if opcode is 6 disconnect force
 				if(message.getOpcode().equals(6))
 					break;
+				
+				// get packet to do sth
 				TreatPacket(message);
-				sleep(100);
+				
+				// w8 for chip improvements
+				sleep(Config.getLatency());
 			}
 			
 			Log.outTimed("Close connection with " + sockt.getInetAddress());
+			// close socket properly
 			sockt.close();
 	    } 
 		catch (SocketTimeoutException ste) 
 		{
+			try 
+			{ sockt.close(); } 
+			catch (IOException e1) {}
 			Log.outTimed("Client " + sockt.getInetAddress() + " timeout");
 		}
 		catch (InterruptedException e) 
 		{
-			Log.outError("Listener Thread Error !");
+			Log.outError("Threading Error !");
 		} 
 		catch (IOException e) 
 		{
@@ -77,6 +94,7 @@ public class Listener extends Thread
 	
 	public void TreatPacket(Packet packt)
 	{
+		// create packethandler for this packet 
 		packopt = new Packet_handler(packt,sockt, sess);
 		packopt.Destroy();
 	}

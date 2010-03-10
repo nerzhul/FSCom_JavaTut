@@ -19,7 +19,7 @@ public class Config {
 
 	
 	private static String db_ip,db_name,db_user,db_pwd;
-	private static Integer server_id,loglevel;
+	private static Integer server_id,latency,loglevel = 3;
 
 	public static void LoadConfig()
 	{
@@ -66,6 +66,8 @@ public class Config {
 			db_ip = KeyValTab[1];
 		else if(KeyValTab[0].equals("log_level"))
 			loglevel = Integer.decode(KeyValTab[1]);
+		else if(KeyValTab[0].equals("latency"))
+			latency = Integer.decode(KeyValTab[1]);
 		else if(KeyValTab[0].equals("server_id"))
 		{
 			server_id = Integer.decode(KeyValTab[1]);
@@ -84,4 +86,5 @@ public class Config {
 	public static String getDbPwd() { return db_pwd; }
 	public static Integer getServerId() { return server_id; }
 	public static Integer getLoglevel() { return loglevel; }
+	public static Integer getLatency() { return latency; }
 }

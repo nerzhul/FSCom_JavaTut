@@ -28,6 +28,9 @@ import socket.packet.objects.Message;
 import database.DatabaseFunctions;
 import database.DatabaseTransactions;
 
+/*
+ * Session and all actions we can do on it
+ */
 public class session {
 	
 	private boolean connected;
@@ -57,17 +60,21 @@ public class session {
 	public void connect_client()
 	{
 		connected = true;
+		// get datas from database
 		uid = DatabaseTransactions.IntegerQuery("account", "uid", "user = '" + name + "'");
 		setPseudo(DatabaseTransactions.StringQuery("account", "pseudo", "user = '" + name + "'"));
 		personnal_msg = DatabaseTransactions.StringQuery("account", "phr_perso", "user = '" + name + "'");
-		
+		// add this session to master SessionHandler
 		SessionHandler.AddSession(this);
+		// load blocked contacts
 		LoadBlockedContacts();
+		// send all recv invitations when we are disconnected.
 		LoadAndSendInvitation();
 	}
 	
 	private void LoadAndSendInvitation() 
 	{
+		// get invitations from database and send it
 		Vector<Integer> invit = DatabaseTransactions.getIntegerList("acc_invitation", "contact", "uid = '" + uid + "'");
 		for(Integer i: invit)
 		{
@@ -78,11 +85,13 @@ public class session {
 
 	private void LoadBlockedContacts() 
 	{
+		// store all blocked ids 
 		uid_blocked = DatabaseTransactions.getIntegerList("acc_blocked", "contact", "uid = '" + uid + "' AND blocked != '0'");
 	}
 
 	public void disconnect_client()
 	{
+		// close socket and destroy thread
 		try 
 		{
 			getSocket().close();
@@ -98,6 +107,7 @@ public class session {
 		
 		synchronized(sess_linked)
 		{
+			// link sessions between them (improve perfs)
 			if(!block)
 				sess_linked.add(sess);
 			sess.sess_linked.add(this);
@@ -110,6 +120,7 @@ public class session {
 	
 	public boolean know_contact(Integer _uid)
 	{
+		// if there is data on db client know the other client
 		if(DatabaseTransactions.DataExist("acc_contact", "uid", "contact = '" + _uid + "'" +
 				" AND uid = '" + this.getUid() + "'"))
 			return true;
@@ -119,6 +130,7 @@ public class session {
 	
 	public boolean has_group(Integer _gid)
 	{
+		// verify if client has group
 		if(DatabaseTransactions.DataExist("acc_group", "uid", "gid = '" + _gid + "'" +
 				" AND uid = '" + uid + "'"))
 			return true;
@@ -131,23 +143,27 @@ public class session {
 		if(sess == null)
 			return;
 		
+		// prepare packet to declare client disconnected
 		Cont_Disconct_handler pck = new Cont_Disconct_handler(sess.getUid());
 		if(sock != null)
 			pck.Send(sock);
-			if(!blocked)
+		
+		if(!blocked)
+		{
+			// declare client disconnected and clean it from all vectors
+			for(int i=0;i<sess_linked.size();i++)
+			//for(session s: sess_linked)
 			{
-				for(int i=0;i<sess_linked.size();i++)
-				//for(session s: sess_linked)
-				{
-					session s = sess_linked.get(i);
-					if(s.equals(sess))
-						sess_linked.remove(s);
-				}
+				session s = sess_linked.get(i);
+				if(s.equals(sess))
+					sess_linked.remove(s);
 			}
+		}
 	}
 	
 	public boolean has_blocked(Integer _uid) 
 	{
+		// verify if client has blocked other client
 		if(DatabaseTransactions.IntegerQuery("acc_blocked", "blocked"
 				, "contact = '" + _uid + "' AND uid = '" + uid + "'") == 1)
 			return true;
@@ -157,8 +173,10 @@ public class session {
 	
 	public void broadcast_SomethingChanged(int sth) 
 	{
+		// generic function to broadcast sth to all client knowed contacts 
 		switch(sth)
 		{
+		// send modifications to himself
 			case 1:
 				this.SendStatusToMe(0, status);
 				break;
@@ -174,7 +192,6 @@ public class session {
 		{
 			for(session s : sess_linked)
 			{
-				
 				boolean blocked = false;
 				synchronized(uid_blocked)
 				{
@@ -183,6 +200,7 @@ public class session {
 							blocked = true;
 				}
 				
+				// if contact is'nt blocked, send new datas
 				if(!blocked)
 				{
 					switch(sth)
@@ -222,8 +240,10 @@ public class session {
 		IdAndData pck = (IdAndData)packet;
 		Integer method = Integer.decode(pck.getDat());
 		Integer c_uid = pck.getUid();
+		// method : 1 => block
 		if(method.equals(1))
 		{
+			// declare client disconnected to contact
 			if(SessionHandler.getContactByUID(c_uid) != null)
 				SessionHandler.getContactByUID(c_uid).contact_disconnected(this,true);
 			synchronized(uid_blocked)
@@ -233,6 +253,7 @@ public class session {
 		}
 		else
 		{
+			// declare client connected
 			if(SessionHandler.getContactByUID(c_uid) != null)
 				SessionHandler.getContactByUID(c_uid).contact_connected(this, true);
 			synchronized(uid_blocked)
@@ -241,6 +262,7 @@ public class session {
 			}
 		}
 		
+		// clean database
 		if(DatabaseTransactions.DataExist("acc_blocked", "blocked", "uid = '" + 
 				uid + "' AND contact = '" + c_uid + "'"))
 			DatabaseTransactions.ExecuteQuery("UPDATE acc_blocked SET blocked = '" + method + 
@@ -248,6 +270,8 @@ public class session {
 		else
 			DatabaseTransactions.ExecuteQuery("INSERT INTO acc_blocked VALUES ('" + uid + "','" 
 					+ c_uid + "','" + method + "')");
+		
+		// recv response from server
 		BlockContact_handler pack = new BlockContact_handler(c_uid,method);
 		pack.Send(sock);
 	}
@@ -258,6 +282,7 @@ public class session {
 		
 		Message msg = (Message) packet;
 		Integer _uid = msg.getDest();
+		// if client is connected and don't has blocked me, send msg
 		if(SessionHandler.getContactByUID(_uid) != null)
 			if(!SessionHandler.getContactByUID(_uid).has_blocked(uid))
 				SessionHandler.getContactByUID(_uid).SendMessageToMe(uid,msg.getMsg());
@@ -282,6 +307,7 @@ public class session {
 			return;
 		
 		String pck = packet.toString();
+		// update pseudo on session & database
 		SetName(pck);
 		DatabaseTransactions.ExecuteQuery("UPDATE account SET pseudo = '" + pck + 
 				"'	WHERE uid = '" + uid + "'");
@@ -294,6 +320,7 @@ public class session {
 			return;
 		
 		String pck = packet.toString();
+		// update personnal msg on session & db
 		SetPersonnalMsg(pck);
 		DatabaseTransactions.ExecuteQuery("UPDATE account SET phr_perso = '" + pck +
 				"' WHERE uid = '" + uid + "'");
@@ -306,16 +333,20 @@ public class session {
 			return null;
 		
 		String username = packet.toString();
+		// if contact exist
 		if(DatabaseTransactions.DataExist("account", "user", "user = '" + username + "'") &&
 				!username.equals(DatabaseFunctions.getAccountNameByUID(uid)))
 		{
+			// if don't have the contact in our list
 			Integer _uid = DatabaseFunctions.getAccountUIDByName(username);
 			if(!DatabaseTransactions.DataExist("acc_contact", "contact", "uid = '" + uid + "' AND contact = '"
 					+ _uid + "'"))
 			{
+				// add him
 				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + uid + "','" + 
 						_uid + "','','0','0')");
 				
+				// if he is connected send an invitation else register
 				if(SessionHandler.isConnected(_uid))
 				{
 					Invitation invit = new Invitation(uid, _uid, true);
@@ -340,20 +371,25 @@ public class session {
 
 	public void ManageInvitation(Integer _uid, Integer method) 
 	{
+		// handle response from client with invitation
 		switch(method)
 		{
+			// he doesn't want to add him
 			case 1:
 				DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE uid = '" + uid + "' AND" +
 						" contact = '" + _uid + "'");
 				break;
+			// he wants
 			case 0:
 				DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE uid = '" + uid + "' AND" +
 						" contact = '" + _uid + "'");
 				DatabaseTransactions.ExecuteQuery("INSERT INTO acc_contact VALUES ('" + _uid + "','" + 
 						uid + "','0','','0'");
+				// add contact
 				AddContactToClientList(_uid);
 				if(SessionHandler.getContactByUID(_uid).IsConnected())
 				{
+					// send him our datas
 					SendStatusToMe(_uid,SessionHandler.getContactByUID(_uid).getStatus());
 					SessionHandler.getContactByUID(_uid).SendStatusToMe(uid, this.getStatus());
 				}
@@ -367,6 +403,7 @@ public class session {
 	
 	private void AddContactToClientList(Integer _uid) 
 	{
+		// add him with specify invitation
 		AddContactWithoutInvite_handler ACWI = new AddContactWithoutInvite_handler(this,new contact(_uid, 0, DatabaseTransactions.StringQuery(
 				"account", "pseudo", "uid = '" + _uid + "'"), 
 				DatabaseTransactions.StringQuery(
@@ -378,17 +415,20 @@ public class session {
 	
 	public synchronized void DelContact(Integer _uid, Integer blocked) 
 	{
+		// delete contact & clean db
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_contact WHERE uid = '" + uid + "' AND " 
 				+ "contact = '" + _uid + "'");
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_invitation WHERE contact = '" + uid + "' AND "
 				+ "uid = '" + _uid + "'");
 		if(SessionHandler.isConnected(_uid))
 		{
+			// remove him from our link list
 			for(session s : sess_linked)
 				if(s.getUid().equals(_uid))
 					sess_linked.remove(s);
 			SessionHandler.getContactByUID(_uid).contact_disconnected(this, true);
 		}
+		// declare him deleted to client
 		ContactDeleted_handler pack = new ContactDeleted_handler(_uid);
 		pack.Send(getSocket());
 	}
@@ -404,10 +444,10 @@ public class session {
 			{
 				Integer tmpgid = Integer.decode(dat.getDat());
 				if(tmpgid >= 0)
+					// if we have group 
 					if(has_group(tmpgid) || tmpgid.equals(0))
 						DatabaseTransactions.ExecuteUQuery("acc_contact", "group",
 							tmpgid.toString(), " contact = '" + dat.getUid() + "'");
-					
 			}
 	}
 	
@@ -434,6 +474,7 @@ public class session {
 		if(pck.getUid().equals(0))
 			return;
 		
+		// if group is'nt master group insert it and declare it done
 		DatabaseTransactions.ExecuteQuery("INSERT INTO acc_group VALUES ('" +
 				this.getUid() + "','" + pck.getUid() + "','" + pck.getDat() + "')");
 		
@@ -449,6 +490,8 @@ public class session {
 		Integer _gid = (Integer)data;
 		if(_gid.equals(0))
 			return;
+		
+		// if group is'nt master group clean db & send confirm
 		
 		DatabaseTransactions.ExecuteQuery("DELETE FROM acc_group where uid = '" +
 				this.getUid() + "' AND gid = '" + _gid + "'");
@@ -468,10 +511,14 @@ public class session {
 		Integer _gid = pck.getUid();
 		String gName = pck.getDat();
 		
-		DatabaseTransactions.ExecuteUQuery("acc_group", "name", gName, "uid = '" +
-				this.getUid() + "' AND gid = '" + _gid + "'");
-		ConfirmGroupRenamed_handler pkt = new ConfirmGroupRenamed_handler(_gid,gName);
-		pkt.Send(sock);
+		// if client has group
+		if(has_group(_gid))
+		{
+			DatabaseTransactions.ExecuteUQuery("acc_group", "name", gName, "uid = '" +
+					this.getUid() + "' AND gid = '" + _gid + "'");
+			ConfirmGroupRenamed_handler pkt = new ConfirmGroupRenamed_handler(_gid,gName);
+			pkt.Send(sock);
+		}
 	}
 
 	public void SearchIp(Object data) 
@@ -494,6 +541,7 @@ public class session {
 		
 		IdAndData pck = (IdAndData)data;
 		Integer _uid = pck.getUid();
+		// send avatar required to client.
 		AvatarAnswer_handler pkt = new AvatarAnswer_handler(AvatarHandler.getAvatarByUID(_uid));
 		pkt.Send(sock);
 	}
@@ -506,7 +554,8 @@ public class session {
 		Avatar pck = (Avatar)data;
 		pck.setUid(this.getUid());
 		
-		if(pck != null)
+		// if there is an image, add avatar
+		if(pck.getImg() != null)
 			AvatarHandler.AddAvatar(pck);
 	}
 

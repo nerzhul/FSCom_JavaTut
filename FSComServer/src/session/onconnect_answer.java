@@ -1,5 +1,8 @@
 package session;
 
+/*
+ * basic enum for inform answers sent to client when he connects
+ */
 public enum onconnect_answer 
 {
 	CONN_NONE(0),

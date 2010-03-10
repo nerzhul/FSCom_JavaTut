@@ -1,9 +1,12 @@
 package session.defines;
 
+/*
+ * invitations states, used.
+ */
 public enum InvitationState {
-	LATER(0),
+	ACCEPT(0),
 	NOT_ACCEPT(1),
-	ACCEPT(2);
+	LATER(2);
 	
 	private final int value;
 	
