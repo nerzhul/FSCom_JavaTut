@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import database.DatabaseTransactions;
-import session.onconnect_answer;
 import session.session;
+import session.defines.onconnect_answer;
 import socket.packet.handlers.Send_handler;
 
 /*

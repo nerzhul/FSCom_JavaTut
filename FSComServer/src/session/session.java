@@ -91,7 +91,7 @@ public class session {
 
 	public void disconnect_client()
 	{
-		// close socket and destroy thread
+		// close socket and destroy thre	ad
 		try 
 		{
 			getSocket().close();
@@ -564,10 +564,6 @@ public class session {
 		if(pck.getImg() != null)
 			AvatarHandler.AddAvatar(pck);
 	}
-
-	
-
-	
 	
 
 

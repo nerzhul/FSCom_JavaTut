@@ -3,7 +3,7 @@ package thread;
 import misc.Config;
 import misc.Log;
 import session.MirrorHandler;
-import session.ServerList;
+import socket.ServerList;
 
 /*
  * mirroring handler

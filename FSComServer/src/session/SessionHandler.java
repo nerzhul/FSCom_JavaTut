@@ -24,7 +24,6 @@ public class SessionHandler {
 			session s = v_sess.get(i);
 			s.disconnect_client();
 		}
-			
 	}
 	
 	public synchronized static void AddSession(session sess)

@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import session.ServerList;
+import socket.ServerList;
 
 /*
  * This class contains handler for configuration file & vars

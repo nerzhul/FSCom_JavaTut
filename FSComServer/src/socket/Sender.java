@@ -51,7 +51,7 @@ public class Sender
 			// clean buffer
 			out.flush();
 	    	Log.outTimed("Send packet " + pck.getOpcode() + ": " + pck.getData() + " to client : " + socket.getInetAddress());
-		}
+		}	
 		catch(SocketException e)
 		{
 			CloseConnection();
